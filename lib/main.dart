@@ -1,4 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:saleasy/auth/auth_screen.dart';
+import 'package:saleasy/screens/Product_screen.dart';
+import 'package:saleasy/screens/company_lead_screen.dart';
+import 'package:saleasy/screens/company_task_screen.dart';
+import 'package:saleasy/screens/employee_screen.dart';
+import 'package:saleasy/screens/profile_screen.dart';
+import 'package:saleasy/screens/self_lead_screen.dart';
+import 'package:saleasy/screens/self_task_screen.dart';
+import 'package:saleasy/screens/target_screen.dart';
+
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,30 +21,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'myapp',
+      title: 'SalEasy',
       theme: ThemeData(
         accentColor: Colors.amber,
         primaryColor: Colors.indigo,
       ),
-      home: Home(),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
-
-  
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('home'),
-      ),
-      body: Center(
-        child: Text('this my home page'),
-      ),
+      home:HomeScreen(),
+      routes: {
+        ProductScreen.routeName:(context)=>ProductScreen(),
+        EmployeeScreen.routeName:(context)=>EmployeeScreen(),
+        SelfLeadScreen.routeName:(context)=>SelfLeadScreen(),
+        CompanyLeadScreen.routeName:(context)=>CompanyLeadScreen(),
+        SelfTaskScreen.routeName:(context)=>SelfTaskScreen(),
+        CompanyTaskScreen.routeName:(context)=>CompanyTaskScreen(),
+        TargetScreen.routeName:(context)=>TargetScreen(),
+        ProfileScreen.routeName:(context)=>ProfileScreen(),
+      },
     );
   }
 }
