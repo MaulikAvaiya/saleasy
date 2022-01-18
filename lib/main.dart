@@ -24,7 +24,8 @@ class MyApp extends StatelessWidget {
       title: 'SalEasy',
       theme: ThemeData(
         accentColor: Colors.amber,
-        primaryColor: Colors.indigo,
+       primaryColor: Colors.tealAccent[400],
+        
       ),
       home:HomeScreen(),
       routes: {
