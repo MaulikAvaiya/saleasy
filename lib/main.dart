@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SalEasy',
       theme: ThemeData(
-        primaryColor: Colors.lightBlue,
+       primaryColor: Colors.tealAccent[400],
+        
       ),
       home: HomeScreen(),
       routes: {
