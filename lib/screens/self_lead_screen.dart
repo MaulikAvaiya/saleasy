@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
-import 'Lead_screen.dart';
 import 'selflead/visited_lead_screen.dart';
 import 'selflead/sales_lead_screen.dart';
 
