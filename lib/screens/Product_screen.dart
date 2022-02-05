@@ -1,75 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:saleasy/Forms/add_product.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:saleasy/list/product_list.dart';
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
   static const routeName = '/Product-screen';
+
   const ProductScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product List'),
       ),
-      body: Dismissible(
-      background: Container(
-        color: Theme.of(context).errorColor,
-        child: Icon(
-          Icons.delete,
-          color: Colors.white,
-          size: 40,
-        ),
-        alignment: Alignment.centerRight,
-        padding: EdgeInsets.only(right: 20),
-        margin: EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 4,
-        ),
-      ),
-      direction: DismissDirection.endToStart,
-      confirmDismiss: (direction) {
-        return showDialog(
-          context: context,
-          builder: (ctx) => AlertDialog(
-                title: Text('Are you sure?'),
-                content: Text(
-                  'Do you want to remove the item from the cart?',
-                ),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('No'),
-                    onPressed: () {
-                      Navigator.of(ctx).pop(false);
-                    },
-                  ),
-                  FlatButton(
-                    child: Text('Yes'),
-                    onPressed: () {
-                      Navigator.of(ctx).pop(true);
-                    },
-                  ),
-                ],
-              ),
-        );
-      },
-        key: ValueKey(null),
-        child: Card(
-          child: ListTile(
-            title: Text('product name'),
-            subtitle: Text('product rate'),
-            trailing: InkWell(
-              child: Icon(
-                Icons.edit,
-                color: Colors.red,
-                size: 30,
-              ),
-              onTap: () {},
-            ),
-          ),
-        ),
-      ),
+      body: ProductList(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(AddProduct.routeName);
+        },
         backgroundColor: Colors.blue,
         child: Icon(Icons.add),
       ),

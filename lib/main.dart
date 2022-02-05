@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:saleasy/Forms/add_product.dart';
 import 'package:saleasy/auth/auth_screen.dart';
-import 'package:saleasy/screens/Product_screen.dart';
+import 'package:saleasy/screens/product_screen.dart';
 import 'package:saleasy/screens/company_lead_screen.dart';
 import 'package:saleasy/screens/company_task_screen.dart';
 import 'package:saleasy/screens/employee_screen.dart';
@@ -8,10 +9,14 @@ import 'package:saleasy/screens/profile_screen.dart';
 import 'package:saleasy/screens/self_lead_screen.dart';
 import 'package:saleasy/screens/self_task_screen.dart';
 import 'package:saleasy/screens/target_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 import 'screens/home_screen.dart';
 
-void main() {
+Future<void> main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -36,6 +41,7 @@ class MyApp extends StatelessWidget {
         CompanyTaskScreen.routeName:(context)=>CompanyTaskScreen(),
         TargetScreen.routeName:(context)=>TargetScreen(),
         ProfileScreen.routeName:(context)=>ProfileScreen(),
+        AddProduct.routeName:(context)=>AddProduct(),
       },
     );
   }
