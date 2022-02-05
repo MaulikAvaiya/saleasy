@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:saleasy/Forms/add_employee.dart';
+import 'package:saleasy/Forms/add_product.dart';
 import 'package:saleasy/auth/auth_screen.dart';
-import 'package:saleasy/screens/Product_screen.dart';
+import 'package:saleasy/screens/product_screen.dart';
 import 'package:saleasy/screens/company_lead_screen.dart';
 import 'package:saleasy/screens/company_task_screen.dart';
 import 'package:saleasy/screens/employee_screen.dart';
@@ -8,17 +10,18 @@ import 'package:saleasy/screens/profile_screen.dart';
 import 'package:saleasy/screens/self_lead_screen.dart';
 import 'package:saleasy/screens/self_task_screen.dart';
 import 'package:saleasy/screens/target_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'screens/home_screen.dart';
 import 'package:saleasy/screens/lead_screen.dart';
 import 'package:saleasy/screens/visited_lead_screen.dart';
 import 'package:saleasy/screens/sales_lead_screen.dart';
 import 'screens/sales_lead_screen.dart';
-import './addscreens/add_product_screen.dart';
-import './addscreens/add_employee_details_screen.dart';
 
 
 
-void main() {
+Future<void> main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -46,8 +49,8 @@ class MyApp extends StatelessWidget {
         LeadScreen.routeName:(context)=>LeadScreen(),
         VisitedLeadScreen.routeName:(context)=>VisitedLeadScreen(),
         SalesLeadScreen.routeName:(context)=>SalesLeadScreen(),
-        AddProductScreen.routeName:(context)=>AddProductScreen(),
-        AddEmployeeDetailScreen.routeName:(context)=>AddEmployeeDetailScreen(),
+        AddProduct.routeName:(context)=>AddProduct(),
+        AddEmployee.routeName:(context)=>AddEmployee(),
         
 
       },

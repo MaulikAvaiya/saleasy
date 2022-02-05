@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "366649411186",
+    "project_id": "saleasy-2d206",
+    "storage_bucket": "saleasy-2d206.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366649411186:android:a4a78509c86cc81f0664eb",
+        "android_client_info": {
+          "package_name": "com.example.saleasy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "366649411186-b158gbto92nhcenq7n71tvjhnqu6bqvp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.saleasy",
+            "certificate_hash": "be79260568ae224ff52f6155f0c6e7f0978c189c"
+          }
+        },
+        {
+          "client_id": "366649411186-hrn3j6d06trnim6df7pji8lcfht37dhj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQvGShrrgJp1uuXQsuGyQ_Wz7keup01Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "366649411186-hrn3j6d06trnim6df7pji8lcfht37dhj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

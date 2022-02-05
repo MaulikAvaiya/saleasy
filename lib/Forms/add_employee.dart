@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
-class AddEmployeeDetailScreen extends StatefulWidget {
+class AddEmployee extends StatefulWidget {
   static const routeName = '/add-employee';
-  const AddEmployeeDetailScreen({Key? key}) : super(key: key);
 
   @override
-   _AddEmployeeDetailScreenState createState() => _AddEmployeeDetailScreenState();
+  State<AddEmployee> createState() => _AddEmployeeState();
 }
 
-class _AddEmployeeDetailScreenState extends State<AddEmployeeDetailScreen> {
+class _AddEmployeeState extends State<AddEmployee> {
   final _addressFocusNode = FocusNode();
+
   final _numberFocusNode = FocusNode();
+
   final _form = GlobalKey<FormState>();
 
   @override
