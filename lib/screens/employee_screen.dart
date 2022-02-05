@@ -68,8 +68,10 @@ class EmployeeScreen extends StatelessWidget {
           child: Card(
             elevation: 5,
             child: ListTile(
+              isThreeLine: true,
               title: Text('product name'),
               subtitle: Text('product price'),
+              
               trailing: InkWell(
                 child: const Icon(
                   Icons.edit,

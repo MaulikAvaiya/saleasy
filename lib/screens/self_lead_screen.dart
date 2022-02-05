@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 import 'Lead_screen.dart';
-import 'visited_lead_screen.dart';
-import 'sales_lead_screen.dart';
+import 'selflead/visited_lead_screen.dart';
+import 'selflead/sales_lead_screen.dart';
 
 class SelfLeadScreen extends StatefulWidget {
   static const routeName = '/SelfLead-screen';
@@ -37,74 +37,50 @@ class _SelfLeadScreenState extends State<SelfLeadScreen> {
       body: Container(
         color: ColorConfig.backColor,
         child: Center(
-          child: SizedBox(
-            width: 420,
-            height: 670,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              color: Colors.white,
-              elevation: 10,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 18),
-                child: GridView.custom(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    childAspectRatio: 3 / 2,
-                    crossAxisSpacing: 25,
-                    mainAxisSpacing: 25,
-                  ),
-                  childrenDelegate: SliverChildBuilderDelegate(
-                    (BuildContext, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          switch (index) {
-                            case 0:
-                              Navigator.pushNamed(
-                                  context, LeadScreen.routeName);
-                              break;
-                            case 1:
-                              Navigator.pushNamed(
-                                  context, VisitedLeadScreen.routeName);
-                              break;
-                            case 2:
-                              Navigator.pushNamed(
-                                  context, SalesLeadScreen.routeName);
-                              break;
-                          }
-                          child:
-                          Column(
-                            children: [
-                              Container(
-                                child: Card(
-                                  color: ColorConfig.primaryColor,
-                                  elevation: 5,
-                                  child: Image.asset(
-                                    images[index],
-                                    fit: BoxFit.cover,
-                                    height: 91,
-                                    width: 91,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                title[index],
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    childCount: 3,
-                  ),
-                  padding: EdgeInsets.all(10),
-                  shrinkWrap: true,
-                ),
-              ),
+          child: Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 20,vertical: 15),
+            child: SizedBox(
+              width: double.infinity,
+
+              child: Card(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  elevation: 10,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                      //  onTap: ,
+                        child: SizedBox(
+                          width: 150,
+                          height: 150,
+                          child: Card(
+                            color: Colors.amber,
+                            child: Image.asset(""),
+                          ),
+                        ),
+                      ),
+                      Text("Lead"),
+                      SizedBox(
+                        width: 150,
+                        height: 150,
+                        child: Card(
+                          color: Colors.amber,
+                          child: Image.asset(""),
+                        ),
+                      ),
+                      Text("Visited Lead"),
+                      SizedBox(
+                        width: 150,
+                        height: 150,
+                        child: Card(
+                          color: Colors.amber,
+                          child: Image.asset(""),
+                        ),
+                      ),
+                      Text("Sales Lead")
+                    ],
+                  )),
             ),
           ),
         ),

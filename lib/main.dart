@@ -12,10 +12,10 @@ import 'package:saleasy/screens/self_task_screen.dart';
 import 'package:saleasy/screens/target_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/home_screen.dart';
-import 'package:saleasy/screens/lead_screen.dart';
-import 'package:saleasy/screens/visited_lead_screen.dart';
-import 'package:saleasy/screens/sales_lead_screen.dart';
-import 'screens/sales_lead_screen.dart';
+import 'package:saleasy/screens/selflead/lead_screen.dart';
+import 'package:saleasy/screens/selflead/visited_lead_screen.dart';
+import 'package:saleasy/screens/selflead/sales_lead_screen.dart';
+import 'screens/selflead/sales_lead_screen.dart';
 
 
 
