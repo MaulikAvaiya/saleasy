@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
-import 'selflead/visited_lead_screen.dart';
-import 'selflead/sales_lead_screen.dart';
+import 'package:saleasy/screens/selflead/self_sales_screen.dart';
+import 'package:saleasy/screens/selflead/self_visited_screen.dart';
+import 'package:saleasy/screens/selflead/selflead_screen.dart';
 
-class SelfLeadScreen extends StatefulWidget {
-  static const routeName = '/SelfLead-screen';
-  const SelfLeadScreen({Key? key}) : super(key: key);
+class SelfLead extends StatelessWidget {
+  static const routeName = '/SelfLead';
+   SelfLead({Key? key}) : super(key: key);
 
-  @override
-  State<SelfLeadScreen> createState() => _SelfLeadScreenState();
-}
-
-class _SelfLeadScreenState extends State<SelfLeadScreen> {
   List<String> images = [
     "assets/images/product-return.png",
     "assets/images/product-return.png",
@@ -49,32 +45,44 @@ class _SelfLeadScreenState extends State<SelfLeadScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       GestureDetector(
-                      //  onTap: ,
+                        onTap:() {
+                          Navigator.of(context).pushNamed(SelfLeadScreen.routeName);
+                        } ,
                         child: SizedBox(
                           width: 150,
                           height: 150,
                           child: Card(
-                            color: Colors.amber,
+                            color: ColorConfig.primaryColor,
                             child: Image.asset(""),
                           ),
                         ),
                       ),
                       Text("Lead"),
-                      SizedBox(
-                        width: 150,
-                        height: 150,
-                        child: Card(
-                          color: Colors.amber,
-                          child: Image.asset(""),
+                      GestureDetector(
+                        onTap:() {
+                          Navigator.of(context).pushNamed(SelfVisitedScreen.routeName);
+                        } ,
+                        child: SizedBox(
+                          width: 150,
+                          height: 150,
+                          child: Card(
+                            color: ColorConfig.primaryColor,
+                            child: Image.asset(""),
+                          ),
                         ),
                       ),
                       Text("Visited Lead"),
-                      SizedBox(
-                        width: 150,
-                        height: 150,
-                        child: Card(
-                          color: Colors.amber,
-                          child: Image.asset(""),
+                      GestureDetector(
+                        onTap:() {
+                          Navigator.of(context).pushNamed(SelfSalesScreen.routeName);
+                        } ,
+                        child: SizedBox(
+                          width: 150,
+                          height: 150,
+                          child: Card(
+                            color: ColorConfig.primaryColor,
+                            child: Image.asset(""),
+                          ),
                         ),
                       ),
                       Text("Sales Lead")

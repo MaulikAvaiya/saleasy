@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 import 'Product_screen.dart';
-import 'company_lead_screen.dart';
+import 'company_lead.dart';
 import 'company_task_screen.dart';
 import 'employee_screen.dart';
 import 'profile_screen.dart';
-import 'self_lead_screen.dart';
+import 'self_lead.dart';
 import 'self_task_screen.dart';
 import 'target_screen.dart';
 
@@ -86,11 +86,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 break;
                               case 2:
                                 Navigator.pushNamed(
-                                    context, SelfLeadScreen.routeName);
+                                    context, SelfLead.routeName);
                                 break;
                               case 3:
                                 Navigator.pushNamed(
-                                    context, CompanyLeadScreen.routeName);
+                                    context, CompanyLead.routeName);
                                 break;
                               case 4:
                                 Navigator.pushNamed(

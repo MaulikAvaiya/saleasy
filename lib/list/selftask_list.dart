@@ -1,41 +1,19 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:saleasy/DetailScreen/product_detail.dart';
+import 'package:saleasy/DetailScreen/selftask_detail.dart';
 import 'package:saleasy/constant/color_config.dart';
 
-class ProductList extends StatefulWidget {
-  const ProductList({Key? key}) : super(key: key);
+class SelfTaskList extends StatefulWidget {
+  const SelfTaskList({ Key? key }) : super(key: key);
 
   @override
-  _ProductListState createState() => _ProductListState();
+  _SelfTaskListState createState() => _SelfTaskListState();
 }
 
-class _ProductListState extends State<ProductList> {
-  final Stream<QuerySnapshot> productStream =
-      FirebaseFirestore.instance.collection('products').snapshots();
-
-  CollectionReference product =
-      FirebaseFirestore.instance.collection('products');
+class _SelfTaskListState extends State<SelfTaskList> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: productStream,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            print('some thing went wrong');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          final List storeDocs = [];
-          snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map student = document.data() as Map<String, dynamic>;
-            storeDocs.add(student);
-          }).toList();
-          return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
+    return ListView.builder(
+            itemCount: 5,
             itemBuilder: (context, index) {
               return Dismissible(
                 background: Container(
@@ -81,7 +59,7 @@ class _ProductListState extends State<ProductList> {
                 key: ValueKey(null),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed(ProductDetail.routeName);
+                    Navigator.of(context).pushNamed(SelfTaskDetail.routeName);
                   },
                   child: Card(
                     child: Padding(
@@ -105,13 +83,20 @@ class _ProductListState extends State<ProductList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '${snapshot.data!.docs[index]['name']}',
+                                  'employee name',
                                   style: TextStyle(fontSize: 20),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(top: 10),
                                   child: Text(
-                                    '${snapshot.data!.docs[index]['rate']}',
+                                    'employee address',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10),
+                                  child: Text(
+                                    'employee mobile no',
                                     style: TextStyle(fontSize: 20),
                                   ),
                                 ),
@@ -140,6 +125,5 @@ class _ProductListState extends State<ProductList> {
               );
             },
           );
-        });
   }
 }

@@ -35,7 +35,7 @@ class _ProductScreenState extends State<ProductScreen> {
           onPressed: () {
             Navigator.of(context).pushNamed(AddProduct.routeName);
           },
-          backgroundColor: Colors.blue,
+          backgroundColor: ColorConfig.primaryColor,
           child: Icon(Icons.add),
         ),
       );
