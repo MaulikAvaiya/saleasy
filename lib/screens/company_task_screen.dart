@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:saleasy/constant/color_config.dart';
+import 'package:saleasy/list/companytask_list.dart';
 
 class CompanyTaskScreen extends StatelessWidget {
   static const routeName='/CompanyTask-screen';
@@ -10,8 +12,14 @@ class CompanyTaskScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('CompanyTaskScreen'),
       ),
-      body: Center(
-        child: Text('this is CompanyTask screen'),
+      body: CompanyTaskList(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+        //  Navigator.of(context).pushNamed(AddEmployee.routeName);
+        },
+        backgroundColor: ColorConfig.primaryColor,
+        child: const Icon(Icons.add),
       ),
     );
   }

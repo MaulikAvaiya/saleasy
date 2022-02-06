@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
+import 'package:saleasy/list/self_list/self_sales_list.dart';
 
-class VisitedLeadScreen extends StatelessWidget {
-  static const routeName = '/visited-lead-screen';
-  const VisitedLeadScreen({Key? key}) : super(key: key);
+class SelfSalesScreen extends StatelessWidget {
+  static const routeName = '/self_sales_screen';
+  const SelfSalesScreen({Key? key}) : super(key: key);
  
 
   @override
@@ -12,16 +13,14 @@ class VisitedLeadScreen extends StatelessWidget {
       backgroundColor: ColorConfig.primaryColor,
       appBar: AppBar(
         title: const Text(
-          'Visited Lead Details',
+          'sales Lead Details',
           style: TextStyle(
             color: Colors.white,
             fontSize: 25,
           ),
         ),
       ),
-      body: Center(
-        child: Text('this is Visitad lead screen'),
-      ),
+      body: SelfSalesList(),
     );
   }
 }

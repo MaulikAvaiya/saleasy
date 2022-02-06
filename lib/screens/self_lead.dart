@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
-import 'package:saleasy/screens/selflead/lead_screen.dart';
-import 'package:saleasy/screens/selflead/sales_lead_screen.dart';
-import 'package:saleasy/screens/selflead/visited_lead_screen.dart';
+import 'package:saleasy/screens/selflead/self_sales_screen.dart';
+import 'package:saleasy/screens/selflead/self_visited_screen.dart';
+import 'package:saleasy/screens/selflead/selflead_screen.dart';
 
-class SelfLeadScreen extends StatelessWidget {
-  static const routeName = '/self-lead-screen';
+class SelfLead extends StatelessWidget {
+  static const routeName = '/SelfLead';
+  SelfLead({Key? key}) : super(key: key);
+
+  List<String> images = [
+    "assets/images/product-return.png",
+    "assets/images/product-return.png",
+    "assets/images/product-return.png",
+  ];
+
+  List<String> title = [
+    'Lead',
+    'Visited Lead',
+    'Sales Lead',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,13 +47,14 @@ class SelfLeadScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushNamed(LeadScreen.routeName);
+                        Navigator.of(context)
+                            .pushNamed(SelfLeadScreen.routeName);
                       },
                       child: SizedBox(
                         width: 150,
                         height: 150,
                         child: Card(
-                          color: Colors.amber,
+                          color: ColorConfig.primaryColor,
                           child: Image.asset(""),
                         ),
                       ),
@@ -47,13 +62,14 @@ class SelfLeadScreen extends StatelessWidget {
                     Text("Lead"),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushNamed(VisitedLeadScreen.routeName);
+                        Navigator.of(context)
+                            .pushNamed(SelfVisitedScreen.routeName);
                       },
                       child: SizedBox(
                         width: 150,
                         height: 150,
                         child: Card(
-                          color: Colors.amber,
+                          color: ColorConfig.primaryColor,
                           child: Image.asset(""),
                         ),
                       ),
@@ -61,13 +77,14 @@ class SelfLeadScreen extends StatelessWidget {
                     Text("Visited Lead"),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushNamed(SalesLeadScreen.routeName);
+                        Navigator.of(context)
+                            .pushNamed(SelfSalesScreen.routeName);
                       },
                       child: SizedBox(
                         width: 150,
                         height: 150,
                         child: Card(
-                          color: Colors.amber,
+                          color: ColorConfig.primaryColor,
                           child: Image.asset(""),
                         ),
                       ),

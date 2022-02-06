@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
+import 'package:saleasy/list/self_list/selflead_list.dart';
 
-class LeadScreen extends StatelessWidget {
-  static const routeName = '/lead-screen';
-  const LeadScreen({Key? key}) : super(key: key);
+class SelfLeadScreen extends StatelessWidget {
+  static const routeName = '/selflead_screen';
+  const SelfLeadScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +19,15 @@ class LeadScreen extends StatelessWidget {
           ),
         ),
       ),
-
+      body: SelfLeadList(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-          },
-          backgroundColor: Colors.blue,
-          child: Icon(Icons.add),
-        ),
-      );
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+        //  Navigator.of(context).pushNamed(AddEmployee.routeName);
+        },
+        backgroundColor: ColorConfig.primaryColor,
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 }
