@@ -55,11 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
           color: ColorConfig.backColor,
           child: Center(
             child: SizedBox(
-              width: 420,
-              height: 670,
+              width: 400,
+              height: 580,
               child: Card(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
+                    borderRadius: BorderRadius.circular(20)),
                 color:Colors.white,
                 elevation: 10,
                 child: Padding(
@@ -119,15 +119,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Image.asset(
                                     images[index],
                                     fit: BoxFit.cover,
-                                    height: 91,
-                                    width: 91,
+                                    height: 85,
+                                    width: 85,
                                   ),
                                 ),
                               ),
                               Text(
                                 title[index],
                                 style: const TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
