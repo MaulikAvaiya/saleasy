@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:saleasy/AddForms/add_product.dart';
 import 'package:saleasy/constant/color_config.dart';
-import 'package:saleasy/Forms/add_product.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:saleasy/list/product_list.dart';

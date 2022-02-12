@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:saleasy/AddForms/add_product.dart';
 import 'package:saleasy/DetailScreen/companyDetail/companylead_detail.dart';
 import 'package:saleasy/DetailScreen/companyDetail/companysales_detail.dart';
 import 'package:saleasy/DetailScreen/companyDetail/companyvisited_detail.dart';
 import 'package:saleasy/DetailScreen/companytask_detail.dart';
 import 'package:saleasy/DetailScreen/employee_detail.dart';
-import 'package:saleasy/DetailScreen/product_detail.dart';
 import 'package:saleasy/DetailScreen/selfDetail/selflead_detail.dart';
 import 'package:saleasy/DetailScreen/selfDetail/selfsales_detail.dart';
 import 'package:saleasy/DetailScreen/selfDetail/selfvisited_detail.dart';
 import 'package:saleasy/DetailScreen/selftask_detail.dart';
 import 'package:saleasy/DetailScreen/target_detail.dart';
-import 'package:saleasy/Forms/add_employee.dart';
-import 'package:saleasy/Forms/add_product.dart';
-import 'package:saleasy/Forms/self_lead_forms/add_sales_lead.dart';
-import 'package:saleasy/Forms/self_lead_forms/edit_task.dart';
+import 'package:saleasy/AddForms/add_employee.dart';
 import 'package:saleasy/auth/auth_screen.dart';
 import 'package:saleasy/screens/CompanyLead/company_sales_screen.dart';
 import 'package:saleasy/screens/CompanyLead/company_visited_screen.dart';
@@ -27,6 +24,7 @@ import 'package:saleasy/screens/self_lead.dart';
 import 'package:saleasy/screens/self_task_screen.dart';
 import 'package:saleasy/screens/target_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'screens/home_screen.dart';
 import 'package:saleasy/screens/selflead/selflead_screen.dart';
 import 'package:saleasy/screens/selflead/self_sales_screen.dart';
@@ -61,10 +59,14 @@ class MyApp extends StatelessWidget {
         TargetScreen.routeName: (context) => TargetScreen(),
         ProfileScreen.routeName: (context) => ProfileScreen(),
 
-        //form route
+        //Addform route
         AddProduct.routeName: (context) => AddProduct(),
         AddEmployee.routeName: (context) => AddEmployee(),
-        AddSalesLead.routeName: (context) => AddSalesLead(),
+
+      
+
+        //EditForm route
+
         
 
         //self lead route
@@ -77,7 +79,7 @@ class MyApp extends StatelessWidget {
         CompanySalesScreen.routeName: (context) => CompanySalesScreen(),
 
         //detail route
-        ProductDetail.routeName: (context) => ProductDetail(),
+       // ProductDetail.routeName: (context) => ProductDetail(name: '',rate: '',),
         EmloyeeDetail.routeName: (context) => EmloyeeDetail(),
         SelfLeadDetail.routeName: (context) => SelfLeadDetail(),
         SelfVisitedDetail.routeName: (context) => SelfVisitedDetail(),

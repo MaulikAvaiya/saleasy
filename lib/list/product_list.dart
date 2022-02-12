@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/DetailScreen/product_detail.dart';
+import 'package:saleasy/EditForm/edit_product.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 class ProductList extends StatefulWidget {
@@ -16,6 +17,15 @@ class _ProductListState extends State<ProductList> {
 
   CollectionReference product =
       FirebaseFirestore.instance.collection('products');
+
+  Future<void> deleteUser(id) {
+    return product
+        .doc(id)
+        .delete()
+        .then((value) => print('user deleted'))
+        .catchError((error) => print('Fail: $error'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -70,8 +80,9 @@ class _ProductListState extends State<ProductList> {
                         ),
                         FlatButton(
                           child: Text('Yes'),
-                          onPressed: () {
-                            Navigator.of(ctx).pop(true);
+                          onPressed: () => {
+                            deleteUser(snapshot.data!.docs[index].id),
+                            Navigator.of(context).pop(),
                           },
                         ),
                       ],
@@ -81,7 +92,9 @@ class _ProductListState extends State<ProductList> {
                 key: ValueKey(null),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed(ProductDetail.routeName);
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                    return  ProductDetail(name: snapshot.data!.docs[index]['name'],rate:snapshot.data!.docs[index]['rate'].toString() ,);
+                    }));
                   },
                   child: Card(
                     child: Padding(
@@ -125,10 +138,21 @@ class _ProductListState extends State<ProductList> {
                                 borderRadius: BorderRadius.circular(50)),
                             child: Padding(
                               padding: EdgeInsets.all(10),
-                              child: Icon(
-                                Icons.edit,
-                                color: ColorConfig.primaryColor,
-                                size: 30,
+                              child: GestureDetector(
+                                onTap: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => EditProduct(
+                                          id: snapshot.data!.docs[index].id),
+                                    ),
+                                  ),
+                                },
+                                child: Icon(
+                                  Icons.edit,
+                                  color: ColorConfig.primaryColor,
+                                  size: 30,
+                                ),
                               ),
                             ),
                           ),

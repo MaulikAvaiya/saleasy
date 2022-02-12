@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:saleasy/constant/color_config.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({Key? key}) : super(key: key);
@@ -56,6 +57,7 @@ class _AddProductState extends State<AddProduct> {
 
   @override
   Widget build(BuildContext context) {
+    FocusNode myFocusNode =FocusNode();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -67,6 +69,7 @@ class _AddProductState extends State<AddProduct> {
         ),
       ),
       body: Form(
+        
         key: _formKey,
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
@@ -82,12 +85,14 @@ class _AddProductState extends State<AddProduct> {
                     FocusScope.of(context)
                         .requestFocus(_rateFocusNode);
                   },
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'ProductName: ',
-                    labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(fontSize: 20.0,color: ColorConfig.primaryColor,),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorConfig.primaryColor)),
+                    enabledBorder:OutlineInputBorder(borderSide: BorderSide(color: ColorConfig.backColor,width: 2)),
+                    //border: OutlineInputBorder(borderSide: BorderSide(color: Colors.amber,width: 10)),
                     errorStyle:
-                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                        TextStyle( color: Colors.redAccent, fontSize: 15),
                   ),
                   controller: nameController,
                   validator: (value) {
@@ -133,7 +138,12 @@ class _AddProductState extends State<AddProduct> {
                             productName = nameController.text;
                             rate = rateController.text;
                             addUser();
+
                             // addUser();
+
+                            Navigator.pop(context);
+                           // addUser();
+
                           });
                         }
                       },
