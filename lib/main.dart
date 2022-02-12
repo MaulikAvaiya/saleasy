@@ -12,6 +12,8 @@ import 'package:saleasy/DetailScreen/selftask_detail.dart';
 import 'package:saleasy/DetailScreen/target_detail.dart';
 import 'package:saleasy/Forms/add_employee.dart';
 import 'package:saleasy/Forms/add_product.dart';
+import 'package:saleasy/Forms/self_lead_forms/add_sales_lead.dart';
+import 'package:saleasy/Forms/self_lead_forms/edit_task.dart';
 import 'package:saleasy/auth/auth_screen.dart';
 import 'package:saleasy/screens/CompanyLead/company_sales_screen.dart';
 import 'package:saleasy/screens/CompanyLead/company_visited_screen.dart';
@@ -62,6 +64,8 @@ class MyApp extends StatelessWidget {
         //form route
         AddProduct.routeName: (context) => AddProduct(),
         AddEmployee.routeName: (context) => AddEmployee(),
+        AddSalesLead.routeName: (context) => AddSalesLead(),
+        
 
         //self lead route
         SelfLeadScreen.routeName: (context) => SelfLeadScreen(),

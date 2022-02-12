@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 class AddEmployee extends StatefulWidget {
+  const AddEmployee({Key? key}) : super(key: key);
   static const routeName = '/add-employee';
 
   @override
@@ -10,24 +11,15 @@ class AddEmployee extends StatefulWidget {
 
 class _AddEmployeeState extends State<AddEmployee> {
   final _addressFocusNode = FocusNode();
+  final _contactnumberFocusNode = FocusNode();
 
-  final _numberFocusNode = FocusNode();
-
-  final _form = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     _addressFocusNode.dispose();
-    _numberFocusNode.dispose();
+    _contactnumberFocusNode.dispose();
     super.dispose();
-  }
-
-  void _saveForm() {
-    final isValid = _form.currentState?.validate();
-    if (isValid!) {
-      return;
-    }
-    _form.currentState?.save();
   }
 
   @override
@@ -42,137 +34,115 @@ class _AddEmployeeState extends State<AddEmployee> {
             fontSize: 25,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: _saveForm,
-            icon: const Icon(
-              Icons.save_rounded,
-              size: 30,
-            ),
-          ),
-        ],
       ),
-      body: Container(
-        color: ColorConfig.backColor,
+      body: Form(
+        key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          child: ListView(
             children: [
-              SizedBox(
-                height: 400,
-                width: 450,
-                child: Card(
-                  borderOnForeground: true,
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context)
+                        .requestFocus(_addressFocusNode);
+                  },
+                  decoration: const InputDecoration(
+                    labelText: 'Employee Name: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  child: Form(
-                    key: _form,
-                    child: Column(children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Employee Name',
-                            errorStyle: const TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                            labelStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.text,
-                          onFieldSubmitted: (_) {
-                            FocusScope.of(context)
-                                .requestFocus(_addressFocusNode);
-                          },
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter employee name';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Address',
-                            errorStyle: const TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                            labelStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.multiline,
-                          focusNode: _numberFocusNode,
-                          onFieldSubmitted: (_) {
-                            _saveForm();
-                          },
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a Address';
-                            }
-                            if (value.length < 55) {
-                              return 'Should be at least 55 characters long';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Contact Number',
-                            errorStyle: const TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                            labelStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
-                          onFieldSubmitted: (_) {
-                            _saveForm();
-                          },
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a contact number';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ]),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter LeadName';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  maxLines: 2,
+                  keyboardType: TextInputType.multiline,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context)
+                        .requestFocus(_contactnumberFocusNode);
+                  },
+                  decoration: const InputDecoration(
+                    labelText: 'Address: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter Address';
+                    }
+                    if (value.length < 55) {
+                      return 'Should be at least 55 characters long';
+                    }
+                    return null;
+                  },
+                  focusNode: _addressFocusNode,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.done,
+                  decoration: const InputDecoration(
+                    labelText: 'Contact Number: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter contact number';
+                    }
+                    return null;
+                  },
+                  focusNode: _contactnumberFocusNode,
+                ),
+              ),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Validate returns true if the form is valid, otherwise false.
+                        if (_formKey.currentState!.validate()) {
+                          setState(() {});
+                        }
+                      },
+                      child: const Text(
+                        'Register',
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => {},
+                      child: const Text(
+                        'Reset',
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                      style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                    ),
+                  ],
                 ),
               ),
             ],

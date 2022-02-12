@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:saleasy/Forms/self_lead_forms/add_sales_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/list/self_list/self_sales_list.dart';
 
 class SelfSalesScreen extends StatelessWidget {
-  static const routeName = '/self_sales_screen';
+  static const routeName = '/self-sales-screen';
   const SelfSalesScreen({Key? key}) : super(key: key);
  
 
@@ -21,6 +22,14 @@ class SelfSalesScreen extends StatelessWidget {
         ),
       ),
       body: SelfSalesList(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(AddSalesLead.routeName);
+          },
+          backgroundColor: ColorConfig.primaryColor,
+          child: Icon(Icons.add),
+        ),
     );
   }
 }

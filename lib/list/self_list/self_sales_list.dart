@@ -76,7 +76,7 @@ class _SelfSalesListState extends State<SelfSalesList> {
                           width: 230,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children:[
                               Text(
                                 'employee name',
                                 style: TextStyle(fontSize: 20),

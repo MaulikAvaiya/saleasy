@@ -3,12 +3,37 @@ import 'package:saleasy/constant/color_config.dart';
 
 class AddSalesLead extends StatefulWidget {
   const AddSalesLead({Key? key}) : super(key: key);
+  static const routeName = '/add-sales-lead';
 
   @override
   _AddSalesLeadState createState() => _AddSalesLeadState();
 }
 
 class _AddSalesLeadState extends State<AddSalesLead> {
+   final _addressFocusNode =FocusNode();
+   final _contactnumberFocusNode =FocusNode();
+   final _companynameFocusNode =FocusNode();
+   final _productnameFocusNode =FocusNode();
+   final _quantityFocusNode =FocusNode();
+   final _rateFocusNode =FocusNode();
+   final _amountFocusNode =FocusNode();
+   final _datetimeFocusNode =FocusNode();
+
+   @override
+  void dispose() {
+    _addressFocusNode.dispose();
+    _contactnumberFocusNode.dispose();
+    _companynameFocusNode.dispose();
+    _productnameFocusNode.dispose();
+    _quantityFocusNode.dispose();
+    _rateFocusNode.dispose();
+    _amountFocusNode.dispose();
+    _datetimeFocusNode.dispose();
+    
+    super.dispose();
+  }
+   
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -27,14 +52,19 @@ class _AddSalesLeadState extends State<AddSalesLead> {
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
           child: ListView(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  decoration: InputDecoration(
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_addressFocusNode);
+                  },
+                  decoration: const InputDecoration(
                     labelText: 'Lead Name: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -50,10 +80,16 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
-                  autofocus: false,
-                  decoration: InputDecoration(
+                  autofocus: false, 
+                  maxLines: 2,
+                  keyboardType: TextInputType.multiline,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_contactnumberFocusNode);
+                  },
+                  decoration: const InputDecoration(
                     labelText: 'Address: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -69,13 +105,19 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     }
                     return null;
                   },
+                  focusNode: _addressFocusNode,
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  decoration: InputDecoration(
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_companynameFocusNode);
+                  },
+                  decoration: const InputDecoration(
                     labelText: 'Contact Number: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -88,13 +130,19 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     }
                     return null;
                   },
+                  focusNode: _contactnumberFocusNode,
                 ),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  decoration: InputDecoration(
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_productnameFocusNode);
+                  },
+                  decoration: const InputDecoration(
                     labelText: 'Company Name: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -107,13 +155,19 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     }
                     return null;
                   },
+                  focusNode: _companynameFocusNode,
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  decoration: InputDecoration(
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_quantityFocusNode);
+                  },
+                  decoration: const InputDecoration(
                     labelText: 'product Name: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -126,13 +180,19 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     }
                     return null;
                   },
+                  focusNode: _productnameFocusNode,
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  decoration: InputDecoration(
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_rateFocusNode);
+                  },
+                  decoration: const InputDecoration(
                     labelText: 'Quantity: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -145,13 +205,19 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     }
                     return null;
                   },
+                  focusNode: _quantityFocusNode,
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  decoration: InputDecoration(
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_amountFocusNode);
+                  },
+                  decoration: const InputDecoration(
                     labelText: 'Rate: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -164,13 +230,19 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     }
                     return null;
                   },
+                  focusNode: _rateFocusNode,
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  decoration: InputDecoration(
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_datetimeFocusNode);
+                  },
+                  decoration: const InputDecoration(
                     labelText: 'Amount: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -183,13 +255,16 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     }
                     return null;
                   },
+                  focusNode: _amountFocusNode,
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  decoration: InputDecoration(
+                  keyboardType: TextInputType.datetime,
+                  textInputAction: TextInputAction.done,
+                  decoration: const InputDecoration(
                     labelText: 'Date Time: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -202,6 +277,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     }
                     return null;
                   },
+                  focusNode: _datetimeFocusNode,
                 ),
               ),
               Container(
@@ -215,14 +291,14 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                           setState(() {});
                         }
                       },
-                      child: Text(
+                      child: const Text(
                         'Register',
                         style: TextStyle(fontSize: 18.0),
                       ),
                     ),
                     ElevatedButton(
                       onPressed: () => {},
-                      child: Text(
+                      child: const Text(
                         'Reset',
                         style: TextStyle(fontSize: 18.0),
                       ),
