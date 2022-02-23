@@ -129,7 +129,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.name,
@@ -184,7 +184,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                 //  focusNode: _addressFocusNode,
                 ),
               ),
-              Container(
+              SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

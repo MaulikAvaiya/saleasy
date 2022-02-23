@@ -72,11 +72,11 @@ class _AddProductState extends State<AddProduct> {
         
         key: _formKey,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          padding:const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
           child: ListView(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin:const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.name,
@@ -92,7 +92,7 @@ class _AddProductState extends State<AddProduct> {
                     enabledBorder:OutlineInputBorder(borderSide: BorderSide(color: ColorConfig.backColor,width: 2)),
                     //border: OutlineInputBorder(borderSide: BorderSide(color: Colors.amber,width: 10)),
                     errorStyle:
-                        TextStyle( color: Colors.redAccent, fontSize: 15),
+                        const TextStyle( color: Colors.redAccent, fontSize: 15),
                   ),
                   controller: nameController,
                   validator: (value) {
@@ -104,7 +104,7 @@ class _AddProductState extends State<AddProduct> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin:const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.number,
@@ -126,7 +126,7 @@ class _AddProductState extends State<AddProduct> {
                   focusNode: _rateFocusNode,
                 ),
               ),
-              Container(
+              SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

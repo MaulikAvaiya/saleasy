@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/deletefunction/companyleaddelete.dart';
-import 'package:saleasy/deletefunction/companyleaddelete.dart';
-import 'package:saleasy/deletefunction/selfleadelete.dart';
 import 'package:saleasy/screens/selflead/self_visited_screen.dart';
 
 class AddCompanySalesLead extends StatefulWidget {

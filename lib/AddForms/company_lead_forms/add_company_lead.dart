@@ -196,7 +196,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.name,
@@ -218,7 +218,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                   focusNode: _employeenameFocusNode,
                 ),
               ),
-              Container(
+              SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

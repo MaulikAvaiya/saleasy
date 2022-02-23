@@ -17,7 +17,7 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('company visited detail screen'),),
+      appBar: AppBar(title: const Text('company visited detail screen'),),
       body: FutureBuilder<DocumentSnapshot>(
           future: companyvisitedlead.doc(widget.id).get(),
           builder: (context, snapshot) {
@@ -25,14 +25,14 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
               print('some thing went wrong');
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
             return Column(
               children: [
                 Container(
-                  child: Text('companyvisitedlead detail screen'),
+                  child: const Text('companyvisitedlead detail screen'),
                 ),
                 Text(snapshot.data!['name']),
                 Text(snapshot.data!['address']),

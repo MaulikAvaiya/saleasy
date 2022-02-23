@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/AddForms/self_lead_forms/add_sales_lead.dart';
-import 'package:saleasy/AddForms/self_lead_forms/add_self_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 class SelfVisitedDetail extends StatefulWidget {
@@ -20,7 +19,7 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('self vidited detail screen'),
+        title: const Text('self vidited detail screen'),
       ),
       body: FutureBuilder<DocumentSnapshot>(
           future: selflead.doc(widget.id).get(),
@@ -29,14 +28,14 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
               print('some thing went wrong');
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
             return Column(
               children: [
                 Container(
-                  child: Text('selfsaleslead detail screen'),
+                  child: const Text('selfsaleslead detail screen'),
                 ),
                 Text(snapshot.data!['name']),
                 Text(snapshot.data!['address']),

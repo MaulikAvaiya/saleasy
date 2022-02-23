@@ -130,7 +130,7 @@ class _AddTaskState extends State<AddTask> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.name,
@@ -155,7 +155,7 @@ class _AddTaskState extends State<AddTask> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.datetime,
@@ -180,7 +180,7 @@ class _AddTaskState extends State<AddTask> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.datetime,
@@ -205,7 +205,7 @@ class _AddTaskState extends State<AddTask> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.datetime,
@@ -226,7 +226,7 @@ class _AddTaskState extends State<AddTask> {
                   focusNode: _typeFocusNode,
                 ),
               ),
-              Container(
+              SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

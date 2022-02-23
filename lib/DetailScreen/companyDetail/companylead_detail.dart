@@ -18,7 +18,7 @@ class _CompanyLeadDetailState extends State<CompanyLeadDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('companylead detail screen'),),
+      appBar: AppBar(title: const Text('companylead detail screen'),),
       body: FutureBuilder<DocumentSnapshot>(
           future: companylead.doc(widget.id).get(),
           builder: (context, snapshot) {
@@ -26,14 +26,14 @@ class _CompanyLeadDetailState extends State<CompanyLeadDetail> {
               print('some thing went wrong');
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
             return Column(
               children: [
                 Container(
-                  child: Text('companylead detail screen'),
+                  child: const Text('companylead detail screen'),
                 ),
                 Text(snapshot.data!['name']),
                 Text(snapshot.data!['address']),

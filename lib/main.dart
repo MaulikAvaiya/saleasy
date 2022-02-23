@@ -2,18 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:saleasy/AddForms/add_product.dart';
 import 'package:saleasy/AddForms/company_lead_forms/add_company_lead.dart';
 import 'package:saleasy/AddForms/self_lead_forms/add_self_lead.dart';
-import 'package:saleasy/DetailScreen/companyDetail/companylead_detail.dart';
 import 'package:saleasy/DetailScreen/companyDetail/companysales_detail.dart';
-import 'package:saleasy/DetailScreen/companyDetail/companyvisited_detail.dart';
 import 'package:saleasy/DetailScreen/companytask_detail.dart';
 import 'package:saleasy/DetailScreen/employee_detail.dart';
-import 'package:saleasy/DetailScreen/selfDetail/selflead_detail.dart';
 import 'package:saleasy/DetailScreen/selfDetail/selfsales_detail.dart';
-import 'package:saleasy/DetailScreen/selfDetail/selfvisited_detail.dart';
 import 'package:saleasy/DetailScreen/selftask_detail.dart';
 import 'package:saleasy/DetailScreen/target_detail.dart';
 import 'package:saleasy/AddForms/add_employee.dart';
-import 'package:saleasy/auth/auth_screen.dart';
 import 'package:saleasy/screens/CompanyLead/company_sales_screen.dart';
 import 'package:saleasy/screens/CompanyLead/company_visited_screen.dart';
 import 'package:saleasy/screens/CompanyLead/companylead_screen.dart';
@@ -36,7 +31,7 @@ import 'screens/selflead/self_visited_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -49,23 +44,23 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.tealAccent[400],
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
       routes: {
         //main route
-        ProductScreen.routeName: (context) => ProductScreen(),
-        EmployeeScreen.routeName: (context) => EmployeeScreen(),
+        ProductScreen.routeName: (context) => const ProductScreen(),
+        EmployeeScreen.routeName: (context) => const EmployeeScreen(),
         SelfLead.routeName: (context) => SelfLead(),
-        CompanyLead.routeName: (context) => CompanyLead(),
-        SelfTaskScreen.routeName: (context) => SelfTaskScreen(),
-        CompanyTaskScreen.routeName: (context) => CompanyTaskScreen(),
-        TargetScreen.routeName: (context) => TargetScreen(),
-        ProfileScreen.routeName: (context) => ProfileScreen(),
+        CompanyLead.routeName: (context) => const CompanyLead(),
+        SelfTaskScreen.routeName: (context) => const SelfTaskScreen(),
+        CompanyTaskScreen.routeName: (context) => const CompanyTaskScreen(),
+        TargetScreen.routeName: (context) => const TargetScreen(),
+        ProfileScreen.routeName: (context) => const ProfileScreen(),
 
         //Addform route
-        AddProduct.routeName: (context) => AddProduct(),
-        AddEmployee.routeName: (context) => AddEmployee(),
-        AddSelfLead.routeName:(context)=>AddSelfLead(),
-        AddCompanyLead.routeName:(context)=>AddCompanyLead(),
+        AddProduct.routeName: (context) => const AddProduct(),
+        AddEmployee.routeName: (context) => const AddEmployee(),
+        AddSelfLead.routeName:(context)=>const AddSelfLead(),
+        AddCompanyLead.routeName:(context)=>const AddCompanyLead(),
 
       
 
@@ -87,13 +82,13 @@ class MyApp extends StatelessWidget {
         EmloyeeDetail.routeName: (context) => const EmloyeeDetail(),
       //  SelfLeadDetail.routeName: (context) => SelfLeadDetail(),
       //  SelfVisitedDetail.routeName: (context) => SelfVisitedDetail(),
-        SelfSalesDetail.routeName: (context) => SelfSalesDetail(),
+        SelfSalesDetail.routeName: (context) => const SelfSalesDetail(),
       //  CompanyLeadDetail.routeName: (context) => CompanyLeadDetail(),
       //  CompanyVisitedDetail.routeName: (context) => CompanyVisitedDetail(),
-        CompanySalesDetail.routeName: (context) => CompanySalesDetail(),
-        SelfTaskDetail.routeName:(context)=>SelfTaskDetail(),
-        CompanyTaskDetail.routeName:(context)=>CompanyTaskDetail(),
-        TargetDetail.routeName:(context)=>TargetDetail(),
+        CompanySalesDetail.routeName: (context) => const CompanySalesDetail(),
+        SelfTaskDetail.routeName:(context)=>const SelfTaskDetail(),
+        CompanyTaskDetail.routeName:(context)=>const CompanyTaskDetail(),
+        TargetDetail.routeName:(context)=>const TargetDetail(),
       },
     );
   }

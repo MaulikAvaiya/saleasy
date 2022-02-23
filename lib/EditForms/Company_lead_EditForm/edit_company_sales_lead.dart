@@ -43,8 +43,8 @@ class _EditCompanySalesLeadState extends State<EditCompanySalesLead> {
   CollectionReference companysaleslead =
       FirebaseFirestore.instance.collection('companysaleslead');
 
-  Future<void> updateCompanysalesLead(
-      id, name, address, contact, companyName, product, quantity,rate,amount, datetime) {
+  Future<void> updateCompanysalesLead(id, name, address, contact, companyName,
+      product, quantity, rate, amount, datetime) {
     return companysaleslead
         .doc(id)
         .update({
@@ -89,7 +89,7 @@ class _EditCompanySalesLeadState extends State<EditCompanySalesLead> {
                 print('Something went wrong.');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -355,38 +355,36 @@ class _EditCompanySalesLeadState extends State<EditCompanySalesLead> {
                         focusNode: _datetimeFocusNode,
                       ),
                     ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              // Validate returns true if the form is valid, otherwise false.
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  updateCompanysalesLead(
-                                    widget.id,
-                                    selfleadName,
-                                    selfleadAddress,
-                                    selfleadContact,
-                                    selfleadcompanyName,
-                                    product,
-                                    quantity,
-                                    rate,
-                                    amount,
-                                    datetime,
-                                  );
-                                });
-                                Navigator.of(context).pop();
-                              }
-                            },
-                            child: const Text(
-                              'Save',
-                              style: TextStyle(fontSize: 18.0),
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // Validate returns true if the form is valid, otherwise false.
+                            if (_formKey.currentState!.validate()) {
+                              setState(() {
+                                updateCompanysalesLead(
+                                  widget.id,
+                                  selfleadName,
+                                  selfleadAddress,
+                                  selfleadContact,
+                                  selfleadcompanyName,
+                                  product,
+                                  quantity,
+                                  rate,
+                                  amount,
+                                  datetime,
+                                );
+                              });
+                              Navigator.of(context).pop();
+                            }
+                          },
+                          child: const Text(
+                            'Save',
+                            style: TextStyle(fontSize: 18.0),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     )
                   ],
                 ),

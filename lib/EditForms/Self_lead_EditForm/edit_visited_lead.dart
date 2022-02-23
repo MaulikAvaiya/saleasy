@@ -79,7 +79,7 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
                 print('Something went wrong.');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -156,7 +156,7 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
                         initialValue: selfleadContact,
                         autofocus: false,
@@ -289,38 +289,36 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
                         focusNode: _datetimeFocusNode,
                       ),
                     ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              // Validate returns true if the form is valid, otherwise false.
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  updateSelfvisitedLead(
-                                      widget.id,
-                                      selfleadName,
-                                      selfleadAddress,
-                                      selfleadContact,
-                                      selfleadcompanyName,
-                                      product,
-                                      decision,
-                                      datetime,
-                                      );
-                                });
-                                Navigator.of(context).pop();
-                              }
-                            },
-                            child: const Text(
-                              'Save',
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // Validate returns true if the form is valid, otherwise false.
+                            if (_formKey.currentState!.validate()) {
+                              setState(() {
+                                updateSelfvisitedLead(
+                                    widget.id,
+                                    selfleadName,
+                                    selfleadAddress,
+                                    selfleadContact,
+                                    selfleadcompanyName,
+                                    product,
+                                    decision,
+                                    datetime,
+                                    );
+                              });
+                              Navigator.of(context).pop();
+                            }
+                          },
+                          child: const Text(
+                            'Save',
+                            style: TextStyle(
+                              fontSize: 18,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     )
                   ],
                 ),
