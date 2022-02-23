@@ -12,13 +12,20 @@ class CompanyLead extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CompanyLead'),
+        backgroundColor: ColorConfig.primaryColor,
+        title: const Text(
+          'Company Lead',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+          ),
+        ),
       ),
       body: Container(
         color: ColorConfig.backColor,
         child: Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
             child: SizedBox(
               width: double.infinity,
               child: Card(
@@ -35,45 +42,61 @@ class CompanyLead extends StatelessWidget {
                               .pushNamed(CompanyLeadScreen.routeName);
                         },
                         child: SizedBox(
-                          width: 150,
-                          height: 150,
+                          width: 110,
+                          height: 110,
                           child: Card(
-                            color: ColorConfig.primaryColor,
-                            child: Image.asset(""),
+                            child: Image.asset("assets/images/lead.png"),
                           ),
                         ),
                       ),
-                      Text("Lead"),
+                      const Text(
+                        "Lead",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context)
                               .pushNamed(CompanyVisitedScreen.routeName);
                         },
                         child: SizedBox(
-                          width: 150,
-                          height: 150,
+                          width: 110,
+                          height: 110,
                           child: Card(
-                            color: ColorConfig.primaryColor,
-                            child: Image.asset(""),
+                            child:
+                                Image.asset("assets/images/visited-lead.png"),
                           ),
                         ),
                       ),
-                      Text("Visited Lead"),
+                      const Text(
+                        "Visited Lead",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context)
                               .pushNamed(CompanySalesScreen.routeName);
                         },
                         child: SizedBox(
-                          width: 150,
-                          height: 150,
+                          width: 110,
+                          height: 110,
                           child: Card(
-                            color: ColorConfig.primaryColor,
-                            child: Image.asset(""),
+                            child: Image.asset("assets/images/sales-lead.png"),
                           ),
                         ),
                       ),
-                      Text("Sales Lead")
+                      const Text(
+                        "Sales Lead",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
                     ],
                   )),
             ),

@@ -5,20 +5,8 @@ import 'package:saleasy/screens/selflead/self_visited_screen.dart';
 import 'package:saleasy/screens/selflead/selflead_screen.dart';
 
 class SelfLead extends StatelessWidget {
-  static const routeName = '/SelfLead';
+  static const routeName = '/Self-Lead';
   SelfLead({Key? key}) : super(key: key);
-
-  List<String> images = [
-    "assets/images/product-return.png",
-    "assets/images/product-return.png",
-    "assets/images/product-return.png",
-  ];
-
-  List<String> title = [
-    'Lead',
-    'Visited Lead',
-    'Sales Lead',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +15,17 @@ class SelfLead extends StatelessWidget {
         backgroundColor: ColorConfig.primaryColor,
         title: const Text(
           'Self Lead Dashboard',
-          style: TextStyle(color: Colors.white, fontSize: 25),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+          ),
         ),
       ),
       body: Container(
         color: ColorConfig.backColor,
         child: Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
             child: SizedBox(
               width: double.infinity,
               child: Card(
@@ -51,45 +42,60 @@ class SelfLead extends StatelessWidget {
                             .pushNamed(SelfLeadScreen.routeName);
                       },
                       child: SizedBox(
-                        width: 150,
-                        height: 150,
+                        width: 110,
+                        height: 110,
                         child: Card(
-                          color: ColorConfig.primaryColor,
-                          child: Image.asset(""),
+                          child: Image.asset("assets/images/lead.png"),
                         ),
                       ),
                     ),
-                    Text("Lead"),
+                    const Text(
+                      "Lead",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context)
                             .pushNamed(SelfVisitedScreen.routeName);
                       },
                       child: SizedBox(
-                        width: 150,
-                        height: 150,
+                        width: 110,
+                        height: 110,
                         child: Card(
-                          color: ColorConfig.primaryColor,
-                          child: Image.asset(""),
+                          child: Image.asset("assets/images/visited-lead.png"),
                         ),
                       ),
                     ),
-                    Text("Visited Lead"),
+                    const Text(
+                      "Visited Lead",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context)
                             .pushNamed(SelfSalesScreen.routeName);
                       },
                       child: SizedBox(
-                        width: 150,
-                        height: 150,
+                        width: 110,
+                        height: 110,
                         child: Card(
-                          color: ColorConfig.primaryColor,
-                          child: Image.asset(""),
+                          child: Image.asset("assets/images/sales-lead.png"),
                         ),
                       ),
                     ),
-                    Text("Sales Lead"),
+                    const Text(
+                      "Sales Lead",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ),

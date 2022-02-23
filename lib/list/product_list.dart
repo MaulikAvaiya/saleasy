@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/DetailScreen/product_detail.dart';
-import 'package:saleasy/EditForm/edit_product.dart';
+import 'package:saleasy/EditForms/edit_product.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 class ProductList extends StatefulWidget {
