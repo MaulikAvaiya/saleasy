@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saleasy/AddForms/self_lead_forms/add_self_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/list/self_list/selflead_list.dart';
 
@@ -23,7 +24,7 @@ class SelfLeadScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-        //  Navigator.of(context).pushNamed(AddEmployee.routeName);
+          Navigator.of(context).pushNamed(AddSelfLead.routeName);
         },
         backgroundColor: ColorConfig.primaryColor,
         child: const Icon(Icons.add),

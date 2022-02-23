@@ -2,19 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
-class EditSalesLead extends StatefulWidget {
+class EditCompanySalesLead extends StatefulWidget {
   final String id;
-  const EditSalesLead({
+  const EditCompanySalesLead({
     Key? key,
     required this.id,
   }) : super(key: key);
-  static const routeName = '/edit-sales-lead';
+  static const routeName = '/edit-Companysales-lead';
 
   @override
-  _EditSalesLeadState createState() => _EditSalesLeadState();
+  _EditCompanySalesLeadState createState() => _EditCompanySalesLeadState();
 }
 
-class _EditSalesLeadState extends State<EditSalesLead> {
+class _EditCompanySalesLeadState extends State<EditCompanySalesLead> {
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
   final _companynameFocusNode = FocusNode();
@@ -40,12 +40,12 @@ class _EditSalesLeadState extends State<EditSalesLead> {
 
   final _formKey = GlobalKey<FormState>();
 
-  CollectionReference selfsaleslead =
-      FirebaseFirestore.instance.collection('selfsaleslead');
+  CollectionReference companysaleslead =
+      FirebaseFirestore.instance.collection('companysaleslead');
 
-  Future<void> updateSelfsalesLead(
+  Future<void> updateCompanysalesLead(
       id, name, address, contact, companyName, product, quantity,rate,amount, datetime) {
-    return selfsaleslead
+    return companysaleslead
         .doc(id)
         .update({
           'name': name,
@@ -364,7 +364,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                               // Validate returns true if the form is valid, otherwise false.
                               if (_formKey.currentState!.validate()) {
                                 setState(() {
-                                  updateSelfsalesLead(
+                                  updateCompanysalesLead(
                                     widget.id,
                                     selfleadName,
                                     selfleadAddress,

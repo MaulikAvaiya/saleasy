@@ -19,7 +19,7 @@ class _EditProductState extends State<EditProduct> {
   CollectionReference products =
       FirebaseFirestore.instance.collection('products');
 
-  Future<void> UpdateUser(id, name, rate) {
+  Future<void> updateProduct(id, name, rate) {
     return products
         .doc(id)
         .update({
@@ -112,7 +112,7 @@ class _EditProductState extends State<EditProduct> {
                           onPressed: () {
                             // Validate returns true if the form is valid, otherwise false.
                             if (_formKey.currentState!.validate()) {
-                              UpdateUser(widget.id, name, rate);
+                              updateProduct(widget.id, name, rate);
                               Navigator.pop(context);
                             }
                           },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saleasy/AddForms/company_lead_forms/add_company_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/list/company_list/companylead_list.dart';
 
@@ -15,7 +16,7 @@ class CompanyLeadScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-        //  Navigator.of(context).pushNamed(AddEmployee.routeName);
+          Navigator.of(context).pushNamed(AddCompanyLead.routeName);
         },
         backgroundColor: ColorConfig.primaryColor,
         child: const Icon(Icons.add),

@@ -2,26 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
-class EditSalesLead extends StatefulWidget {
+class EditCompanyVisitedLead extends StatefulWidget {
   final String id;
-  const EditSalesLead({
-    Key? key,
-    required this.id,
-  }) : super(key: key);
-  static const routeName = '/edit-sales-lead';
+  const EditCompanyVisitedLead({Key? key, required this.id}) : super(key: key);
+  static const routeName = '/edit-companyvisited-lead';
 
   @override
-  _EditSalesLeadState createState() => _EditSalesLeadState();
+  _EditCompanyVisitedLeadState createState() => _EditCompanyVisitedLeadState();
 }
 
-class _EditSalesLeadState extends State<EditSalesLead> {
+class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
   final _companynameFocusNode = FocusNode();
   final _productnameFocusNode = FocusNode();
-  final _quantityFocusNode = FocusNode();
-  final _rateFocusNode = FocusNode();
-  final _amountFocusNode = FocusNode();
+  final _decisionFocusNode = FocusNode();
   final _datetimeFocusNode = FocusNode();
 
   @override
@@ -30,9 +25,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
     _contactnumberFocusNode.dispose();
     _companynameFocusNode.dispose();
     _productnameFocusNode.dispose();
-    _quantityFocusNode.dispose();
-    _rateFocusNode.dispose();
-    _amountFocusNode.dispose();
+    _decisionFocusNode.dispose();
     _datetimeFocusNode.dispose();
 
     super.dispose();
@@ -40,12 +33,11 @@ class _EditSalesLeadState extends State<EditSalesLead> {
 
   final _formKey = GlobalKey<FormState>();
 
-  CollectionReference selfsaleslead =
-      FirebaseFirestore.instance.collection('selfsaleslead');
+  CollectionReference companyvisitedlead =
+      FirebaseFirestore.instance.collection('companyvisitedlead');
 
-  Future<void> updateSelfsalesLead(
-      id, name, address, contact, companyName, product, quantity,rate,amount, datetime) {
-    return selfsaleslead
+  Future<void> updateCompanyVisitedLead(id, name, address, contact, companyName,product,decision,datetime) {
+    return companyvisitedlead
         .doc(id)
         .update({
           'name': name,
@@ -53,14 +45,12 @@ class _EditSalesLeadState extends State<EditSalesLead> {
           'contact': contact,
           'companyname': companyName,
           'product': product,
-          'quantity': quantity,
-          'rate': rate,
-          'amount': amount,
+          'decision': decision,
           'datetime': datetime,
         })
-        .then((value) => print("selfsaleslead Updated"))
+        .then((value) => print("Companyvisitedlead Updated"))
         .catchError(
-          (error) => print("Failed to update selfsaleslead:$error"),
+          (error) => print("Failed to update Companyvisitedlead:$error"),
         );
   }
 
@@ -70,7 +60,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
       appBar: AppBar(
         backgroundColor: ColorConfig.primaryColor,
         title: const Text(
-          "Edit Sales Lead",
+          "Edit CompanyVisited Lead",
           style: TextStyle(
             color: Colors.white,
             fontSize: 25,
@@ -81,7 +71,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
         key: _formKey,
         child: FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
-                .collection('selfsaleslead')
+                .collection('companyvisitedlead')
                 .doc(widget.id)
                 .get(),
             builder: (_, snapshot) {
@@ -99,11 +89,9 @@ class _EditSalesLeadState extends State<EditSalesLead> {
               var selfleadAddress = data['address'];
               var selfleadContact = data['contact'];
               var selfleadcompanyName = data['companyname'];
-              var product = data['product'];
-              var quantity = data['quantity'];
-              var amount = data['amount'];
-              var rate = data['rate'];
-              var datetime = data['datetime'];
+              var product=data['product'];
+              var decision=data['decision'];
+              var datetime=data['datetime'];
 
               return Padding(
                 padding:
@@ -168,11 +156,11 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      margin: EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
                         initialValue: selfleadContact,
                         autofocus: false,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         onFieldSubmitted: (_) {
                           FocusScope.of(context)
@@ -187,7 +175,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter contact number ';
+                            return 'Please enter contact number';
                           }
                           return null;
                         },
@@ -199,7 +187,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                       child: TextFormField(
                         initialValue: selfleadcompanyName,
                         autofocus: false,
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,
                         onFieldSubmitted: (_) {
                           FocusScope.of(context)
@@ -214,7 +202,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter company name';
+                            return 'Please enter company name ';
                           }
                           return null;
                         },
@@ -225,16 +213,16 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
                         initialValue: product,
-                        onChanged: (value) => product = value,
+                        onChanged: (value) => product=value,
                         autofocus: false,
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         onFieldSubmitted: (_) {
                           FocusScope.of(context)
-                              .requestFocus(_quantityFocusNode);
+                              .requestFocus(_decisionFocusNode);
                         },
                         decoration: const InputDecoration(
-                          labelText: 'product Name: ',
+                          labelText: 'Product Name: ',
                           labelStyle: TextStyle(fontSize: 20.0),
                           border: OutlineInputBorder(),
                           errorStyle:
@@ -242,7 +230,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter product number';
+                            return 'Please enter product name';
                           }
                           return null;
                         },
@@ -252,71 +240,17 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
-                        initialValue: quantity,
-                        onChanged: (value) => quantity = value,
+                        initialValue: decision,
+                        onChanged: (value) => decision=value,
                         autofocus: false,
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        onFieldSubmitted: (_) {
-                          FocusScope.of(context).requestFocus(_rateFocusNode);
-                        },
-                        decoration: const InputDecoration(
-                          labelText: 'Quantity: ',
-                          labelStyle: TextStyle(fontSize: 20.0),
-                          border: OutlineInputBorder(),
-                          errorStyle:
-                              TextStyle(color: Colors.redAccent, fontSize: 15),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter quantity';
-                          }
-                          return null;
-                        },
-                        focusNode: _quantityFocusNode,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextFormField(
-                        initialValue: rate,
-                        onChanged: (value) => rate = value,
-                        autofocus: false,
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        onFieldSubmitted: (_) {
-                          FocusScope.of(context).requestFocus(_amountFocusNode);
-                        },
-                        decoration: const InputDecoration(
-                          labelText: 'Rate: ',
-                          labelStyle: TextStyle(fontSize: 20.0),
-                          border: OutlineInputBorder(),
-                          errorStyle:
-                              TextStyle(color: Colors.redAccent, fontSize: 15),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please Enter Rate';
-                          }
-                          return null;
-                        },
-                        focusNode: _rateFocusNode,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextFormField(
-                        initialValue: amount,
-                        onChanged: (value) => amount = value,
-                        autofocus: false,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         onFieldSubmitted: (_) {
                           FocusScope.of(context)
                               .requestFocus(_datetimeFocusNode);
                         },
                         decoration: const InputDecoration(
-                          labelText: 'Amount: ',
+                          labelText: 'Decision: ',
                           labelStyle: TextStyle(fontSize: 20.0),
                           border: OutlineInputBorder(),
                           errorStyle:
@@ -324,20 +258,20 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter amount';
+                            return 'Please enter your decision';
                           }
                           return null;
                         },
-                        focusNode: _amountFocusNode,
+                        focusNode: _decisionFocusNode,
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
                         initialValue: datetime,
-                        onChanged: (value) => datetime = value,
+                        onChanged: (value) => datetime=value,
                         autofocus: false,
-                        keyboardType: TextInputType.datetime,
+                        keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.done,
                         decoration: const InputDecoration(
                           labelText: 'Date Time: ',
@@ -348,7 +282,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter date and time';
+                            return 'Please enter Date and time';
                           }
                           return null;
                         },
@@ -357,32 +291,32 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                     ),
                     Container(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           ElevatedButton(
                             onPressed: () {
                               // Validate returns true if the form is valid, otherwise false.
                               if (_formKey.currentState!.validate()) {
                                 setState(() {
-                                  updateSelfsalesLead(
-                                    widget.id,
-                                    selfleadName,
-                                    selfleadAddress,
-                                    selfleadContact,
-                                    selfleadcompanyName,
-                                    product,
-                                    quantity,
-                                    rate,
-                                    amount,
-                                    datetime,
-                                  );
+                                  updateCompanyVisitedLead(
+                                      widget.id,
+                                      selfleadName,
+                                      selfleadAddress,
+                                      selfleadContact,
+                                      selfleadcompanyName,
+                                      product,
+                                      decision,
+                                      datetime,
+                                      );
                                 });
                                 Navigator.of(context).pop();
                               }
                             },
                             child: const Text(
                               'Save',
-                              style: TextStyle(fontSize: 18.0),
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ],

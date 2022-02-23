@@ -18,7 +18,7 @@ class _ProductListState extends State<ProductList> {
   CollectionReference product =
       FirebaseFirestore.instance.collection('products');
 
-  Future<void> deleteUser(id) {
+  Future<void> deleteProduct(id) {
     return product
         .doc(id)
         .delete()
@@ -41,8 +41,8 @@ class _ProductListState extends State<ProductList> {
           }
           final List storeDocs = [];
           snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map student = document.data() as Map<String, dynamic>;
-            storeDocs.add(student);
+            Map product = document.data() as Map<String, dynamic>;
+            storeDocs.add(product);
           }).toList();
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
@@ -81,7 +81,7 @@ class _ProductListState extends State<ProductList> {
                         FlatButton(
                           child: Text('Yes'),
                           onPressed: () => {
-                            deleteUser(snapshot.data!.docs[index].id),
+                            deleteProduct(snapshot.data!.docs[index].id),
                             Navigator.of(context).pop(),
                           },
                         ),

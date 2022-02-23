@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
@@ -10,10 +11,26 @@ class AddSelfLead extends StatefulWidget {
 }
 
 class _AddSelfLeadState extends State<AddSelfLead> {
+
+  var leadName = '';
+  var leadAddress = '';
+  var leadContact = '';
+  var leadCompanyName = '';
+  var leadEmpName='';
+
+  final leadNameController = TextEditingController();
+  final leadAddressController = TextEditingController();
+  final leadContactController = TextEditingController();
+  final leadCompanyNameController = TextEditingController();
+  final leadEmpNameController=TextEditingController();
+
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
   final _companynameFocusNode = FocusNode();
   final _employeenameFocusNode = FocusNode();
+
+
+
 
   @override
   void dispose() {
@@ -22,11 +39,34 @@ class _AddSelfLeadState extends State<AddSelfLead> {
     _companynameFocusNode.dispose();
     _employeenameFocusNode.dispose();
   
+    leadNameController.dispose();
+    leadAddressController.dispose();
+    leadContactController.dispose();
+    leadCompanyNameController.dispose();
+    leadEmpNameController.dispose();
+    
 
     super.dispose();
   }
 
   final _formKey = GlobalKey<FormState>();
+
+  CollectionReference selflead =
+      FirebaseFirestore.instance.collection('selflead');
+
+  Future<void> addSelfLead() {
+    return selflead
+        .add({
+          'name': leadName,
+          'address': leadAddress,
+          'contact': leadContact,
+          'companyname': leadCompanyName,
+          'employee':leadEmpName,
+        })
+        .then((value) => print('lead Added'))
+        .catchError((error) => print('Failed to Add lead: $error'));
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +103,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  controller: leadNameController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter LeadName';
@@ -89,12 +130,13 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  controller: leadAddressController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter Address';
                     }
-                    if (value.length < 55) {
-                      return 'Should be at least 55 characters long';
+                    if (value.length < 20) {
+                      return 'Should be at least 20 characters long';
                     }
                     return null;
                   },
@@ -117,6 +159,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  controller: leadContactController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter contact number ';
@@ -142,6 +185,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  controller: leadCompanyNameController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter company name';
@@ -164,6 +208,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  controller: leadEmpNameController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter employee name';
@@ -181,7 +226,16 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                       onPressed: () {
                         // Validate returns true if the form is valid, otherwise false.
                         if (_formKey.currentState!.validate()) {
-                          setState(() {});
+                          setState(() {
+                            leadName=leadNameController.text;
+                            leadAddress=leadAddressController.text;
+                            leadContact=leadContactController.text;
+                            leadCompanyName=leadCompanyNameController.text;
+                            leadEmpName=leadEmpNameController.text;
+                            
+                            addSelfLead();
+                            Navigator.of(context).pop();
+                          });
                         }
                       },
                       child: const Text(

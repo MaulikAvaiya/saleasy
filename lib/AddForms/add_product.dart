@@ -45,14 +45,14 @@ class _AddProductState extends State<AddProduct> {
   CollectionReference products =
       FirebaseFirestore.instance.collection('products');
 
-  Future<void> addUser() {
+  Future<void> addProduct() {
     return products
         .add({
           'name': productName,
           'rate': rate,
         })
-        .then((value) => print('User Added'))
-        .catchError((error) => print('Failed to Add user: $error'));
+        .then((value) => print('product Added'))
+        .catchError((error) => print('Failed to Add product: $error'));
   }
 
   @override
@@ -137,9 +137,9 @@ class _AddProductState extends State<AddProduct> {
                           setState(() {
                             productName = nameController.text;
                             rate = rateController.text;
-                            addUser();
+                            addProduct();
 
-                            // addUser();
+                        
 
                             Navigator.pop(context);
                            // addUser();

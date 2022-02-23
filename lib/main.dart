@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saleasy/AddForms/add_product.dart';
+import 'package:saleasy/AddForms/company_lead_forms/add_company_lead.dart';
+import 'package:saleasy/AddForms/self_lead_forms/add_self_lead.dart';
 import 'package:saleasy/DetailScreen/companyDetail/companylead_detail.dart';
 import 'package:saleasy/DetailScreen/companyDetail/companysales_detail.dart';
 import 'package:saleasy/DetailScreen/companyDetail/companyvisited_detail.dart';
@@ -62,6 +64,8 @@ class MyApp extends StatelessWidget {
         //Addform route
         AddProduct.routeName: (context) => AddProduct(),
         AddEmployee.routeName: (context) => AddEmployee(),
+        AddSelfLead.routeName:(context)=>AddSelfLead(),
+        AddCompanyLead.routeName:(context)=>AddCompanyLead(),
 
       
 
@@ -70,22 +74,22 @@ class MyApp extends StatelessWidget {
         
 
         //self lead route
-        SelfLeadScreen.routeName: (context) => SelfLeadScreen(),
-        SelfVisitedScreen.routeName: (context) => SelfVisitedScreen(),
-        SelfSalesScreen.routeName: (context) => SelfSalesScreen(),
+        SelfLeadScreen.routeName: (context) => const SelfLeadScreen(),
+        SelfVisitedScreen.routeName: (context) => const SelfVisitedScreen(),
+        SelfSalesScreen.routeName: (context) => const SelfSalesScreen(),
         //company lead route
-        CompanyLeadScreen.routeName: (context) => CompanyLeadScreen(),
-        CompanyVisitedScreen.routeName: (context) => CompanyVisitedScreen(),
-        CompanySalesScreen.routeName: (context) => CompanySalesScreen(),
+        CompanyLeadScreen.routeName: (context) => const CompanyLeadScreen(),
+        CompanyVisitedScreen.routeName: (context) => const CompanyVisitedScreen(),
+        CompanySalesScreen.routeName: (context) => const CompanySalesScreen(),
 
         //detail route
        // ProductDetail.routeName: (context) => ProductDetail(name: '',rate: '',),
-        EmloyeeDetail.routeName: (context) => EmloyeeDetail(),
-        SelfLeadDetail.routeName: (context) => SelfLeadDetail(),
-        SelfVisitedDetail.routeName: (context) => SelfVisitedDetail(),
+        EmloyeeDetail.routeName: (context) => const EmloyeeDetail(),
+      //  SelfLeadDetail.routeName: (context) => SelfLeadDetail(),
+      //  SelfVisitedDetail.routeName: (context) => SelfVisitedDetail(),
         SelfSalesDetail.routeName: (context) => SelfSalesDetail(),
-        CompanyLeadDetail.routeName: (context) => CompanyLeadDetail(),
-        CompanyVisitedDetail.routeName: (context) => CompanyVisitedDetail(),
+      //  CompanyLeadDetail.routeName: (context) => CompanyLeadDetail(),
+      //  CompanyVisitedDetail.routeName: (context) => CompanyVisitedDetail(),
         CompanySalesDetail.routeName: (context) => CompanySalesDetail(),
         SelfTaskDetail.routeName:(context)=>SelfTaskDetail(),
         CompanyTaskDetail.routeName:(context)=>CompanyTaskDetail(),

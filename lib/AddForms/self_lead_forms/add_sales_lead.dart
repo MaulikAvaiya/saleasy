@@ -1,8 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:saleasy/AddForms/self_lead_forms/add_visited_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
+import 'package:saleasy/deletefunction/selfleadelete.dart';
+import 'package:saleasy/list/self_list/self_visited_list.dart';
+import 'package:saleasy/screens/selflead/self_visited_screen.dart';
 
 class AddSalesLead extends StatefulWidget {
-  const AddSalesLead({Key? key}) : super(key: key);
+  final String id;
+  final String name;
+  final String address;
+  final String contact;
+  final String companyName;
+  //final String product;
+
+  const AddSalesLead({
+    Key? key,
+    required this.id,
+    required this.name,
+    required this.address,
+    required this.contact,
+    required this.companyName,
+   // required this.product,
+  }) : super(key: key);
   static const routeName = '/add-sales-lead';
 
   @override
@@ -10,16 +30,37 @@ class AddSalesLead extends StatefulWidget {
 }
 
 class _AddSalesLeadState extends State<AddSalesLead> {
-   final _addressFocusNode =FocusNode();
-   final _contactnumberFocusNode =FocusNode();
-   final _companynameFocusNode =FocusNode();
-   final _productnameFocusNode =FocusNode();
-   final _quantityFocusNode =FocusNode();
-   final _rateFocusNode =FocusNode();
-   final _amountFocusNode =FocusNode();
-   final _datetimeFocusNode =FocusNode();
+  var leadName = '';
+  var leadAddress = '';
+  var leadContact = '';
+  var leadCompanyName = '';
+  var dateTime = '';
+  var rate = '';
+  var amount = '';
+  var product = '';
+  var quantity = '';
 
-   @override
+  final leadNameController = TextEditingController();
+  final leadAddressController = TextEditingController();
+  final leadContactController = TextEditingController();
+  final leadCompanyNameController = TextEditingController();
+  final leadEmpNameController = TextEditingController();
+  final dateTimeController = TextEditingController();
+  final productController = TextEditingController();
+  final rateController = TextEditingController();
+  final amountController = TextEditingController();
+  final quantityController = TextEditingController();
+
+  final _addressFocusNode = FocusNode();
+  final _contactnumberFocusNode = FocusNode();
+  final _companynameFocusNode = FocusNode();
+  final _productnameFocusNode = FocusNode();
+  final _quantityFocusNode = FocusNode();
+  final _rateFocusNode = FocusNode();
+  final _amountFocusNode = FocusNode();
+  final _datetimeFocusNode = FocusNode();
+
+  @override
   void dispose() {
     _addressFocusNode.dispose();
     _contactnumberFocusNode.dispose();
@@ -29,10 +70,29 @@ class _AddSalesLeadState extends State<AddSalesLead> {
     _rateFocusNode.dispose();
     _amountFocusNode.dispose();
     _datetimeFocusNode.dispose();
-    
+
     super.dispose();
   }
-   
+
+  CollectionReference selfsaleslead =
+      FirebaseFirestore.instance.collection('selfsaleslead');
+
+  Future<void> addselfsaleslead() {
+    return selfsaleslead
+        .add({
+          'name': widget.name,
+          'address': widget.address,
+          'contact': widget.contact,
+          'companyname': widget.companyName,
+          'product': product,
+          'rate': rate,
+          'amount': amount,
+          'datetime': dateTime,
+          'quantity': quantity,
+        })
+        .then((value) => print('selfsaleslead Added'))
+        .catchError((error) => print('Failed to Add selfsaleslead: $error'));
+  }
 
   final _formKey = GlobalKey<FormState>();
 
@@ -58,6 +118,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  initialValue: widget.name,
                   autofocus: false,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
@@ -82,12 +143,14 @@ class _AddSalesLeadState extends State<AddSalesLead> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
-                  autofocus: false, 
+                  initialValue: widget.address,
+                  autofocus: false,
                   maxLines: 2,
                   keyboardType: TextInputType.multiline,
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_contactnumberFocusNode);
+                    FocusScope.of(context)
+                        .requestFocus(_contactnumberFocusNode);
                   },
                   decoration: const InputDecoration(
                     labelText: 'Address: ',
@@ -100,8 +163,8 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter Address';
                     }
-                    if (value.length < 55) {
-                      return 'Should be at least 55 characters long';
+                    if (value.length < 20) {
+                      return 'Should be at least 20 characters long';
                     }
                     return null;
                   },
@@ -111,6 +174,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  initialValue: widget.contact,
                   autofocus: false,
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
@@ -136,6 +200,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  initialValue: widget.companyName,
                   autofocus: false,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
@@ -161,6 +226,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  
                   autofocus: false,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
@@ -174,6 +240,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  controller: productController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter product number';
@@ -199,6 +266,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  controller: quantityController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter quantity';
@@ -224,6 +292,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  controller: rateController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please Enter Rate';
@@ -249,6 +318,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  controller: amountController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter amount';
@@ -271,6 +341,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  controller: dateTimeController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter date and time';
@@ -288,7 +359,18 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                       onPressed: () {
                         // Validate returns true if the form is valid, otherwise false.
                         if (_formKey.currentState!.validate()) {
-                          setState(() {});
+                          setState(() {
+                            product=productController.text;
+                            amount = amountController.text;
+                            quantity = quantityController.text;
+                            rate = rateController.text;
+                            dateTime = dateTimeController.text;
+
+                            addselfsaleslead();
+                            Selfleadelete().deleteSelflead(widget.id);
+                            VisitedLeadDelete().deletevisitedlead(widget.id);
+                            Navigator.of(context).pushNamed(SelfVisitedScreen.routeName);
+                          });
                         }
                       },
                       child: const Text(

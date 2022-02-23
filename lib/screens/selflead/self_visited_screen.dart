@@ -4,6 +4,7 @@ import 'package:saleasy/list/self_list/self_visited_list.dart';
 
 class SelfVisitedScreen extends StatelessWidget {
   static const routeName = '/self_visited_screen';
+ // final String id;
   const SelfVisitedScreen({Key? key}) : super(key: key);
 
   @override
@@ -19,12 +20,12 @@ class SelfVisitedScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SelfVisitedList(),
+      body:  SelfVisitedList(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: Colors.blue,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
