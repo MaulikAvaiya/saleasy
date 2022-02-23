@@ -70,7 +70,7 @@ class _EditCompanyLeadState extends State<EditCompanyLead> {
                 print('Something went wrong.');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -197,34 +197,32 @@ class _EditCompanyLeadState extends State<EditCompanyLead> {
                         focusNode: _companynameFocusNode,
                       ),
                     ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              // Validate returns true if the form is valid, otherwise false.
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  updateCompanyLead(
-                                      widget.id,
-                                      selfleadName,
-                                      selfleadAddress,
-                                      selfleadContact,
-                                      selfleadcompanyName);
-                                });
-                                Navigator.of(context).pop();
-                              }
-                            },
-                            child: const Text(
-                              'Save',
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // Validate returns true if the form is valid, otherwise false.
+                            if (_formKey.currentState!.validate()) {
+                              setState(() {
+                                updateCompanyLead(
+                                    widget.id,
+                                    selfleadName,
+                                    selfleadAddress,
+                                    selfleadContact,
+                                    selfleadcompanyName);
+                              });
+                              Navigator.of(context).pop();
+                            }
+                          },
+                          child: const Text(
+                            'Save',
+                            style: TextStyle(
+                              fontSize: 18,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     )
                   ],
                 ),

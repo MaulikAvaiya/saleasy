@@ -15,6 +15,7 @@ class _EditEmployeeState extends State<EditEmployee> {
 
   final _formKey = GlobalKey<FormState>();
 
+  @override
   void dispose() {
     _addressFocusNode.dispose();
     _contactnumberFocusNode.dispose();
@@ -59,7 +60,7 @@ class _EditEmployeeState extends State<EditEmployee> {
               print('Something went wrong.');
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -133,7 +134,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10.0),
+                    margin: const EdgeInsets.symmetric(vertical: 10.0),
                     child: TextFormField(
                       initialValue: empContact,
                       onChanged: (value) => empContact = value,
@@ -191,36 +192,34 @@ class _EditEmployeeState extends State<EditEmployee> {
                       //  focusNode: _addressFocusNode,
                     ),
                   ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            // Validate returns true if the form is valid, otherwise false.
-                            if (_formKey.currentState!.validate()) {
-                             setState(() {
-                                updateEmployee(widget.id, empName, empAddress,empContact,empAddress);
-                              Navigator.pop(context);
-                             });
-                            }
-                          },
-                          child: const Text(
-                            'update',
-                            style: TextStyle(fontSize: 18.0),
-                          ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // Validate returns true if the form is valid, otherwise false.
+                          if (_formKey.currentState!.validate()) {
+                           setState(() {
+                              updateEmployee(widget.id, empName, empAddress,empContact,empAddress);
+                            Navigator.pop(context);
+                           });
+                          }
+                        },
+                        child: const Text(
+                          'update',
+                          style: TextStyle(fontSize: 18.0),
                         ),
-                        ElevatedButton(
-                          onPressed: () => {},
-                          child: const Text(
-                            'Reset',
-                            style: TextStyle(fontSize: 18.0),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.blueGrey),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => {},
+                        child: const Text(
+                          'Reset',
+                          style: TextStyle(fontSize: 18.0),
                         ),
-                      ],
-                    ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.blueGrey),
+                      ),
+                    ],
                   ),
                 ],
               ),

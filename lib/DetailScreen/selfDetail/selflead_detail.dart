@@ -6,7 +6,7 @@ import 'package:saleasy/constant/color_config.dart';
 
 class SelfLeadDetail extends StatefulWidget {
   final String id;
-  SelfLeadDetail({Key? key, required this.id}) : super(key: key);
+  const SelfLeadDetail({Key? key, required this.id}) : super(key: key);
   static const routeName = '/Selflead_detail';
   @override
   _SelfLeadDetailState createState() => _SelfLeadDetailState();
@@ -29,7 +29,7 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
     // var data = getData(widget.id);
     return Scaffold(
         appBar: AppBar(
-          title: Text('selflead detail screen'),
+          title: const Text('selflead detail screen'),
         ),
         body: FutureBuilder<DocumentSnapshot>(
           future: selflead.doc(widget.id).get(),
@@ -38,14 +38,14 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
               print('some thing went wrong');
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
             return Column(
               children: [
                 Container(
-                  child: Text('selflead detail screen'),
+                  child: const Text('selflead detail screen'),
                 ),
                 Text(snapshot.data!['name']),
                 Text(snapshot.data!['address']),

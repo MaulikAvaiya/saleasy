@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class EditProduct extends StatefulWidget {
@@ -7,7 +6,7 @@ class EditProduct extends StatefulWidget {
   final String id;
 
 
-  EditProduct({Key? key, required this.id}) : super(key: key);
+  const EditProduct({Key? key, required this.id}) : super(key: key);
 
   @override
   State<EditProduct> createState() => _EditProductState();
@@ -36,7 +35,7 @@ class _EditProductState extends State<EditProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Update Products'),
+        title: const Text('Update Products'),
       ),
       body: Form(
         key: _formKey,
@@ -50,7 +49,7 @@ class _EditProductState extends State<EditProduct> {
               print('Something went wrong.');
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -59,16 +58,16 @@ class _EditProductState extends State<EditProduct> {
             var name = data['name'];
             var rate = data['rate'];
             return Padding(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
               child: ListView(
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10.0),
+                    margin: const EdgeInsets.symmetric(vertical: 10.0),
                     child: TextFormField(
                       initialValue: name,
                       onChanged: (value) => name = value,
                       autofocus: false,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'ProductName: ',
                         labelStyle: TextStyle(fontSize: 20.0),
                         border: OutlineInputBorder(),
@@ -84,12 +83,12 @@ class _EditProductState extends State<EditProduct> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10.0),
+                    margin: const EdgeInsets.symmetric(vertical: 10.0),
                     child: TextFormField(
                       initialValue: rate,
                       onChanged: (value) => rate = value,
                       autofocus: false,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Rate: ',
                         labelStyle: TextStyle(fontSize: 20.0),
                         border: OutlineInputBorder(),
@@ -104,34 +103,32 @@ class _EditProductState extends State<EditProduct> {
                       },
                     ),
                   ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            // Validate returns true if the form is valid, otherwise false.
-                            if (_formKey.currentState!.validate()) {
-                              updateProduct(widget.id, name, rate);
-                              Navigator.pop(context);
-                            }
-                          },
-                          child: Text(
-                            'update',
-                            style: TextStyle(fontSize: 18.0),
-                          ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // Validate returns true if the form is valid, otherwise false.
+                          if (_formKey.currentState!.validate()) {
+                            updateProduct(widget.id, name, rate);
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: const Text(
+                          'update',
+                          style: TextStyle(fontSize: 18.0),
                         ),
-                        ElevatedButton(
-                          onPressed: () => {},
-                          child: Text(
-                            'Reset',
-                            style: TextStyle(fontSize: 18.0),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.blueGrey),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => {},
+                        child: const Text(
+                          'Reset',
+                          style: TextStyle(fontSize: 18.0),
                         ),
-                      ],
-                    ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.blueGrey),
+                      ),
+                    ],
                   )
                 ],
               ),

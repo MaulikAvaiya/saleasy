@@ -196,7 +196,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.name,
@@ -218,7 +218,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                   focusNode: _employeenameFocusNode,
                 ),
               ),
-              Container(
+              SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

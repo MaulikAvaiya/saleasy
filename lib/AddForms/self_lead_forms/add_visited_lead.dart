@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:saleasy/AddForms/self_lead_forms/add_self_lead.dart';
+
 import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/deletefunction/selfleadelete.dart';
-import 'package:saleasy/list/self_list/selflead_list.dart';
+
 import 'package:saleasy/screens/selflead/selflead_screen.dart';
 
 class AddVisitedLead extends StatefulWidget {
@@ -12,7 +12,7 @@ class AddVisitedLead extends StatefulWidget {
   final String address;
   final String contact;
   final String companyName;
-  AddVisitedLead({
+  const AddVisitedLead({
     Key? key,
     required this.id,
     required this.name,
@@ -179,7 +179,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   initialValue: widget.contact,
                   autofocus: false,
@@ -314,7 +314,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                       focusNode: _datetimeFocusNode,
                     ),
               ),
-              Container(
+              SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

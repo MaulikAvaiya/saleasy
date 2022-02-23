@@ -79,7 +79,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                 print('Something went wrong.');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }

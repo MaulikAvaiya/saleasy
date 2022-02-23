@@ -12,7 +12,7 @@ class AddCompanyVisitedLead extends StatefulWidget {
   final String address;
   final String contact;
   final String companyName;
-  AddCompanyVisitedLead({
+  const AddCompanyVisitedLead({
     Key? key,
     required this.id,
     required this.name,

@@ -89,7 +89,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                 print('Something went wrong.');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -332,7 +332,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
                         initialValue: datetime,
                         onChanged: (value) => datetime = value,
@@ -355,38 +355,36 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                         focusNode: _datetimeFocusNode,
                       ),
                     ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              // Validate returns true if the form is valid, otherwise false.
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  updateSelfsalesLead(
-                                    widget.id,
-                                    selfleadName,
-                                    selfleadAddress,
-                                    selfleadContact,
-                                    selfleadcompanyName,
-                                    product,
-                                    quantity,
-                                    rate,
-                                    amount,
-                                    datetime,
-                                  );
-                                });
-                                Navigator.of(context).pop();
-                              }
-                            },
-                            child: const Text(
-                              'Save',
-                              style: TextStyle(fontSize: 18.0),
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // Validate returns true if the form is valid, otherwise false.
+                            if (_formKey.currentState!.validate()) {
+                              setState(() {
+                                updateSelfsalesLead(
+                                  widget.id,
+                                  selfleadName,
+                                  selfleadAddress,
+                                  selfleadContact,
+                                  selfleadcompanyName,
+                                  product,
+                                  quantity,
+                                  rate,
+                                  amount,
+                                  datetime,
+                                );
+                              });
+                              Navigator.of(context).pop();
+                            }
+                          },
+                          child: const Text(
+                            'Save',
+                            style: TextStyle(fontSize: 18.0),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     )
                   ],
                 ),

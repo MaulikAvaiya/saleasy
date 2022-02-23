@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:saleasy/AddForms/self_lead_forms/add_visited_lead.dart';
+
 import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/deletefunction/selfleadelete.dart';
-import 'package:saleasy/list/self_list/self_visited_list.dart';
+
 import 'package:saleasy/screens/selflead/self_visited_screen.dart';
 
 class AddSalesLead extends StatefulWidget {
@@ -198,7 +198,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   initialValue: widget.companyName,
                   autofocus: false,
@@ -351,7 +351,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                   focusNode: _datetimeFocusNode,
                 ),
               ),
-              Container(
+              SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
