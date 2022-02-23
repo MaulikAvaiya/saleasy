@@ -1,39 +1,44 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:saleasy/AddForms/self_lead_forms/add_self_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
+import 'package:saleasy/deletefunction/companyleaddelete.dart';
+import 'package:saleasy/deletefunction/companyleaddelete.dart';
 import 'package:saleasy/deletefunction/selfleadelete.dart';
-import 'package:saleasy/list/self_list/selflead_list.dart';
-import 'package:saleasy/screens/selflead/selflead_screen.dart';
+import 'package:saleasy/screens/selflead/self_visited_screen.dart';
 
-class AddVisitedLead extends StatefulWidget {
+class AddCompanySalesLead extends StatefulWidget {
   final String id;
   final String name;
   final String address;
   final String contact;
   final String companyName;
-  AddVisitedLead({
+  //final String product;
+
+  const AddCompanySalesLead({
     Key? key,
     required this.id,
     required this.name,
     required this.address,
     required this.contact,
     required this.companyName,
+   // required this.product,
   }) : super(key: key);
-  static const routeName = '/add-visited-lead';
+  static const routeName = '/add-Companysales-lead';
 
   @override
-  _AddVisitedLeadState createState() => _AddVisitedLeadState();
+  _AddCompanySalesLeadState createState() => _AddCompanySalesLeadState();
 }
 
-class _AddVisitedLeadState extends State<AddVisitedLead> {
+class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
   var leadName = '';
   var leadAddress = '';
   var leadContact = '';
   var leadCompanyName = '';
- // var dateTime = '';
-  var decision = '';
+  var dateTime = '';
+  var rate = '';
+  var amount = '';
   var product = '';
+  var quantity = '';
 
   final leadNameController = TextEditingController();
   final leadAddressController = TextEditingController();
@@ -42,13 +47,17 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
   final leadEmpNameController = TextEditingController();
   final dateTimeController = TextEditingController();
   final productController = TextEditingController();
-  final decisionController = TextEditingController();
+  final rateController = TextEditingController();
+  final amountController = TextEditingController();
+  final quantityController = TextEditingController();
 
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
   final _companynameFocusNode = FocusNode();
   final _productnameFocusNode = FocusNode();
-  final _decisionFocusNode = FocusNode();
+  final _quantityFocusNode = FocusNode();
+  final _rateFocusNode = FocusNode();
+  final _amountFocusNode = FocusNode();
   final _datetimeFocusNode = FocusNode();
 
   @override
@@ -57,49 +66,35 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
     _contactnumberFocusNode.dispose();
     _companynameFocusNode.dispose();
     _productnameFocusNode.dispose();
-    _decisionFocusNode.dispose();
+    _quantityFocusNode.dispose();
+    _rateFocusNode.dispose();
+    _amountFocusNode.dispose();
     _datetimeFocusNode.dispose();
 
     super.dispose();
   }
-  String date = "";
-  DateTime selectedDate = DateTime.now();
 
-  CollectionReference selfvisitedlead =
-      FirebaseFirestore.instance.collection('selfvisitedlead');
+  CollectionReference companysaleslead =
+      FirebaseFirestore.instance.collection('companysaleslead');
 
-  Future<void> addselfvisitedlead() {
-    return selfvisitedlead
+  Future<void> addcompanysaleslead() {
+    return companysaleslead
         .add({
           'name': widget.name,
           'address': widget.address,
           'contact': widget.contact,
           'companyname': widget.companyName,
           'product': product,
-          'decision': decision,
-          'datetime': selectedDate,
+          'rate': rate,
+          'amount': amount,
+          'datetime': dateTime,
+          'quantity': quantity,
         })
-        .then((value) => print('selfvisitedlead Added'))
-        .catchError((error) => print('Failed to Add selfvisitedlead: $error'));
+        .then((value) => print('companysaleslead Added'))
+        .catchError((error) => print('Failed to Add companysaleslead: $error'));
   }
 
   final _formKey = GlobalKey<FormState>();
-  
-  
-
-   Future<void> _selectDate(BuildContext context) async {
-    final Future<DateTime?> selected = showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2010),
-      lastDate: DateTime(2050),
-    );
-    if(selected!=null &&selected!=selectedDate){
-      setState(() {
-        selectedDate=selected as DateTime;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +102,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
       appBar: AppBar(
         backgroundColor: ColorConfig.primaryColor,
         title: const Text(
-          "Add Visited Lead",
+          "Add companysales Lead",
           style: TextStyle(
             color: Colors.white,
             fontSize: 25,
@@ -137,7 +132,6 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  //  controller: leadNameController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter LeadName';
@@ -165,7 +159,6 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  // controller: leadAddressController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter Address';
@@ -179,11 +172,11 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   initialValue: widget.contact,
                   autofocus: false,
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_companynameFocusNode);
@@ -195,10 +188,9 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  // controller: leadContactController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter contact number';
+                      return 'Please enter contact number ';
                     }
                     return null;
                   },
@@ -206,11 +198,11 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
+                margin: EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   initialValue: widget.companyName,
                   autofocus: false,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_productnameFocusNode);
@@ -222,10 +214,9 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  //  controller: leadCompanyNameController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter company name ';
+                      return 'Please enter company name';
                     }
                     return null;
                   },
@@ -235,14 +226,15 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  
                   autofocus: false,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_decisionFocusNode);
+                    FocusScope.of(context).requestFocus(_quantityFocusNode);
                   },
                   decoration: const InputDecoration(
-                    labelText: 'Product Name: ',
+                    labelText: 'product Name: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
                     errorStyle:
@@ -251,7 +243,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                   controller: productController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter product name';
+                      return 'Please enter product number';
                     }
                     return null;
                   },
@@ -262,57 +254,102 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_datetimeFocusNode);
+                    FocusScope.of(context).requestFocus(_rateFocusNode);
                   },
                   decoration: const InputDecoration(
-                    labelText: 'Decision: ',
+                    labelText: 'Quantity: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  controller: decisionController,
+                  controller: quantityController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your decision';
+                      return 'Please enter quantity';
                     }
                     return null;
                   },
-                  focusNode: _decisionFocusNode,
+                  focusNode: _quantityFocusNode,
                 ),
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child:
-                    TextFormField(
-                   // initialValue: selectedDate.toString(),
-                    onTap: () => setState(() {
-                       _selectDate(context);
-                       dateTimeController.text=selectedDate.toString();
-                    }),
-                      autofocus: false,
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.done,
-                      decoration: const InputDecoration(
-                        labelText: 'Date Time: ',
-                        icon: Icon(Icons.calendar_today_rounded),
-                        labelStyle: TextStyle(fontSize: 20.0),
-                        border: OutlineInputBorder(),
-                        errorStyle:
-                            TextStyle(color: Colors.redAccent, fontSize: 15),
-                      ),
-                      controller: dateTimeController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter Date and time';
-                        }
-                        return null;
-                      },
-                      focusNode: _datetimeFocusNode,
-                    ),
+                child: TextFormField(
+                  autofocus: false,
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_amountFocusNode);
+                  },
+                  decoration: const InputDecoration(
+                    labelText: 'Rate: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                  ),
+                  controller: rateController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Rate';
+                    }
+                    return null;
+                  },
+                  focusNode: _rateFocusNode,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_datetimeFocusNode);
+                  },
+                  decoration: const InputDecoration(
+                    labelText: 'Amount: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                  ),
+                  controller: amountController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter amount';
+                    }
+                    return null;
+                  },
+                  focusNode: _amountFocusNode,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  keyboardType: TextInputType.datetime,
+                  textInputAction: TextInputAction.done,
+                  decoration: const InputDecoration(
+                    labelText: 'Date Time: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                  ),
+                  controller: dateTimeController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter date and time';
+                    }
+                    return null;
+                  },
+                  focusNode: _datetimeFocusNode,
+                ),
               ),
               Container(
                 child: Row(
@@ -323,23 +360,16 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                         // Validate returns true if the form is valid, otherwise false.
                         if (_formKey.currentState!.validate()) {
                           setState(() {
-                            if (_formKey.currentState!.validate()) {
-                              setState(() {
-                                // leadName=widget.name;
-                                // leadAddress=widget.ad;
-                                // leadContact=leadContactController.text;
-                                // leadCompanyName=leadCompanyNameController.text;
-                                product = productController.text;
-                                decision = decisionController.text;
-                              //  selectedDate =dateTimeController.text as DateTime;
+                            product=productController.text;
+                            amount = amountController.text;
+                            quantity = quantityController.text;
+                            rate = rateController.text;
+                            dateTime = dateTimeController.text;
 
-                                addselfvisitedlead();
-                                Selfleadelete().deleteSelflead(widget.id);
-                                Navigator.of(context)
-                                    .pushNamed(SelfLeadScreen.routeName);
-                              });
-                              //  SelfLeadList().
-                            }
+                            addcompanysaleslead();
+                            Companyleadelete().deletecompanylead(widget.id);
+                            CompanyVisitedLeadDelete().deletevisitedlead(widget.id);
+                            Navigator.of(context).popAndPushNamed(SelfVisitedScreen.routeName);
                           });
                         }
                       },

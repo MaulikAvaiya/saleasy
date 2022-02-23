@@ -96,8 +96,8 @@ class _AddTaskState extends State<AddTask> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter Address';
                     }
-                    if (value.length < 55) {
-                      return 'Should be at least 55 characters long';
+                    if (value.length < 20) {
+                      return 'Should be at least 20 characters long';
                     }
                     return null;
                   },

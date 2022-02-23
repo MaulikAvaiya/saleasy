@@ -2,16 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
-class EditSelfLead extends StatefulWidget {
+class EditCompanyLead extends StatefulWidget {
   final String id;
-  const EditSelfLead({Key? key, required this.id}) : super(key: key);
-  static const routeName = '/edit-self-lead';
+  const EditCompanyLead({Key? key, required this.id}) : super(key: key);
+  static const routeName = '/edit-Company-lead';
 
   @override
-  _EditSelfLeadState createState() => _EditSelfLeadState();
+  _EditCompanyLeadState createState() => _EditCompanyLeadState();
 }
 
-class _EditSelfLeadState extends State<EditSelfLead> {
+class _EditCompanyLeadState extends State<EditCompanyLead> {
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
   final _companynameFocusNode = FocusNode();
@@ -27,11 +27,11 @@ class _EditSelfLeadState extends State<EditSelfLead> {
 
   final _formKey = GlobalKey<FormState>();
 
-  CollectionReference selflead =
-      FirebaseFirestore.instance.collection('selflead');
+  CollectionReference companylead =
+      FirebaseFirestore.instance.collection('companylead');
 
-  Future<void> updateSelfLead(id, name, address, contact, companyName) {
-    return selflead
+  Future<void> updateCompanyLead(id, name, address, contact, companyName) {
+    return companylead
         .doc(id)
         .update({
           'name': name,
@@ -39,9 +39,9 @@ class _EditSelfLeadState extends State<EditSelfLead> {
           'contact': contact,
           'companyname': companyName,
         })
-        .then((value) => print("selflead Updated"))
+        .then((value) => print("companylead Updated"))
         .catchError(
-          (error) => print("Failed to update selflead:$error"),
+          (error) => print("Failed to update companylead:$error"),
         );
   }
 
@@ -51,7 +51,7 @@ class _EditSelfLeadState extends State<EditSelfLead> {
       appBar: AppBar(
         backgroundColor: ColorConfig.primaryColor,
         title: const Text(
-          "Edit Self Lead",
+          "Edit Company Lead",
           style: TextStyle(
             color: Colors.white,
             fontSize: 25,
@@ -62,7 +62,7 @@ class _EditSelfLeadState extends State<EditSelfLead> {
         key: _formKey,
         child: FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
-                .collection('selflead')
+                .collection('companylead')
                 .doc(widget.id)
                 .get(),
             builder: (_, snapshot) {
@@ -206,7 +206,7 @@ class _EditSelfLeadState extends State<EditSelfLead> {
                               // Validate returns true if the form is valid, otherwise false.
                               if (_formKey.currentState!.validate()) {
                                 setState(() {
-                                  updateSelfLead(
+                                  updateCompanyLead(
                                       widget.id,
                                       selfleadName,
                                       selfleadAddress,

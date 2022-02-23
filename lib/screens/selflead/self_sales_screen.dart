@@ -14,7 +14,7 @@ class SelfSalesScreen extends StatelessWidget {
       backgroundColor: ColorConfig.primaryColor,
       appBar: AppBar(
         title: const Text(
-          'sales Lead Details',
+          'sales Lead list',
           style: TextStyle(
             color: Colors.white,
             fontSize: 25,

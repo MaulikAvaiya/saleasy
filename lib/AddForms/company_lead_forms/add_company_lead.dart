@@ -2,56 +2,71 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
-class AddEmployee extends StatefulWidget {
-  const AddEmployee({Key? key}) : super(key: key);
-  static const routeName = '/add-employee';
+class AddCompanyLead extends StatefulWidget {
+  const AddCompanyLead({Key? key}) : super(key: key);
+  static const routeName = '/add-company-lead';
 
   @override
-  State<AddEmployee> createState() => _AddEmployeeState();
+  _AddCompanyLeadState createState() => _AddCompanyLeadState();
 }
 
-class _AddEmployeeState extends State<AddEmployee> {
+class _AddCompanyLeadState extends State<AddCompanyLead> {
+
+  var leadName = '';
+  var leadAddress = '';
+  var leadContact = '';
+  var leadCompanyName = '';
+  var leadEmpName='';
+
+  final leadNameController = TextEditingController();
+  final leadAddressController = TextEditingController();
+  final leadContactController = TextEditingController();
+  final leadCompanyNameController = TextEditingController();
+  final leadEmpNameController=TextEditingController();
+
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
+  final _companynameFocusNode = FocusNode();
+  final _employeenameFocusNode = FocusNode();
 
-  final _formKey = GlobalKey<FormState>();
 
-  var empName = '';
-  var empAddress = '';
-  var empContact = '';
-  var empEmail = '';
 
-  final empNameController = TextEditingController();
-  final empAddressController = TextEditingController();
-  final empContactController = TextEditingController();
-  final empEmailController = TextEditingController();
 
   @override
   void dispose() {
     _addressFocusNode.dispose();
     _contactnumberFocusNode.dispose();
+    _companynameFocusNode.dispose();
+    _employeenameFocusNode.dispose();
+  
+    leadNameController.dispose();
+    leadAddressController.dispose();
+    leadContactController.dispose();
+    leadCompanyNameController.dispose();
+    leadEmpNameController.dispose();
+    
 
-    empAddressController.dispose();
-    empContactController.dispose();
-    empNameController.dispose();
-    empEmailController.dispose();
     super.dispose();
   }
 
-  CollectionReference employee =
-      FirebaseFirestore.instance.collection('employee');
+  final _formKey = GlobalKey<FormState>();
 
-  Future<void> addEmployee() {
-    return employee
+  CollectionReference companylead =
+      FirebaseFirestore.instance.collection('companylead');
+
+  Future<void> addCompanyLead() {
+    return companylead
         .add({
-          'empname': empName,
-          'empaddress': empAddress,
-          'empcontact': empContact,
-          'empemail': empEmail,
+          'name': leadName,
+          'address': leadAddress,
+          'contact': leadContact,
+          'companyname': leadCompanyName,
+          'employee':leadEmpName,
         })
-        .then((value) => print('employee Added'))
-        .catchError((error) => print('Failed to Add Employee: $error'));
+        .then((value) => print('companyselflead Added'))
+        .catchError((error) => print('Failed to Add companyselflead: $error'));
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +74,7 @@ class _AddEmployeeState extends State<AddEmployee> {
       appBar: AppBar(
         backgroundColor: ColorConfig.primaryColor,
         title: const Text(
-          'Add Employee',
+          "Add companyselflead ",
           style: TextStyle(
             color: Colors.white,
             fontSize: 25,
@@ -82,13 +97,13 @@ class _AddEmployeeState extends State<AddEmployee> {
                     FocusScope.of(context).requestFocus(_addressFocusNode);
                   },
                   decoration: const InputDecoration(
-                    labelText: 'Employee Name: ',
+                    labelText: ' Lead Name: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  controller: empNameController,
+                  controller: leadNameController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter LeadName';
@@ -109,13 +124,13 @@ class _AddEmployeeState extends State<AddEmployee> {
                         .requestFocus(_contactnumberFocusNode);
                   },
                   decoration: const InputDecoration(
-                    labelText: 'Address: ',
+                    labelText: ' Address: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  controller: empAddressController,
+                  controller: leadAddressController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter Address';
@@ -129,22 +144,25 @@ class _AddEmployeeState extends State<AddEmployee> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  keyboardType: TextInputType.name,
-                  textInputAction: TextInputAction.done,
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_companynameFocusNode);
+                  },
                   decoration: const InputDecoration(
-                    labelText: 'Contact Number: ',
+                    labelText: ' Contact Number: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  controller: empContactController,
+                  controller: leadContactController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter contact number';
+                      return 'Please enter contact number ';
                     }
                     return null;
                   },
@@ -155,33 +173,49 @@ class _AddEmployeeState extends State<AddEmployee> {
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  maxLines: 2,
-                  keyboardType: TextInputType.multiline,
+                  keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (_) {
-                    FocusScope.of(context)
-                        .requestFocus(_contactnumberFocusNode);
+                    FocusScope.of(context).requestFocus(_employeenameFocusNode);
                   },
                   decoration: const InputDecoration(
-                    labelText: 'Email: ',
+                    labelText: 'Company Name: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  controller: empEmailController,
+                  controller: leadCompanyNameController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter Email';
-                    } else if (!value.contains('@')) {
-                      return 'not valid email';
-                    } else if (!value.contains('.com')) {
-                      return 'not valid email';
-                    } else {
-                      return null;
+                      return 'Please enter company name';
                     }
+                    return null;
                   },
-                //  focusNode: _addressFocusNode,
+                  focusNode: _companynameFocusNode,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.done,
+                  decoration: const InputDecoration(
+                    labelText: 'Employee Name: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                  ),
+                  controller: leadEmpNameController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter employee name';
+                    }
+                    return null;
+                  },
+                  focusNode: _employeenameFocusNode,
                 ),
               ),
               Container(
@@ -193,12 +227,14 @@ class _AddEmployeeState extends State<AddEmployee> {
                         // Validate returns true if the form is valid, otherwise false.
                         if (_formKey.currentState!.validate()) {
                           setState(() {
-                            empName = empNameController.text;
-                            empAddress = empAddressController.text;
-                            empContact = empContactController.text;
-                            empEmail = empEmailController.text;
-
-                            addEmployee();
+                            leadName=leadNameController.text;
+                            leadAddress=leadAddressController.text;
+                            leadContact=leadContactController.text;
+                            leadCompanyName=leadCompanyNameController.text;
+                            leadEmpName=leadEmpNameController.text;
+                            
+                            addCompanyLead();
+                            Navigator.of(context).pop();
                           });
                         }
                       },
@@ -217,7 +253,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                     ),
                   ],
                 ),
-              ),
+              )
             ],
           ),
         ),

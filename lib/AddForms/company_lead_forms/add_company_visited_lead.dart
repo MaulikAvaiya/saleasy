@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:saleasy/AddForms/self_lead_forms/add_self_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
-import 'package:saleasy/deletefunction/selfleadelete.dart';
-import 'package:saleasy/list/self_list/selflead_list.dart';
-import 'package:saleasy/screens/selflead/selflead_screen.dart';
+import 'package:saleasy/deletefunction/companyleaddelete.dart';
+import 'package:saleasy/screens/CompanyLead/companylead_screen.dart';
 
-class AddVisitedLead extends StatefulWidget {
+
+
+class AddCompanyVisitedLead extends StatefulWidget {
   final String id;
   final String name;
   final String address;
   final String contact;
   final String companyName;
-  AddVisitedLead({
+  AddCompanyVisitedLead({
     Key? key,
     required this.id,
     required this.name,
@@ -20,18 +20,18 @@ class AddVisitedLead extends StatefulWidget {
     required this.contact,
     required this.companyName,
   }) : super(key: key);
-  static const routeName = '/add-visited-lead';
+  static const routeName = '/add-companyvisited-lead';
 
   @override
-  _AddVisitedLeadState createState() => _AddVisitedLeadState();
+  _AddCompanyVisitedLeadState createState() => _AddCompanyVisitedLeadState();
 }
 
-class _AddVisitedLeadState extends State<AddVisitedLead> {
+class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
   var leadName = '';
   var leadAddress = '';
   var leadContact = '';
   var leadCompanyName = '';
- // var dateTime = '';
+  // var dateTime = '';
   var decision = '';
   var product = '';
 
@@ -62,14 +62,15 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
 
     super.dispose();
   }
+
   String date = "";
   DateTime selectedDate = DateTime.now();
 
-  CollectionReference selfvisitedlead =
-      FirebaseFirestore.instance.collection('selfvisitedlead');
+  CollectionReference companyvisitedlead =
+      FirebaseFirestore.instance.collection('companyvisitedlead');
 
-  Future<void> addselfvisitedlead() {
-    return selfvisitedlead
+  Future<void> addcompanyvisitedlead() {
+    return companyvisitedlead
         .add({
           'name': widget.name,
           'address': widget.address,
@@ -79,24 +80,22 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
           'decision': decision,
           'datetime': selectedDate,
         })
-        .then((value) => print('selfvisitedlead Added'))
-        .catchError((error) => print('Failed to Add selfvisitedlead: $error'));
+        .then((value) => print('companyvisitedlead Added'))
+        .catchError((error) => print('Failed to Add companyvisitedlead: $error'));
   }
 
   final _formKey = GlobalKey<FormState>();
-  
-  
 
-   Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context) async {
     final Future<DateTime?> selected = showDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2010),
       lastDate: DateTime(2050),
     );
-    if(selected!=null &&selected!=selectedDate){
+    if (selected != null && selected != selectedDate) {
       setState(() {
-        selectedDate=selected as DateTime;
+        selectedDate = selected as DateTime;
       });
     }
   }
@@ -179,7 +178,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   initialValue: widget.contact,
                   autofocus: false,
@@ -286,35 +285,34 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child:
-                    TextFormField(
-                   // initialValue: selectedDate.toString(),
-                    onTap: () => setState(() {
-                       _selectDate(context);
-                       dateTimeController.text=selectedDate.toString();
-                    }),
-                      autofocus: false,
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.done,
-                      decoration: const InputDecoration(
-                        labelText: 'Date Time: ',
-                        icon: Icon(Icons.calendar_today_rounded),
-                        labelStyle: TextStyle(fontSize: 20.0),
-                        border: OutlineInputBorder(),
-                        errorStyle:
-                            TextStyle(color: Colors.redAccent, fontSize: 15),
-                      ),
-                      controller: dateTimeController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter Date and time';
-                        }
-                        return null;
-                      },
-                      focusNode: _datetimeFocusNode,
-                    ),
+                child: TextFormField(
+                  // initialValue: selectedDate.toString(),
+                  onTap: () => setState(() {
+                    _selectDate(context);
+                    dateTimeController.text = selectedDate.toString();
+                  }),
+                  autofocus: false,
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.done,
+                  decoration: const InputDecoration(
+                    labelText: 'Date Time: ',
+                    icon: Icon(Icons.calendar_today_rounded),
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                  ),
+                  controller: dateTimeController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter Date and time';
+                    }
+                    return null;
+                  },
+                  focusNode: _datetimeFocusNode,
+                ),
               ),
-              Container(
+              SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -331,12 +329,12 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                                 // leadCompanyName=leadCompanyNameController.text;
                                 product = productController.text;
                                 decision = decisionController.text;
-                              //  selectedDate =dateTimeController.text as DateTime;
+                                //  selectedDate =dateTimeController.text as DateTime;
 
-                                addselfvisitedlead();
-                                Selfleadelete().deleteSelflead(widget.id);
+                                addcompanyvisitedlead();
+                                Companyleadelete().deletecompanylead(widget.id);
                                 Navigator.of(context)
-                                    .pushNamed(SelfLeadScreen.routeName);
+                                    .popAndPushNamed(CompanyLeadScreen.routeName);
                               });
                               //  SelfLeadList().
                             }
