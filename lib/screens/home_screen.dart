@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       childCount: 8,
                     ),
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     shrinkWrap: true,
                   ),
                 ),

@@ -35,7 +35,7 @@ class _ProductListState extends State<ProductList> {
             print('some thing went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -50,14 +50,14 @@ class _ProductListState extends State<ProductList> {
               return Dismissible(
                 background: Container(
                   color: Theme.of(context).errorColor,
-                  child: Icon(
+                  child: const Icon(
                     Icons.delete,
                     color: Colors.white,
                     size: 40,
                   ),
                   alignment: Alignment.centerRight,
-                  padding: EdgeInsets.only(right: 20),
-                  margin: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.only(right: 20),
+                  margin: const EdgeInsets.symmetric(
                     horizontal: 15,
                     vertical: 4,
                   ),
@@ -67,19 +67,19 @@ class _ProductListState extends State<ProductList> {
                   return showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
-                      title: Text('Are you sure?'),
-                      content: Text(
+                      title: const Text('Are you sure?'),
+                      content: const Text(
                         'Do you want to remove the item from the cart?',
                       ),
                       actions: <Widget>[
                         FlatButton(
-                          child: Text('No'),
+                          child: const Text('No'),
                           onPressed: () {
                             Navigator.of(ctx).pop(false);
                           },
                         ),
                         FlatButton(
-                          child: Text('Yes'),
+                          child: const Text('Yes'),
                           onPressed: () => {
                             deleteProduct(snapshot.data!.docs[index].id),
                             Navigator.of(context).pop(),
@@ -89,7 +89,7 @@ class _ProductListState extends State<ProductList> {
                     ),
                   );
                 },
-                key: ValueKey(null),
+                key: const ValueKey(null),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context){
@@ -98,11 +98,11 @@ class _ProductListState extends State<ProductList> {
                   },
                   child: Card(
                     child: Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left: 7, right: 15),
+                            padding: const EdgeInsets.only(left: 7, right: 15),
                             child: Card(
                               elevation: 5,
                               color: ColorConfig.primaryColor,
@@ -119,13 +119,13 @@ class _ProductListState extends State<ProductList> {
                               children: [
                                 Text(
                                   '${snapshot.data!.docs[index]['name']}',
-                                  style: TextStyle(fontSize: 20),
+                                  style: const TextStyle(fontSize: 20),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(top: 10),
+                                  padding: const EdgeInsets.only(top: 10),
                                   child: Text(
                                     '${snapshot.data!.docs[index]['rate']}',
-                                    style: TextStyle(fontSize: 20),
+                                    style: const TextStyle(fontSize: 20),
                                   ),
                                 ),
                               ],
@@ -137,7 +137,7 @@ class _ProductListState extends State<ProductList> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             child: Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: GestureDetector(
                                 onTap: () => {
                                   Navigator.push(

@@ -10,7 +10,7 @@ class CompanyTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CompanyTaskScreen'),
+        title: const Text('CompanyTaskScreen'),
       ),
       body: CompanyTaskList(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

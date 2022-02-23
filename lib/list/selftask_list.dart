@@ -18,14 +18,14 @@ class _SelfTaskListState extends State<SelfTaskList> {
               return Dismissible(
                 background: Container(
                   color: Theme.of(context).errorColor,
-                  child: Icon(
+                  child: const Icon(
                     Icons.delete,
                     color: Colors.white,
                     size: 40,
                   ),
                   alignment: Alignment.centerRight,
-                  padding: EdgeInsets.only(right: 20),
-                  margin: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.only(right: 20),
+                  margin: const EdgeInsets.symmetric(
                     horizontal: 15,
                     vertical: 4,
                   ),
@@ -35,19 +35,19 @@ class _SelfTaskListState extends State<SelfTaskList> {
                   return showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
-                      title: Text('Are you sure?'),
-                      content: Text(
+                      title: const Text('Are you sure?'),
+                      content: const Text(
                         'Do you want to remove the item from the cart?',
                       ),
                       actions: <Widget>[
                         FlatButton(
-                          child: Text('No'),
+                          child: const Text('No'),
                           onPressed: () {
                             Navigator.of(ctx).pop(false);
                           },
                         ),
                         FlatButton(
-                          child: Text('Yes'),
+                          child: const Text('Yes'),
                           onPressed: () {
                             Navigator.of(ctx).pop(true);
                           },
@@ -56,18 +56,18 @@ class _SelfTaskListState extends State<SelfTaskList> {
                     ),
                   );
                 },
-                key: ValueKey(null),
+                key: const ValueKey(null),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushNamed(SelfTaskDetail.routeName);
                   },
                   child: Card(
                     child: Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left: 7, right: 15),
+                            padding: const EdgeInsets.only(left: 7, right: 15),
                             child: Card(
                               elevation: 5,
                               color: ColorConfig.primaryColor,
@@ -81,7 +81,7 @@ class _SelfTaskListState extends State<SelfTaskList> {
                             width: 230,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                              children: const  [
                                 Text(
                                   'employee name',
                                   style: TextStyle(fontSize: 20),
@@ -109,7 +109,7 @@ class _SelfTaskListState extends State<SelfTaskList> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             child: Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Icon(
                                 Icons.edit,
                                 color: ColorConfig.primaryColor,

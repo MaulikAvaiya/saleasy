@@ -37,7 +37,7 @@ class _ProductScreenState extends State<ProductScreen> {
             Navigator.of(context).pushNamed(AddProduct.routeName);
           },
           backgroundColor: ColorConfig.primaryColor,
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
       );
   }

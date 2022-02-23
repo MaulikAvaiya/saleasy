@@ -8,7 +8,7 @@ class CompanySalesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('company sales'),
+        title: const Text('company sales'),
       ),
       body:CompanySalesList(),
       

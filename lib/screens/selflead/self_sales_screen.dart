@@ -28,7 +28,7 @@ class SelfSalesScreen extends StatelessWidget {
             Navigator.of(context).pushNamed(AddSalesLead.routeName);
           },
           backgroundColor: ColorConfig.primaryColor,
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
     );
   }

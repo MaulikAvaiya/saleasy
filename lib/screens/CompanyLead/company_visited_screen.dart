@@ -8,7 +8,7 @@ class CompanyVisitedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('company visit'),
+        title: const Text('company visit'),
       ),
       body: CompanyVisitedList(),
       

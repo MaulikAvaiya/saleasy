@@ -10,7 +10,7 @@ class CompanyLeadScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('company lead'),
+        title: const Text('company lead'),
       ),
       body: CompanyLeadList(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
