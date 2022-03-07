@@ -1,8 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 class AddTask extends StatefulWidget {
-  const AddTask({Key? key}) : super(key: key);
+          String id;
+          String name;
+          String address;
+          String contact;
+          String companyName;
+   AddTask({Key? key,
+     required this.id,
+    required this.name,
+    required this.address,
+    required this.contact,
+    required this.companyName,
+  }) : super(key: key);
   static const routeName = '/add-task';
 
   @override
@@ -10,6 +22,35 @@ class AddTask extends StatefulWidget {
 }
 
 class _AddTaskState extends State<AddTask> {
+
+var task='';
+var tasktype='';
+var date='';
+
+
+ final taskController = TextEditingController();
+  final tasktypeController = TextEditingController();
+
+ CollectionReference selftask =
+      FirebaseFirestore.instance.collection('selftask');
+
+  Future<void> addselfTask() {
+    return selftask
+        .add({
+          'name': widget.name,
+          'address': widget.address,
+          'contact': widget.contact,
+          'companyname': widget.companyName,
+          'task': task,
+          'tasktype': tasktype,
+          'datetime': date,
+        })
+        .then((value) => print('selftask Added'))
+        .catchError((error) => print('Failed to Add selftask: $error'));
+  }
+
+
+
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
   final _companynameFocusNode = FocusNode();
@@ -53,6 +94,7 @@ class _AddTaskState extends State<AddTask> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  initialValue: widget.name,
                   autofocus: false,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
@@ -77,6 +119,7 @@ class _AddTaskState extends State<AddTask> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  initialValue: widget.address,
                   autofocus: false,
                   maxLines: 2,
                   keyboardType: TextInputType.multiline,
@@ -107,6 +150,7 @@ class _AddTaskState extends State<AddTask> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  initialValue: widget.contact,
                   autofocus: false,
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
@@ -132,6 +176,7 @@ class _AddTaskState extends State<AddTask> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  initialValue: widget.companyName,
                   autofocus: false,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
@@ -188,6 +233,7 @@ class _AddTaskState extends State<AddTask> {
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_typeFocusNode);
                   },
+                  controller: taskController,
                   decoration: const InputDecoration(
                     labelText: 'Task Detail: ',
                     labelStyle: TextStyle(fontSize: 20.0),
@@ -217,6 +263,7 @@ class _AddTaskState extends State<AddTask> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
+                  controller: tasktypeController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter type';
@@ -234,7 +281,13 @@ class _AddTaskState extends State<AddTask> {
                       onPressed: () {
                         // Validate returns true if the form is valid, otherwise false.
                         if (_formKey.currentState!.validate()) {
-                          setState(() {});
+                          setState(() {
+
+                            task=taskController.text;
+                            tasktype=tasktypeController.text;
+                            addselfTask();
+
+                          });
                         }
                       },
                       child: const Text(

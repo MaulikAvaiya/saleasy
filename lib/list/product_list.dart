@@ -92,8 +92,12 @@ class _ProductListState extends State<ProductList> {
                 key: const ValueKey(null),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                    return  ProductDetail(name: snapshot.data!.docs[index]['name'],rate:snapshot.data!.docs[index]['rate'].toString() ,);
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return ProductDetail(
+                        name: snapshot.data!.docs[index]['name'],
+                        rate: snapshot.data!.docs[index]['rate'].toString(),
+                      );
                     }));
                   },
                   child: Card(

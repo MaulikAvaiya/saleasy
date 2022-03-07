@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
+import '../auth/profile_screen.dart';
 import 'Product_screen.dart';
 import 'company_lead.dart';
 import 'company_task_screen.dart';
 import 'employee_screen.dart';
-import 'profile_screen.dart';
 import 'self_lead.dart';
 import 'self_task_screen.dart';
 import 'target_screen.dart';

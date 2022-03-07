@@ -9,23 +9,24 @@ import 'package:saleasy/DetailScreen/selfDetail/selfsales_detail.dart';
 import 'package:saleasy/DetailScreen/selftask_detail.dart';
 import 'package:saleasy/DetailScreen/target_detail.dart';
 import 'package:saleasy/AddForms/add_employee.dart';
+import 'package:saleasy/auth/change_password.dart';
+import 'package:saleasy/auth/signup.dart';
 import 'package:saleasy/screens/CompanyLead/company_sales_screen.dart';
 import 'package:saleasy/screens/CompanyLead/company_visited_screen.dart';
 import 'package:saleasy/screens/CompanyLead/companylead_screen.dart';
+import 'package:saleasy/screens/home_screen.dart';
 import 'package:saleasy/screens/product_screen.dart';
 import 'package:saleasy/screens/company_lead.dart';
 import 'package:saleasy/screens/company_task_screen.dart';
 import 'package:saleasy/screens/employee_screen.dart';
-import 'package:saleasy/screens/profile_screen.dart';
 import 'package:saleasy/screens/self_lead.dart';
 import 'package:saleasy/screens/self_task_screen.dart';
 import 'package:saleasy/screens/target_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'screens/home_screen.dart';
 import 'package:saleasy/screens/selflead/selflead_screen.dart';
 import 'package:saleasy/screens/selflead/self_sales_screen.dart';
 import 'package:saleasy/screens/selflead/self_visited_screen.dart';
+import 'auth/profile_screen.dart';
 import 'screens/selflead/self_visited_screen.dart';
 
 Future<void> main() async {
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.tealAccent[400],
       ),
-      home: const HomeScreen(),
+      home: const Signup(),
       routes: {
         //main route
         ProductScreen.routeName: (context) => const ProductScreen(),
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
         CompanyTaskScreen.routeName: (context) => const CompanyTaskScreen(),
         TargetScreen.routeName: (context) => const TargetScreen(),
         ProfileScreen.routeName: (context) => const ProfileScreen(),
+        ChangePassword.routeName:(context)=>const ChangePassword(),
 
         //Addform route
         AddProduct.routeName: (context) => const AddProduct(),

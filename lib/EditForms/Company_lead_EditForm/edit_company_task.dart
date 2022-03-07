@@ -2,19 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
-class EditTask extends StatefulWidget {
+class EditCompanyTask extends StatefulWidget {
   final String id;
-  const EditTask({
+  const EditCompanyTask({
     Key? key,
     required this.id,
   }) : super(key: key);
   static const routeName = '/add-task';
 
   @override
-  _EditTaskState createState() => _EditTaskState();
+  _EditCompanyTaskState createState() => _EditCompanyTaskState();
 }
 
-class _EditTaskState extends State<EditTask> {
+class _EditCompanyTaskState extends State<EditCompanyTask> {
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
   final _companynameFocusNode = FocusNode();
@@ -34,12 +34,12 @@ class _EditTaskState extends State<EditTask> {
     super.dispose();
   }
 
-  CollectionReference selftask =
-      FirebaseFirestore.instance.collection('selftask');
+  CollectionReference Companytask =
+      FirebaseFirestore.instance.collection('companytask');
 
-  Future<void> updateSelfTask(
+  Future<void> updateComapnyTask(
       id, name, address, contact, companyName, task, tasktype, datetime) {
-    return selftask
+    return Companytask
         .doc(id)
         .update({
           'name': name,
@@ -50,9 +50,9 @@ class _EditTaskState extends State<EditTask> {
           'tasktype': tasktype,
           'datetime': datetime,
         })
-        .then((value) => print("selftask Updated"))
+        .then((value) => print("Companytask Updated"))
         .catchError(
-          (error) => print("Failed to update selftask:$error"),
+          (error) => print("Failed to update Companytask:$error"),
         );
   }
 
@@ -64,7 +64,7 @@ class _EditTaskState extends State<EditTask> {
         appBar: AppBar(
           backgroundColor: ColorConfig.primaryColor,
           title: const Text(
-            "Edit Task",
+            "Edit Company Task",
             style: TextStyle(
               color: Colors.white,
               fontSize: 25,
@@ -75,7 +75,7 @@ class _EditTaskState extends State<EditTask> {
           key: _formKey,
           child: FutureBuilder<DocumentSnapshot>(
               future: FirebaseFirestore.instance
-                  .collection('selftask')
+                  .collection('Companytask')
                   .doc(widget.id)
                   .get(),
               builder: (_, snapshot) {
@@ -299,7 +299,7 @@ class _EditTaskState extends State<EditTask> {
                               // Validate returns true if the form is valid, otherwise false.
                              if (_formKey.currentState!.validate()) {
                               setState(() {
-                                updateSelfTask(
+                                updateComapnyTask(
                                     widget.id,
                                     selfleadName,
                                     selfleadAddress,

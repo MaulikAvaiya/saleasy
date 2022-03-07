@@ -43,7 +43,7 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
                 Text(snapshot.data!['contact']),
                 Text(snapshot.data!['product']),
                 Text(snapshot.data!['decision']),
-                Text(snapshot.data!['datetime']),
+                Text(snapshot.data!['datetime'].toString()),
                 Row(
                   children: [
                     SizedBox(

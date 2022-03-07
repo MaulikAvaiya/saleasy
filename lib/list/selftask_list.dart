@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/DetailScreen/selftask_detail.dart';
+import 'package:saleasy/EditForms/Self_lead_EditForm/edit_task.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 class SelfTaskList extends StatefulWidget {
@@ -10,10 +12,41 @@ class SelfTaskList extends StatefulWidget {
 }
 
 class _SelfTaskListState extends State<SelfTaskList> {
+final Stream<QuerySnapshot> selftaskStream =
+      FirebaseFirestore.instance.collection('selftask').snapshots();
+
+  CollectionReference selftask =
+      FirebaseFirestore.instance.collection('selftask');
+
+  Future<void> deleteSelfTask(id) {
+    return selftask
+        .doc(id)
+        .delete()
+        .then((value) => print('task deleted'))
+        .catchError((error) => print('Fail: $error'));
+  }
+
   @override
   Widget build(BuildContext context) {
+
+   return StreamBuilder<QuerySnapshot>(
+        stream: selftaskStream,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print('some thing went wrong');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          final List storeDocs = [];
+          snapshot.data!.docs.map((DocumentSnapshot document) {
+            Map product = document.data() as Map<String, dynamic>;
+            storeDocs.add(product);
+          }).toList();
     return ListView.builder(
-            itemCount: 5,
+            itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               return Dismissible(
                 background: Container(
@@ -49,6 +82,7 @@ class _SelfTaskListState extends State<SelfTaskList> {
                         FlatButton(
                           child: const Text('Yes'),
                           onPressed: () {
+                            deleteSelfTask(snapshot.data!.docs[index].id);
                             Navigator.of(ctx).pop(true);
                           },
                         ),
@@ -81,39 +115,47 @@ class _SelfTaskListState extends State<SelfTaskList> {
                             width: 230,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const  [
+                              children:   [
                                 Text(
-                                  'employee name',
+                                  snapshot.data!.docs[index]['name'],
                                   style: TextStyle(fontSize: 20),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(top: 10),
                                   child: Text(
-                                    'employee address',
+                                    snapshot.data!.docs[index]['tasktype'],
                                     style: TextStyle(fontSize: 20),
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    'employee mobile no',
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                ),
+                                // Padding(
+                                //   padding: EdgeInsets.only(top: 10),
+                                //   child: Text(
+                                //     'employee mobile no',
+                                //     style: TextStyle(fontSize: 20),
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
-                          Card(
-                            elevation: 10,
-                            color: ColorConfig.backColor,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Icon(
-                                Icons.edit,
-                                color: ColorConfig.primaryColor,
-                                size: 30,
+                          GestureDetector(
+                            onTap: () =>  Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return EditTask(
+                                    id: snapshot.data!.docs[index].id);
+                              },
+                            )),
+                            child: Card(
+                              elevation: 10,
+                              color: ColorConfig.backColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Icon(
+                                  Icons.edit,
+                                  color: ColorConfig.primaryColor,
+                                  size: 30,
+                                ),
                               ),
                             ),
                           ),
@@ -125,5 +167,7 @@ class _SelfTaskListState extends State<SelfTaskList> {
               );
             },
           );
+        }
+   );
   }
 }

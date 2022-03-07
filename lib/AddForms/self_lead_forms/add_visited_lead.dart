@@ -288,23 +288,25 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child:
                     TextFormField(
-                   // initialValue: selectedDate.toString(),
-                    onTap: () => setState(() {
-                       _selectDate(context);
-                       dateTimeController.text=selectedDate.toString();
-                    }),
+                    initialValue: selectedDate.toString(),
                       autofocus: false,
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.done,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Date Time: ',
-                        icon: Icon(Icons.calendar_today_rounded),
+                        suffixIcon: GestureDetector(
+                          onTap: (() => setState(() {
+                            _selectDate(context);
+                          })
+                          ),
+
+                          child: Icon(Icons.date_range)),
                         labelStyle: TextStyle(fontSize: 20.0),
-                        border: OutlineInputBorder(),
+                        border: const OutlineInputBorder(),
                         errorStyle:
-                            TextStyle(color: Colors.redAccent, fontSize: 15),
+                            const TextStyle(color: Colors.redAccent, fontSize: 15),
                       ),
-                      controller: dateTimeController,
+
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter Date and time';

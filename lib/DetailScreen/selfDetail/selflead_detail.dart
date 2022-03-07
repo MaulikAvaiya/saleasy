@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sms/flutter_sms.dart';
 import 'package:saleasy/AddForms/self_lead_forms/add_sales_lead.dart';
+import 'package:saleasy/AddForms/self_lead_forms/add_task.dart';
 import 'package:saleasy/AddForms/self_lead_forms/add_visited_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SelfLeadDetail extends StatefulWidget {
   final String id;
@@ -15,6 +18,8 @@ class SelfLeadDetail extends StatefulWidget {
 class _SelfLeadDetailState extends State<SelfLeadDetail> {
   CollectionReference selflead =
       FirebaseFirestore.instance.collection('selflead');
+
+  String number = '';
 
   //  Future<void> getData(String id) {
   //   return selflead
@@ -42,6 +47,9 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
                 child: CircularProgressIndicator(),
               );
             }
+            number = snapshot.data!['contact'];
+            List<String> recipents = [number];
+           String code='91';
             return Column(
               children: [
                 Container(
@@ -68,8 +76,7 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
                               },
                             ),
                           );
-                          }
-                          ),
+                        }),
                         child: Card(
                           color: ColorConfig.primaryColor,
                           child: Image.asset(''),
@@ -79,8 +86,7 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
                     SizedBox(
                       width: 100,
                       height: 100,
-                      child: 
-                      GestureDetector(
+                      child: GestureDetector(
                         onTap: () => setState(() {
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -94,44 +100,71 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
                               },
                             ),
                           );
-                          }
-                          ),
+                        }),
                         child: Card(
                           color: ColorConfig.primaryColor,
                           child: Image.asset(''),
                         ),
                       ),
                     ),
-                    // SizedBox(
-                    //   width: 100,
-                    //   height: 100,
-                    //   child: GestureDetector(
-                    //     onTap: () => setState(() {
-                    //       Navigator.of(context).push(
-                    //         MaterialPageRoute(
-                    //           builder: (context) {
-                    //             return AddVisitedLead(
-                    //                 id: widget.id,
-                    //                 name: snapshot.data!['name'],
-                    //                 address: snapshot.data!['address'],
-                    //                 contact: snapshot.data!['contact'],
-                    //                 companyName: snapshot.data!['companyname']);
-                    //           },
-                    //         ),
-                    //       );
-                    //       }
-                    //       ),
-                    //     child: Card(
-                    //       color: ColorConfig.primaryColor,
-                    //       child: Image.asset(''),
-                    //     ),
-                    //   ),
-                    // ),
+                    SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: GestureDetector(
+                        onTap: () => setState(() {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return AddTask(
+                                    id: widget.id,
+                                    name: snapshot.data!['name'],
+                                    address: snapshot.data!['address'],
+                                    contact: snapshot.data!['contact'],
+                                    companyName: snapshot.data!['companyname']);
+                              },
+                            ),
+                          );
+                        }),
+                        child: Card(
+                          color: ColorConfig.primaryColor,
+                          child: Image.asset(''),
+                        ),
+                      ),
+                    ),
                   ],
+                ),
+                ElevatedButton.icon(
+                  onPressed: ()async {
+                  await  launch('https://wa.me/$code$number');
+                  },
+                  icon: Icon(Icons.whatsapp),
+                  label: Text('whatsapp'),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    _sendsms('welcome', recipents);
+                  },
+                  icon: Icon(Icons.message),
+                  label: Text('message'),
+                ),
+                ElevatedButton.icon(
+                  onPressed: ()async {
+                  await  launch('tel://$number');
+                  },
+                  icon: Icon(Icons.phone),
+                  label: Text('phone'),
                 ),
               ],
             );
           },
         ));
   }
+}
+
+void _sendsms(String sms, List<String> recipents) async {
+  String _result =
+      await sendSMS(message: sms, recipients: recipents).catchError((onError) {
+    debugPrint(onError);
+  });
+  debugPrint(_result);
 }
