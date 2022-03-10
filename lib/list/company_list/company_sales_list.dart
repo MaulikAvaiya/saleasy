@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:saleasy/DetailScreen/companyDetail/companyvisited_detail.dart';
 import 'package:saleasy/constant/color_config.dart';
+import '../../DetailScreen/companyDetail/companysales_detail.dart';
+import '../../EditForms/Company_lead_EditForm/edit_company_sales_lead.dart';
 
 class CompanySalesList extends StatefulWidget {
   const CompanySalesList({Key? key}) : super(key: key);
@@ -76,7 +77,12 @@ class _CompanySalesListState extends State<CompanySalesList> {
                 },
                 key: const ValueKey(null),
                 child: GestureDetector(
-                 // onTap: () => ,
+                  onTap: () =>  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) {
+                      return CompanySalesDetail(
+                          id: snapshot.data!.docs[index].id);
+                    },
+                  )),
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(10),
@@ -99,7 +105,7 @@ class _CompanySalesListState extends State<CompanySalesList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                   snapshot.data!.docs[index]['name'],
+                                  snapshot.data!.docs[index]['name'],
                                   style: const TextStyle(fontSize: 20),
                                 ),
                                 Padding(
@@ -120,19 +126,24 @@ class _CompanySalesListState extends State<CompanySalesList> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              
-                            },
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return EditCompanySalesLead(
+                                      id: snapshot.data!.docs[index].id);
+                                },
+                              ),
+                            ),
                             child: Card(
                               elevation: 10,
-                              color: ColorConfig.backColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50)),
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: Icon(
                                   Icons.edit,
-                                  color: ColorConfig.primaryColor,
+                                  color: ColorConfig.appbartextColor,
                                   size: 30,
                                 ),
                               ),

@@ -143,14 +143,14 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
                             )),
                           child: Card(
                             elevation: 10,
-                            color: ColorConfig.backColor,
+                        
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             child: Padding(
                               padding: const EdgeInsets.all(10),
                               child: Icon(
                                 Icons.edit,
-                                color: ColorConfig.primaryColor,
+                                 color: ColorConfig.appbartextColor,
                                 size: 30,
                               ),
                             ),

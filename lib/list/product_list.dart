@@ -137,7 +137,7 @@ class _ProductListState extends State<ProductList> {
                           ),
                           Card(
                             elevation: 10,
-                            color: ColorConfig.backColor,
+                          
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             child: Padding(
@@ -154,7 +154,7 @@ class _ProductListState extends State<ProductList> {
                                 },
                                 child: Icon(
                                   Icons.edit,
-                                  color: ColorConfig.primaryColor,
+                                  color: ColorConfig.appbartextColor,
                                   size: 30,
                                 ),
                               ),

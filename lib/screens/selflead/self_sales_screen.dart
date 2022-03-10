@@ -6,30 +6,30 @@ import 'package:saleasy/list/self_list/self_sales_list.dart';
 class SelfSalesScreen extends StatelessWidget {
   static const routeName = '/self-sales-screen';
   const SelfSalesScreen({Key? key}) : super(key: key);
- 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConfig.primaryColor,
       appBar: AppBar(
-        title: const Text(
-          'sales Lead list',
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
+          'Sales Lead List',
           style: TextStyle(
-            color: Colors.white,
             fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
           ),
         ),
       ),
       body: SelfSalesList(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed(AddSalesLead.routeName);
-          },
-          backgroundColor: ColorConfig.primaryColor,
-          child: const Icon(Icons.add),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(AddSalesLead.routeName);
+        },
+        backgroundColor: ColorConfig.primaryColor,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

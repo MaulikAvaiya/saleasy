@@ -10,22 +10,28 @@ class TargetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
           'Target',
           style: TextStyle(
-            color: Colors.white,
             fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
           ),
         ),
       ),
       body: TargetList(),
+      backgroundColor: ColorConfig.primaryColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //   Navigator.of(context).pushNamed(AddEmployee.routeName);
         },
-        backgroundColor: ColorConfig.primaryColor,
-        child: const Icon(Icons.add),
+        backgroundColor: ColorConfig.appbarColor,
+        child: Icon(
+          Icons.add,
+          color: ColorConfig.appbartextColor,
+        ),
       ),
     );
   }

@@ -80,7 +80,8 @@ class _CompanyVisitedListState extends State<CompanyVisitedList> {
                 child: GestureDetector(
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) {
-                      return CompanyVisitedDetail(id: snapshot.data!.docs[index].id);
+                      return CompanyVisitedDetail(
+                          id: snapshot.data!.docs[index].id);
                     },
                   )),
                   child: Card(
@@ -105,13 +106,13 @@ class _CompanyVisitedListState extends State<CompanyVisitedList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                   snapshot.data!.docs[index]['name'],
+                                  snapshot.data!.docs[index]['name'],
                                   style: const TextStyle(fontSize: 20),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 10),
                                   child: Text(
-                                     snapshot.data!.docs[index]['contact'],
+                                    snapshot.data!.docs[index]['contact'],
                                     style: const TextStyle(fontSize: 20),
                                   ),
                                 ),
@@ -126,22 +127,24 @@ class _CompanyVisitedListState extends State<CompanyVisitedList> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () =>  Navigator.push(context, MaterialPageRoute(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
                                 builder: (context) {
                                   return EditCompanyVisitedLead(
                                       id: snapshot.data!.docs[index].id);
                                 },
-                              )),
+                              ),
+                            ),
                             child: Card(
                               elevation: 10,
-                              color: ColorConfig.backColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50)),
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: Icon(
                                   Icons.edit,
-                                  color: ColorConfig.primaryColor,
+                                  color: ColorConfig.appbartextColor,
                                   size: 30,
                                 ),
                               ),

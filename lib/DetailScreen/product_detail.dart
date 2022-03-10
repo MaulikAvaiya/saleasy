@@ -16,17 +16,71 @@ class _ProductDetailState extends State<ProductDetail> {
   
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-      color: ColorConfig.primaryColor,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    return  Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
+          'Product Detail',
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
+          ),
+        ),
+      ),
+      body: Container(
+        color: ColorConfig.primaryColor,
+        padding: EdgeInsets.all(5),
+        height: 700,
+        width: 430,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text("Product Name:"),
-            Text(widget.name),
-            Text("Rate:"),
-            Text(widget.rate),
+            SizedBox(
+              height: 150,
+              width: 400,
+              child: Card(
+                shape:
+                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text(
+                        "Product Name:",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        widget.name,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      const Text(
+                        "Rate:",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        widget.rate,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -5,12 +5,20 @@ import 'package:saleasy/list/company_list/companylead_list.dart';
 
 class CompanyLeadScreen extends StatelessWidget {
   const CompanyLeadScreen({Key? key}) : super(key: key);
-  static const routeName='/company_lead_screen';
+  static const routeName = '/company_lead_screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('company lead'),
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
+          'Company Lead List',
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
+          ),
+        ),
       ),
       body: CompanyLeadList(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

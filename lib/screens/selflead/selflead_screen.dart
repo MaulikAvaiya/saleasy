@@ -10,13 +10,14 @@ class SelfLeadScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConfig.primaryColor,
       appBar: AppBar(
-        title: const Text(
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
           'Self Lead List',
           style: TextStyle(
-            color: Colors.white,
             fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
           ),
         ),
       ),
@@ -26,8 +27,11 @@ class SelfLeadScreen extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).pushNamed(AddSelfLead.routeName);
         },
-        backgroundColor: ColorConfig.primaryColor,
-        child: const Icon(Icons.add),
+        backgroundColor: ColorConfig.appbarColor,
+        child: Icon(
+          Icons.add,
+          color: ColorConfig.appbartextColor,
+        ),
       ),
     );
   }

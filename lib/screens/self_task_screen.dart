@@ -10,22 +10,28 @@ class SelfTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'SelfTask',
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
+          'Self Task',
           style: TextStyle(
-            color: Colors.white,
             fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
           ),
         ),
       ),
       body: SelfTaskList(),
+      backgroundColor: ColorConfig.primaryColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //  Navigator.of(context).pushNamed(AddEmployee.routeName);
         },
-        backgroundColor: ColorConfig.primaryColor,
-        child: const Icon(Icons.add),
+        backgroundColor: ColorConfig.appbarColor,
+        child: Icon(
+          Icons.add,
+          color: ColorConfig.appbartextColor,
+        ),
       ),
     );
   }

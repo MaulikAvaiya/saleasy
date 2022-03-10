@@ -104,260 +104,264 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorConfig.primaryColor,
-        title: const Text(
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
           "Add Visited Lead",
           style: TextStyle(
-            color: Colors.white,
             fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
           ),
         ),
       ),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-          child: ListView(
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  initialValue: widget.name,
-                  autofocus: false,
-                  keyboardType: TextInputType.name,
-                  textInputAction: TextInputAction.next,
-                  onFieldSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_addressFocusNode);
-                  },
-                  decoration: const InputDecoration(
-                    labelText: 'Lead Name: ',
-                    labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
-                    errorStyle:
-                        TextStyle(color: Colors.redAccent, fontSize: 15),
+      body: Container(
+        color: ColorConfig.primaryColor,
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            child: ListView(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    initialValue: widget.name,
+                    autofocus: false,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_addressFocusNode);
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Lead Name: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    //  controller: leadNameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter LeadName';
+                      }
+                      return null;
+                    },
                   ),
-                  //  controller: leadNameController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter LeadName';
-                    }
-                    return null;
-                  },
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  initialValue: widget.address,
-                  autofocus: false,
-                  maxLines: 2,
-                  keyboardType: TextInputType.multiline,
-                  textInputAction: TextInputAction.next,
-                  onFieldSubmitted: (_) {
-                    FocusScope.of(context)
-                        .requestFocus(_contactnumberFocusNode);
-                  },
-                  decoration: const InputDecoration(
-                    labelText: 'Address: ',
-                    labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
-                    errorStyle:
-                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    initialValue: widget.address,
+                    autofocus: false,
+                    maxLines: 2,
+                    keyboardType: TextInputType.multiline,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context)
+                          .requestFocus(_contactnumberFocusNode);
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Address: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    // controller: leadAddressController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter Address';
+                      }
+                      if (value.length < 20) {
+                        return 'Should be at least 20 characters long';
+                      }
+                      return null;
+                    },
+                    focusNode: _addressFocusNode,
                   ),
-                  // controller: leadAddressController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter Address';
-                    }
-                    if (value.length < 20) {
-                      return 'Should be at least 20 characters long';
-                    }
-                    return null;
-                  },
-                  focusNode: _addressFocusNode,
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  initialValue: widget.contact,
-                  autofocus: false,
-                  keyboardType: TextInputType.name,
-                  textInputAction: TextInputAction.next,
-                  onFieldSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_companynameFocusNode);
-                  },
-                  decoration: const InputDecoration(
-                    labelText: 'Contact Number: ',
-                    labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
-                    errorStyle:
-                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    initialValue: widget.contact,
+                    autofocus: false,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_companynameFocusNode);
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Contact Number: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    // controller: leadContactController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter contact number';
+                      }
+                      return null;
+                    },
+                    focusNode: _contactnumberFocusNode,
                   ),
-                  // controller: leadContactController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter contact number';
-                    }
-                    return null;
-                  },
-                  focusNode: _contactnumberFocusNode,
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  initialValue: widget.companyName,
-                  autofocus: false,
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                  onFieldSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_productnameFocusNode);
-                  },
-                  decoration: const InputDecoration(
-                    labelText: 'Company Name: ',
-                    labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
-                    errorStyle:
-                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    initialValue: widget.companyName,
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_productnameFocusNode);
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Company Name: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    //  controller: leadCompanyNameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter company name ';
+                      }
+                      return null;
+                    },
+                    focusNode: _companynameFocusNode,
                   ),
-                  //  controller: leadCompanyNameController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter company name ';
-                    }
-                    return null;
-                  },
-                  focusNode: _companynameFocusNode,
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  autofocus: false,
-                  keyboardType: TextInputType.name,
-                  textInputAction: TextInputAction.next,
-                  onFieldSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_decisionFocusNode);
-                  },
-                  decoration: const InputDecoration(
-                    labelText: 'Product Name: ',
-                    labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
-                    errorStyle:
-                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_decisionFocusNode);
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Product Name: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    controller: productController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter product name';
+                      }
+                      return null;
+                    },
+                    focusNode: _productnameFocusNode,
                   ),
-                  controller: productController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter product name';
-                    }
-                    return null;
-                  },
-                  focusNode: _productnameFocusNode,
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  autofocus: false,
-                  keyboardType: TextInputType.name,
-                  textInputAction: TextInputAction.next,
-                  onFieldSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_datetimeFocusNode);
-                  },
-                  decoration: const InputDecoration(
-                    labelText: 'Decision: ',
-                    labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
-                    errorStyle:
-                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_datetimeFocusNode);
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Decision: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    controller: decisionController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your decision';
+                      }
+                      return null;
+                    },
+                    focusNode: _decisionFocusNode,
                   ),
-                  controller: decisionController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your decision';
-                    }
-                    return null;
-                  },
-                  focusNode: _decisionFocusNode,
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  // initialValue: selectedDate.toString(),
-                  onTap: () => setState(() {
-                    _selectDate(context);
-                    dateTimeController.text = selectedDate.toString();
-                  }),
-                  autofocus: false,
-                  keyboardType: TextInputType.name,
-                  textInputAction: TextInputAction.done,
-                  decoration: const InputDecoration(
-                    labelText: 'Date Time: ',
-                    icon: Icon(Icons.calendar_today_rounded),
-                    labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
-                    errorStyle:
-                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    // initialValue: selectedDate.toString(),
+                    onTap: () => setState(() {
+                      _selectDate(context);
+                      dateTimeController.text = selectedDate.toString();
+                    }),
+                    autofocus: false,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.done,
+                    decoration: const InputDecoration(
+                      labelText: 'Date Time: ',
+                      icon: Icon(Icons.calendar_today_rounded),
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    controller: dateTimeController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter Date and time';
+                      }
+                      return null;
+                    },
+                    focusNode: _datetimeFocusNode,
                   ),
-                  controller: dateTimeController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter Date and time';
-                    }
-                    return null;
-                  },
-                  focusNode: _datetimeFocusNode,
                 ),
-              ),
-              SizedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // Validate returns true if the form is valid, otherwise false.
-                        if (_formKey.currentState!.validate()) {
-                          setState(() {
-                            if (_formKey.currentState!.validate()) {
-                              setState(() {
-                                // leadName=widget.name;
-                                // leadAddress=widget.ad;
-                                // leadContact=leadContactController.text;
-                                // leadCompanyName=leadCompanyNameController.text;
-                                product = productController.text;
-                                decision = decisionController.text;
-                                //  selectedDate =dateTimeController.text as DateTime;
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // Validate returns true if the form is valid, otherwise false.
+                          if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  // leadName=widget.name;
+                                  // leadAddress=widget.ad;
+                                  // leadContact=leadContactController.text;
+                                  // leadCompanyName=leadCompanyNameController.text;
+                                  product = productController.text;
+                                  decision = decisionController.text;
+                                  //  selectedDate =dateTimeController.text as DateTime;
 
-                                addcompanyvisitedlead();
-                                Companyleadelete().deletecompanylead(widget.id);
-                                Navigator.of(context)
-                                    .popAndPushNamed(CompanyLeadScreen.routeName);
-                              });
-                              //  SelfLeadList().
-                            }
-                          });
-                        }
-                      },
-                      child: const Text(
-                        'Register',
-                        style: TextStyle(fontSize: 18.0),
+                                  addcompanyvisitedlead();
+                                  Companyleadelete().deletecompanylead(widget.id);
+                                  Navigator.of(context)
+                                      .popAndPushNamed(CompanyLeadScreen.routeName);
+                                });
+                                //  SelfLeadList().
+                              }
+                            });
+                          }
+                        },
+                        child: const Text(
+                          'Register',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
                       ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => {},
-                      child: const Text(
-                        'Reset',
-                        style: TextStyle(fontSize: 18.0),
+                      ElevatedButton(
+                        onPressed: () => {},
+                        child: const Text(
+                          'Reset',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
                       ),
-                      style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

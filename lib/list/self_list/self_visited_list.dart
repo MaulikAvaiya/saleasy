@@ -79,9 +79,12 @@ class _SelfVisitedListState extends State<SelfVisitedList> {
                 key: const ValueKey(null),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                      return SelfVisitedDetail(id:snapshot.data!.docs[index].id);
-                    },));
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) {
+                        return SelfVisitedDetail(
+                            id: snapshot.data!.docs[index].id);
+                      },
+                    ));
                   },
                   child: Card(
                     child: Padding(
@@ -126,23 +129,25 @@ class _SelfVisitedListState extends State<SelfVisitedList> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () =>
-                                Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return EditVisitedLead(
-                                    id: snapshot.data!.docs[index].id);
-                              },
-                            )),
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return EditVisitedLead(
+                                      id: snapshot.data!.docs[index].id);
+                                },
+                              ),
+                            ),
                             child: Card(
                               elevation: 10,
-                              color: ColorConfig.backColor,
+                              
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50)),
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: Icon(
                                   Icons.edit,
-                                  color: ColorConfig.primaryColor,
+                                  color: ColorConfig.appbartextColor,
                                   size: 30,
                                 ),
                               ),

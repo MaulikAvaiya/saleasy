@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:saleasy/AddForms/add_employee.dart';
-
-
 import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/list/employee_list.dart';
 
@@ -13,23 +11,28 @@ class EmployeeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorConfig.primaryColor,
-        title: const Text(
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
           'Employee Detail',
           style: TextStyle(
-            color: Colors.white,
             fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
           ),
         ),
       ),
       body: EmployeeList(),
+      backgroundColor: ColorConfig.primaryColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-         Navigator.of(context).pushNamed(AddEmployee.routeName);
+          Navigator.of(context).pushNamed(AddEmployee.routeName);
         },
-        backgroundColor: ColorConfig.primaryColor,
-        child: const Icon(Icons.add),
+        backgroundColor: ColorConfig.appbarColor,
+        child: Icon(
+          Icons.add,
+          color: ColorConfig.appbartextColor,
+        ),
       ),
     );
   }

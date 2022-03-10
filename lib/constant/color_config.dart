@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorConfig{
-  static Color primaryColor=const Color(0xff2e9f75);
-   static Color backColor=const Color(0xffd2d7c8);
+  static Color appbarColor=const Color(0xffdcc6b6);
+  static Color appbartextColor=const Color(0xff96614f);
+  static Color primaryColor=const Color(0xfffaf3f0); 
 }

@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.tealAccent[400],
       ),
-      home: const Signup(),
+      home: HomeScreen(),
       routes: {
         //main route
         ProductScreen.routeName: (context) => const ProductScreen(),
@@ -81,13 +81,13 @@ class MyApp extends StatelessWidget {
 
         //detail route
        // ProductDetail.routeName: (context) => ProductDetail(name: '',rate: '',),
-        EmloyeeDetail.routeName: (context) => const EmloyeeDetail(),
+        //EmloyeeDetail.routeName: (context) => const EmloyeeDetail(),
       //  SelfLeadDetail.routeName: (context) => SelfLeadDetail(),
       //  SelfVisitedDetail.routeName: (context) => SelfVisitedDetail(),
-        SelfSalesDetail.routeName: (context) => const SelfSalesDetail(),
+        //SelfSalesDetail.routeName: (context) => SelfSalesDetail(),
       //  CompanyLeadDetail.routeName: (context) => CompanyLeadDetail(),
       //  CompanyVisitedDetail.routeName: (context) => CompanyVisitedDetail(),
-        CompanySalesDetail.routeName: (context) => const CompanySalesDetail(),
+       // CompanySalesDetail.routeName: (context) =>  CompanySalesDetail(),
         SelfTaskDetail.routeName:(context)=>const SelfTaskDetail(),
         CompanyTaskDetail.routeName:(context)=>const CompanyTaskDetail(),
         TargetDetail.routeName:(context)=>const TargetDetail(),

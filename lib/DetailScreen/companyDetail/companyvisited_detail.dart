@@ -17,64 +17,189 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('company visited detail screen'),),
+      appBar: AppBar(
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
+          'Company Visited Detail',
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
+          ),
+        ),
+      ),
       body: FutureBuilder<DocumentSnapshot>(
-          future: companyvisitedlead.doc(widget.id).get(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              print('some thing went wrong');
-            }
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return Column(
-              children: [
-                Container(
-                  child: const Text('companyvisitedlead detail screen'),
-                ),
-                Text(snapshot.data!['name']),
-                Text(snapshot.data!['address']),
-                Text(snapshot.data!['companyname']),
-                Text(snapshot.data!['contact']),
-                Text(snapshot.data!['product']),
-                Text(snapshot.data!['decision']),
-                Text(snapshot.data!['datetime']),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: GestureDetector(
-                        onTap: () => setState(() {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return AddCompanySalesLead(
-                                  id: widget.id,
-                                  name: snapshot.data!['name'],
-                                  address: snapshot.data!['address'],
-                                  contact: snapshot.data!['contact'],
-                                  companyName: snapshot.data!['companyname'],
-                                );
-                              },
+        future: companyvisitedlead.doc(widget.id).get(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print('some thing went wrong');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return SingleChildScrollView(
+            child: Container(
+              color: ColorConfig.primaryColor,
+              height: 700,
+              width: 430,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 500,
+                    width: 400,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text(
+                              "Lead Name:",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          );
-                        }),
-                        child: Card(
-                          color: ColorConfig.primaryColor,
-                          child: Image.asset(''),
+                            Text(
+                              snapshot.data!['name'],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const Text(
+                              "Address:",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              snapshot.data!['address'],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const Text(
+                              "Company Name:",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              snapshot.data!['companyname'],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const Text(
+                              "Contact Number:",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              snapshot.data!['contact'],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const Text(
+                              "Product Name:",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              snapshot.data!['product'],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const Text(
+                              "Decision:",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              snapshot.data!['decision'],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const Text(
+                              "date Time:",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              snapshot.data!['datetime'],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 100,
+                                  height: 100,
+                                  child: GestureDetector(
+                                    onTap: () => setState(() {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return AddCompanySalesLead(
+                                              id: widget.id,
+                                              name: snapshot.data!['name'],
+                                              address:
+                                                  snapshot.data!['address'],
+                                              contact:
+                                                  snapshot.data!['contact'],
+                                              companyName:
+                                                  snapshot.data!['companyname'],
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    }),
+                                    child: Card(
+                                      color: ColorConfig.primaryColor,
+                                      child: Image.asset(''),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ],
-            );
-          }),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
-    
-    
   }
 }
