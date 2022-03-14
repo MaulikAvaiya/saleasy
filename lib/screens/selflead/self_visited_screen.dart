@@ -22,15 +22,6 @@ class SelfVisitedScreen extends StatelessWidget {
         ),
       ),
       body: SelfVisitedList(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: ColorConfig.appbarColor,
-        child: Icon(
-          Icons.add,
-          color: ColorConfig.appbartextColor,
-        ),
-      ),
     );
   }
 }

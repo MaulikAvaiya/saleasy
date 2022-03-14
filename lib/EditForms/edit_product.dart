@@ -13,7 +13,14 @@ class EditProduct extends StatefulWidget {
 }
 
 class _EditProductState extends State<EditProduct> {
+  final _rateFocusNode = FocusNode();
+
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _rateFocusNode.dispose();
+  }
 
   CollectionReference products =
       FirebaseFirestore.instance.collection('products');
@@ -38,10 +45,10 @@ class _EditProductState extends State<EditProduct> {
         backgroundColor: ColorConfig.appbarColor,
         title: Text(
           'Update Products',
-             style: TextStyle(
-             fontSize: 25,
-             fontWeight: FontWeight.bold,
-             color: ColorConfig.appbartextColor,
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
           ),
         ),
       ),
@@ -68,7 +75,8 @@ class _EditProductState extends State<EditProduct> {
               var name = data['name'];
               var rate = data['rate'];
               return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                 child: ListView(
                   children: [
                     Container(
@@ -77,6 +85,11 @@ class _EditProductState extends State<EditProduct> {
                         initialValue: name,
                         onChanged: (value) => name = value,
                         autofocus: false,
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).requestFocus(_rateFocusNode);
+                        },
                         decoration: const InputDecoration(
                           labelText: 'ProductName: ',
                           labelStyle: TextStyle(fontSize: 20.0),
@@ -86,7 +99,7 @@ class _EditProductState extends State<EditProduct> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please Enter Prouct Name';
+                            return 'Please enter prouct name';
                           }
                           return null;
                         },
@@ -98,6 +111,8 @@ class _EditProductState extends State<EditProduct> {
                         initialValue: rate,
                         onChanged: (value) => rate = value,
                         autofocus: false,
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.done,
                         decoration: const InputDecoration(
                           labelText: 'Rate: ',
                           labelStyle: TextStyle(fontSize: 20.0),
@@ -109,14 +124,24 @@ class _EditProductState extends State<EditProduct> {
                           if (value == null || value.isEmpty) {
                             return 'Please Enter rate';
                           }
+                          if (double.tryParse(value) == null) {
+                            return 'Please enter a valid number';
+                          }
+                          if (double.parse(value) <= 0) {
+                            return 'Please enter a number greater than zero';
+                          }
                           return null;
                         },
+                        focusNode: _rateFocusNode,
                       ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: ColorConfig.appbarColor,
+                          ),
                           onPressed: () {
                             // Validate returns true if the form is valid, otherwise false.
                             if (_formKey.currentState!.validate()) {
@@ -124,22 +149,31 @@ class _EditProductState extends State<EditProduct> {
                               Navigator.pop(context);
                             }
                           },
-                          child: const Text(
-                            'update',
-                            style: TextStyle(fontSize: 18.0),
+                          child: Text(
+                            'Update',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              color: ColorConfig.appbartextColor,
+                            ),
                           ),
                         ),
                         ElevatedButton(
                           onPressed: () => {},
-                          child: const Text(
+                          child: Text(
                             'Reset',
-                            style: TextStyle(fontSize: 18.0),
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              color: ColorConfig.appbartextColor,
+                            ),
                           ),
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.blueGrey),
-                        ),
+                          style: ElevatedButton.styleFrom(
+                            primary: ColorConfig.appbarColor,
+                          ),
+                        )
                       ],
-                    )
+                    ),
                   ],
                 ),
               );

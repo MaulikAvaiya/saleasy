@@ -147,7 +147,7 @@ class _SelfVisitedListState extends State<SelfVisitedList> {
                                 padding: const EdgeInsets.all(10),
                                 child: Icon(
                                   Icons.edit,
-                                  color: ColorConfig.appbartextColor,
+                                  color: ColorConfig.appbarColor,
                                   size: 30,
                                 ),
                               ),

@@ -26,8 +26,11 @@ class CompanyLeadScreen extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).pushNamed(AddCompanyLead.routeName);
         },
-        backgroundColor: ColorConfig.primaryColor,
-        child: const Icon(Icons.add),
+        backgroundColor: ColorConfig.appbarColor,
+        child: Icon(
+          Icons.add,
+          color: ColorConfig.appbartextColor,
+        ),
       ),
     );
   }

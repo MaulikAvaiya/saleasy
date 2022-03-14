@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<String> images = [
-    "assets/images/product.png",
+    "assets/images/products.png",
     "assets/images/employee.png",
     "assets/images/self-lead.png",
     "assets/images/company-lead.png",

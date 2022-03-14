@@ -68,9 +68,10 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['name'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -82,9 +83,10 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['address'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -96,9 +98,10 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['companyname'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -110,9 +113,10 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['contact'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -124,9 +128,10 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['product'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -138,9 +143,10 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['decision'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -152,9 +158,10 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['datetime'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             Row(
@@ -182,8 +189,8 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
                                       );
                                     }),
                                     child: Card(
-                                      color: ColorConfig.primaryColor,
-                                      child: Image.asset(''),
+                                      
+                                      child: Image.asset('assets/images/saleslead.png'),
                                     ),
                                   ),
                                 ),

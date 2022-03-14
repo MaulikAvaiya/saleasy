@@ -31,7 +31,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
   var leadAddress = '';
   var leadContact = '';
   var leadCompanyName = '';
- // var dateTime = '';
+  // var dateTime = '';
   var decision = '';
   var product = '';
 
@@ -62,6 +62,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
 
     super.dispose();
   }
+
   String date = "";
   DateTime selectedDate = DateTime.now();
 
@@ -84,19 +85,17 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
   }
 
   final _formKey = GlobalKey<FormState>();
-  
-  
 
-   Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context) async {
     final Future<DateTime?> selected = showDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2010),
       lastDate: DateTime(2050),
     );
-    if(selected!=null &&selected!=selectedDate){
+    if (selected != null && selected != selectedDate) {
       setState(() {
-        selectedDate=selected as DateTime;
+        selectedDate = selected as DateTime;
       });
     }
   }
@@ -143,7 +142,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                     //  controller: leadNameController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter LeadName';
+                        return 'Please enter leadName';
                       }
                       return null;
                     },
@@ -189,7 +188,8 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_companynameFocusNode);
+                      FocusScope.of(context)
+                          .requestFocus(_companynameFocusNode);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Contact Number: ',
@@ -202,6 +202,9 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter contact number';
+                      }
+                      if (value.length != 10){
+                        return 'Contact number must be 10 digit';
                       }
                       return null;
                     },
@@ -216,7 +219,8 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_productnameFocusNode);
+                      FocusScope.of(context)
+                          .requestFocus(_productnameFocusNode);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Company Name: ',
@@ -289,41 +293,40 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child:
-                      TextFormField(
-                      initialValue: selectedDate.toString(),
-                        autofocus: false,
-                        keyboardType: TextInputType.name,
-                        textInputAction: TextInputAction.done,
-                        decoration: InputDecoration(
-                          labelText: 'Date Time: ',
-                          suffixIcon: GestureDetector(
-                            onTap: (() => setState(() {
-                              _selectDate(context);
-                            })
-                            ),
-
-                            child: Icon(Icons.date_range)),
-                          labelStyle: TextStyle(fontSize: 20.0),
-                          border: const OutlineInputBorder(),
-                          errorStyle:
-                              const TextStyle(color: Colors.redAccent, fontSize: 15),
-                        ),
-
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter Date and time';
-                          }
-                          return null;
-                        },
-                        focusNode: _datetimeFocusNode,
-                      ),
+                  child: TextFormField(
+                    initialValue: selectedDate.toString(),
+                    autofocus: false,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.done,
+                    decoration: InputDecoration(
+                      labelText: 'Date Time: ',
+                      suffixIcon: GestureDetector(
+                          onTap: (() => setState(() {
+                                _selectDate(context);
+                              })),
+                          child: Icon(Icons.date_range)),
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: const OutlineInputBorder(),
+                      errorStyle: const TextStyle(
+                          color: Colors.redAccent, fontSize: 15),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter Date and time';
+                      }
+                      return null;
+                    },
+                    focusNode: _datetimeFocusNode,
+                  ),
                 ),
                 SizedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: ColorConfig.appbarColor,
+                        ),
                         onPressed: () {
                           // Validate returns true if the form is valid, otherwise false.
                           if (_formKey.currentState!.validate()) {
@@ -336,7 +339,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                                   // leadCompanyName=leadCompanyNameController.text;
                                   product = productController.text;
                                   decision = decisionController.text;
-                                //  selectedDate =dateTimeController.text as DateTime;
+                                  //  selectedDate =dateTimeController.text as DateTime;
 
                                   addselfvisitedlead();
                                   Selfleadelete().deleteSelflead(widget.id);
@@ -348,18 +351,28 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                             });
                           }
                         },
-                        child: const Text(
+                        child: Text(
                           'Register',
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConfig.appbartextColor,
+                          ),
                         ),
                       ),
                       ElevatedButton(
                         onPressed: () => {},
-                        child: const Text(
+                        child: Text(
                           'Reset',
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConfig.appbartextColor,
+                          ),
                         ),
-                        style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                        style: ElevatedButton.styleFrom(
+                          primary: ColorConfig.appbarColor,
+                        ),
                       ),
                     ],
                   ),

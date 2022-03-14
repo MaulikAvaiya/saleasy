@@ -13,6 +13,7 @@ class AddEmployee extends StatefulWidget {
 class _AddEmployeeState extends State<AddEmployee> {
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
+  final _emailFocusNode = FocusNode();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -28,9 +29,12 @@ class _AddEmployeeState extends State<AddEmployee> {
 
   @override
   void dispose() {
+    //focuseNode
     _addressFocusNode.dispose();
     _contactnumberFocusNode.dispose();
+    _emailFocusNode.dispose();
 
+    //Controller
     empAddressController.dispose();
     empContactController.dispose();
     empNameController.dispose();
@@ -94,7 +98,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                     controller: empNameController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter LeadName';
+                        return 'Please enter employee name';
                       }
                       return null;
                     },
@@ -135,8 +139,12 @@ class _AddEmployeeState extends State<AddEmployee> {
                   margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
                     autofocus: false,
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context)
+                          .requestFocus(_emailFocusNode);
+                    },
                     decoration: const InputDecoration(
                       labelText: 'Contact Number: ',
                       labelStyle: TextStyle(fontSize: 20.0),
@@ -149,6 +157,9 @@ class _AddEmployeeState extends State<AddEmployee> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter contact number';
                       }
+                      if (value.length != 10){
+                        return 'Contact number must be 10 digit';
+                      }
                       return null;
                     },
                     focusNode: _contactnumberFocusNode,
@@ -159,12 +170,8 @@ class _AddEmployeeState extends State<AddEmployee> {
                   child: TextFormField(
                     autofocus: false,
                     maxLines: 2,
-                    keyboardType: TextInputType.multiline,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context)
-                          .requestFocus(_contactnumberFocusNode);
-                    },
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.done,
                     decoration: const InputDecoration(
                       labelText: 'Email: ',
                       labelStyle: TextStyle(fontSize: 20.0),
@@ -184,7 +191,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         return null;
                       }
                     },
-                  //  focusNode: _addressFocusNode,
+                    focusNode: _emailFocusNode,
                   ),
                 ),
                 SizedBox(
@@ -192,6 +199,9 @@ class _AddEmployeeState extends State<AddEmployee> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: ColorConfig.appbarColor,
+                        ),
                         onPressed: () {
                           // Validate returns true if the form is valid, otherwise false.
                           if (_formKey.currentState!.validate()) {
@@ -205,18 +215,28 @@ class _AddEmployeeState extends State<AddEmployee> {
                             });
                           }
                         },
-                        child: const Text(
+                        child: Text(
                           'Register',
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConfig.appbartextColor,
+                          ),
                         ),
                       ),
                       ElevatedButton(
                         onPressed: () => {},
-                        child: const Text(
+                        child: Text(
                           'Reset',
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConfig.appbartextColor,
+                          ),
                         ),
-                        style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                        style: ElevatedButton.styleFrom(
+                          primary: ColorConfig.appbarColor,
+                        ),
                       ),
                     ],
                   ),

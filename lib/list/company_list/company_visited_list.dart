@@ -144,7 +144,7 @@ class _CompanyVisitedListState extends State<CompanyVisitedList> {
                                 padding: const EdgeInsets.all(10),
                                 child: Icon(
                                   Icons.edit,
-                                  color: ColorConfig.appbartextColor,
+                                  color: ColorConfig.appbarColor,
                                   size: 30,
                                 ),
                               ),

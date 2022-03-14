@@ -122,7 +122,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                           controller: leadNameController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter LeadName';
+                              return 'Please enter leadName';
                             }
                             return null;
                           },
@@ -180,6 +180,9 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter contact number ';
+                            }
+                            if (value.length != 10){
+                              return 'Contact number must be 10 digit';
                             }
                             return null;
                           },
@@ -265,6 +268,9 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: ColorConfig.appbarColor,
+                              ),
                               onPressed: () {
                                 // Validate returns true if the form is valid, otherwise false.
                                 if (_formKey.currentState!.validate()) {
@@ -281,19 +287,28 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                                   });
                                 }
                               },
-                              child: const Text(
+                              child: Text(
                                 'Register',
-                                style: TextStyle(fontSize: 18.0),
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorConfig.appbartextColor,
+                                ),
                               ),
                             ),
                             ElevatedButton(
                               onPressed: () => {},
-                              child: const Text(
+                              child: Text(
                                 'Reset',
-                                style: TextStyle(fontSize: 18.0),
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorConfig.appbartextColor,
+                                ),
                               ),
                               style: ElevatedButton.styleFrom(
-                                  primary: Colors.blueGrey),
+                                primary: ColorConfig.appbarColor,
+                              ),
                             ),
                           ],
                         ),
