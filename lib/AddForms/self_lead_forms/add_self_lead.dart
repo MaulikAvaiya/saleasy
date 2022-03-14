@@ -61,7 +61,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
           'address': leadAddress,
           'contact': leadContact,
           'companyname': leadCompanyName,
-          'employee': leadEmpName,
+          'employee': _mySelection,
         })
         .then((value) => print('lead Added'))
         .catchError((error) => print('Failed to Add lead: $error'));
@@ -214,51 +214,42 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                         ),
                       ),
                       Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          color: Colors.grey,
+                          width: 0.8,
+                        )),
                         margin: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: DropdownButton<dynamic>(
-                          isDense: true,
-                          hint: _mySelection != null
-                              ? Text(_mySelection)
-                              : Text('select employee name'),
-                          value: _mySelection,
-                          onChanged: (dynamic newValue) {
-                            setState(() {
-                              _mySelection = newValue;
-                            });
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: DropdownButton<dynamic>(
+                            underline: Container(color: Colors.transparent),
+                            isDense: true,
+                            hint: _mySelection != null
+                                ? Text(_mySelection)
+                                : Text('select employee name'),
+                            value: _mySelection,
+                            onChanged: (dynamic newValue) {
+                              setState(() {
+                                _mySelection = newValue;
+                              });
 
-                            print(_mySelection);
-                          },
-                          items: snapshot.data!.docs
-                              .map((DocumentSnapshot snapshot) {
-                            return DropdownMenuItem<dynamic>(
-                              value: snapshot[
-                                  'empname'], //snapshot['id'].toString(),
-                              child: Text(
-                                snapshot["empname"],
-                              ),
-                            );
-                          }).toList(),
+                              debugPrint(_mySelection);
+                            },
+                            icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                            isExpanded: true,
+                            items: snapshot.data!.docs
+                                .map((DocumentSnapshot snapshot) {
+                              return DropdownMenuItem<dynamic>(
+                                value: snapshot[
+                                    'empname'], //snapshot['id'].toString(),
+                                child: Text(
+                                  snapshot["empname"],
+                                ),
+                              );
+                            }).toList(),
+                          ),
                         ),
-                        //   child: TextFormField(
-                        //     autofocus: false,
-                        //     keyboardType: TextInputType.name,
-                        //     textInputAction: TextInputAction.done,
-                        //     decoration: const InputDecoration(
-                        //       labelText: 'Employee Name: ',
-                        //       labelStyle: TextStyle(fontSize: 20.0),
-                        //       border: OutlineInputBorder(),
-                        //       errorStyle:
-                        //           TextStyle(color: Colors.redAccent, fontSize: 15),
-                        //     ),
-                        //     controller: leadEmpNameController,
-                        //     validator: (value) {
-                        //       if (value == null || value.isEmpty) {
-                        //         return 'Please enter employee name';
-                        //       }
-                        //       return null;
-                        //     },
-                        //     focusNode: _employeenameFocusNode,
-                        //   ),
                       ),
                       SizedBox(
                         child: Row(

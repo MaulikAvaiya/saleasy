@@ -27,6 +27,10 @@ class AddCompanyVisitedLead extends StatefulWidget {
 }
 
 class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
+
+
+   var _mySelection;
+
   var leadName = '';
   var leadAddress = '';
   var leadContact = '';
@@ -76,7 +80,7 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
           'address': widget.address,
           'contact': widget.contact,
           'companyname': widget.companyName,
-          'product': product,
+          'product': _mySelection,
           'decision': decision,
           'datetime': selectedDate,
         })
@@ -85,6 +89,9 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
   }
 
   final _formKey = GlobalKey<FormState>();
+
+  final Stream<QuerySnapshot> productStream =
+      FirebaseFirestore.instance.collection('products').snapshots();
 
   Future<void> _selectDate(BuildContext context) async {
     final Future<DateTime?> selected = showDatePicker(
@@ -114,7 +121,18 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
           ),
         ),
       ),
-      body: Container(
+      body:StreamBuilder<QuerySnapshot>(
+          stream: productStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              print('some thing went wrong');
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return Container(
         color: ColorConfig.primaryColor,
         child: Form(
           key: _formKey,
@@ -235,31 +253,43 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_decisionFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Product Name: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    controller: productController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter product name';
-                      }
-                      return null;
-                    },
-                    focusNode: _productnameFocusNode,
-                  ),
-                ),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          color: Colors.grey,
+                          width: 0.8,
+                        )),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: DropdownButton<dynamic>(
+                            underline: Container(color: Colors.transparent),
+                            isDense: true,
+                            hint: _mySelection != null
+                                ? Text(_mySelection)
+                                : Text('select product name'),
+                            value: _mySelection,
+                            onChanged: (dynamic newValue) {
+                              setState(() {
+                                _mySelection = newValue;
+                              });
+
+                              debugPrint(_mySelection);
+                            },
+                            icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                            isExpanded: true,
+                            items: snapshot.data!.docs
+                                .map((DocumentSnapshot snapshot) {
+                              return DropdownMenuItem<dynamic>(
+                                value: snapshot[
+                                    'name'], //snapshot['id'].toString(),
+                                child: Text(
+                                  snapshot["name"],
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
@@ -364,6 +394,8 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
             ),
           ),
         ),
+      );
+          }
       ),
     );
   }

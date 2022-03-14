@@ -11,6 +11,7 @@ class AddCompanyLead extends StatefulWidget {
 }
 
 class _AddCompanyLeadState extends State<AddCompanyLead> {
+ var _mySelection;
 
   var leadName = '';
   var leadAddress = '';
@@ -54,6 +55,9 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
   CollectionReference companylead =
       FirebaseFirestore.instance.collection('companylead');
 
+        final Stream<QuerySnapshot> employeeStream =
+      FirebaseFirestore.instance.collection('employee').snapshots();
+
   Future<void> addCompanyLead() {
     return companylead
         .add({
@@ -61,7 +65,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
           'address': leadAddress,
           'contact': leadContact,
           'companyname': leadCompanyName,
-          'employee':leadEmpName,
+          'employee':_mySelection,
         })
         .then((value) => print('companyselflead Added'))
         .catchError((error) => print('Failed to Add companyselflead: $error'));
@@ -82,7 +86,18 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
           ),
         ),
       ),
-      body: Container(
+      body:StreamBuilder<QuerySnapshot>(
+          stream: employeeStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              print('some thing went wrong');
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return Container(
         color: ColorConfig.primaryColor,
         child: Form(
           key: _formKey,
@@ -199,28 +214,43 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.done,
-                    decoration: const InputDecoration(
-                      labelText: 'Employee Name: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    controller: leadEmpNameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter employee name';
-                      }
-                      return null;
-                    },
-                    focusNode: _employeenameFocusNode,
-                  ),
-                ),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          color: Colors.grey,
+                          width: 0.8,
+                        )),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: DropdownButton<dynamic>(
+                            underline: Container(color: Colors.transparent),
+                            isDense: true,
+                            hint: _mySelection != null
+                                ? Text(_mySelection)
+                                : Text('select employee name'),
+                            value: _mySelection,
+                            onChanged: (dynamic newValue) {
+                              setState(() {
+                                _mySelection = newValue;
+                              });
+
+                              debugPrint(_mySelection);
+                            },
+                            icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                            isExpanded: true,
+                            items: snapshot.data!.docs
+                                .map((DocumentSnapshot snapshot) {
+                              return DropdownMenuItem<dynamic>(
+                                value: snapshot[
+                                    'empname'], //snapshot['id'].toString(),
+                                child: Text(
+                                  snapshot["empname"],
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
                 SizedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -261,6 +291,8 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
             ),
           ),
         ),
+      );
+          }
       ),
     );
   }

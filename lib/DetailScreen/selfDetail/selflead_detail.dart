@@ -222,22 +222,22 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
                             onPressed: () async {
                               await launch('https://wa.me/$code$number');
                             },
-                            icon: Icon(Icons.whatsapp),
-                            label: Text('whatsapp'),
+                            icon: const Icon(Icons.whatsapp),
+                            label: const Text('whatsapp'),
                           ),
                           ElevatedButton.icon(
                             onPressed: () {
                               _sendsms('welcome', recipents);
                             },
-                            icon: Icon(Icons.message),
-                            label: Text('message'),
+                            icon: const Icon(Icons.message),
+                            label: const Text('message'),
                           ),
                           ElevatedButton.icon(
                             onPressed: () async {
                               await launch('tel://$number');
                             },
-                            icon: Icon(Icons.phone),
-                            label: Text('phone'),
+                            icon: const Icon(Icons.phone),
+                            label: const Text('phone'),
                           ),
                         ],
                       ),

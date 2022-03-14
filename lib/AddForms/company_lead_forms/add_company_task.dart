@@ -1,101 +1,79 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
-import 'package:saleasy/deletefunction/companyleaddelete.dart';
-import 'package:saleasy/screens/selflead/self_visited_screen.dart';
 
-class AddCompanySalesLead extends StatefulWidget {
-  final String id;
-  final String name;
-  final String address;
-  final String contact;
-  final String companyName;
-  //final String product;
-
-  const AddCompanySalesLead({
+class AddCompanyTask extends StatefulWidget {
+  String id;
+  String name;
+  String address;
+  String contact;
+  String companyName;
+  AddCompanyTask({
     Key? key,
     required this.id,
     required this.name,
     required this.address,
     required this.contact,
     required this.companyName,
-   // required this.product,
   }) : super(key: key);
-  static const routeName = '/add-Companysales-lead';
+  static const routeName = '/add-task';
 
   @override
-  _AddCompanySalesLeadState createState() => _AddCompanySalesLeadState();
+  _AddCompanyTaskState createState() => _AddCompanyTaskState();
 }
 
-class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
+class _AddCompanyTaskState extends State<AddCompanyTask> {
 
-     var _mySelection;
-  var leadName = '';
-  var leadAddress = '';
-  var leadContact = '';
-  var leadCompanyName = '';
-  var dateTime = '';
-  var rate = '';
-  var amount = '';
-  var product = '';
-  var quantity = '';
+var _mySelection;
 
-  final leadNameController = TextEditingController();
-  final leadAddressController = TextEditingController();
-  final leadContactController = TextEditingController();
-  final leadCompanyNameController = TextEditingController();
-  final leadEmpNameController = TextEditingController();
-  final dateTimeController = TextEditingController();
-  final productController = TextEditingController();
-  final rateController = TextEditingController();
-  final amountController = TextEditingController();
-  final quantityController = TextEditingController();
+  var task = '';
+  var tasktype = '';
+  var date = '';
+
+  final taskController = TextEditingController();
+  final tasktypeController = TextEditingController();
+
+  CollectionReference companytask =
+      FirebaseFirestore.instance.collection('companytask');
+
+  Future<void> addCompanyTask() {
+    return companytask
+        .add({
+          'name': widget.name,
+          'address': widget.address,
+          'contact': widget.contact,
+          'companyname': widget.companyName,
+          'employee':_mySelection,
+          'task': task,
+          'tasktype': tasktype,
+          'datetime': date,
+        })
+        .then((value) => print('companytask Added'))
+        .catchError((error) => print('Failed to Add companytask: $error'));
+  }
 
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
   final _companynameFocusNode = FocusNode();
-  final _productnameFocusNode = FocusNode();
-  final _quantityFocusNode = FocusNode();
-  final _rateFocusNode = FocusNode();
-  final _amountFocusNode = FocusNode();
   final _datetimeFocusNode = FocusNode();
+  final _taskdetailFocusNode = FocusNode();
+  final _typeFocusNode = FocusNode();
 
   @override
   void dispose() {
     _addressFocusNode.dispose();
     _contactnumberFocusNode.dispose();
     _companynameFocusNode.dispose();
-    _productnameFocusNode.dispose();
-    _quantityFocusNode.dispose();
-    _rateFocusNode.dispose();
-    _amountFocusNode.dispose();
     _datetimeFocusNode.dispose();
+    _taskdetailFocusNode.dispose();
+    _typeFocusNode.dispose();
 
     super.dispose();
   }
 
-  CollectionReference companysaleslead =
-      FirebaseFirestore.instance.collection('companysaleslead');
-
-  Future<void> addcompanysaleslead() {
-    return companysaleslead
-        .add({
-          'name': widget.name,
-          'address': widget.address,
-          'contact': widget.contact,
-          'companyname': widget.companyName,
-          'product': _mySelection,
-          'rate': rate,
-          'amount': amount,
-          'datetime': dateTime,
-          'quantity': quantity,
-        })
-        .then((value) => print('companysaleslead Added'))
-        .catchError((error) => print('Failed to Add companysaleslead: $error'));
-  }
-
-    final Stream<QuerySnapshot> productStream =
-      FirebaseFirestore.instance.collection('products').snapshots();
+  
+  final Stream<QuerySnapshot> employeeStream =
+      FirebaseFirestore.instance.collection('employee').snapshots();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -105,16 +83,16 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
         title: Text(
-          "Add Company SalesLead",
+          "Add companytask",
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
             color: ColorConfig.appbartextColor,
           ),
-          ),
         ),
+      ),
       body:StreamBuilder<QuerySnapshot>(
-          stream: productStream,
+          stream: employeeStream,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               print('some thing went wrong');
@@ -124,7 +102,7 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                 child: CircularProgressIndicator(),
               );
             }
-            return Container(
+return Container(
         color: ColorConfig.primaryColor,
         child: Form(
           key: _formKey,
@@ -215,14 +193,14 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 10.0),
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
                     initialValue: widget.companyName,
                     autofocus: false,
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_productnameFocusNode);
+                      FocusScope.of(context).requestFocus(_datetimeFocusNode);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Company Name: ',
@@ -240,7 +218,7 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                     focusNode: _companynameFocusNode,
                   ),
                 ),
-                Container(
+                 Container(
                         decoration: BoxDecoration(
                             border: Border.all(
                           color: Colors.grey,
@@ -254,7 +232,7 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                             isDense: true,
                             hint: _mySelection != null
                                 ? Text(_mySelection)
-                                : Text('select product name'),
+                                : Text('select employee name'),
                             value: _mySelection,
                             onChanged: (dynamic newValue) {
                               setState(() {
@@ -269,9 +247,9 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                                 .map((DocumentSnapshot snapshot) {
                               return DropdownMenuItem<dynamic>(
                                 value: snapshot[
-                                    'name'], //snapshot['id'].toString(),
+                                    'empname'], //snapshot['id'].toString(),
                                 child: Text(
-                                  snapshot["name"],
+                                  snapshot["empname"],
                                 ),
                               );
                             }).toList(),
@@ -282,86 +260,11 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                   margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
                     autofocus: false,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_rateFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Quantity: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    controller: quantityController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter quantity';
-                      }
-                      return null;
-                    },
-                    focusNode: _quantityFocusNode,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_amountFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Rate: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    controller: rateController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please Enter Rate';
-                      }
-                      return null;
-                    },
-                    focusNode: _rateFocusNode,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_datetimeFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Amount: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    controller: amountController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter amount';
-                      }
-                      return null;
-                    },
-                    focusNode: _amountFocusNode,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    autofocus: false,
                     keyboardType: TextInputType.datetime,
-                    textInputAction: TextInputAction.done,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_taskdetailFocusNode);
+                    },
                     decoration: const InputDecoration(
                       labelText: 'Date Time: ',
                       labelStyle: TextStyle(fontSize: 20.0),
@@ -369,7 +272,6 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                       errorStyle:
                           TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
-                    controller: dateTimeController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter date and time';
@@ -380,6 +282,55 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                   ),
                 ),
                 Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.datetime,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_typeFocusNode);
+                    },
+                    controller: taskController,
+                    decoration: const InputDecoration(
+                      labelText: 'Task Detail: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter task detail';
+                      }
+                      return null;
+                    },
+                    focusNode: _taskdetailFocusNode,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.datetime,
+                    textInputAction: TextInputAction.done,
+                    decoration: const InputDecoration(
+                      labelText: 'Type: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    controller: tasktypeController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter type';
+                      }
+                      return null;
+                    },
+                    focusNode: _typeFocusNode,
+                  ),
+                ),
+                SizedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -388,16 +339,9 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                           // Validate returns true if the form is valid, otherwise false.
                           if (_formKey.currentState!.validate()) {
                             setState(() {
-                              product=productController.text;
-                              amount = amountController.text;
-                              quantity = quantityController.text;
-                              rate = rateController.text;
-                              dateTime = dateTimeController.text;
-
-                              addcompanysaleslead();
-                              Companyleadelete().deletecompanylead(widget.id);
-                              CompanyVisitedLeadDelete().deletevisitedlead(widget.id);
-                              Navigator.of(context).popAndPushNamed(SelfVisitedScreen.routeName);
+                              task = taskController.text;
+                              tasktype = tasktypeController.text;
+                              addCompanyTask();
                             });
                           }
                         },
@@ -416,7 +360,7 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

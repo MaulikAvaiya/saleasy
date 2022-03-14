@@ -38,99 +38,99 @@ class _HomeScreenState extends State<HomeScreen> {
     'Target',
     'Profile',
   ];
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    debugPrint(screenHeight.toString());
+    debugPrint(screenWidth.toString());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
-        title: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'SalEasy',
-            style: TextStyle(
-              fontSize: 35,
-              fontWeight: FontWeight.bold,
-              color: ColorConfig.appbartextColor,
-              ),
+        title: Text(
+          'SalEasy',
+          style: TextStyle(
+            fontSize: screenHeight*0.044,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
           ),
         ),
       ),
       body: Container(
-        color: ColorConfig.primaryColor,
+        color: ColorConfig.backColor,
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 18),
-            child: GridView.custom(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 3 / 2,
-                crossAxisSpacing: 25,
-                mainAxisSpacing: 25,
-              ),
-              childrenDelegate: SliverChildBuilderDelegate(
-                (BuildContext, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      switch (index) {
-                        case 0:
-                          Navigator.pushNamed(context, ProductScreen.routeName);
-                          break;
-                        case 1:
-                          Navigator.pushNamed(
-                              context, EmployeeScreen.routeName);
-                          break;
-                        case 2:
-                          Navigator.pushNamed(context, SelfLead.routeName);
-                          break;
-                        case 3:
-                          Navigator.pushNamed(context, CompanyLead.routeName);
-                          break;
-                        case 4:
-                          Navigator.pushNamed(
-                              context, SelfTaskScreen.routeName);
-                          break;
-                        case 5:
-                          Navigator.pushNamed(
-                              context, CompanyTaskScreen.routeName);
-                          break;
-                        case 6:
-                          Navigator.pushNamed(context, TargetScreen.routeName);
-                          break;
-                        case 7:
-                          Navigator.pushNamed(context, ProfileScreen.routeName);
-                          break;
-                      }
-                    },
+          child: GridView.custom(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio:1.2 ,
+             crossAxisSpacing: screenWidth*0.001,
+              mainAxisSpacing: screenHeight*0.001,
+            ),
+            childrenDelegate: SliverChildBuilderDelegate(
+              (BuildContext, index) {
+                return GestureDetector(
+                  onTap: () {
+                    switch (index) {
+                      case 0:
+                        Navigator.pushNamed(context, ProductScreen.routeName);
+                        break;
+                      case 1:
+                        Navigator.pushNamed(
+                            context, EmployeeScreen.routeName);
+                        break;
+                      case 2:
+                        Navigator.pushNamed(context, SelfLead.routeName);
+                        break;
+                      case 3:
+                        Navigator.pushNamed(context, CompanyLead.routeName);
+                        break;
+                      case 4:
+                        Navigator.pushNamed(
+                            context, SelfTaskScreen.routeName);
+                        break;
+                      case 5:
+                        Navigator.pushNamed(
+                            context, CompanyTaskScreen.routeName);
+                        break;
+                      case 6:
+                        Navigator.pushNamed(context, TargetScreen.routeName);
+                        break;
+                      case 7:
+                        Navigator.pushNamed(context, ProfileScreen.routeName);
+                        break;
+                    }
+                  },
+                  child: Padding(
+                    padding:  EdgeInsets.only(top: screenHeight*0.03),
                     child: Column(
                       children: [
-                        Container(
-                          child: Card(
-                            color: ColorConfig.primaryColor,
-                            elevation: 5,
-                            child: Image.asset(
-                              images[index],
-                              fit: BoxFit.cover,
-                              height: 91,
-                              width: 91,
-                            ),
+                        Card(
+                          color: ColorConfig.primaryColor,
+                          elevation: 5,
+                          child: Image.asset(
+                            images[index],
+                            width: screenWidth * 0.22,
                           ),
                         ),
-                        Text(
-                          title[index],
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                        Padding(
+                          padding: EdgeInsets.only(top: screenHeight * 0.002),
+                          child: Text(
+                            title[index],
+                            style: TextStyle(
+                              fontSize: screenHeight * 0.02,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  );
-                },
-                childCount: 8,
-              ),
-              padding: const EdgeInsets.all(10),
-              shrinkWrap: true,
+                  ),
+                );
+              },
+              childCount: 8,
             ),
+            shrinkWrap: true,
           ),
         ),
       ),

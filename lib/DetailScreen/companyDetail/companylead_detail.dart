@@ -4,6 +4,8 @@ import 'package:saleasy/AddForms/company_lead_forms/add_company_sales_lead.dart'
 import 'package:saleasy/AddForms/company_lead_forms/add_company_visited_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../AddForms/company_lead_forms/add_company_task.dart';
+
 class CompanyLeadDetail extends StatefulWidget {
   final String id;
   const CompanyLeadDetail({Key? key, required this.id}) : super(key: key);
@@ -185,31 +187,35 @@ class _CompanyLeadDetailState extends State<CompanyLeadDetail> {
                                   ),
                                 ),
                               ),
-                              // SizedBox(
-                              //   width: 100,
-                              //   height: 100,
-                              //   child: GestureDetector(
-                              //     onTap: () => setState(() {
-                              //       Navigator.of(context).push(
-                              //         MaterialPageRoute(
-                              //           builder: (context) {
-                              //             return AddVisitedLead(
-                              //                 id: widget.id,
-                              //                 name: snapshot.data!['name'],
-                              //                 address: snapshot.data!['address'],
-                              //                 contact: snapshot.data!['contact'],
-                              //                 companyName: snapshot.data!['companyname']);
-                              //           },
-                              //         ),
-                              //       );
-                              //       }
-                              //       ),
-                              //     child: Card(
-                              //       color: ColorConfig.primaryColor,
-                              //       child: Image.asset(''),
-                              //     ),
-                              //   ),
-                              // ),
+                              SizedBox(
+                                width: 100,
+                                height: 100,
+                                child: GestureDetector(
+                                  onTap: () => setState(() {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) {
+                                                  return AddCompanyTask(
+                                                      id: widget.id,
+                                                      name: snapshot
+                                                          .data!['name'],
+                                                      address: snapshot
+                                                          .data!['address'],
+                                                      contact: snapshot
+                                                          .data!['contact'],
+                                                      companyName:
+                                                          snapshot.data![
+                                                              'companyname']);
+                                                },
+                                              ),
+                                            );
+                                          }),
+                                  child: Card(
+                                    color: ColorConfig.primaryColor,
+                                    child: Image.asset(''),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ],
