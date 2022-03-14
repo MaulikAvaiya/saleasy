@@ -148,7 +148,7 @@ class _SelfSalesListState extends State<SelfSalesList> {
                                 padding: const EdgeInsets.all(10),
                                 child: Icon(
                                   Icons.edit,
-                                   color: ColorConfig.appbartextColor,
+                                   color: ColorConfig.appbarColor,
                                   size: 30,
                                 ),
                               ),

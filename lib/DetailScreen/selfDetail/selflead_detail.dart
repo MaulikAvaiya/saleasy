@@ -42,8 +42,8 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
             fontWeight: FontWeight.bold,
             color: ColorConfig.appbartextColor,
           ),
-          ),
         ),
+      ),
       body: FutureBuilder<DocumentSnapshot>(
         future: selflead.doc(widget.id).get(),
         builder: (context, snapshot) {
@@ -58,193 +58,239 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
           number = snapshot.data!['contact'];
           List<String> recipents = [number];
           String code = '91';
-          return Container(
-            color: ColorConfig.primaryColor,
-            height: 700,
-            width: 430,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 550,
-                  width: 400,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Text(
-                            "Lead Name:",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+          return SingleChildScrollView(
+            child: Container(
+              color: ColorConfig.primaryColor,
+              padding: const EdgeInsets.all(6),
+              height: 700,
+              width: 430,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 550,
+                    width: 400,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text(
+                              "Lead Name:",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Text(
-                            snapshot.data!['name'],
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal,
+                            Text(
+                              snapshot.data!['name'],
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
+                              ),
                             ),
-                          ),
-                          const Text(
-                            "Address:",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                            const Text(
+                              "Address:",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Text(
-                            snapshot.data!['address'],
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal,
+                            Text(
+                              snapshot.data!['address'],
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
+                              ),
                             ),
-                          ),
-                          const Text(
-                            "Company Name:",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                            const Text(
+                              "Company Name:",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Text(
-                            snapshot.data!['companyname'],
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal,
+                            Text(
+                              snapshot.data!['companyname'],
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
+                              ),
                             ),
-                          ),
-                          const Text(
-                            "Contact Number:",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                            const Text(
+                              "Contact Number:",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Text(
-                            snapshot.data!['contact'],
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal,
+                            Text(
+                              snapshot.data!['contact'],
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
+                              ),
                             ),
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 100,
-                                height: 100,
-                                child: GestureDetector(
-                                  onTap: () => setState(() {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return AddVisitedLead(
-                                              id: widget.id,
-                                              name: snapshot.data!['name'],
-                                              address:
-                                                  snapshot.data!['address'],
-                                              contact:
-                                                  snapshot.data!['contact'],
-                                              companyName: snapshot
-                                                  .data!['companyname']);
+                            Container(
+                              padding: EdgeInsets.all(25),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,  
+                                crossAxisAlignment: CrossAxisAlignment.center,                          
+                                children: [
+                                  
+                                  SizedBox(
+                                    width: 90,
+                                    height: 90,
+                                    child: GestureDetector(
+                                      onTap: () => setState(() {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return AddVisitedLead(
+                                                  id: widget.id,
+                                                  name: snapshot.data!['name'],
+                                                  address:
+                                                      snapshot.data!['address'],
+                                                  contact:
+                                                      snapshot.data!['contact'],
+                                                  companyName: snapshot
+                                                      .data!['companyname']);
+                                            },
+                                          ),
+                                        );
+                                      }),
+                                      child: Card(
+                                        child: Image.asset(
+                                            'assets/images/visitedlead.png'),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 90,
+                                    height: 90,
+                                    child: GestureDetector(
+                                      onTap: () => setState(() {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return AddSalesLead(
+                                                  id: widget.id,
+                                                  name: snapshot.data!['name'],
+                                                  address:
+                                                      snapshot.data!['address'],
+                                                  contact:
+                                                      snapshot.data!['contact'],
+                                                  companyName: snapshot
+                                                      .data!['companyname']);
+                                            },
+                                          ),
+                                        );
+                                      }),
+                                      child: Card(
+                                        child: Image.asset(
+                                            'assets/images/saleslead.png'),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 90,
+                                    height: 90,
+                                    child: GestureDetector(
+                                      onTap: () => setState(
+                                        () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return AddTask(
+                                                    id: widget.id,
+                                                    name: snapshot.data!['name'],
+                                                    address:
+                                                        snapshot.data!['address'],
+                                                    contact:
+                                                        snapshot.data!['contact'],
+                                                    companyName: snapshot
+                                                        .data!['companyname']);
+                                              },
+                                            ),
+                                          );
                                         },
                                       ),
-                                    );
-                                  }),
-                                  child: Card(
-                                    color: ColorConfig.primaryColor,
-                                    child: Image.asset(''),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 100,
-                                height: 100,
-                                child: GestureDetector(
-                                  onTap: () => setState(() {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return AddSalesLead(
-                                              id: widget.id,
-                                              name: snapshot.data!['name'],
-                                              address:
-                                                  snapshot.data!['address'],
-                                              contact:
-                                                  snapshot.data!['contact'],
-                                              companyName: snapshot
-                                                  .data!['companyname']);
-                                        },
+                                      child: Card(
+                                        child:
+                                            Image.asset('assets/images/task.png'),
                                       ),
-                                    );
-                                  }),
-                                  child: Card(
-                                    color: ColorConfig.primaryColor,
-                                    child: Image.asset(''),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                              SizedBox(
-                                width: 100,
-                                height: 100,
-                                child: GestureDetector(
-                                  onTap: () => setState(() {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return AddTask(
-                                              id: widget.id,
-                                              name: snapshot.data!['name'],
-                                              address:
-                                                  snapshot.data!['address'],
-                                              contact:
-                                                  snapshot.data!['contact'],
-                                              companyName: snapshot
-                                                  .data!['companyname']);
-                                        },
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(25),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 90,
+                                    height: 90,
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        await launch(
+                                          'https://wa.me/$code$number',
+                                        );
+                                      },
+                                      child: Card(
+                                        child: Image.asset(
+                                            'assets/images/whatsapp.png',),
                                       ),
-                                    );
-                                  }),
-                                  child: Card(
-                                    color: ColorConfig.primaryColor,
-                                    child: Image.asset(''),
+                                    ),
                                   ),
-                                ),
+                                  SizedBox(
+                                    width: 90,
+                                    height: 90,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        _sendsms('welcome', recipents);
+                                      },
+                                      child: Card(
+                                        child: Image.asset(
+                                          'assets/images/message.png',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 90,
+                                    height: 90,
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        await launch('tel://$number');
+                                      },
+                                      child: Card(
+                                        child:
+                                            Image.asset('assets/images/phone.png',),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
+                            ),
                             ],
                           ),
-                          ElevatedButton.icon(
-                            onPressed: () async {
-                              await launch('https://wa.me/$code$number');
-                            },
-                            icon: const Icon(Icons.whatsapp),
-                            label: const Text('whatsapp'),
-                          ),
-                          ElevatedButton.icon(
-                            onPressed: () {
-                              _sendsms('welcome', recipents);
-                            },
-                            icon: const Icon(Icons.message),
-                            label: const Text('message'),
-                          ),
-                          ElevatedButton.icon(
-                            onPressed: () async {
-                              await launch('tel://$number');
-                            },
-                            icon: const Icon(Icons.phone),
-                            label: const Text('phone'),
-                          ),
-                        ],
+
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },

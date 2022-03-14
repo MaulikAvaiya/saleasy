@@ -4,8 +4,6 @@ import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/deletefunction/companyleaddelete.dart';
 import 'package:saleasy/screens/CompanyLead/companylead_screen.dart';
 
-
-
 class AddCompanyVisitedLead extends StatefulWidget {
   final String id;
   final String name;
@@ -85,7 +83,8 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
           'datetime': selectedDate,
         })
         .then((value) => print('companyvisitedlead Added'))
-        .catchError((error) => print('Failed to Add companyvisitedlead: $error'));
+        .catchError(
+            (error) => print('Failed to Add companyvisitedlead: $error'));
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -160,7 +159,7 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
                     //  controller: leadNameController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter LeadName';
+                        return 'Please enter leadName';
                       }
                       return null;
                     },
@@ -206,7 +205,8 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_companynameFocusNode);
+                      FocusScope.of(context)
+                          .requestFocus(_companynameFocusNode);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Contact Number: ',
@@ -219,6 +219,9 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter contact number';
+                      }
+                      if (value.length != 10){
+                        return 'Contact number must be 10 digit';
                       }
                       return null;
                     },
@@ -233,7 +236,8 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_productnameFocusNode);
+                      FocusScope.of(context)
+                          .requestFocus(_productnameFocusNode);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Company Name: ',
@@ -350,6 +354,9 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: ColorConfig.appbarColor,
+                        ),
                         onPressed: () {
                           // Validate returns true if the form is valid, otherwise false.
                           if (_formKey.currentState!.validate()) {
@@ -365,27 +372,38 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
                                   //  selectedDate =dateTimeController.text as DateTime;
 
                                   addcompanyvisitedlead();
-                                  Companyleadelete().deletecompanylead(widget.id);
-                                  Navigator.of(context)
-                                      .popAndPushNamed(CompanyLeadScreen.routeName);
+                                  Companyleadelete()
+                                      .deletecompanylead(widget.id);
+                                  Navigator.of(context).popAndPushNamed(
+                                      CompanyLeadScreen.routeName);
                                 });
                                 //  SelfLeadList().
                               }
                             });
                           }
                         },
-                        child: const Text(
+                        child: Text(
                           'Register',
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConfig.appbartextColor,
+                          ),
                         ),
                       ),
                       ElevatedButton(
                         onPressed: () => {},
-                        child: const Text(
+                        child: Text(
                           'Reset',
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConfig.appbartextColor,
+                          ),
                         ),
-                        style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                        style: ElevatedButton.styleFrom(
+                          primary: ColorConfig.appbarColor,
+                        ),
                       ),
                     ],
                   ),

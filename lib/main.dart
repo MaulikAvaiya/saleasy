@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
       //  CompanyLeadDetail.routeName: (context) => CompanyLeadDetail(),
       //  CompanyVisitedDetail.routeName: (context) => CompanyVisitedDetail(),
        // CompanySalesDetail.routeName: (context) =>  CompanySalesDetail(),
-        SelfTaskDetail.routeName:(context)=>const SelfTaskDetail(),
+        //SelfTaskDetail.routeName:(context)=>const SelfTaskDetail(),
         CompanyTaskDetail.routeName:(context)=>const CompanyTaskDetail(),
         TargetDetail.routeName:(context)=>const TargetDetail(),
       },

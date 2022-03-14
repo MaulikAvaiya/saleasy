@@ -93,8 +93,17 @@ final Stream<QuerySnapshot> selftaskStream =
                 key: const ValueKey(null),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed(SelfTaskDetail.routeName);
-                  },
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SelfTaskDetail(
+                          name: snapshot.data!.docs[index]['name'],
+                          tasktype: snapshot.data!.docs[index]['tasktype'],
+                        );
+                      },
+                    ),
+                  );
+                },
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(10),
@@ -106,7 +115,7 @@ final Stream<QuerySnapshot> selftaskStream =
                               elevation: 5,
                               color: ColorConfig.primaryColor,
                               child: Image.asset(
-                                "assets/images/product.png",
+                                "assets/images/self-task.png",
                                 width: 60,
                               ),
                             ),
@@ -153,7 +162,7 @@ final Stream<QuerySnapshot> selftaskStream =
                                 padding: const EdgeInsets.all(10),
                                 child: Icon(
                                   Icons.edit,
-                                   color: ColorConfig.appbartextColor,
+                                   color: ColorConfig.appbarColor,
                                   size: 30,
                                 ),
                               ),

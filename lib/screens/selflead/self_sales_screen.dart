@@ -22,14 +22,6 @@ class SelfSalesScreen extends StatelessWidget {
         ),
       ),
       body: SelfSalesList(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed(AddSalesLead.routeName);
-        },
-        backgroundColor: ColorConfig.primaryColor,
-        child: const Icon(Icons.add),
-      ),
     );
   }
 }

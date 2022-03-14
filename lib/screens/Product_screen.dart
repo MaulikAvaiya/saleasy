@@ -23,7 +23,7 @@ class _ProductScreenState extends State<ProductScreen> {
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
-            color: ColorConfig.appbartextColor,
+            color: ColorConfig.appbartextColor
           ),
         ),
       ),
@@ -37,7 +37,7 @@ class _ProductScreenState extends State<ProductScreen> {
         backgroundColor: ColorConfig.appbarColor,
         child: Icon(
           Icons.add,
-          color: ColorConfig.appbartextColor,
+          color: Colors.white,
         ),
       ),
     );

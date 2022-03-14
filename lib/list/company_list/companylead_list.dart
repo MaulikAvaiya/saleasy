@@ -143,7 +143,7 @@ class _CompanyLeadListState extends State<CompanyLeadList> {
                                 padding: const EdgeInsets.all(10),
                                 child: Icon(
                                   Icons.edit,
-                                   color: ColorConfig.appbartextColor,
+                                   color: ColorConfig.appbarColor,
                                   size: 30,
                                 ),
                               ),

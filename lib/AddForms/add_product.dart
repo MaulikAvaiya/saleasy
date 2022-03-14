@@ -25,11 +25,11 @@ class _AddProductState extends State<AddProduct> {
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
+    // Clean up the controller when the widget is disposed
     nameController.dispose();
     rateController.dispose();
 
-    // FocusNode.
+    // FocusNode
     _rateFocusNode.dispose();
 
     super.dispose();
@@ -82,31 +82,23 @@ class _AddProductState extends State<AddProduct> {
                   child: TextFormField(
                     autofocus: false,
                     keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
+                    textInputAction: TextInputAction.done,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_rateFocusNode);
+                      FocusScope.of(context)
+                          .requestFocus(_rateFocusNode);
                     },
-                    decoration: InputDecoration(
-                      labelText: 'ProductName: ',
-                      labelStyle: TextStyle(
-                        fontSize: 20.0,
-                        color: ColorConfig.primaryColor,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: ColorConfig.primaryColor)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: ColorConfig.primaryColor, width: 2)),
-                      //border: OutlineInputBorder(borderSide: BorderSide(color: Colors.amber,width: 10)),
-                      errorStyle: const TextStyle(
-                          color: Colors.redAccent, fontSize: 15),
+                    decoration: const InputDecoration(
+                      labelText: 'Product name: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
-                    controller: nameController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please Enter Prouct Name';
+                        return 'Please enter a product name';
                       }
+                     
                       return null;
                     },
                   ),
@@ -128,6 +120,12 @@ class _AddProductState extends State<AddProduct> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please Enter rate';
+                      }
+                       if(double.tryParse(value) == null){
+                        return 'Please enter a valid number';
+                      }
+                      if(double.parse(value) <= 0){
+                        return 'Please enter a number greater than zero';
                       }
                       return null;
                     },
@@ -159,7 +157,8 @@ class _AddProductState extends State<AddProduct> {
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
-                            color: ColorConfig.appbartextColor,
+                            //color: ColorConfig.appbartextColor,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -170,7 +169,8 @@ class _AddProductState extends State<AddProduct> {
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
-                            color: ColorConfig.appbartextColor,
+                            //color: ColorConfig.appbartextColor,
+                            color: Colors.white,
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
@@ -187,4 +187,7 @@ class _AddProductState extends State<AddProduct> {
       ),
     );
   }
+}
+
+class Parse {
 }

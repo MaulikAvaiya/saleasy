@@ -150,7 +150,7 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
                               padding: const EdgeInsets.all(10),
                               child: Icon(
                                 Icons.edit,
-                                 color: ColorConfig.appbartextColor,
+                                 color: ColorConfig.appbarColor,
                                 size: 30,
                               ),
                             ),

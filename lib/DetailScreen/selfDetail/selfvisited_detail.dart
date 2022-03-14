@@ -69,9 +69,10 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['name'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -83,9 +84,10 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['address'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -97,9 +99,10 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['companyname'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -111,9 +114,10 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['contact'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -125,9 +129,10 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['product'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -139,9 +144,10 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['decision'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             const Text(
@@ -153,9 +159,10 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
                             ),
                             Text(
                               snapshot.data!['datetime'].toString(),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
+                                color: ColorConfig.textColor,
                               ),
                             ),
                             Row(
@@ -183,8 +190,8 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
                                       );
                                     }),
                                     child: Card(
-                                      color: ColorConfig.primaryColor,
-                                      child: Image.asset(''),
+                                      
+                                      child: Image.asset('assets/images/saleslead.png'),
                                     ),
                                   ),
                                 ),

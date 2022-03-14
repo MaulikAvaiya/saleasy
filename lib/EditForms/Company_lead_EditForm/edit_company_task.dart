@@ -42,8 +42,10 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
   CollectionReference Companytask =
       FirebaseFirestore.instance.collection('companytask');
 
+
   Future<void> updateComapnyTask(id, name, address, contact, companyName,
       employee, task, tasktype, ) {
+
     return Companytask.doc(id)
         .update({
           'name': name,
@@ -59,7 +61,7 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
         .catchError(
           (error) => print("Failed to update Companytask:$error"),
         );
-  }
+      }
 
   final _formKey = GlobalKey<FormState>();
 
@@ -400,6 +402,7 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
               ),
             );
           }),
+  
     );
   }
 }

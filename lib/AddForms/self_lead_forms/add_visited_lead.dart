@@ -90,8 +90,10 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
 
   final _formKey = GlobalKey<FormState>();
 
+
   final Stream<QuerySnapshot> productStream =
       FirebaseFirestore.instance.collection('products').snapshots();
+
 
   Future<void> _selectDate(BuildContext context) async {
     final Future<DateTime?> selected = showDatePicker(

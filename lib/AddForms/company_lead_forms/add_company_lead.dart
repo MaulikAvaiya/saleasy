@@ -11,27 +11,24 @@ class AddCompanyLead extends StatefulWidget {
 }
 
 class _AddCompanyLeadState extends State<AddCompanyLead> {
- var _mySelection;
 
+ var _mySelection;
   var leadName = '';
   var leadAddress = '';
   var leadContact = '';
   var leadCompanyName = '';
-  var leadEmpName='';
+  var leadEmpName = '';
 
   final leadNameController = TextEditingController();
   final leadAddressController = TextEditingController();
   final leadContactController = TextEditingController();
   final leadCompanyNameController = TextEditingController();
-  final leadEmpNameController=TextEditingController();
+  final leadEmpNameController = TextEditingController();
 
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
   final _companynameFocusNode = FocusNode();
   final _employeenameFocusNode = FocusNode();
-
-
-
 
   @override
   void dispose() {
@@ -39,13 +36,12 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
     _contactnumberFocusNode.dispose();
     _companynameFocusNode.dispose();
     _employeenameFocusNode.dispose();
-  
+
     leadNameController.dispose();
     leadAddressController.dispose();
     leadContactController.dispose();
     leadCompanyNameController.dispose();
     leadEmpNameController.dispose();
-    
 
     super.dispose();
   }
@@ -66,11 +62,11 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
           'contact': leadContact,
           'companyname': leadCompanyName,
           'employee':_mySelection,
+
         })
         .then((value) => print('companyselflead Added'))
         .catchError((error) => print('Failed to Add companyselflead: $error'));
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +120,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                     controller: leadNameController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter LeadName';
+                        return 'Please enter leadName';
                       }
                       return null;
                     },
@@ -151,7 +147,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                     controller: leadAddressController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter Address';
+                        return 'Please enter address';
                       }
                       if (value.length < 20) {
                         return 'Should be at least 20 characters long';
@@ -168,7 +164,8 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_companynameFocusNode);
+                      FocusScope.of(context)
+                          .requestFocus(_companynameFocusNode);
                     },
                     decoration: const InputDecoration(
                       labelText: ' Contact Number: ',
@@ -182,6 +179,9 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter contact number ';
                       }
+                      if (value.length != 10){
+                        return 'Contact number must be 10 digit';
+                      }
                       return null;
                     },
                     focusNode: _contactnumberFocusNode,
@@ -194,7 +194,8 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_employeenameFocusNode);
+                      FocusScope.of(context)
+                          .requestFocus(_employeenameFocusNode);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Company Name: ',
@@ -256,33 +257,46 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: ColorConfig.appbarColor,
+                        ),
                         onPressed: () {
                           // Validate returns true if the form is valid, otherwise false.
                           if (_formKey.currentState!.validate()) {
                             setState(() {
-                              leadName=leadNameController.text;
-                              leadAddress=leadAddressController.text;
-                              leadContact=leadContactController.text;
-                              leadCompanyName=leadCompanyNameController.text;
-                              leadEmpName=leadEmpNameController.text;
-                              
+                              leadName = leadNameController.text;
+                              leadAddress = leadAddressController.text;
+                              leadContact = leadContactController.text;
+                              leadCompanyName = leadCompanyNameController.text;
+                              leadEmpName = leadEmpNameController.text;
+
                               addCompanyLead();
                               Navigator.of(context).pop();
                             });
                           }
                         },
-                        child: const Text(
+                        child: Text(
                           'Register',
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConfig.appbartextColor,
+                          ),
                         ),
                       ),
                       ElevatedButton(
                         onPressed: () => {},
-                        child: const Text(
+                        child: Text(
                           'Reset',
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConfig.appbartextColor,
+                          ),
                         ),
-                        style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                        style: ElevatedButton.styleFrom(
+                          primary: ColorConfig.appbarColor,
+                        ),
                       ),
                     ],
                   ),
