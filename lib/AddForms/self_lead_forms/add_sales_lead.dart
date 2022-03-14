@@ -278,6 +278,12 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter quantity';
                       }
+                       if(double.tryParse(value) == null){
+                        return 'Please enter a valid number';
+                      }
+                      if(double.parse(value) <= 0){
+                        return 'Please enter a number greater than zero';
+                      }
                       return null;
                     },
                     focusNode: _quantityFocusNode,
@@ -302,7 +308,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                     controller: rateController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please Enter Rate';
+                        return 'Please Enter rate';
                       }
                       if(double.tryParse(value) == null){
                         return 'Please enter a valid number';
