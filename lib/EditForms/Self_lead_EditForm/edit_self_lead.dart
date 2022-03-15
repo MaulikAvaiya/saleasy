@@ -110,7 +110,7 @@ class _EditSelfLeadState extends State<EditSelfLead> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter leadName';
+                            return 'Please enter lead name';
                           }
                           return null;
                         },

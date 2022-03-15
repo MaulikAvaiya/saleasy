@@ -124,7 +124,7 @@ class _ProductListState extends State<ProductList> {
                             elevation: 5,
                             color: ColorConfig.primaryColor,
                             child: Image.asset(
-                              "assets/images/products.png",
+                              "assets/images/product.png",
                               width: 60,
                             ),
                           ),

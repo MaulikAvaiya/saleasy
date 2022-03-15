@@ -30,6 +30,8 @@ class AddSalesLead extends StatefulWidget {
 }
 
 class _AddSalesLeadState extends State<AddSalesLead> {
+  var _mySelection;
+
   var leadName = '';
   var leadAddress = '';
   var leadContact = '';
@@ -74,6 +76,9 @@ class _AddSalesLeadState extends State<AddSalesLead> {
     super.dispose();
   }
 
+  final Stream<QuerySnapshot> productStream =
+      FirebaseFirestore.instance.collection('products').snapshots();
+
   CollectionReference selfsaleslead =
       FirebaseFirestore.instance.collection('selfsaleslead');
 
@@ -84,7 +89,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
           'address': widget.address,
           'contact': widget.contact,
           'companyname': widget.companyName,
-          'product': product,
+          'product': _mySelection,
           'rate': rate,
           'amount': amount,
           'datetime': dateTime,
@@ -110,328 +115,345 @@ class _AddSalesLeadState extends State<AddSalesLead> {
           ),
         ),
       ),
-      body: Container(
-        color: ColorConfig.primaryColor,
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: ListView(
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    initialValue: widget.name,
-                    autofocus: false,
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_addressFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Lead Name: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter leadName';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    initialValue: widget.address,
-                    autofocus: false,
-                    maxLines: 2,
-                    keyboardType: TextInputType.multiline,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context)
-                          .requestFocus(_contactnumberFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Address: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter Address';
-                      }
-                      if (value.length < 20) {
-                        return 'Should be at least 20 characters long';
-                      }
-                      return null;
-                    },
-                    focusNode: _addressFocusNode,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    initialValue: widget.contact,
-                    autofocus: false,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context)
-                          .requestFocus(_companynameFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Contact Number: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter contact number ';
-                      }
-                      if (value.length != 10){
-                        return 'Contact number must be 10 digit';
-                      }
-                      return null;
-                    },
-                    focusNode: _contactnumberFocusNode,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    initialValue: widget.companyName,
-                    autofocus: false,
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context)
-                          .requestFocus(_productnameFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Company Name: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter company name';
-                      }
-                      return null;
-                    },
-                    focusNode: _companynameFocusNode,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_quantityFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'product Name: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    controller: productController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter product name';
-                      }
-                      return null;
-                    },
-                    focusNode: _productnameFocusNode,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_rateFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Quantity: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    controller: quantityController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter quantity';
-                      }
-                       if(double.tryParse(value) == null){
-                        return 'Please enter a valid number';
-                      }
-                      if(double.parse(value) <= 0){
-                        return 'Please enter a number greater than zero';
-                      }
-                      return null;
-                    },
-                    focusNode: _quantityFocusNode,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_amountFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Rate: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    controller: rateController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please Enter rate';
-                      }
-                      if(double.tryParse(value) == null){
-                        return 'Please enter a valid number';
-                      }
-                      if(double.parse(value) <= 0){
-                        return 'Please enter a number greater than zero';
-                      }
-                      return null;
-                    },
-                    focusNode: _rateFocusNode,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_datetimeFocusNode);
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Amount: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    controller: amountController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter amount';
-                      }
-                      if(double.tryParse(value) == null){
-                        return 'Please enter a valid number';
-                      }
-                      if(double.parse(value) <= 0){
-                        return 'Please enter a number greater than zero';
-                      }
-                      return null;
-                    },
-                    focusNode: _amountFocusNode,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.datetime,
-                    textInputAction: TextInputAction.done,
-                    decoration: const InputDecoration(
-                      labelText: 'Date Time: ',
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
-                    ),
-                    controller: dateTimeController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter date and time';
-                      }
-                      return null;
-                    },
-                    focusNode: _datetimeFocusNode,
-                  ),
-                ),
-                SizedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: ColorConfig.appbarColor,
-                        ),
-                        onPressed: () {
-                          // Validate returns true if the form is valid, otherwise false.
-                          if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              product = productController.text;
-                              amount = amountController.text;
-                              quantity = quantityController.text;
-                              rate = rateController.text;
-                              dateTime = dateTimeController.text;
-
-                              addselfsaleslead();
-                              Selfleadelete().deleteSelflead(widget.id);
-                              VisitedLeadDelete().deletevisitedlead(widget.id);
-                              Navigator.of(context)
-                                  .pushNamed(SelfVisitedScreen.routeName);
-                            });
-                          }
+      body: StreamBuilder<QuerySnapshot>(
+        stream: productStream,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print('some thing went wrong');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Container(
+            color: ColorConfig.primaryColor,
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                child: ListView(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextFormField(
+                        initialValue: widget.name,
+                        autofocus: false,
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context)
+                              .requestFocus(_addressFocusNode);
                         },
-                        child: Text(
-                          'Register',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: ColorConfig.appbartextColor,
-                          ),
+                        decoration: const InputDecoration(
+                          labelText: 'Lead Name: ',
+                          labelStyle: TextStyle(fontSize: 20.0),
+                          border: OutlineInputBorder(),
+                          errorStyle:
+                              TextStyle(color: Colors.redAccent, fontSize: 15),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter lead name';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextFormField(
+                        initialValue: widget.address,
+                        autofocus: false,
+                        maxLines: 2,
+                        keyboardType: TextInputType.multiline,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context)
+                              .requestFocus(_contactnumberFocusNode);
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Address: ',
+                          labelStyle: TextStyle(fontSize: 20.0),
+                          border: OutlineInputBorder(),
+                          errorStyle:
+                              TextStyle(color: Colors.redAccent, fontSize: 15),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter Address';
+                          }
+                          if (value.length < 20) {
+                            return 'Should be at least 20 characters long';
+                          }
+                          return null;
+                        },
+                        focusNode: _addressFocusNode,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextFormField(
+                        initialValue: widget.contact,
+                        autofocus: false,
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context)
+                              .requestFocus(_companynameFocusNode);
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Contact Number: ',
+                          labelStyle: TextStyle(fontSize: 20.0),
+                          border: OutlineInputBorder(),
+                          errorStyle:
+                              TextStyle(color: Colors.redAccent, fontSize: 15),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter contact number ';
+                          }
+                          if (value.length != 10){
+                        return 'Contact number must be 10 digit';
+                      } 
+                          return null;
+                        },
+                        focusNode: _contactnumberFocusNode,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextFormField(
+                        initialValue: widget.companyName,
+                        autofocus: false,
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context)
+                              .requestFocus(_productnameFocusNode);
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Company Name: ',
+                          labelStyle: TextStyle(fontSize: 20.0),
+                          border: OutlineInputBorder(),
+                          errorStyle:
+                              TextStyle(color: Colors.redAccent, fontSize: 15),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter company name';
+                          }
+                          return null;
+                        },
+                        focusNode: _companynameFocusNode,
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                        color: Colors.grey,
+                        width: 0.8,
+                      )),
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Padding(
+                        padding: EdgeInsets.all(15),
+                        child: DropdownButton<dynamic>(
+                          underline: Container(color: Colors.transparent),
+                          isDense: true,
+                          hint: _mySelection != null
+                              ? Text(_mySelection)
+                              : Text('select product name'),
+                          value: _mySelection,
+                          onChanged: (dynamic newValue) {
+                            setState(() {
+                              _mySelection = newValue;
+                            });
+
+                            debugPrint(_mySelection);
+                          },
+                          icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                          isExpanded: true,
+                          items: snapshot.data!.docs
+                              .map((DocumentSnapshot snapshot) {
+                            return DropdownMenuItem<dynamic>(
+                              value:
+                                  snapshot['name'], //snapshot['id'].toString(),
+                              child: Text(
+                                snapshot['name'],
+                              ),
+                            );
+                          }).toList(),
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () => {},
-                        child: Text(
-                          'Reset',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: ColorConfig.appbartextColor,
-                          ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextFormField(
+                        autofocus: false,
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).requestFocus(_rateFocusNode);
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Quantity: ',
+                          labelStyle: TextStyle(fontSize: 20.0),
+                          border: OutlineInputBorder(),
+                          errorStyle:
+                              TextStyle(color: Colors.redAccent, fontSize: 15),
                         ),
-                        style: ElevatedButton.styleFrom(
-                          primary: ColorConfig.appbarColor,
-                        ),
+                        controller: quantityController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter quantity';
+                          }
+                          if(double.tryParse(value) == null){
+                        return 'Please enter a valid number';
+                      }
+                      if(double.parse(value) <= 0){
+                        return 'Please enter a number greater than zero';
+                      }
+                          return null;
+                        },
+                        focusNode: _quantityFocusNode,
                       ),
-                    ],
-                  ),
-                )
-              ],
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextFormField(
+                        autofocus: false,
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).requestFocus(_amountFocusNode);
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Rate: ',
+                          labelStyle: TextStyle(fontSize: 20.0),
+                          border: OutlineInputBorder(),
+                          errorStyle:
+                              TextStyle(color: Colors.redAccent, fontSize: 15),
+                        ),
+                        controller: rateController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please Enter rate';
+                          }
+                          if(double.tryParse(value) == null){
+                        return 'Please enter a valid number';
+                      }
+                      if(double.parse(value) <= 0){
+                        return 'Please enter a number greater than zero';
+                      }
+                          return null;
+                        },
+                        focusNode: _rateFocusNode,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextFormField(
+                        autofocus: false,
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context)
+                              .requestFocus(_datetimeFocusNode);
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Amount: ',
+                          labelStyle: TextStyle(fontSize: 20.0),
+                          border: OutlineInputBorder(),
+                          errorStyle:
+                              TextStyle(color: Colors.redAccent, fontSize: 15),
+                        ),
+                        controller: amountController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter amount';
+                          }
+                          if(double.tryParse(value) == null){
+                        return 'Please enter a valid number';
+                      }
+                      if(double.parse(value) <= 0){
+                        return 'Please enter a number greater than zero';
+                      }
+                          return null;
+                        },
+                        focusNode: _amountFocusNode,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextFormField(
+                        autofocus: false,
+                        keyboardType: TextInputType.datetime,
+                        textInputAction: TextInputAction.done,
+                        decoration: const InputDecoration(
+                          labelText: 'Date Time: ',
+                          labelStyle: TextStyle(fontSize: 20.0),
+                          border: OutlineInputBorder(),
+                          errorStyle:
+                              TextStyle(color: Colors.redAccent, fontSize: 15),
+                        ),
+                        controller: dateTimeController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter date and time';
+                          }
+                          return null;
+                        },
+                        focusNode: _datetimeFocusNode,
+                      ),
+                    ),
+                    SizedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              // Validate returns true if the form is valid, otherwise false.
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  product = productController.text;
+                                  amount = amountController.text;
+                                  quantity = quantityController.text;
+                                  rate = rateController.text;
+                                  dateTime = dateTimeController.text;
+
+                                  addselfsaleslead();
+                                  Selfleadelete().deleteSelflead(widget.id);
+                                  VisitedLeadDelete()
+                                      .deletevisitedlead(widget.id);
+                                  Navigator.of(context)
+                                      .pushNamed(SelfVisitedScreen.routeName);
+                                });
+                              }
+                            },
+                            child: const Text(
+                              'Register',
+                              style: TextStyle(fontSize: 18.0),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () => {},
+                            child: const Text(
+                              'Reset',
+                              style: TextStyle(fontSize: 18.0),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.blueGrey),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

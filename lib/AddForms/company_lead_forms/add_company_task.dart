@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
-class AddTask extends StatefulWidget {
+class AddCompanyTask extends StatefulWidget {
   String id;
   String name;
   String address;
   String contact;
   String companyName;
-  AddTask({
+  AddCompanyTask({
     Key? key,
     required this.id,
     required this.name,
@@ -19,10 +19,13 @@ class AddTask extends StatefulWidget {
   static const routeName = '/add-task';
 
   @override
-  _AddTaskState createState() => _AddTaskState();
+  _AddCompanyTaskState createState() => _AddCompanyTaskState();
 }
 
-class _AddTaskState extends State<AddTask> {
+class _AddCompanyTaskState extends State<AddCompanyTask> {
+
+var _mySelection;
+
   var task = '';
   var tasktype = '';
   var date = '';
@@ -30,22 +33,23 @@ class _AddTaskState extends State<AddTask> {
   final taskController = TextEditingController();
   final tasktypeController = TextEditingController();
 
-  CollectionReference selftask =
-      FirebaseFirestore.instance.collection('selftask');
+  CollectionReference companytask =
+      FirebaseFirestore.instance.collection('companytask');
 
-  Future<void> addselfTask() {
-    return selftask
+  Future<void> addCompanyTask() {
+    return companytask
         .add({
           'name': widget.name,
           'address': widget.address,
           'contact': widget.contact,
           'companyname': widget.companyName,
+          'employee':_mySelection,
           'task': task,
           'tasktype': tasktype,
           'datetime': date,
         })
-        .then((value) => print('selftask Added'))
-        .catchError((error) => print('Failed to Add selftask: $error'));
+        .then((value) => print('companytask Added'))
+        .catchError((error) => print('Failed to Add companytask: $error'));
   }
 
   final _addressFocusNode = FocusNode();
@@ -67,6 +71,10 @@ class _AddTaskState extends State<AddTask> {
     super.dispose();
   }
 
+  
+  final Stream<QuerySnapshot> employeeStream =
+      FirebaseFirestore.instance.collection('employee').snapshots();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -75,7 +83,7 @@ class _AddTaskState extends State<AddTask> {
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
         title: Text(
-          "Add Task",
+          "Add companytask",
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
@@ -83,7 +91,18 @@ class _AddTaskState extends State<AddTask> {
           ),
         ),
       ),
-      body: Container(
+      body:StreamBuilder<QuerySnapshot>(
+          stream: employeeStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              print('some thing went wrong');
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+return Container(
         color: ColorConfig.primaryColor,
         child: Form(
           key: _formKey,
@@ -155,8 +174,7 @@ class _AddTaskState extends State<AddTask> {
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context)
-                          .requestFocus(_companynameFocusNode);
+                      FocusScope.of(context).requestFocus(_companynameFocusNode);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Contact Number: ',
@@ -203,6 +221,44 @@ class _AddTaskState extends State<AddTask> {
                     focusNode: _companynameFocusNode,
                   ),
                 ),
+                 Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          color: Colors.grey,
+                          width: 0.8,
+                        )),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: DropdownButton<dynamic>(
+                            underline: Container(color: Colors.transparent),
+                            isDense: true,
+                            hint: _mySelection != null
+                                ? Text(_mySelection)
+                                : Text('select employee name'),
+                            value: _mySelection,
+                            onChanged: (dynamic newValue) {
+                              setState(() {
+                                _mySelection = newValue;
+                              });
+
+                              debugPrint(_mySelection);
+                            },
+                            icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                            isExpanded: true,
+                            items: snapshot.data!.docs
+                                .map((DocumentSnapshot snapshot) {
+                              return DropdownMenuItem<dynamic>(
+                                value: snapshot[
+                                    'empname'], //snapshot['id'].toString(),
+                                child: Text(
+                                  snapshot["empname"],
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
@@ -282,41 +338,28 @@ class _AddTaskState extends State<AddTask> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: ColorConfig.appbarColor,
-                        ),
                         onPressed: () {
                           // Validate returns true if the form is valid, otherwise false.
                           if (_formKey.currentState!.validate()) {
                             setState(() {
                               task = taskController.text;
                               tasktype = tasktypeController.text;
-                              addselfTask();
+                              addCompanyTask();
                             });
                           }
                         },
-                        child: Text(
+                        child: const Text(
                           'Register',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: ColorConfig.appbartextColor,
-                          ),
+                          style: TextStyle(fontSize: 18.0),
                         ),
                       ),
                       ElevatedButton(
                         onPressed: () => {},
-                        child: Text(
+                        child: const Text(
                           'Reset',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: ColorConfig.appbartextColor,
-                          ),
+                          style: TextStyle(fontSize: 18.0),
                         ),
-                        style: ElevatedButton.styleFrom(
-                          primary: ColorConfig.appbarColor,
-                        ),
+                        style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
                       ),
                     ],
                   ),
@@ -325,6 +368,8 @@ class _AddTaskState extends State<AddTask> {
             ),
           ),
         ),
+      );
+          }
       ),
     );
   }

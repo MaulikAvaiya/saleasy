@@ -15,6 +15,9 @@ class EditSalesLead extends StatefulWidget {
 }
 
 class _EditSalesLeadState extends State<EditSalesLead> {
+
+  var _mySelection;
+
   final _addressFocusNode = FocusNode();
   final _contactnumberFocusNode = FocusNode();
   final _companynameFocusNode = FocusNode();
@@ -39,6 +42,9 @@ class _EditSalesLeadState extends State<EditSalesLead> {
   }
 
   final _formKey = GlobalKey<FormState>();
+
+   final Stream<QuerySnapshot> productStream =
+      FirebaseFirestore.instance.collection('products').snapshots();
 
   CollectionReference selfsaleslead =
       FirebaseFirestore.instance.collection('selfsaleslead');
@@ -78,7 +84,20 @@ class _EditSalesLeadState extends State<EditSalesLead> {
           ),
         ),
       ),
-      body: Container(
+      body:StreamBuilder<QuerySnapshot>(
+          stream: productStream,
+          builder: (context, datasnapshot) {
+            if (datasnapshot.hasError) {
+              print('some thing went wrong');
+            }
+            if (datasnapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+      
+      
+     return  Container(
         color: ColorConfig.primaryColor,
         child: Form(
           key: _formKey,
@@ -133,7 +152,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter leadName';
+                            return 'Please enter lead name';
                           }
                           return null;
                         },
@@ -227,34 +246,44 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                         focusNode: _companynameFocusNode,
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextFormField(
-                        initialValue: product,
-                        onChanged: (value) => product = value,
-                        autofocus: false,
-                        keyboardType: TextInputType.name,
-                        textInputAction: TextInputAction.next,
-                        onFieldSubmitted: (_) {
-                          FocusScope.of(context)
-                              .requestFocus(_quantityFocusNode);
-                        },
-                        decoration: const InputDecoration(
-                          labelText: 'product Name: ',
-                          labelStyle: TextStyle(fontSize: 20.0),
-                          border: OutlineInputBorder(),
-                          errorStyle:
-                              TextStyle(color: Colors.redAccent, fontSize: 15),
+                        Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          color: Colors.grey,
+                          width: 0.8,
+                        )),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: DropdownButton<dynamic>(
+                            underline: Container(color: Colors.transparent),
+                            isDense: true,
+                            hint: _mySelection != null
+                                ? Text(_mySelection)
+                                : Text('select product name'),
+                            value: _mySelection,
+                            onChanged: (dynamic newValue) {
+                              setState(() {
+                                _mySelection = newValue;
+                              });
+
+                              debugPrint(_mySelection);
+                            },
+                            icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                            isExpanded: true,
+                            items: datasnapshot.data!.docs
+                                .map((DocumentSnapshot snapshot) {
+                              return DropdownMenuItem<dynamic>(
+                                value: snapshot[
+                                    'name'], //snapshot['id'].toString(),
+                                child: Text(
+                                  snapshot["name"],
+                                ),
+                              );
+                            }).toList(),
+                          ),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter product number';
-                          }
-                          return null;
-                        },
-                        focusNode: _productnameFocusNode,
-                      ),
-                    ),
+                        ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
@@ -383,6 +412,11 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
+                          child: Text('Save',style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConfig.appbartextColor,
+                          ),),
                           style: ElevatedButton.styleFrom(
                             primary: ColorConfig.appbarColor,
                           ),
@@ -406,15 +440,40 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                               Navigator.of(context).pop();
                             }
                           },
-                          child: Text(
-                            'Save',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                              color: ColorConfig.appbartextColor,
+
+                          focusNode: _datetimeFocusNode,
+                        ),
+                      ]
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              // Validate returns true if the form is valid, otherwise false.
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  updateSelfsalesLead(
+                                    widget.id,
+                                    selfleadName,
+                                    selfleadAddress,
+                                    selfleadContact,
+                                    selfleadcompanyName,
+                                    _mySelection,
+                                    quantity,
+                                    rate,
+                                    amount,
+                                    datetime,
+                                  );
+                                });
+                                Navigator.of(context).pop();
+                              }
+                            },
+                            child: const Text(
+                              'Save',
+                              style: TextStyle(fontSize: 18.0),
                             ),
                           ),
-                        ),
                       ],
                     )
                   ],
@@ -423,6 +482,8 @@ class _EditSalesLeadState extends State<EditSalesLead> {
             },
           ),
         ),
+      );
+          }
       ),
     );
   }

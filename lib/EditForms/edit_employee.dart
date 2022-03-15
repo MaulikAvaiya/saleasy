@@ -106,7 +106,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter leadName';
+                            return 'Please enter employee name';
                           }
                           return null;
                         },

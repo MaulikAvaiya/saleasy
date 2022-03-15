@@ -283,8 +283,9 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
                                 ],
                               ),
                             ),
-                          ],
-                        ),
+                            ],
+                          ),
+
                       ),
                     ),
                   ),
