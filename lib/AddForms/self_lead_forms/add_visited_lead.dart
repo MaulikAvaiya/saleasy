@@ -95,8 +95,8 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
       FirebaseFirestore.instance.collection('products').snapshots();
 
 
-  Future<void> _selectDate(BuildContext context) async {
-    final Future<DateTime?> selected = showDatePicker(
+  void  _selectDate(BuildContext context) async {
+    final DateTime? selected =await showDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2010),
@@ -104,7 +104,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
     );
     if (selected != null && selected != selectedDate) {
       setState(() {
-        selectedDate = selected as DateTime;
+        selectedDate = selected;
       });
     }
   }
@@ -264,13 +264,14 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                       ),
                       Container(
                         decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
                             border: Border.all(
                           color: Colors.grey,
-                          width: 0.8,
+                          width: 1,
                         )),
-                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      
                         child: Padding(
-                          padding: EdgeInsets.all(15),
+                          padding: EdgeInsets.symmetric(vertical:15,horizontal: 10),
                           child: DropdownButton<dynamic>(
                             underline: Container(color: Colors.transparent),
                             isDense: true,
@@ -327,34 +328,54 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                           focusNode: _decisionFocusNode,
                         ),
                       ),
+
                       Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: TextFormField(
-                          initialValue: selectedDate.toString(),
-                          autofocus: false,
-                          keyboardType: TextInputType.name,
-                          textInputAction: TextInputAction.done,
-                          decoration: InputDecoration(
-                            labelText: 'Date Time: ',
-                            suffixIcon: GestureDetector(
-                                onTap: (() => setState(() {
-                                      _selectDate(context);
-                                    })),
-                                child: Icon(Icons.date_range)),
-                            labelStyle: TextStyle(fontSize: 20.0),
-                            border: const OutlineInputBorder(),
-                            errorStyle: const TextStyle(
-                                color: Colors.redAccent, fontSize: 15),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter date and time';
-                            }
-                            return null;
-                          },
-                          focusNode: _datetimeFocusNode,
+                         decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        )),
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                          selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
+                            Text('please select date'),
+                            GestureDetector(
+                                   onTap: (() => setState(() {
+                                        _selectDate(context);
+                                      })),
+                                  child: Icon(Icons.date_range)),
+                      ],),
+
                         ),
-                      ),
+                    ),
+                      // Container(
+                      //   margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      //   child: TextFormField(
+                      //     initialValue: selectedDate.toString(),
+                      //     autofocus: false,
+                      //     keyboardType: TextInputType.name,
+                      //     textInputAction: TextInputAction.done,
+                      //     decoration: InputDecoration(
+                      //       labelText: 'Date Time: ',
+                      //       suffixIcon: ,
+                      //       labelStyle: TextStyle(fontSize: 20.0),
+                      //       border: const OutlineInputBorder(),
+                      //       errorStyle: const TextStyle(
+                      //           color: Colors.redAccent, fontSize: 15),
+                      //     ),
+                      //     validator: (value) {
+                      //       if (value == null || value.isEmpty) {
+                      //         return 'Please enter Date and time';
+                      //       }
+                      //       return null;
+                      //     },
+                      //     focusNode: _datetimeFocusNode,
+                      //   ),
+                      // ),
                       SizedBox(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
