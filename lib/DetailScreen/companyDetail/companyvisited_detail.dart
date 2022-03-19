@@ -190,7 +190,7 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
                                     }),
                                     child: Card(
                                       
-                                      child: Image.asset('assets/images/saleslead.png'),
+                                      child: Image.asset('assets/images/sales-lead.png'),
                                     ),
                                   ),
                                 ),

@@ -5,14 +5,13 @@ import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/list/employee_list.dart';
 
 class CompanyTaskList extends StatefulWidget {
-  const CompanyTaskList({ Key? key }) : super(key: key);
+  const CompanyTaskList({Key? key}) : super(key: key);
 
   @override
   _CompanyTaskListState createState() => _CompanyTaskListState();
 }
 
 class _CompanyTaskListState extends State<CompanyTaskList> {
-
   final Stream<QuerySnapshot> companytaskStream =
       FirebaseFirestore.instance.collection('companytask').snapshots();
 
@@ -29,8 +28,11 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
 
   @override
   Widget build(BuildContext context) {
-
-  return  StreamBuilder<QuerySnapshot>(
+    double screenWitdth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    debugPrint(screenWitdth.toString());
+    debugPrint(screenHeight.toString());
+    return StreamBuilder<QuerySnapshot>(
         stream: companytaskStream,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -46,22 +48,22 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
             Map product = document.data() as Map<String, dynamic>;
             storeDocs.add(product);
           }).toList();
-    return ListView.builder(
+          return ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               return Dismissible(
                 background: Container(
                   color: Theme.of(context).errorColor,
-                  child: const Icon(
+                  child: Icon(
                     Icons.delete,
                     color: Colors.white,
-                    size: 40,
+                    size: screenHeight * 0.05,
                   ),
                   alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.only(right: 20),
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 4,
+                  padding: EdgeInsets.only(right: screenWitdth * 0.05),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: screenWitdth * 0.019,
+                    vertical: screenHeight * 0.025,
                   ),
                 ),
                 direction: DismissDirection.endToStart,
@@ -83,7 +85,7 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
                         FlatButton(
                           child: const Text('Yes'),
                           onPressed: () {
-                             deleteCompanyTask(snapshot.data!.docs[index].id);
+                            deleteCompanyTask(snapshot.data!.docs[index].id);
                             Navigator.of(ctx).pop(true);
                           },
                         ),
@@ -94,11 +96,17 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
                 key: const ValueKey(null),
                 child: Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenWitdth * 0.025,
+                      vertical: screenHeight * 0.025,
+                    ),
                     child: Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 7, right: 15),
+                          padding: EdgeInsets.only(
+                            left: screenWitdth * 0.02,
+                            right: screenWitdth * 0.04,
+                          ),
                           child: Card(
                             elevation: 5,
                             color: ColorConfig.primaryColor,
@@ -109,19 +117,22 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
                           ),
                         ),
                         SizedBox(
-                          width: 230,
+                          width: screenWitdth * 0.52,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children:  [
+                            children: [
                               Text(
                                 snapshot.data!.docs[index]['name'],
-                                style: TextStyle(fontSize: 20),
+                                style:
+                                    TextStyle(fontSize: screenHeight * 0.035),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 10),
+                                padding:
+                                    EdgeInsets.only(top: screenHeight * 0.012),
                                 child: Text(
                                   snapshot.data!.docs[index]['tasktype'],
-                                  style: TextStyle(fontSize: 20),
+                                  style:
+                                      TextStyle(fontSize: screenHeight * 0.030),
                                 ),
                               ),
                               // Padding(
@@ -135,23 +146,26 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () => Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return EditCompanyTask(
-                                    id: snapshot.data!.docs[index].id);
-                              },
-                            )),
+                          onTap: () =>
+                              Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return EditCompanyTask(
+                                  id: snapshot.data!.docs[index].id);
+                            },
+                          )),
                           child: Card(
                             elevation: 10,
-                        
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             child: Padding(
-                              padding: const EdgeInsets.all(10),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: screenWitdth * 0.008,
+                                vertical: screenHeight * 0.006,
+                              ),
                               child: Icon(
                                 Icons.edit,
-                                 color: ColorConfig.appbarColor,
-                                size: 30,
+                                color: ColorConfig.appbarColor,
+                                size: screenHeight * 0.05,
                               ),
                             ),
                           ),
@@ -163,7 +177,6 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
               );
             },
           );
-        }
-    );
+        });
   }
 }

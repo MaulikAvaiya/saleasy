@@ -169,7 +169,7 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
                                       }),
                                       child: Card(
                                         child: Image.asset(
-                                            'assets/images/visitedlead.png'),
+                                            'assets/images/visited-lead.png'),
                                       ),
                                     ),
                                   ),
@@ -196,7 +196,7 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
                                       }),
                                       child: Card(
                                         child: Image.asset(
-                                            'assets/images/saleslead.png'),
+                                            'assets/images/sales-lead.png'),
                                       ),
                                     ),
                                   ),
