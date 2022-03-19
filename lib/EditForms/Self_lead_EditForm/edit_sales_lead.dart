@@ -41,6 +41,8 @@ class _EditSalesLeadState extends State<EditSalesLead> {
     super.dispose();
   }
 
+   DateTime selectedDate = DateTime.now();
+
   final _formKey = GlobalKey<FormState>();
 
    final Stream<QuerySnapshot> productStream =
@@ -62,12 +64,26 @@ class _EditSalesLeadState extends State<EditSalesLead> {
           'quantity': quantity,
           'rate': rate,
           'amount': amount,
-          'datetime': datetime,
+          'datetime': selectedDate,
         })
         .then((value) => print("selfsaleslead Updated"))
         .catchError(
           (error) => print("Failed to update selfsaleslead:$error"),
         );
+  }
+
+  void  _selectDate(BuildContext context) async {
+    final DateTime? selected =await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2050),
+    );
+    if (selected != null && selected != selectedDate) {
+      setState(() {
+        selectedDate = selected;
+      });
+    }
   }
 
   @override
@@ -125,7 +141,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
               var quantity = data['quantity'];
               var amount = data['amount'];
               var rate = data['rate'];
-              var datetime = data['datetime'];
+              var datetime = data['datetime'].toString();
 
               return Padding(
                 padding:
@@ -287,7 +303,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
-                        initialValue: quantity,
+                        initialValue: quantity.toString(),
                         onChanged: (value) => quantity = value,
                         autofocus: false,
                         keyboardType: TextInputType.number,
@@ -320,7 +336,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
-                        initialValue: rate,
+                        initialValue: rate.toString(),
                         onChanged: (value) => rate = value,
                         autofocus: false,
                         keyboardType: TextInputType.number,
@@ -353,7 +369,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
-                        initialValue: amount,
+                        initialValue: amount.toString(),
                         onChanged: (value) => amount = value,
                         autofocus: false,
                         keyboardType: TextInputType.number,
@@ -384,29 +400,28 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                         focusNode: _amountFocusNode,
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextFormField(
-                        initialValue: datetime,
-                        onChanged: (value) => datetime = value,
-                        autofocus: false,
-                        keyboardType: TextInputType.datetime,
-                        textInputAction: TextInputAction.done,
-                        decoration: const InputDecoration(
-                          labelText: 'Date Time: ',
-                          labelStyle: TextStyle(fontSize: 20.0),
-                          border: OutlineInputBorder(),
-                          errorStyle:
-                              TextStyle(color: Colors.redAccent, fontSize: 15),
+                     Container(
+                         decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        )),
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                          selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
+                            Text('please select date'),
+                            GestureDetector(
+                                   onTap: (() => setState(() {
+                                        _selectDate(context);
+                                      })),
+                                  child: Icon(Icons.date_range)),
+                      ],),
+
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter date and time';
-                          }
-                          return null;
-                        },
-                        focusNode: _datetimeFocusNode,
-                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

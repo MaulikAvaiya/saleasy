@@ -36,6 +36,8 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
 
   var _mySelection;
 
+   DateTime selectedDate = DateTime.now();
+
   final Stream<QuerySnapshot> employeeStream =
       FirebaseFirestore.instance.collection('employee').snapshots();
 
@@ -55,13 +57,26 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
           'employee': employee,
           'task': task,
           'tasktype': tasktype,
-        //  'datetime': datetime,
+          'datetime': selectedDate,
         })
         .then((value) => print("Companytask Updated"))
         .catchError(
           (error) => print("Failed to update Companytask:$error"),
         );
       }
+      void  _selectDate(BuildContext context) async {
+    final DateTime? selected =await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2050),
+    );
+    if (selected != null && selected != selectedDate) {
+      setState(() {
+        selectedDate = selected;
+      });
+    }
+  }
 
   final _formKey = GlobalKey<FormState>();
 
@@ -284,34 +299,29 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
                                 ),
                               ),
                             ),
-                            Container(
-                              margin:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: TextFormField(
-                              //  initialValue: datetime,
-                                autofocus: false,
-                                keyboardType: TextInputType.datetime,
-                                textInputAction: TextInputAction.next,
-                                onFieldSubmitted: (_) {
-                                  FocusScope.of(context)
-                                      .requestFocus(_taskdetailFocusNode);
-                                },
-                                decoration: const InputDecoration(
-                                  labelText: 'Date Time: ',
-                                  labelStyle: TextStyle(fontSize: 20.0),
-                                  border: OutlineInputBorder(),
-                                  errorStyle: TextStyle(
-                                      color: Colors.redAccent, fontSize: 15),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter date and time';
-                                  }
-                                  return null;
-                                },
-                                focusNode: _datetimeFocusNode,
-                              ),
-                            ),
+                             Container(
+                         decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        )),
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                          selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
+                            Text('please select date'),
+                            GestureDetector(
+                                   onTap: (() => setState(() {
+                                        _selectDate(context);
+                                      })),
+                                  child: Icon(Icons.date_range)),
+                      ],),
+
+                        ),
+                    ),
                             Container(
                               margin:
                                   const EdgeInsets.symmetric(vertical: 10.0),

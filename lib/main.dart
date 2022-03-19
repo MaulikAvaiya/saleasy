@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:saleasy/AddForms/add_product.dart';
 import 'package:saleasy/AddForms/company_lead_forms/add_company_lead.dart';
 import 'package:saleasy/AddForms/self_lead_forms/add_self_lead.dart';
+import 'package:saleasy/AddForms/target_form.dart';
 import 'package:saleasy/DetailScreen/companyDetail/companysales_detail.dart';
 import 'package:saleasy/DetailScreen/companytask_detail.dart';
 import 'package:saleasy/DetailScreen/employee_detail.dart';
@@ -78,6 +79,7 @@ class MyApp extends StatelessWidget {
         CompanyLeadScreen.routeName: (context) => const CompanyLeadScreen(),
         CompanyVisitedScreen.routeName: (context) => const CompanyVisitedScreen(),
         CompanySalesScreen.routeName: (context) => const CompanySalesScreen(),
+         AddTarget.routeName: (context) =>  AddTarget(),
 
         //detail route
        // ProductDetail.routeName: (context) => ProductDetail(name: '',rate: '',),

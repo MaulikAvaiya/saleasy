@@ -1,19 +1,57 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 class TargetList extends StatefulWidget {
-  const TargetList({ Key? key }) : super(key: key);
+  const TargetList({Key? key}) : super(key: key);
 
   @override
   _TargetListState createState() => _TargetListState();
 }
 
 class _TargetListState extends State<TargetList> {
+  var datefrom;
+  var dateto;
+
+
+
+  final Stream<QuerySnapshot> targetStream =
+      FirebaseFirestore.instance.collection('target').snapshots();
+
+  CollectionReference target = FirebaseFirestore.instance.collection('target');
+
+  Future<void> deletetarget(id) {
+    return target
+        .doc(id)
+        .delete()
+        .then((value) => print('target deleted'))
+        .catchError((error) => print('Fail: $error'));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-            itemCount: 5,
+    return StreamBuilder<QuerySnapshot>(
+        stream: targetStream,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print('some thing went wrong');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
+              
+            
+             Timestamp timestamp=snapshot.data!.docs[index]['datefrom'];
+              DateTime myDateTime=timestamp.toDate();
+          
+             Timestamp timestamp1=snapshot.data!.docs[index]['dateto'];
+              DateTime myDateTime1=timestamp1.toDate();
               return Dismissible(
                 background: Container(
                   color: Theme.of(context).errorColor,
@@ -76,22 +114,23 @@ class _TargetListState extends State<TargetList> {
                           width: 230,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text(
-                                'employee name',
+                                snapshot.data!.docs[index]['product'],
                                 style: TextStyle(fontSize: 20),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: 10),
                                 child: Text(
-                                  'employee address',
+                                 "${myDateTime.day}/${myDateTime.month}/${myDateTime.year}",
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: 10),
                                 child: Text(
-                                  'employee mobile no',
+                                  "${myDateTime1.day}/${myDateTime1.month}/${myDateTime1.year}",
+                                      
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),
@@ -100,14 +139,13 @@ class _TargetListState extends State<TargetList> {
                         ),
                         Card(
                           elevation: 10,
-                      
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50)),
                           child: Padding(
                             padding: const EdgeInsets.all(10),
                             child: Icon(
                               Icons.edit,
-                               color: ColorConfig.appbarColor,
+                              color: ColorConfig.appbarColor,
                               size: 30,
                             ),
                           ),
@@ -119,5 +157,6 @@ class _TargetListState extends State<TargetList> {
               );
             },
           );
+        });
   }
 }

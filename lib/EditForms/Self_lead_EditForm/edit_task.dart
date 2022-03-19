@@ -34,6 +34,8 @@ class _EditTaskState extends State<EditTask> {
     super.dispose();
   }
 
+   DateTime selectedDate = DateTime.now();
+
   CollectionReference selftask =
       FirebaseFirestore.instance.collection('selftask');
 
@@ -48,12 +50,26 @@ class _EditTaskState extends State<EditTask> {
           'companyname': companyName,
           'task': task,
           'tasktype': tasktype,
-          'datetime': datetime,
+          'datetime': selectedDate,
         })
         .then((value) => print("selftask Updated"))
         .catchError(
           (error) => print("Failed to update selftask:$error"),
         );
+  }
+
+  void  _selectDate(BuildContext context) async {
+    final DateTime? selected =await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2050),
+    );
+    if (selected != null && selected != selectedDate) {
+      setState(() {
+        selectedDate = selected;
+      });
+    }
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -98,7 +114,7 @@ class _EditTaskState extends State<EditTask> {
               var selfleadcompanyName = data['companyname'];
               var task = data['task'];
               var tasktype = data['tasktype'];
-              var datetime = data['datetime'];
+              var datetime = data['datetime'].toString();
 
               return Padding(
                 padding:
@@ -220,31 +236,27 @@ class _EditTaskState extends State<EditTask> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextFormField(
-                        initialValue: datetime,
-                        autofocus: false,
-                        keyboardType: TextInputType.datetime,
-                        textInputAction: TextInputAction.next,
-                        onFieldSubmitted: (_) {
-                          FocusScope.of(context)
-                              .requestFocus(_taskdetailFocusNode);
-                        },
-                        decoration: const InputDecoration(
-                          labelText: 'Date Time: ',
-                          labelStyle: TextStyle(fontSize: 20.0),
-                          border: OutlineInputBorder(),
-                          errorStyle:
-                              TextStyle(color: Colors.redAccent, fontSize: 15),
+                         decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        )),
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                          selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
+                            Text('please select date'),
+                            GestureDetector(
+                                   onTap: (() => setState(() {
+                                        _selectDate(context);
+                                      })),
+                                  child: Icon(Icons.date_range)),
+                      ],),
+
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter date and time';
-                          }
-                          return null;
-                        },
-                        focusNode: _datetimeFocusNode,
-                      ),
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),

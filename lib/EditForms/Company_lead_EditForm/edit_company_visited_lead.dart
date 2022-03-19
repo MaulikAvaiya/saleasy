@@ -31,6 +31,8 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
     super.dispose();
   }
 
+     DateTime selectedDate = DateTime.now();
+
   final _formKey = GlobalKey<FormState>();
   var _mySelection;
 
@@ -51,12 +53,25 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
           'companyname': companyName,
           'product': product,
           'decision': decision,
-          'datetime': datetime,
+          'datetime': selectedDate,
         })
         .then((value) => print("Companyvisitedlead Updated"))
         .catchError(
           (error) => print("Failed to update Companyvisitedlead:$error"),
         );
+  }
+  void  _selectDate(BuildContext context) async {
+    final DateTime? selected =await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2050),
+    );
+    if (selected != null && selected != selectedDate) {
+      setState(() {
+        selectedDate = selected;
+      });
+    }
   }
 
   @override
@@ -110,7 +125,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                       var selfleadcompanyName = data['companyname'];
                       var product = data['product'];
                       var decision = data['decision'];
-                      var datetime = data['datetime'];
+                      var datetime = data['datetime'].toString();
 
                       return Padding(
                         padding: const EdgeInsets.symmetric(
@@ -305,30 +320,28 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                               ),
                             ),
                             Container(
-                              margin:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: TextFormField(
-                                initialValue: datetime,
-                                onChanged: (value) => datetime = value,
-                                autofocus: false,
-                                keyboardType: TextInputType.name,
-                                textInputAction: TextInputAction.done,
-                                decoration: const InputDecoration(
-                                  labelText: 'Date Time: ',
-                                  labelStyle: TextStyle(fontSize: 20.0),
-                                  border: OutlineInputBorder(),
-                                  errorStyle: TextStyle(
-                                      color: Colors.redAccent, fontSize: 15),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter date and time';
-                                  }
-                                  return null;
-                                },
-                                focusNode: _datetimeFocusNode,
-                              ),
-                            ),
+                         decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        )),
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                          selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
+                            Text('please select date'),
+                            GestureDetector(
+                                   onTap: (() => setState(() {
+                                        _selectDate(context);
+                                      })),
+                                  child: Icon(Icons.date_range)),
+                      ],),
+
+                        ),
+                    ),
                             Container(
                               child: Row(
                                 mainAxisAlignment:

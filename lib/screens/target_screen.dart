@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/list/target_list.dart';
 
+import '../AddForms/target_form.dart';
+
 class TargetScreen extends StatelessWidget {
   static const routeName = '/Target-screen';
   const TargetScreen({Key? key}) : super(key: key);
@@ -25,7 +27,7 @@ class TargetScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //   Navigator.of(context).pushNamed(AddEmployee.routeName);
+           Navigator.of(context).pushNamed(AddTarget.routeName);
         },
         backgroundColor: ColorConfig.appbarColor,
         child: Icon(

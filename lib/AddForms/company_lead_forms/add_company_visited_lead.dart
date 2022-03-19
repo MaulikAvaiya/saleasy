@@ -92,8 +92,8 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
   final Stream<QuerySnapshot> productStream =
       FirebaseFirestore.instance.collection('products').snapshots();
 
-  Future<void> _selectDate(BuildContext context) async {
-    final Future<DateTime?> selected = showDatePicker(
+ void  _selectDate(BuildContext context) async {
+    final DateTime? selected =await showDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2010),
@@ -101,11 +101,10 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
     );
     if (selected != null && selected != selectedDate) {
       setState(() {
-        selectedDate = selected as DateTime;
+        selectedDate = selected;
       });
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -320,35 +319,29 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
                     focusNode: _decisionFocusNode,
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    // initialValue: selectedDate.toString(),
-                    onTap: () => setState(() {
-                      _selectDate(context);
-                      dateTimeController.text = selectedDate.toString();
-                    }),
-                    autofocus: false,
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.done,
-                    decoration: const InputDecoration(
-                      labelText: 'Date Time: ',
-                      icon: Icon(Icons.calendar_today_rounded),
-                      labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
-                      errorStyle:
-                          TextStyle(color: Colors.redAccent, fontSize: 15),
+             Container(
+                         decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        )),
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                          selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
+                            Text('please select date'),
+                            GestureDetector(
+                                   onTap: (() => setState(() {
+                                        _selectDate(context);
+                                      })),
+                                  child: Icon(Icons.date_range)),
+                      ],),
+
+                        ),
                     ),
-                    controller: dateTimeController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter date and time';
-                      }
-                      return null;
-                    },
-                    focusNode: _datetimeFocusNode,
-                  ),
-                ),
                 SizedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
