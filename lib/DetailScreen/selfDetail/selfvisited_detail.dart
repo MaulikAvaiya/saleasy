@@ -191,7 +191,7 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
                                     }),
                                     child: Card(
                                       
-                                      child: Image.asset('assets/images/saleslead.png'),
+                                      child: Image.asset('assets/images/sales-lead.png'),
                                     ),
                                   ),
                                 ),

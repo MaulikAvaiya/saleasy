@@ -6,23 +6,25 @@ import 'package:saleasy/constant/color_config.dart';
 import '../../DetailScreen/selfDetail/selfsales_detail.dart';
 
 class SelfSalesList extends StatefulWidget {
-  const SelfSalesList({ Key? key }) : super(key: key);
+  const SelfSalesList({Key? key}) : super(key: key);
 
   @override
   _SelfSalesListState createState() => _SelfSalesListState();
 }
 
 class _SelfSalesListState extends State<SelfSalesList> {
-
   final Stream<QuerySnapshot> selfsalesleadStream =
       FirebaseFirestore.instance.collection('selfsaleslead').snapshots();
 
-  CollectionReference selfsaleslead=
+  CollectionReference selfsaleslead =
       FirebaseFirestore.instance.collection('selfsaleslead');
-
 
   @override
   Widget build(BuildContext context) {
+    double screenWitdth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    debugPrint(screenWitdth.toString());
+    debugPrint(screenHeight.toString());
     return StreamBuilder<QuerySnapshot>(
         stream: selfsalesleadStream,
         builder: (context, snapshot) {
@@ -34,26 +36,24 @@ class _SelfSalesListState extends State<SelfSalesList> {
               child: CircularProgressIndicator(),
             );
           }
-    
-    
-   return  ListView.builder(
+
+          return ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               return Dismissible(
                 background: Container(
-                  color: Theme.of(context).errorColor,
-                  child: const Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.only(right: 20),
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 4,
-                  ),
-                ),
+                    color: Theme.of(context).errorColor,
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                      size: screenHeight * 0.05,
+                    ),
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.only(right: screenWitdth * 0.05),
+                    margin: EdgeInsets.symmetric(
+                      horizontal: screenWitdth * 0.019,
+                      vertical: screenHeight * 0.025,
+                    ),),
                 direction: DismissDirection.endToStart,
                 confirmDismiss: (direction) {
                   return showDialog(
@@ -82,7 +82,7 @@ class _SelfSalesListState extends State<SelfSalesList> {
                 },
                 key: const ValueKey(null),
                 child: GestureDetector(
-                   onTap: () {
+                  onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) {
                         return SelfSalesDetail(
@@ -92,11 +92,17 @@ class _SelfSalesListState extends State<SelfSalesList> {
                   },
                   child: Card(
                     child: Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: screenWitdth * 0.025,
+                        vertical: screenHeight * 0.025,
+                      ),
                       child: Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 7, right: 15),
+                            padding: EdgeInsets.only(
+                              left: screenWitdth * 0.02,
+                              right: screenWitdth * 0.04,
+                            ),
                             child: Card(
                               elevation: 5,
                               color: ColorConfig.primaryColor,
@@ -107,49 +113,55 @@ class _SelfSalesListState extends State<SelfSalesList> {
                             ),
                           ),
                           SizedBox(
-                            width: 230,
+                            width: screenWitdth * 0.52,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children:[
+                              children: [
                                 Text(
                                   snapshot.data!.docs[index]['name'],
-                                  style: const TextStyle(fontSize: 20),
+                                  style:  TextStyle(fontSize: screenHeight * 0.035),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 10),
+                                  padding: EdgeInsets.only(top: screenHeight * 0.012),
                                   child: Text(
                                     snapshot.data!.docs[index]['contact'],
-                                    style: const TextStyle(fontSize: 20),
+                                    style:  TextStyle(fontSize: screenHeight * 0.030),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 10),
+                                  padding: EdgeInsets.only(top:screenHeight * 0.012),
                                   child: Text(
-                                    snapshot.data!.docs[index]['rate'].toString(),
-                                    style: const TextStyle(fontSize: 20),
+                                    snapshot.data!.docs[index]['rate']
+                                        .toString(),
+                                    style: TextStyle(fontSize: screenHeight * 0.030),
                                   ),
                                 ),
                               ],
                             ),
                           ),
                           GestureDetector(
-                            onTap: () => Navigator.push(context, MaterialPageRoute(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
                                 builder: (context) {
                                   return EditSalesLead(
                                       id: snapshot.data!.docs[index].id);
                                 },
-                              ),),
+                              ),
+                            ),
                             child: Card(
                               elevation: 10,
-                          
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50)),
                               child: Padding(
-                                padding: const EdgeInsets.all(10),
+                                padding: EdgeInsets.symmetric(
+                                horizontal: screenWitdth * 0.008,
+                                vertical: screenHeight * 0.006,
+                              ),
                                 child: Icon(
                                   Icons.edit,
-                                   color: ColorConfig.appbarColor,
-                                  size: 30,
+                                  color: ColorConfig.appbarColor,
+                                  size: screenHeight * 0.05,
                                 ),
                               ),
                             ),
@@ -162,7 +174,6 @@ class _SelfSalesListState extends State<SelfSalesList> {
               );
             },
           );
-        }
-    );
+        });
   }
 }

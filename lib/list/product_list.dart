@@ -145,7 +145,7 @@ class _ProductListState extends State<ProductList> {
                                 child: Text(
                                   '${snapshot.data!.docs[index]['rate']}',
                                   style:
-                                      TextStyle(fontSize: screenHeight * 0.02),
+                                      TextStyle(fontSize: screenHeight * 0.030),
                                 ),
                               ),
                             ],

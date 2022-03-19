@@ -20,6 +20,10 @@ class _CompanyVisitedListState extends State<CompanyVisitedList> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWitdth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    debugPrint(screenWitdth.toString());
+    debugPrint(screenHeight.toString());
     return StreamBuilder<QuerySnapshot>(
         stream: companyvisitedleadStream,
         builder: (context, snapshot) {
@@ -38,16 +42,16 @@ class _CompanyVisitedListState extends State<CompanyVisitedList> {
               return Dismissible(
                 background: Container(
                   color: Theme.of(context).errorColor,
-                  child: const Icon(
+                  child: Icon(
                     Icons.delete,
                     color: Colors.white,
-                    size: 40,
+                    size: screenHeight * 0.05,
                   ),
                   alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.only(right: 20),
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 4,
+                  padding: EdgeInsets.only(right: screenWitdth * 0.05),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: screenWitdth * 0.019,
+                  vertical: screenHeight * 0.025,
                   ),
                 ),
                 direction: DismissDirection.endToStart,
@@ -86,11 +90,17 @@ class _CompanyVisitedListState extends State<CompanyVisitedList> {
                   )),
                   child: Card(
                     child: Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.symmetric(
+                      horizontal: screenWitdth * 0.025,
+                      vertical: screenHeight * 0.025,
+                    ),
                       child: Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 7, right: 15),
+                            padding: EdgeInsets.only(
+                            left: screenWitdth * 0.02,
+                            right: screenWitdth * 0.04,
+                          ),
                             child: Card(
                               elevation: 5,
                               color: ColorConfig.primaryColor,
@@ -101,26 +111,26 @@ class _CompanyVisitedListState extends State<CompanyVisitedList> {
                             ),
                           ),
                           SizedBox(
-                            width: 230,
+                            width: screenWitdth * 0.52,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   snapshot.data!.docs[index]['name'],
-                                  style: const TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: screenHeight * 0.035),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 10),
+                                  padding: EdgeInsets.only(top: screenHeight * 0.012),
                                   child: Text(
                                     snapshot.data!.docs[index]['contact'],
-                                    style: const TextStyle(fontSize: 20),
+                                    style: TextStyle(fontSize:  screenHeight * 0.030),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 10),
+                                  padding: EdgeInsets.only(top: screenHeight * 0.012),
                                   child: Text(
                                     snapshot.data!.docs[index]['product'],
-                                    style: const TextStyle(fontSize: 20),
+                                    style: TextStyle(fontSize: screenHeight * 0.030),
                                   ),
                                 ),
                               ],
@@ -141,11 +151,14 @@ class _CompanyVisitedListState extends State<CompanyVisitedList> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50)),
                               child: Padding(
-                                padding: const EdgeInsets.all(10),
+                                padding: EdgeInsets.symmetric(
+                                horizontal: screenWitdth * 0.008,
+                                vertical: screenHeight * 0.006,
+                              ),
                                 child: Icon(
                                   Icons.edit,
                                   color: ColorConfig.appbarColor,
-                                  size: 30,
+                                  size: screenHeight * 0.05,
                                 ),
                               ),
                             ),
