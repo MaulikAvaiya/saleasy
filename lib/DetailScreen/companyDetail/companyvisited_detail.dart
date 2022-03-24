@@ -157,7 +157,7 @@ class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
                               ),
                             ),
                             Text(
-                              snapshot.data!['datetime'],
+                              snapshot.data!['datetime'].toString(),
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,

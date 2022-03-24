@@ -10,10 +10,8 @@ import 'self_task_screen.dart';
 import 'target_screen.dart';
 
 class UserHomePage extends StatelessWidget {
-   UserHomePage({Key? key}) : super(key: key);
+  UserHomePage({Key? key}) : super(key: key);
   List<String> images = [
-    "assets/images/product.png",
-    "assets/images/employee.png",
     "assets/images/self-lead.png",
     "assets/images/company-lead.png",
     "assets/images/self-task.png",
@@ -23,8 +21,6 @@ class UserHomePage extends StatelessWidget {
   ];
 
   List<String> title = [
-    'Product',
-    'Employee',
     'Self Lead',
     'Company Lead',
     'Self Task',
@@ -67,28 +63,22 @@ class UserHomePage extends StatelessWidget {
                   onTap: () {
                     switch (index) {
                       case 0:
-                        Navigator.pushNamed(context, ProductScreen.routeName);
-                        break;
-                      case 1:
-                        Navigator.pushNamed(context, EmployeeScreen.routeName);
-                        break;
-                      case 2:
                         Navigator.pushNamed(context, SelfLead.routeName);
                         break;
-                      case 3:
+                      case 1:
                         Navigator.pushNamed(context, CompanyLead.routeName);
                         break;
-                      case 4:
+                      case 2:
                         Navigator.pushNamed(context, SelfTaskScreen.routeName);
                         break;
-                      case 5:
+                      case 3:
                         Navigator.pushNamed(
                             context, CompanyTaskScreen.routeName);
                         break;
-                      case 6:
+                      case 4:
                         Navigator.pushNamed(context, TargetScreen.routeName);
                         break;
-                      case 7:
+                      case 5:
                         Navigator.pushNamed(context, ProfileScreen.routeName);
                         break;
                     }
@@ -97,24 +87,6 @@ class UserHomePage extends StatelessWidget {
                     padding: EdgeInsets.only(top: screenHeight * 0.03),
                     child: Column(
                       children: [
-                        // Card(
-                        //   color: ColorConfig.primaryColor,
-                        //   elevation: 5,
-                        //   child: Image.asset(
-                        //     images[index],
-                        //     width: screenWidth * 0.22,
-                        //   ),
-                        // ),
-                        // Padding(
-                        //   padding: EdgeInsets.only(top: screenHeight * 0.002),
-                        //   child: Text(
-                        //     title[index],
-                        //     style: TextStyle(
-                        //       fontSize: screenHeight * 0.02,
-                        //       fontWeight: FontWeight.bold,
-                        //     ),
-                        //   ),
-                        // ),
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -127,15 +99,15 @@ class UserHomePage extends StatelessWidget {
                           ),
                           child: Column(children: [
                             SizedBox(
-                              width: 90,
+                              width: screenWidth * 0.24,
                               child: Image.asset(
                                 images[index],
                                 fit: BoxFit.cover,
                               ),
                             ),
                             Container(
-                              height: 30,
-                              width: 150,
+                              height: screenHeight * 0.045,
+                              width: screenWidth * 0.30,
                               color: const Color(0xff005757).withOpacity(0.08),
                               child: Text(
                                 title[index],
@@ -153,7 +125,7 @@ class UserHomePage extends StatelessWidget {
                   ),
                 );
               },
-              childCount: 8,
+              childCount: 6,
             ),
             shrinkWrap: true,
           ),

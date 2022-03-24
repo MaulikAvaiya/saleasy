@@ -27,6 +27,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:saleasy/screens/selflead/selflead_screen.dart';
 import 'package:saleasy/screens/selflead/self_sales_screen.dart';
 import 'package:saleasy/screens/selflead/self_visited_screen.dart';
+import 'package:saleasy/screens/user_page.dart';
 import 'auth/profile_screen.dart';
 import 'screens/selflead/self_visited_screen.dart';
 
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.tealAccent[400],
       ),
-      home: HomeScreen(),
+      home: UserPage(),
       routes: {
         //main route
         ProductScreen.routeName: (context) => const ProductScreen(),
@@ -80,7 +81,7 @@ class MyApp extends StatelessWidget {
         CompanyVisitedScreen.routeName: (context) => const CompanyVisitedScreen(),
         CompanySalesScreen.routeName: (context) => const CompanySalesScreen(),
          AddTarget.routeName: (context) =>  AddTarget(),
-
+        Signup.routeName:(context)=>Signup(),
         //detail route
        // ProductDetail.routeName: (context) => ProductDetail(name: '',rate: '',),
         //EmloyeeDetail.routeName: (context) => const EmloyeeDetail(),

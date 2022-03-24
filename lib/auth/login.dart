@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/auth/signup.dart';
+import 'package:saleasy/controller/user_controller.dart';
 import 'package:saleasy/screens/home_screen.dart';
+import 'package:saleasy/screens/user_home_page.dart';
 
 import 'forgot_password.dart';
 
@@ -29,7 +31,7 @@ class _LoginState extends State<Login> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => isadmin? HomeScreen():UserHomePage(),
         ),
       );
     }catch(e){
