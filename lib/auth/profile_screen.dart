@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/auth/change_password.dart';
-
+import '../constant/color_config.dart';
 import 'login.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -40,7 +40,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('user profile'),
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
+          'User Profile',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
+          ),
+        ),
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -76,27 +84,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 TextButton(
                   onPressed: () {
-                     FirebaseAuth.instance.signOut();
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Login(),
-                    ),
-                    (route) => false);
+                    FirebaseAuth.instance.signOut();
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Login(),
+                        ),
+                        (route) => false);
                   },
-                  child: Text('Log Out',style:TextStyle(color: Colors.black),),
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue
+                  child: Text(
+                    'Log Out',
+                    style: TextStyle(color: Colors.black),
                   ),
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).popAndPushNamed(ChangePassword.routeName);
+                    Navigator.of(context)
+                        .popAndPushNamed(ChangePassword.routeName);
                   },
-                  child: const Text('Update Password',style: TextStyle(color: Colors.black),),
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue
+                  child: const Text(
+                    'Update Password',
+                    style: TextStyle(color: Colors.black),
                   ),
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
                 ),
               ],
             )

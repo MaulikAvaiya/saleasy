@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import '../constant/color_config.dart';
 import 'login.dart';
 
 class Signup extends StatefulWidget {
@@ -11,6 +11,9 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  final _passwordFocusNode = FocusNode();
+  final _confirmpasswordFocusNode = FocusNode();
+
   final _formKey = GlobalKey<FormState>();
 
   var email = "";
@@ -24,6 +27,12 @@ class _SignupState extends State<Signup> {
 
   @override
   void dispose() {
+
+
+    // FocusNode
+    _passwordFocusNode.dispose();
+    _confirmpasswordFocusNode.dispose();
+
     // Clean up the controller when the widget is disposed.
     emailController.dispose();
     passwordController.dispose();
@@ -42,7 +51,11 @@ class _SignupState extends State<Signup> {
             backgroundColor: Colors.redAccent,
             content: Text(
               "Registered Successfully. Please Login..",
-              style: TextStyle(fontSize: 20.0),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.normal,
+                color: Colors.black,
+              ),
             ),
           ),
         );
@@ -71,7 +84,7 @@ class _SignupState extends State<Signup> {
               backgroundColor: Colors.orangeAccent,
               content: Text(
                 "Account Already exists",
-                style: TextStyle(fontSize: 18.0, color: Colors.black),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
             ),
           );
@@ -95,120 +108,163 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("User SignUp"),
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
+          "User SignUp",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
+          ),
+        ),
       ),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-          child: ListView(
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  autofocus: false,
-                  decoration: const InputDecoration(
-                    labelText: 'Email: ',
-                    labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
-                    errorStyle:
-                        TextStyle(color: Colors.redAccent, fontSize: 15),
-                  ),
-                  controller: emailController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please Enter Email';
-                    } else if (!value.contains('@')) {
-                      return 'Please Enter Valid Email';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  autofocus: false,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Password: ',
-                    labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
-                    errorStyle:
-                        TextStyle(color: Colors.redAccent, fontSize: 15),
-                  ),
-                  controller: passwordController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please Enter Password';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextFormField(
-                  autofocus: false,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Confirm Password: ',
-                    labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
-                    errorStyle:
-                        TextStyle(color: Colors.redAccent, fontSize: 15),
-                  ),
-                  controller: confirmPasswordController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please Enter Password';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Validate returns true if the form is valid, otherwise false.
-                      if (_formKey.currentState!.validate()) {
-                        setState(() {
-                          email = emailController.text;
-                          password = passwordController.text;
-                          confirmPassword = confirmPasswordController.text;
-                        });
-                        registration();
-                      }
+      body: Container(
+        color: ColorConfig.primaryColor,
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            child: ListView(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context)
+                          .requestFocus(_passwordFocusNode);
                     },
-                    child: const Text(
-                      'Sign Up',
-                      style: TextStyle(fontSize: 18.0),
+                    decoration: const InputDecoration(
+                      labelText: 'Email: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
+                    controller: emailController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter Email';
+                      } else if (!value.contains('@')) {
+                        return 'Please Enter Valid Email';
+                      }
+                      return null;
+                    },
                   ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Already have an Account? "),
-                  TextButton(
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    obscureText: true,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context)
+                          .requestFocus(_confirmpasswordFocusNode);
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Password: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    controller: passwordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter Password';
+                      }
+                      return null;
+                    },
+                     focusNode: _passwordFocusNode,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    obscureText: true,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.done,
+                    decoration: const InputDecoration(
+                      labelText: 'Confirm Password: ',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    controller: confirmPasswordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter Password';
+                      }
+                      return null;
+                    },
+                     focusNode: _confirmpasswordFocusNode,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Validate returns true if the form is valid, otherwise false.
+                        if (_formKey.currentState!.validate()) {
+                          setState(() {
+                            email = emailController.text;
+                            password = passwordController.text;
+                            confirmPassword = confirmPasswordController.text;
+                          });
+                          registration();
+                        }
+                      },
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Already have an Account? ",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextButton(
                       onPressed: () => {
-                            Navigator.pushReplacement(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation1, animation2) =>
-                                        const Login(),
-                                transitionDuration: const Duration(seconds: 0),
-                              ),
-                            )
-                          },
-                      child: const Text('Login'))
-                ],
-              )
-            ],
+                        Navigator.pushReplacement(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) =>
+                                const Login(),
+                            transitionDuration: const Duration(seconds: 0),
+                          ),
+                        )
+                      },
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -11,6 +11,8 @@ import 'package:saleasy/DetailScreen/selftask_detail.dart';
 import 'package:saleasy/DetailScreen/target_detail.dart';
 import 'package:saleasy/AddForms/add_employee.dart';
 import 'package:saleasy/auth/change_password.dart';
+import 'package:saleasy/auth/forgot_password.dart';
+import 'package:saleasy/auth/login.dart';
 import 'package:saleasy/auth/signup.dart';
 import 'package:saleasy/screens/CompanyLead/company_sales_screen.dart';
 import 'package:saleasy/screens/CompanyLead/company_visited_screen.dart';
@@ -91,8 +93,8 @@ class MyApp extends StatelessWidget {
       //  CompanyVisitedDetail.routeName: (context) => CompanyVisitedDetail(),
        // CompanySalesDetail.routeName: (context) =>  CompanySalesDetail(),
         //SelfTaskDetail.routeName:(context)=>const SelfTaskDetail(),
-        CompanyTaskDetail.routeName:(context)=>const CompanyTaskDetail(),
-        TargetDetail.routeName:(context)=>const TargetDetail(),
+       // CompanyTaskDetail.routeName:(context)=>const CompanyTaskDetail(),
+        //TargetDetail.routeName:(context)=>const TargetDetail(),
       },
     );
   }

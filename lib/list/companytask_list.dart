@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/EditForms/Company_lead_EditForm/edit_company_task.dart';
 import 'package:saleasy/constant/color_config.dart';
-import 'package:saleasy/list/employee_list.dart';
+
+import '../DetailScreen/companytask_detail.dart';
 
 class CompanyTaskList extends StatefulWidget {
   const CompanyTaskList({Key? key}) : super(key: key);
@@ -33,67 +34,80 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
     debugPrint(screenWitdth.toString());
     debugPrint(screenHeight.toString());
     return StreamBuilder<QuerySnapshot>(
-        stream: companytaskStream,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            print('some thing went wrong');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          final List storeDocs = [];
-          snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map product = document.data() as Map<String, dynamic>;
-            storeDocs.add(product);
-          }).toList();
-          return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context, index) {
-              return Dismissible(
-                background: Container(
-                  color: Theme.of(context).errorColor,
-                  child: Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                    size: screenHeight * 0.05,
-                  ),
-                  alignment: Alignment.centerRight,
-                  padding: EdgeInsets.only(right: screenWitdth * 0.05),
-                  margin: EdgeInsets.symmetric(
-                    horizontal: screenWitdth * 0.019,
-                    vertical: screenHeight * 0.025,
-                  ),
+      stream: companytaskStream,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          print('some thing went wrong');
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        final List storeDocs = [];
+        snapshot.data!.docs.map((DocumentSnapshot document) {
+          Map product = document.data() as Map<String, dynamic>;
+          storeDocs.add(product);
+        }).toList();
+        return ListView.builder(
+          itemCount: snapshot.data!.docs.length,
+          itemBuilder: (context, index) {
+            return Dismissible(
+              background: Container(
+                color: Theme.of(context).errorColor,
+                child: Icon(
+                  Icons.delete,
+                  color: Colors.white,
+                  size: screenHeight * 0.05,
                 ),
-                direction: DismissDirection.endToStart,
-                confirmDismiss: (direction) {
-                  return showDialog(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                      title: const Text('Are you sure?'),
-                      content: const Text(
-                        'Do you want to remove the item from the cart?',
+                alignment: Alignment.centerRight,
+                padding: EdgeInsets.only(right: screenWitdth * 0.05),
+                margin: EdgeInsets.symmetric(
+                  horizontal: screenWitdth * 0.019,
+                  vertical: screenHeight * 0.025,
+                ),
+              ),
+              direction: DismissDirection.endToStart,
+              confirmDismiss: (direction) {
+                return showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text('Are you sure?'),
+                    content: const Text(
+                      'Do you want to remove the item from the cart?',
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: const Text('No'),
+                        onPressed: () {
+                          Navigator.of(ctx).pop(false);
+                        },
                       ),
-                      actions: <Widget>[
-                        FlatButton(
-                          child: const Text('No'),
-                          onPressed: () {
-                            Navigator.of(ctx).pop(false);
-                          },
-                        ),
-                        FlatButton(
-                          child: const Text('Yes'),
-                          onPressed: () {
-                            deleteCompanyTask(snapshot.data!.docs[index].id);
-                            Navigator.of(ctx).pop(true);
-                          },
-                        ),
-                      ],
+                      FlatButton(
+                        child: const Text('Yes'),
+                        onPressed: () {
+                          deleteCompanyTask(snapshot.data!.docs[index].id);
+                          Navigator.of(ctx).pop(true);
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
+              key: const ValueKey(null),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return CompanyTaskDetail(
+                          name: snapshot.data!.docs[index]['name'],
+                          tasktype: snapshot.data!.docs[index]['tasktype'],
+                        );
+                      },
                     ),
                   );
                 },
-                key: const ValueKey(null),
                 child: Card(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -111,7 +125,7 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
                             elevation: 5,
                             color: ColorConfig.primaryColor,
                             child: Image.asset(
-                              "assets/images/product.png",
+                              "assets/images/company-task.png",
                               width: 60,
                             ),
                           ),
@@ -174,9 +188,11 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
                     ),
                   ),
                 ),
-              );
-            },
-          );
-        });
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

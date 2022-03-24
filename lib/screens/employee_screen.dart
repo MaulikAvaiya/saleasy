@@ -13,7 +13,7 @@ class EmployeeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
         title: Text(
-          'Employee Detail',
+          'Employee List',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,

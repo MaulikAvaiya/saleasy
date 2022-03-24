@@ -16,6 +16,10 @@ class ProductDetail extends StatefulWidget {
 class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
+    double screenWitdth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    debugPrint(screenWitdth.toString());
+    debugPrint(screenHeight.toString());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
