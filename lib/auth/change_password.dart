@@ -1,12 +1,12 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/auth/login.dart';
 
+import '../constant/color_config.dart';
+
 class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
-  static const routeName='/change_password';
+  static const routeName = '/change_password';
 
   @override
   _ChangePasswordState createState() => _ChangePasswordState();
@@ -42,7 +42,11 @@ class _ChangePasswordState extends State<ChangePassword> {
           backgroundColor: Colors.orangeAccent,
           content: Text(
             'Your Password has been Changed. Login again !',
-            style: TextStyle(fontSize: 18.0),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.normal,
+              color: Colors.black,
+            ),
           ),
         ),
       );
@@ -52,56 +56,71 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('change password')),
-      body: Form(
-      key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-        child: ListView(
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 10.0),
-              child: TextFormField(
-                autofocus: false,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'New Password: ',
-                  hintText: 'Enter New Password',
-                  labelStyle: TextStyle(fontSize: 20.0),
-                  border: OutlineInputBorder(),
-                  errorStyle: TextStyle(color: Colors.redAccent, fontSize: 15),
-                ),
-                controller: newPasswordController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter Password';
-                  }
-                  return null;
-                },
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, otherwise false.
-                if (_formKey.currentState!.validate()) {
-                  setState(() {
-                    newPassword = newPasswordController.text;
-                  });
-                  changePassword();
-                }
-              },
-              child: const Text(
-                'Change Password',
-                style: TextStyle(fontSize: 18.0),
-              ),
-            ),
-          ],
+      appBar: AppBar(
+        backgroundColor: ColorConfig.appbarColor,
+        title: Text(
+          'change password',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: ColorConfig.appbartextColor,
+          ),
         ),
       ),
-    ),
+      body: Container(
+        color: ColorConfig.primaryColor,
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            child: ListView(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    obscureText: true,
+                    keyboardType: TextInputType.name,
+                    decoration: const InputDecoration(
+                      labelText: 'New Password: ',
+                      hintText: 'Enter New Password',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    controller: newPasswordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter Password';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    // Validate returns true if the form is valid, otherwise false.
+                    if (_formKey.currentState!.validate()) {
+                      setState(() {
+                        newPassword = newPasswordController.text;
+                      });
+                      changePassword();
+                    }
+                  },
+                  child: const Text(
+                    'Change Password',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
-    
-    
-    
   }
 }

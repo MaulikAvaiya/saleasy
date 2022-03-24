@@ -107,7 +107,7 @@ class _SelfSalesListState extends State<SelfSalesList> {
                               elevation: 5,
                               color: ColorConfig.primaryColor,
                               child: Image.asset(
-                                "assets/images/product.png",
+                                "assets/images/sales-lead.png",
                                 width: 60,
                               ),
                             ),

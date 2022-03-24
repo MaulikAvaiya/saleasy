@@ -94,6 +94,7 @@ class _AddProductState extends State<AddProduct> {
                       errorStyle:
                           TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
+                    controller: nameController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a product name';

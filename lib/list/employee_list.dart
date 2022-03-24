@@ -124,7 +124,7 @@ class _EmployeeListState extends State<EmployeeList> {
                             elevation: 5,
                             color: ColorConfig.primaryColor,
                             child: Image.asset(
-                              "assets/images/product.png",
+                              "assets/images/employee.png",
                               width: 60,
                             ),
                           ),

@@ -105,7 +105,7 @@ class _CompanyVisitedListState extends State<CompanyVisitedList> {
                               elevation: 5,
                               color: ColorConfig.primaryColor,
                               child: Image.asset(
-                                "assets/images/product.png",
+                                "assets/images/visited-lead.png",
                                 width: 60,
                               ),
                             ),

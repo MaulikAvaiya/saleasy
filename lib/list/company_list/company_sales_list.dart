@@ -104,7 +104,7 @@ class _CompanySalesListState extends State<CompanySalesList> {
                               elevation: 5,
                               color: ColorConfig.primaryColor,
                               child: Image.asset(
-                                "assets/images/product.png",
+                                "assets/images/sales-lead.png",
                                 width: 60,
                               ),
                             ),
