@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -152,7 +151,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     PageRouteBuilder(
-                                      pageBuilder: (context, a, b) => Login(),
+                                      pageBuilder: (context, a, b) => const Login(),
                                       transitionDuration:
                                           const Duration(seconds: 0),
                                     ),

@@ -48,7 +48,7 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
         future: selflead.doc(widget.id).get(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('some thing went wrong');
+            debugPrint('some thing went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -140,7 +140,7 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(25),
+                              padding: const EdgeInsets.all(25),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,  
                                 crossAxisAlignment: CrossAxisAlignment.center,                          
@@ -233,7 +233,7 @@ class _SelfLeadDetailState extends State<SelfLeadDetail> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(25),
+                              padding: const EdgeInsets.all(25),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,

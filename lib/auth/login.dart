@@ -7,7 +7,6 @@ import 'package:saleasy/screens/home_screen.dart';
 import 'package:saleasy/screens/user_home_page.dart';
 
 import 'package:saleasy/constant/color_config.dart';
-import 'package:saleasy/screens/home_screen.dart';
 
 import 'forgot_password.dart';
 
@@ -37,7 +36,7 @@ class _LoginState extends State<Login> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => isadmin? HomeScreen():UserHomePage(),
+          builder: (context) => isadmin? const HomeScreen():UserHomePage(),
         ),
       );
     } catch (e) {

@@ -20,7 +20,7 @@ class CompanySalesScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: CompanySalesList(),
+      body: const CompanySalesList(),
     );
   }
 }

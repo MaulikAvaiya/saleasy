@@ -22,7 +22,7 @@ class TargetScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: TargetList(),
+      body: const TargetList(),
       backgroundColor: ColorConfig.primaryColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(

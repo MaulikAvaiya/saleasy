@@ -22,8 +22,8 @@ class _ProductListState extends State<ProductList> {
     return product
         .doc(id)
         .delete()
-        .then((value) => print('user deleted'))
-        .catchError((error) => print('Fail: $error'));
+        .then((value) => debugPrint('user deleted'))
+        .catchError((error) => debugPrint('Fail: $error'));
   }
 
   @override
@@ -36,7 +36,7 @@ class _ProductListState extends State<ProductList> {
       stream: productStream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          print('some thing went wrong');
+          debugPrint('some thing went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(

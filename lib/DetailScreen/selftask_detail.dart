@@ -5,7 +5,7 @@ class SelfTaskDetail extends StatefulWidget {
   final String name;
   final String tasktype;
 
-  SelfTaskDetail({Key? key, required this.name, required this.tasktype})
+  const SelfTaskDetail({Key? key, required this.name, required this.tasktype})
       : super(key: key);
   static const routeName = '/Salftask_detail';
 

@@ -56,9 +56,9 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
           'decision': decision,
           'datetime': selectedDate,
         })
-        .then((value) => print("selfvisitedlead Updated"))
+        .then((value) => debugPrint("selfvisitedlead Updated"))
         .catchError(
-          (error) => print("Failed to update selfvisitedlead:$error"),
+          (error) => debugPrint("Failed to update selfvisitedlead:$error"),
         );
   }
 
@@ -94,7 +94,7 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
           stream: productStream,
           builder: (context, datasnapshot) {
             if (datasnapshot.hasError) {
-              print('some thing went wrong');
+              debugPrint('some thing went wrong');
             }
             if (datasnapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -113,7 +113,7 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
                       .get(),
                   builder: (_, snapshot) {
                     if (snapshot.hasError) {
-                      print('Something went wrong.');
+                      debugPrint('Something went wrong.');
                     }
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(
@@ -257,13 +257,13 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
                             )),
                             margin: const EdgeInsets.symmetric(vertical: 10.0),
                             child: Padding(
-                              padding: EdgeInsets.all(15),
+                              padding: const EdgeInsets.all(15),
                               child: DropdownButton<dynamic>(
                                 underline: Container(color: Colors.transparent),
                                 isDense: true,
                                 hint: _mySelection != null
                                     ? Text(_mySelection)
-                                    : Text('select product name'),
+                                    : const Text('select product name'),
                                 value: _mySelection,
                                 onChanged: (dynamic newValue) {
                                   setState(() {
@@ -273,7 +273,7 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
                                   debugPrint(_mySelection);
                                 },
                                 icon:
-                                    Icon(Icons.arrow_drop_down_circle_rounded),
+                                    const Icon(Icons.arrow_drop_down_circle_rounded),
                                 isExpanded: true,
                                 items: datasnapshot.data!.docs
                                     .map((DocumentSnapshot snapshot) {
@@ -324,17 +324,17 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
                           width: 1,
                         )),
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          padding:  const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                           selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
-                            Text('please select date'),
+                            const Text('please select date'),
                             GestureDetector(
                                    onTap: (() => setState(() {
                                         _selectDate(context);
                                       })),
-                                  child: Icon(Icons.date_range)),
+                                  child: const Icon(Icons.date_range)),
                       ],),
 
                         ),

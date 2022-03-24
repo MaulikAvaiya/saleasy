@@ -53,8 +53,8 @@ class _AddEmployeeState extends State<AddEmployee> {
           'empcontact': empContact,
           'empemail': empEmail,
         })
-        .then((value) => print('employee Added'))
-        .catchError((error) => print('Failed to Add Employee: $error'));
+        .then((value) => debugPrint('employee Added'))
+        .catchError((error) => debugPrint('Failed to Add Employee: $error'));
   }
 
   @override

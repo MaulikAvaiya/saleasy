@@ -23,8 +23,8 @@ class _EmployeeListState extends State<EmployeeList> {
     return employee
         .doc(id)
         .delete()
-        .then((value) => print('employee deleted'))
-        .catchError((error) => print('Fail: $error'));
+        .then((value) => debugPrint('employee deleted'))
+        .catchError((error) => debugPrint('Fail: $error'));
   }
 
   @override
@@ -37,7 +37,7 @@ class _EmployeeListState extends State<EmployeeList> {
       stream: employeeStream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          print('some thing went wrong');
+          debugPrint('some thing went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(

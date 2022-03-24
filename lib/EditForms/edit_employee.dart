@@ -35,9 +35,9 @@ class _EditEmployeeState extends State<EditEmployee> {
           'empcontact': contact,
           'empemail': email,
         })
-        .then((value) => print("employee Updated"))
+        .then((value) => debugPrint("employee Updated"))
         .catchError(
-          (error) => print("Failed to update employee:$error"),
+          (error) => debugPrint("Failed to update employee:$error"),
         );
   }
 
@@ -66,7 +66,7 @@ class _EditEmployeeState extends State<EditEmployee> {
                 .get(),
             builder: (_, snapshot) {
               if (snapshot.hasError) {
-                print('Something went wrong.');
+                debugPrint('Something went wrong.');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(

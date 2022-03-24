@@ -16,20 +16,18 @@ class UserPage extends StatelessWidget {
             Row(children: [
               GestureDetector(
                 onTap: () => isadmin=true,
-                child: Container(
-                  child: Text('admin'),
-                ),
+                child: Text('admin'),
               ),
               GestureDetector(
                 onTap: () => isUser=true,
                 child: Container(
-                  child: Text('user'),
+                  child: const Text('user'),
                 ),
               ),
             ],),
             TextButton(onPressed: (){
               Navigator.of(context).pushNamed(Signup.routeName);
-            }, child: Text('continue')),
+            }, child: const Text('continue')),
           ],
         ),
       ),

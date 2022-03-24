@@ -32,9 +32,9 @@ class _EditProductState extends State<EditProduct> {
           'name': name,
           'rate': rate,
         })
-        .then((value) => print("User Updated"))
+        .then((value) => debugPrint("User Updated"))
         .catchError(
-          (error) => print("Failed to update user:$error"),
+          (error) => debugPrint("Failed to update user:$error"),
         );
   }
 
@@ -63,7 +63,7 @@ class _EditProductState extends State<EditProduct> {
                 .get(),
             builder: (_, snapshot) {
               if (snapshot.hasError) {
-                print('Something went wrong.');
+                debugPrint('Something went wrong.');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(

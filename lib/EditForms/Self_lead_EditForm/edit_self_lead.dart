@@ -39,9 +39,9 @@ class _EditSelfLeadState extends State<EditSelfLead> {
           'contact': contact,
           'companyname': companyName,
         })
-        .then((value) => print("selflead Updated"))
+        .then((value) => debugPrint("selflead Updated"))
         .catchError(
-          (error) => print("Failed to update selflead:$error"),
+          (error) => debugPrint("Failed to update selflead:$error"),
         );
   }
 
@@ -70,7 +70,7 @@ class _EditSelfLeadState extends State<EditSelfLead> {
                 .get(),
             builder: (_, snapshot) {
               if (snapshot.hasError) {
-                print('Something went wrong.');
+                debugPrint('Something went wrong.');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(

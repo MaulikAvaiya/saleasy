@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 class AddTarget extends StatefulWidget {
-  AddTarget({
+  const AddTarget({
     Key? key,
   }) : super(key: key);
   static const routeName = '/add-target';
@@ -39,8 +39,8 @@ class _AddTargetState extends State<AddTarget> {
           'dateto': selectedDate1,
           'quantity': quantity,
         })
-        .then((value) => print('target Added'))
-        .catchError((error) => print('Failed to Add target: $error'));
+        .then((value) => debugPrint('target Added'))
+        .catchError((error) => debugPrint('Failed to Add target: $error'));
   }
 
   void _selectDateFrom(BuildContext context) async {
@@ -110,7 +110,7 @@ class _AddTargetState extends State<AddTarget> {
           stream: employeeStream,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              print('some thing went wrong');
+              debugPrint('some thing went wrong');
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -147,14 +147,14 @@ class _AddTargetState extends State<AddTarget> {
                               margin:
                                   const EdgeInsets.symmetric(vertical: 10.0),
                               child: Padding(
-                                padding: EdgeInsets.all(15),
+                                padding: const EdgeInsets.all(15),
                                 child: DropdownButton<dynamic>(
                                   underline:
                                       Container(color: Colors.transparent),
                                   isDense: true,
                                   hint: _mySelection != null
                                       ? Text(_mySelection)
-                                      : Text('select employee name'),
+                                      : const Text('select employee name'),
                                   value: _mySelection,
                                   onChanged: (dynamic newValue) {
                                     setState(() {
@@ -163,7 +163,7 @@ class _AddTargetState extends State<AddTarget> {
 
                                     debugPrint(_mySelection);
                                   },
-                                  icon: Icon(
+                                  icon: const Icon(
                                       Icons.arrow_drop_down_circle_rounded),
                                   isExpanded: true,
                                   items: snapshot.data!.docs
@@ -187,7 +187,7 @@ class _AddTargetState extends State<AddTarget> {
                                     width: 1,
                                   )),
                               child: Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     vertical: 15, horizontal: 10),
                                 child: DropdownButton<dynamic>(
                                   underline:
@@ -195,7 +195,7 @@ class _AddTargetState extends State<AddTarget> {
                                   isDense: true,
                                   hint: _mySelection1 != null
                                       ? Text(_mySelection1)
-                                      : Text('select product name'),
+                                      : const Text('select product name'),
                                   value: _mySelection1,
                                   onChanged: (dynamic newValue) {
                                     setState(() {
@@ -204,7 +204,7 @@ class _AddTargetState extends State<AddTarget> {
 
                                     debugPrint(_mySelection1);
                                   },
-                                  icon: Icon(
+                                  icon: const Icon(
                                       Icons.arrow_drop_down_circle_rounded),
                                   isExpanded: true,
                                   items: datasnapshot.data!.docs
@@ -228,7 +228,7 @@ class _AddTargetState extends State<AddTarget> {
                                     width: 1,
                                   )),
                               child: Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 15),
                                 child: Row(
                                   mainAxisAlignment:
@@ -237,12 +237,12 @@ class _AddTargetState extends State<AddTarget> {
                                     selectedDate != null
                                         ? Text(
                                             "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}")
-                                        : Text('please select date from'),
+                                        : const Text('please select date from'),
                                     GestureDetector(
                                         onTap: (() => setState(() {
                                               _selectDateFrom(context);
                                             })),
-                                        child: Icon(Icons.date_range)),
+                                        child: const Icon(Icons.date_range)),
                                   ],
                                 ),
                               ),
@@ -255,7 +255,7 @@ class _AddTargetState extends State<AddTarget> {
                                     width: 1,
                                   )),
                               child: Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 15),
                                 child: Row(
                                   mainAxisAlignment:
@@ -264,12 +264,12 @@ class _AddTargetState extends State<AddTarget> {
                                     selectedDate1 != null
                                         ? Text(
                                             "${selectedDate1.day}/${selectedDate1.month}/${selectedDate1.year}")
-                                        : Text('please select date to'),
+                                        : const Text('please select date to'),
                                     GestureDetector(
                                         onTap: (() => setState(() {
                                               _selectDateTo(context);
                                             })),
-                                        child: Icon(Icons.date_range)),
+                                        child: const Icon(Icons.date_range)),
                                   ],
                                 ),
                               ),

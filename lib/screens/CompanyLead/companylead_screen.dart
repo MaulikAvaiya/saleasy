@@ -20,7 +20,7 @@ class CompanyLeadScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: CompanyLeadList(),
+      body: const CompanyLeadList(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {

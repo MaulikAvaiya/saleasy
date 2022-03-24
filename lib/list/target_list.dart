@@ -23,8 +23,8 @@ class _TargetListState extends State<TargetList> {
     return target
         .doc(id)
         .delete()
-        .then((value) => print('target deleted'))
-        .catchError((error) => print('Fail: $error'));
+        .then((value) => debugPrint('target deleted'))
+        .catchError((error) => debugPrint('Fail: $error'));
   }
 
   @override
@@ -33,7 +33,7 @@ class _TargetListState extends State<TargetList> {
       stream: targetStream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          print('some thing went wrong');
+          debugPrint('some thing went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(

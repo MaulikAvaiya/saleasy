@@ -64,8 +64,8 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
           'employee':_mySelection,
 
         })
-        .then((value) => print('companyselflead Added'))
-        .catchError((error) => print('Failed to Add companyselflead: $error'));
+        .then((value) => debugPrint('companyselflead Added'))
+        .catchError((error) => debugPrint('Failed to Add companyselflead: $error'));
   }
 
   @override
@@ -86,7 +86,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
           stream: employeeStream,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              print('some thing went wrong');
+              debugPrint('some thing went wrong');
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -222,13 +222,13 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                         )),
                         margin: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Padding(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: DropdownButton<dynamic>(
                             underline: Container(color: Colors.transparent),
                             isDense: true,
                             hint: _mySelection != null
                                 ? Text(_mySelection)
-                                : Text('select employee name'),
+                                : const Text('select employee name'),
                             value: _mySelection,
                             onChanged: (dynamic newValue) {
                               setState(() {
@@ -237,7 +237,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
 
                               debugPrint(_mySelection);
                             },
-                            icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                            icon: const Icon(Icons.arrow_drop_down_circle_rounded),
                             isExpanded: true,
                             items: snapshot.data!.docs
                                 .map((DocumentSnapshot snapshot) {

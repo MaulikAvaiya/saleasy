@@ -50,7 +50,9 @@ class _ChangePasswordState extends State<ChangePassword> {
           ),
         ),
       );
-    } catch (e) {}
+    } catch (e) {
+      
+    }
   }
 
   @override

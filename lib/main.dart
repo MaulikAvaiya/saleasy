@@ -3,21 +3,12 @@ import 'package:saleasy/AddForms/add_product.dart';
 import 'package:saleasy/AddForms/company_lead_forms/add_company_lead.dart';
 import 'package:saleasy/AddForms/self_lead_forms/add_self_lead.dart';
 import 'package:saleasy/AddForms/target_form.dart';
-import 'package:saleasy/DetailScreen/companyDetail/companysales_detail.dart';
-import 'package:saleasy/DetailScreen/companytask_detail.dart';
-import 'package:saleasy/DetailScreen/employee_detail.dart';
-import 'package:saleasy/DetailScreen/selfDetail/selfsales_detail.dart';
-import 'package:saleasy/DetailScreen/selftask_detail.dart';
-import 'package:saleasy/DetailScreen/target_detail.dart';
 import 'package:saleasy/AddForms/add_employee.dart';
 import 'package:saleasy/auth/change_password.dart';
-import 'package:saleasy/auth/forgot_password.dart';
-import 'package:saleasy/auth/login.dart';
 import 'package:saleasy/auth/signup.dart';
 import 'package:saleasy/screens/CompanyLead/company_sales_screen.dart';
 import 'package:saleasy/screens/CompanyLead/company_visited_screen.dart';
 import 'package:saleasy/screens/CompanyLead/companylead_screen.dart';
-import 'package:saleasy/screens/home_screen.dart';
 import 'package:saleasy/screens/product_screen.dart';
 import 'package:saleasy/screens/company_lead.dart';
 import 'package:saleasy/screens/company_task_screen.dart';
@@ -49,7 +40,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.tealAccent[400],
       ),
-      home: UserPage(),
+      home: const UserPage(),
       routes: {
         //main route
         ProductScreen.routeName: (context) => const ProductScreen(),
@@ -82,8 +73,8 @@ class MyApp extends StatelessWidget {
         CompanyLeadScreen.routeName: (context) => const CompanyLeadScreen(),
         CompanyVisitedScreen.routeName: (context) => const CompanyVisitedScreen(),
         CompanySalesScreen.routeName: (context) => const CompanySalesScreen(),
-         AddTarget.routeName: (context) =>  AddTarget(),
-        Signup.routeName:(context)=>Signup(),
+         AddTarget.routeName: (context) =>  const AddTarget(),
+        Signup.routeName:(context)=>const Signup(),
         //detail route
        // ProductDetail.routeName: (context) => ProductDetail(name: '',rate: '',),
         //EmloyeeDetail.routeName: (context) => const EmloyeeDetail(),

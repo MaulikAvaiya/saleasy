@@ -47,8 +47,8 @@ class _AddTaskState extends State<AddTask> {
           'tasktype': tasktype,
           'datetime': selectedDate,
         })
-        .then((value) => print('selftask Added'))
-        .catchError((error) => print('Failed to Add selftask: $error'));
+        .then((value) => debugPrint('selftask Added'))
+        .catchError((error) => debugPrint('Failed to Add selftask: $error'));
   }
   void  _selectDate(BuildContext context) async {
     final DateTime? selected =await showDatePicker(
@@ -227,17 +227,17 @@ class _AddTaskState extends State<AddTask> {
                           width: 1,
                         )),
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          padding:  const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                           selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
-                            Text('please select date'),
+                            const Text('please select date'),
                             GestureDetector(
                                    onTap: (() => setState(() {
                                         _selectDate(context);
                                       })),
-                                  child: Icon(Icons.date_range)),
+                                  child: const Icon(Icons.date_range)),
                       ],),
 
                         ),

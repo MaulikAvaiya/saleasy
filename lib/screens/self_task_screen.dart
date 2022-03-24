@@ -20,7 +20,7 @@ class SelfTaskScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SelfTaskList(),
+      body: const SelfTaskList(),
       backgroundColor: ColorConfig.primaryColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(

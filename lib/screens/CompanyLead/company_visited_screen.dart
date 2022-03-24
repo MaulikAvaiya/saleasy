@@ -19,7 +19,7 @@ class CompanyVisitedScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: CompanyVisitedList(),
+      body: const CompanyVisitedList(),
     );
   }
 }

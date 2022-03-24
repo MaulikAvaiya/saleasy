@@ -21,7 +21,7 @@ class SelfVisitedScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SelfVisitedList(),
+      body: const SelfVisitedList(),
     );
   }
 }

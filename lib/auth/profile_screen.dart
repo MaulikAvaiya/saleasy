@@ -92,9 +92,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         (route) => false);
                   },
-                  child: Text(
+                  child: const Text(
                     'Log Out',
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                   ),
                   style: TextButton.styleFrom(backgroundColor: Colors.blue),
                 ),

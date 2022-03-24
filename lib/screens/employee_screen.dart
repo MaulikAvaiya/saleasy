@@ -21,7 +21,7 @@ class EmployeeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: EmployeeList(),
+      body: const EmployeeList(),
       backgroundColor: ColorConfig.primaryColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(

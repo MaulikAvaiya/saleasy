@@ -50,8 +50,8 @@ class _AddProductState extends State<AddProduct> {
           'name': productName,
           'rate': rate,
         })
-        .then((value) => print('product Added'))
-        .catchError((error) => print('Failed to Add product: $error'));
+        .then((value) => debugPrint('product Added'))
+        .catchError((error) => debugPrint('Failed to Add product: $error'));
   }
 
   @override
@@ -153,7 +153,7 @@ class _AddProductState extends State<AddProduct> {
                             });
                           }
                         },
-                        child: Text(
+                        child: const Text(
                           'Register',
                           style: TextStyle(
                             fontSize: 18.0,
@@ -165,7 +165,7 @@ class _AddProductState extends State<AddProduct> {
                       ),
                       ElevatedButton(
                         onPressed: () => {clearText()},
-                        child: Text(
+                        child: const Text(
                           'Reset',
                           style: TextStyle(
                             fontSize: 18.0,

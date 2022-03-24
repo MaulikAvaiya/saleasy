@@ -22,8 +22,8 @@ class _SelfTaskListState extends State<SelfTaskList> {
     return selftask
         .doc(id)
         .delete()
-        .then((value) => print('task deleted'))
-        .catchError((error) => print('Fail: $error'));
+        .then((value) => debugPrint('task deleted'))
+        .catchError((error) => debugPrint('Fail: $error'));
   }
 
   @override
@@ -36,7 +36,7 @@ class _SelfTaskListState extends State<SelfTaskList> {
         stream: selftaskStream,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('some thing went wrong');
+            debugPrint('some thing went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

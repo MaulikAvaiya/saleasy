@@ -5,7 +5,7 @@ class ProductDetail extends StatefulWidget {
   final String name;
   final String rate;
 
-  ProductDetail({Key? key, required this.name, required this.rate})
+  const ProductDetail({Key? key, required this.name, required this.rate})
       : super(key: key);
   static const routeName = '/Product_detail';
 

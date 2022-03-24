@@ -29,7 +29,7 @@ class _SelfLeadListState extends State<SelfLeadList> {
         stream: selfleadStream,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('some thing went wrong');
+            debugPrint('some thing went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

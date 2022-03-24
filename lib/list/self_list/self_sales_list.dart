@@ -29,7 +29,7 @@ class _SelfSalesListState extends State<SelfSalesList> {
         stream: selfsalesleadStream,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('some thing went wrong');
+            debugPrint('some thing went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

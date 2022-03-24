@@ -23,8 +23,8 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
     return companytask
         .doc(id)
         .delete()
-        .then((value) => print('companytask deleted'))
-        .catchError((error) => print('Fail: $error'));
+        .then((value) => debugPrint('companytask deleted'))
+        .catchError((error) => debugPrint('Fail: $error'));
   }
 
   @override
@@ -37,7 +37,7 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
       stream: companytaskStream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          print('some thing went wrong');
+          debugPrint('some thing went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(

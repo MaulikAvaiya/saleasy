@@ -52,9 +52,9 @@ class _EditTaskState extends State<EditTask> {
           'tasktype': tasktype,
           'datetime': selectedDate,
         })
-        .then((value) => print("selftask Updated"))
+        .then((value) => debugPrint("selftask Updated"))
         .catchError(
-          (error) => print("Failed to update selftask:$error"),
+          (error) => debugPrint("Failed to update selftask:$error"),
         );
   }
 
@@ -99,7 +99,7 @@ class _EditTaskState extends State<EditTask> {
                 .get(),
             builder: (_, snapshot) {
               if (snapshot.hasError) {
-                print('Something went wrong.');
+                debugPrint('Something went wrong.');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
@@ -243,17 +243,17 @@ class _EditTaskState extends State<EditTask> {
                           width: 1,
                         )),
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          padding:  const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                           selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
-                            Text('please select date'),
+                            const Text('please select date'),
                             GestureDetector(
                                    onTap: (() => setState(() {
                                         _selectDate(context);
                                       })),
-                                  child: Icon(Icons.date_range)),
+                                  child: const Icon(Icons.date_range)),
                       ],),
 
                         ),

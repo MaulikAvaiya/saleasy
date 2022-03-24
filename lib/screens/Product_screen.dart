@@ -27,7 +27,7 @@ class _ProductScreenState extends State<ProductScreen> {
           ),
         ),
       ),
-      body: ProductList(),
+      body: const ProductList(),
       backgroundColor: ColorConfig.primaryColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
@@ -35,7 +35,7 @@ class _ProductScreenState extends State<ProductScreen> {
           Navigator.of(context).pushNamed(AddProduct.routeName);
         },
         backgroundColor: ColorConfig.appbarColor,
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: Colors.white,
         ),

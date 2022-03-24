@@ -50,8 +50,8 @@ var _mySelection;
           'tasktype': tasktype,
           'datetime': selectedDate,
         })
-        .then((value) => print('companytask Added'))
-        .catchError((error) => print('Failed to Add companytask: $error'));
+        .then((value) => debugPrint('companytask Added'))
+        .catchError((error) => debugPrint('Failed to Add companytask: $error'));
   }
   void  _selectDate(BuildContext context) async {
     final DateTime? selected =await showDatePicker(
@@ -110,7 +110,7 @@ var _mySelection;
           stream: employeeStream,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              print('some thing went wrong');
+              debugPrint('some thing went wrong');
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -244,13 +244,13 @@ return Container(
                         )),
                         margin: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Padding(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: DropdownButton<dynamic>(
                             underline: Container(color: Colors.transparent),
                             isDense: true,
                             hint: _mySelection != null
                                 ? Text(_mySelection)
-                                : Text('select employee name'),
+                                : const Text('select employee name'),
                             value: _mySelection,
                             onChanged: (dynamic newValue) {
                               setState(() {
@@ -259,7 +259,7 @@ return Container(
 
                               debugPrint(_mySelection);
                             },
-                            icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                            icon: const Icon(Icons.arrow_drop_down_circle_rounded),
                             isExpanded: true,
                             items: snapshot.data!.docs
                                 .map((DocumentSnapshot snapshot) {
@@ -282,17 +282,17 @@ return Container(
                           width: 1,
                         )),
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          padding:  const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                           selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
-                            Text('please select date'),
+                            const Text('please select date'),
                             GestureDetector(
                                    onTap: (() => setState(() {
                                         _selectDate(context);
                                       })),
-                                  child: Icon(Icons.date_range)),
+                                  child: const Icon(Icons.date_range)),
                       ],),
 
                         ),

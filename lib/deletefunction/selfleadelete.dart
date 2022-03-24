@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
  class Selfleadelete{
 //  final String id;
@@ -11,8 +12,8 @@ CollectionReference selflead =
     return selflead
         .doc(id)
         .delete()
-        .then((value) => print('selflead deleted'))
-        .catchError((error) => print('Fail: $error'));
+        .then((value) => debugPrint('selflead deleted'))
+        .catchError((error) => debugPrint('Fail: $error'));
   }
 
 
@@ -27,8 +28,8 @@ class VisitedLeadDelete{
     return selfvisitedlead
         .doc(id)
         .delete()
-        .then((value) => print('selfvisitedlead deleted'))
-        .catchError((error) => print('Fail: $error'));
+        .then((value) => debugPrint('selfvisitedlead deleted'))
+        .catchError((error) => debugPrint('Fail: $error'));
   }
 
 }

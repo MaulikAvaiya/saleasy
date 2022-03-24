@@ -38,7 +38,7 @@ class _CompanyLeadDetailState extends State<CompanyLeadDetail> {
         future: companylead.doc(widget.id).get(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('some thing went wrong');
+            debugPrint('some thing went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -144,7 +144,7 @@ class _CompanyLeadDetailState extends State<CompanyLeadDetail> {
                               ),
                             ),
                             Container(
-                               padding: EdgeInsets.all(25),
+                               padding: const EdgeInsets.all(25),
                               child: Row(
                                 children: [
                                   SizedBox(
@@ -233,7 +233,7 @@ class _CompanyLeadDetailState extends State<CompanyLeadDetail> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(25),
+                              padding: const EdgeInsets.all(25),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,

@@ -39,9 +39,9 @@ class _EditCompanyLeadState extends State<EditCompanyLead> {
           'contact': contact,
           'companyname': companyName,
         })
-        .then((value) => print("companylead Updated"))
+        .then((value) => debugPrint("companylead Updated"))
         .catchError(
-          (error) => print("Failed to update companylead:$error"),
+          (error) => debugPrint("Failed to update companylead:$error"),
         );
   }
 
@@ -70,7 +70,7 @@ class _EditCompanyLeadState extends State<EditCompanyLead> {
                 .get(),
             builder: (_, snapshot) {
               if (snapshot.hasError) {
-                print('Something went wrong.');
+                debugPrint('Something went wrong.');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(

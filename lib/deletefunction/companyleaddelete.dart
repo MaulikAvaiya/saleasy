@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
  class Companyleadelete{
 //  final String id;
@@ -11,8 +12,8 @@ CollectionReference companylead =
     return companylead
         .doc(id)
         .delete()
-        .then((value) => print('companylead deleted'))
-        .catchError((error) => print('Fail: $error'));
+        .then((value) => debugPrint('companylead deleted'))
+        .catchError((error) => debugPrint('Fail: $error'));
   }
 
 
@@ -27,8 +28,8 @@ class CompanyVisitedLeadDelete{
     return companyvisitedlead
         .doc(id)
         .delete()
-        .then((value) => print('companyvisitedlead deleted'))
-        .catchError((error) => print('Fail: $error'));
+        .then((value) => debugPrint('companyvisitedlead deleted'))
+        .catchError((error) => debugPrint('Fail: $error'));
   }
 
 }

@@ -92,8 +92,8 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
           'datetime': selectedDate,
           'quantity': quantity,
         })
-        .then((value) => print('companysaleslead Added'))
-        .catchError((error) => print('Failed to Add companysaleslead: $error'));
+        .then((value) => debugPrint('companysaleslead Added'))
+        .catchError((error) => debugPrint('Failed to Add companysaleslead: $error'));
   }
   void  _selectDate(BuildContext context) async {
     final DateTime? selected =await showDatePicker(
@@ -132,7 +132,7 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
           stream: productStream,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              print('some thing went wrong');
+              debugPrint('some thing went wrong');
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -234,7 +234,7 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 10.0),
+                  margin:  const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
                     initialValue: widget.companyName,
                     autofocus: false,
@@ -268,13 +268,13 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                         )),
                         margin: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Padding(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: DropdownButton<dynamic>(
                             underline: Container(color: Colors.transparent),
                             isDense: true,
                             hint: _mySelection != null
                                 ? Text(_mySelection)
-                                : Text('select product name'),
+                                : const Text('select product name'),
                             value: _mySelection,
                             onChanged: (dynamic newValue) {
                               setState(() {
@@ -283,7 +283,7 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
 
                               debugPrint(_mySelection);
                             },
-                            icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                            icon: const Icon(Icons.arrow_drop_down_circle_rounded),
                             isExpanded: true,
                             items: snapshot.data!.docs
                                 .map((DocumentSnapshot snapshot) {
@@ -402,73 +402,71 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
                           width: 1,
                         )),
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          padding:  const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                           selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
-                            Text('please select date'),
+                            const Text('please select date'),
                             GestureDetector(
                                    onTap: (() => setState(() {
                                         _selectDate(context);
                                       })),
-                                  child: Icon(Icons.date_range)),
+                                  child: const Icon(Icons.date_range)),
                       ],),
 
                         ),
                     ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: ColorConfig.appbarColor,
-                        ),
-                        onPressed: () {
-                          // Validate returns true if the form is valid, otherwise false.
-                          if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              product = productController.text;
-                              amount = amountController.text;
-                              quantity = quantityController.text;
-                              rate = rateController.text;
-                              dateTime = dateTimeController.text;
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: ColorConfig.appbarColor,
+                      ),
+                      onPressed: () {
+                        // Validate returns true if the form is valid, otherwise false.
+                        if (_formKey.currentState!.validate()) {
+                          setState(() {
+                            product = productController.text;
+                            amount = amountController.text;
+                            quantity = quantityController.text;
+                            rate = rateController.text;
+                            dateTime = dateTimeController.text;
 
-                              addcompanysaleslead();
-                              Companyleadelete().deletecompanylead(widget.id);
-                              CompanyVisitedLeadDelete()
-                                  .deletevisitedlead(widget.id);
-                              Navigator.of(context)
-                                  .popAndPushNamed(SelfVisitedScreen.routeName);
-                            });
-                          }
-                        },
-                        child: Text(
-                          'Register',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: ColorConfig.appbartextColor,
-                          ),
+                            addcompanysaleslead();
+                            Companyleadelete().deletecompanylead(widget.id);
+                            CompanyVisitedLeadDelete()
+                                .deletevisitedlead(widget.id);
+                            Navigator.of(context)
+                                .popAndPushNamed(SelfVisitedScreen.routeName);
+                          });
+                        }
+                      },
+                      child: Text(
+                        'Register',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: ColorConfig.appbartextColor,
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () => {},
-                        child: Text(
-                          'Reset',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: ColorConfig.appbartextColor,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: ColorConfig.appbarColor,
+                    ),
+                    ElevatedButton(
+                      onPressed: () => {},
+                      child: Text(
+                        'Reset',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: ColorConfig.appbartextColor,
                         ),
                       ),
-                    ],
-                  ),
+                      style: ElevatedButton.styleFrom(
+                        primary: ColorConfig.appbarColor,
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),

@@ -21,7 +21,7 @@ class SelfLeadScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SelfLeadList(),
+      body: const SelfLeadList(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {

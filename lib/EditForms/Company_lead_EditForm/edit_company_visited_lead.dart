@@ -55,9 +55,9 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
           'decision': decision,
           'datetime': selectedDate,
         })
-        .then((value) => print("Companyvisitedlead Updated"))
+        .then((value) => debugPrint("Companyvisitedlead Updated"))
         .catchError(
-          (error) => print("Failed to update Companyvisitedlead:$error"),
+          (error) => debugPrint("Failed to update Companyvisitedlead:$error"),
         );
   }
   void  _selectDate(BuildContext context) async {
@@ -92,7 +92,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
           stream: productStream,
           builder: (context, datasnapshot) {
             if (datasnapshot.hasError) {
-              print('some thing went wrong');
+              debugPrint('some thing went wrong');
             }
             if (datasnapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -110,7 +110,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                         .get(),
                     builder: (_, snapshot) {
                       if (snapshot.hasError) {
-                        print('Something went wrong.');
+                        debugPrint('Something went wrong.');
                       }
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(
@@ -192,7 +192,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 10.0),
+                              margin: const EdgeInsets.symmetric(vertical: 10.0),
                               child: TextFormField(
                                 initialValue: selfleadContact,
                                 autofocus: false,
@@ -258,14 +258,14 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                               margin:
                                   const EdgeInsets.symmetric(vertical: 10.0),
                               child: Padding(
-                                padding: EdgeInsets.all(15),
+                                padding: const EdgeInsets.all(15),
                                 child: DropdownButton<dynamic>(
                                   underline:
                                       Container(color: Colors.transparent),
                                   isDense: true,
                                   hint: _mySelection != null
                                       ? Text(_mySelection)
-                                      : Text('select product name'),
+                                      : const Text('select product name'),
                                   value: _mySelection,
                                   onChanged: (dynamic newValue) {
                                     setState(() {
@@ -274,7 +274,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
 
                                     debugPrint(_mySelection);
                                   },
-                                  icon: Icon(
+                                  icon: const Icon(
                                       Icons.arrow_drop_down_circle_rounded),
                                   isExpanded: true,
                                   items: datasnapshot.data!.docs
@@ -327,54 +327,52 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                           width: 1,
                         )),
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          padding:  const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                           selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
-                            Text('please select date'),
+                            const Text('please select date'),
                             GestureDetector(
                                    onTap: (() => setState(() {
                                         _selectDate(context);
                                       })),
-                                  child: Icon(Icons.date_range)),
+                                  child: const Icon(Icons.date_range)),
                       ],),
 
                         ),
                     ),
-                            Container(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      // Validate returns true if the form is valid, otherwise false.
-                                      if (_formKey.currentState!.validate()) {
-                                        setState(() {
-                                          updateCompanyVisitedLead(
-                                            widget.id,
-                                            selfleadName,
-                                            selfleadAddress,
-                                            selfleadContact,
-                                            selfleadcompanyName,
-                                            _mySelection,
-                                            decision,
-                                            datetime,
-                                          );
-                                        });
-                                        Navigator.of(context).pop();
-                                      }
-                                    },
-                                    child: const Text(
-                                      'Save',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                      ),
+                            Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceAround,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Validate returns true if the form is valid, otherwise false.
+                                    if (_formKey.currentState!.validate()) {
+                                      setState(() {
+                                        updateCompanyVisitedLead(
+                                          widget.id,
+                                          selfleadName,
+                                          selfleadAddress,
+                                          selfleadContact,
+                                          selfleadcompanyName,
+                                          _mySelection,
+                                          decision,
+                                          datetime,
+                                        );
+                                      });
+                                      Navigator.of(context).pop();
+                                    }
+                                  },
+                                  child: const Text(
+                                    'Save',
+                                    style: TextStyle(
+                                      fontSize: 18,
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             )
                           ],
                         ),

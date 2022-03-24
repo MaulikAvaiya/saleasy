@@ -66,9 +66,9 @@ class _EditSalesLeadState extends State<EditSalesLead> {
           'amount': amount,
           'datetime': selectedDate,
         })
-        .then((value) => print("selfsaleslead Updated"))
+        .then((value) => debugPrint("selfsaleslead Updated"))
         .catchError(
-          (error) => print("Failed to update selfsaleslead:$error"),
+          (error) => debugPrint("Failed to update selfsaleslead:$error"),
         );
   }
 
@@ -104,7 +104,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
           stream: productStream,
           builder: (context, datasnapshot) {
             if (datasnapshot.hasError) {
-              print('some thing went wrong');
+              debugPrint('some thing went wrong');
             }
             if (datasnapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -124,7 +124,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                 .get(),
             builder: (_, snapshot) {
               if (snapshot.hasError) {
-                print('Something went wrong.');
+                debugPrint('Something went wrong.');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
@@ -270,13 +270,13 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                         )),
                         margin: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Padding(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: DropdownButton<dynamic>(
                             underline: Container(color: Colors.transparent),
                             isDense: true,
                             hint: _mySelection != null
                                 ? Text(_mySelection)
-                                : Text('select product name'),
+                                : const Text('select product name'),
                             value: _mySelection,
                             onChanged: (dynamic newValue) {
                               setState(() {
@@ -285,7 +285,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
 
                               debugPrint(_mySelection);
                             },
-                            icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                            icon: const Icon(Icons.arrow_drop_down_circle_rounded),
                             isExpanded: true,
                             items: datasnapshot.data!.docs
                                 .map((DocumentSnapshot snapshot) {
@@ -408,17 +408,17 @@ class _EditSalesLeadState extends State<EditSalesLead> {
                           width: 1,
                         )),
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          padding:  const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                           selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
-                            Text('please select date'),
+                            const Text('please select date'),
                             GestureDetector(
                                    onTap: (() => setState(() {
                                         _selectDate(context);
                                       })),
-                                  child: Icon(Icons.date_range)),
+                                  child: const Icon(Icons.date_range)),
                       ],),
 
                         ),

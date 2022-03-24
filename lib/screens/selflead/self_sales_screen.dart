@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:saleasy/AddForms/self_lead_forms/add_sales_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/list/self_list/self_sales_list.dart';
 
@@ -21,7 +20,7 @@ class SelfSalesScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SelfSalesList(),
+      body: const SelfSalesList(),
     );
   }
 }

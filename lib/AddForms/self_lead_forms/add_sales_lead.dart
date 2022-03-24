@@ -97,8 +97,8 @@ class _AddSalesLeadState extends State<AddSalesLead> {
           'datetime': selectedDate,
           'quantity': quantity,
         })
-        .then((value) => print('selfsaleslead Added'))
-        .catchError((error) => print('Failed to Add selfsaleslead: $error'));
+        .then((value) => debugPrint('selfsaleslead Added'))
+        .catchError((error) => debugPrint('Failed to Add selfsaleslead: $error'));
   }
   void  _selectDate(BuildContext context) async {
     final DateTime? selected =await showDatePicker(
@@ -134,7 +134,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
         stream: productStream,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('some thing went wrong');
+            debugPrint('some thing went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -272,13 +272,13 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                       )),
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Padding(
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         child: DropdownButton<dynamic>(
                           underline: Container(color: Colors.transparent),
                           isDense: true,
                           hint: _mySelection != null
                               ? Text(_mySelection)
-                              : Text('select product name'),
+                              : const Text('select product name'),
                           value: _mySelection,
                           onChanged: (dynamic newValue) {
                             setState(() {
@@ -287,7 +287,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
 
                             debugPrint(_mySelection);
                           },
-                          icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                          icon: const Icon(Icons.arrow_drop_down_circle_rounded),
                           isExpanded: true,
                           items: snapshot.data!.docs
                               .map((DocumentSnapshot snapshot) {
@@ -407,17 +407,17 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                           width: 1,
                         )),
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                          padding:  const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                           selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
-                            Text('please select date'),
+                            const Text('please select date'),
                             GestureDetector(
                                    onTap: (() => setState(() {
                                         _selectDate(context);
                                       })),
-                                  child: Icon(Icons.date_range)),
+                                  child: const Icon(Icons.date_range)),
                       ],),
 
                         ),

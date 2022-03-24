@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:saleasy/AddForms/self_lead_forms/add_sales_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 class SelfSalesDetail extends StatefulWidget {
@@ -33,7 +32,7 @@ class _SelfSalesDetailState extends State<SelfSalesDetail> {
         future: selfsaleslead.doc(widget.id).get(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('some thing went wrong');
+            debugPrint('some thing went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

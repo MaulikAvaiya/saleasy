@@ -20,7 +20,7 @@ class CompanyTaskScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: CompanyTaskList(),
+      body: const CompanyTaskList(),
       backgroundColor: ColorConfig.primaryColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
