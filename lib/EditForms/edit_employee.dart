@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../constant/color_config.dart';
+import '../controller/user_controller.dart';
 
 class EditEmployee extends StatefulWidget {
   final String id;
@@ -24,7 +25,7 @@ class _EditEmployeeState extends State<EditEmployee> {
   }
 
   CollectionReference employee =
-      FirebaseFirestore.instance.collection('employee');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('employee');
 
   Future<void> updateEmployee(id, name, address, contact, email) {
     return employee
@@ -61,7 +62,7 @@ class _EditEmployeeState extends State<EditEmployee> {
           key: _formKey,
           child: FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
-                .collection('employee')
+                .collection(user).doc(userId).collection('employee')
                 .doc(widget.id)
                 .get(),
             builder: (_, snapshot) {

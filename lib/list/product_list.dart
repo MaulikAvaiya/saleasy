@@ -4,6 +4,8 @@ import 'package:saleasy/DetailScreen/product_detail.dart';
 import 'package:saleasy/EditForms/edit_product.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../controller/user_controller.dart';
+
 class ProductList extends StatefulWidget {
   const ProductList({Key? key}) : super(key: key);
 
@@ -13,10 +15,10 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
   final Stream<QuerySnapshot> productStream =
-      FirebaseFirestore.instance.collection('products').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('product').snapshots();
 
   CollectionReference product =
-      FirebaseFirestore.instance.collection('products');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('product');
 
   Future<void> deleteProduct(id) {
     return product

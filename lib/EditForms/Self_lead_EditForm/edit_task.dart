@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class EditTask extends StatefulWidget {
   final String id;
   const EditTask({
@@ -37,7 +39,7 @@ class _EditTaskState extends State<EditTask> {
    DateTime selectedDate = DateTime.now();
 
   CollectionReference selftask =
-      FirebaseFirestore.instance.collection('selftask');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('selftask');
 
   Future<void> updateSelfTask(
       id, name, address, contact, companyName, task, tasktype, datetime) {
@@ -94,7 +96,7 @@ class _EditTaskState extends State<EditTask> {
           key: _formKey,
           child: FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
-                .collection('selftask')
+                .collection(user).doc(userId).collection('selftask')
                 .doc(widget.id)
                 .get(),
             builder: (_, snapshot) {

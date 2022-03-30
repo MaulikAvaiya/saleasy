@@ -4,6 +4,8 @@ import 'package:saleasy/DetailScreen/selfDetail/selfvisited_detail.dart';
 import 'package:saleasy/EditForms/Self_lead_EditForm/edit_visited_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class SelfVisitedList extends StatefulWidget {
   const SelfVisitedList({Key? key}) : super(key: key);
 
@@ -13,10 +15,10 @@ class SelfVisitedList extends StatefulWidget {
 
 class _SelfVisitedListState extends State<SelfVisitedList> {
   final Stream<QuerySnapshot> selfvisitedleadStream =
-      FirebaseFirestore.instance.collection('selfvisitedlead').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('selfvisitedlead').snapshots();
 
   CollectionReference selfvisitedlead =
-      FirebaseFirestore.instance.collection('selfvisitedlead');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('selfvisitedlead');
 
   @override
   Widget build(BuildContext context) {

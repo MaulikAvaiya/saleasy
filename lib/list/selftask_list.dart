@@ -4,6 +4,8 @@ import 'package:saleasy/DetailScreen/selftask_detail.dart';
 import 'package:saleasy/EditForms/Self_lead_EditForm/edit_task.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../controller/user_controller.dart';
+
 class SelfTaskList extends StatefulWidget {
   const SelfTaskList({Key? key}) : super(key: key);
 
@@ -13,10 +15,10 @@ class SelfTaskList extends StatefulWidget {
 
 class _SelfTaskListState extends State<SelfTaskList> {
   final Stream<QuerySnapshot> selftaskStream =
-      FirebaseFirestore.instance.collection('selftask').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('selftask').snapshots();
 
   CollectionReference selftask =
-      FirebaseFirestore.instance.collection('selftask');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('selftask');
 
   Future<void> deleteSelfTask(id) {
     return selftask

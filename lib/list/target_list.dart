@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
+import 'package:saleasy/controller/user_controller.dart';
 import '../DetailScreen/target_detail.dart';
 
 class TargetList extends StatefulWidget {
@@ -15,9 +16,9 @@ class _TargetListState extends State<TargetList> {
   var dateto;
 
   final Stream<QuerySnapshot> targetStream =
-      FirebaseFirestore.instance.collection('target').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('target').snapshots();
 
-  CollectionReference target = FirebaseFirestore.instance.collection('target');
+  CollectionReference target = FirebaseFirestore.instance.collection(user).doc(userId).collection('target');
 
   Future<void> deletetarget(id) {
     return target
@@ -101,8 +102,8 @@ class _TargetListState extends State<TargetList> {
                     MaterialPageRoute(
                       builder: (context) {
                         return TargetDetail(
-                          datefrom: snapshot.data!.docs[index]['datefrom'].toString(),
-                          dateto: snapshot.data!.docs[index]['dateto'].toString(),
+                          mydatetime: myDateTime,
+                          mydatetime1: myDateTime1,
                         );
                       },
                     ),

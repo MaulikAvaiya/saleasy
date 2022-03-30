@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class EditCompanyTask extends StatefulWidget {
   final String id;
   const EditCompanyTask({
@@ -39,10 +41,10 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
    DateTime selectedDate = DateTime.now();
 
   final Stream<QuerySnapshot> employeeStream =
-      FirebaseFirestore.instance.collection('employee').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('employee').snapshots();
 
   CollectionReference Companytask =
-      FirebaseFirestore.instance.collection('companytask');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('companytask');
 
 
   Future<void> updateComapnyTask(id, name, address, contact, companyName,
@@ -112,7 +114,7 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
                 key: _formKey,
                 child: FutureBuilder<DocumentSnapshot>(
                     future: FirebaseFirestore.instance
-                        .collection('companytask')
+                        .collection(user).doc(userId).collection('companytask')
                         .doc(widget.id)
                         .get(),
                     builder: (_, snapshot) {

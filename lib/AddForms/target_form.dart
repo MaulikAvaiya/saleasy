@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../controller/user_controller.dart';
+
 class AddTarget extends StatefulWidget {
   const AddTarget({
     Key? key,
@@ -22,13 +24,22 @@ class _AddTargetState extends State<AddTarget> {
   DateTime selectedDate = DateTime.now();
   DateTime selectedDate1 = DateTime.now();
 
-  final Stream<QuerySnapshot> productStream =
-      FirebaseFirestore.instance.collection('products').snapshots();
+  final Stream<QuerySnapshot> productStream = FirebaseFirestore.instance
+      .collection(user)
+      .doc(userId)
+      .collection('products')
+      .snapshots();
 
-  final Stream<QuerySnapshot> employeeStream =
-      FirebaseFirestore.instance.collection('employee').snapshots();
+  final Stream<QuerySnapshot> employeeStream = FirebaseFirestore.instance
+      .collection(user)
+      .doc(userId)
+      .collection('employee')
+      .snapshots();
 
-  CollectionReference target = FirebaseFirestore.instance.collection('target');
+  CollectionReference target = FirebaseFirestore.instance
+      .collection(user)
+      .doc(userId)
+      .collection('target');
 
   Future<void> addtarget() {
     return target

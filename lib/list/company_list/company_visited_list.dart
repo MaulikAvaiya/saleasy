@@ -4,6 +4,8 @@ import 'package:saleasy/DetailScreen/companyDetail/companyvisited_detail.dart';
 import 'package:saleasy/EditForms/Company_lead_EditForm/edit_company_visited_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class CompanyVisitedList extends StatefulWidget {
   const CompanyVisitedList({Key? key}) : super(key: key);
 
@@ -13,10 +15,10 @@ class CompanyVisitedList extends StatefulWidget {
 
 class _CompanyVisitedListState extends State<CompanyVisitedList> {
   final Stream<QuerySnapshot> companyvisitedleadStream =
-      FirebaseFirestore.instance.collection('companyvisitedlead').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('companyvisitedlead').snapshots();
 
   CollectionReference companyvisitedlead =
-      FirebaseFirestore.instance.collection('companyvisitedlead');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('companyvisitedlead');
 
   @override
   Widget build(BuildContext context) {

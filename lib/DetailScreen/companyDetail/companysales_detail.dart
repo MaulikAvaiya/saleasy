@@ -38,6 +38,8 @@ class _CompanySalesDetailState extends State<CompanySalesDetail> {
               child: CircularProgressIndicator(),
             );
           }
+           Timestamp timestamp = snapshot.data!['datetime'];
+            DateTime myDateTime = timestamp.toDate();
           return SingleChildScrollView(
             child: Container(
               color: ColorConfig.primaryColor,
@@ -186,7 +188,7 @@ class _CompanySalesDetailState extends State<CompanySalesDetail> {
                               ),
                             ),
                             Text(
-                              snapshot.data!['datetime'].toString(),
+                              "${myDateTime.day}/${myDateTime.month}/${myDateTime.year}",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,

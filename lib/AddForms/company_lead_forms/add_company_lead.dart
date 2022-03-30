@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class AddCompanyLead extends StatefulWidget {
   const AddCompanyLead({Key? key}) : super(key: key);
   static const routeName = '/add-company-lead';
@@ -49,10 +51,11 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
   final _formKey = GlobalKey<FormState>();
 
   CollectionReference companylead =
-      FirebaseFirestore.instance.collection('companylead');
+       FirebaseFirestore.instance.collection(user).doc(userId).collection('companylead');
 
-        final Stream<QuerySnapshot> employeeStream =
-      FirebaseFirestore.instance.collection('employee').snapshots();
+       final Stream<QuerySnapshot> employeeStream =
+       FirebaseFirestore.instance.collection(user).doc(userId).collection('employee').snapshots();
+
 
   Future<void> addCompanyLead() {
     return companylead

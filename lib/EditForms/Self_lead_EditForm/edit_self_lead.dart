@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class EditSelfLead extends StatefulWidget {
   final String id;
   const EditSelfLead({Key? key, required this.id}) : super(key: key);
@@ -28,7 +30,7 @@ class _EditSelfLeadState extends State<EditSelfLead> {
   final _formKey = GlobalKey<FormState>();
 
   CollectionReference selflead =
-      FirebaseFirestore.instance.collection('selflead');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('selflead');
 
   Future<void> updateSelfLead(id, name, address, contact, companyName) {
     return selflead
@@ -65,7 +67,7 @@ class _EditSelfLeadState extends State<EditSelfLead> {
           key: _formKey,
           child: FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
-                .collection('selflead')
+                .collection(user).doc(userId).collection('selflead')
                 .doc(widget.id)
                 .get(),
             builder: (_, snapshot) {
