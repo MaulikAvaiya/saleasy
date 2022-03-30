@@ -94,9 +94,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                   child: const Text(
                     'Log Out',
-                    style: const TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.white),
                   ),
-                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  style: TextButton.styleFrom(
+                    backgroundColor: ColorConfig.appbarColor,
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
@@ -105,9 +107,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                   child: const Text(
                     'Update Password',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ),
-                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  style: TextButton.styleFrom(
+                    backgroundColor: ColorConfig.appbarColor,
+                  ),
                 ),
               ],
             )

@@ -4,7 +4,7 @@ import '../constant/color_config.dart';
 import 'login.dart';
 
 class Signup extends StatefulWidget {
-  static const routeName='/sign-up screen';
+  static const routeName = '/sign-up screen';
   const Signup({Key? key}) : super(key: key);
 
   @override
@@ -28,8 +28,6 @@ class _SignupState extends State<Signup> {
 
   @override
   void dispose() {
-
-
     // FocusNode
     _passwordFocusNode.dispose();
     _confirmpasswordFocusNode.dispose();
@@ -134,8 +132,7 @@ class _SignupState extends State<Signup> {
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context)
-                          .requestFocus(_passwordFocusNode);
+                      FocusScope.of(context).requestFocus(_passwordFocusNode);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Email: ',
@@ -180,7 +177,7 @@ class _SignupState extends State<Signup> {
                       }
                       return null;
                     },
-                     focusNode: _passwordFocusNode,
+                    focusNode: _passwordFocusNode,
                   ),
                 ),
                 Container(
@@ -204,13 +201,16 @@ class _SignupState extends State<Signup> {
                       }
                       return null;
                     },
-                     focusNode: _confirmpasswordFocusNode,
+                    focusNode: _confirmpasswordFocusNode,
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: ColorConfig.appbarColor,
+                      ),
                       onPressed: () {
                         // Validate returns true if the form is valid, otherwise false.
                         if (_formKey.currentState!.validate()) {

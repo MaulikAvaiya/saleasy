@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/auth/login.dart';
-
 import '../constant/color_config.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -50,9 +49,7 @@ class _ChangePasswordState extends State<ChangePassword> {
           ),
         ),
       );
-    } catch (e) {
-      
-    }
+    } catch (e) {}
   }
 
   @override
@@ -61,7 +58,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
         title: Text(
-          'change password',
+          'Change Password',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
@@ -101,6 +98,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                   ),
                 ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: ColorConfig.appbarColor,
+                  ),
                   onPressed: () {
                     // Validate returns true if the form is valid, otherwise false.
                     if (_formKey.currentState!.validate()) {
@@ -110,11 +110,12 @@ class _ChangePasswordState extends State<ChangePassword> {
                       changePassword();
                     }
                   },
-                  child: const Text(
+                  child: Text(
                     'Change Password',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
+                      backgroundColor: ColorConfig.appbarColor,
                     ),
                   ),
                 ),

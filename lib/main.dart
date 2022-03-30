@@ -5,6 +5,8 @@ import 'package:saleasy/AddForms/self_lead_forms/add_self_lead.dart';
 import 'package:saleasy/AddForms/target_form.dart';
 import 'package:saleasy/AddForms/add_employee.dart';
 import 'package:saleasy/auth/change_password.dart';
+import 'package:saleasy/auth/forgot_password.dart';
+import 'package:saleasy/auth/login.dart';
 import 'package:saleasy/auth/signup.dart';
 import 'package:saleasy/screens/CompanyLead/company_sales_screen.dart';
 import 'package:saleasy/screens/CompanyLead/company_visited_screen.dart';
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.tealAccent[400],
       ),
-      home: const UserPage(),
+      home: const ProfileScreen(),
       routes: {
         //main route
         ProductScreen.routeName: (context) => const ProductScreen(),

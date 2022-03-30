@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/auth/signup.dart';
@@ -109,8 +108,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             labelText: 'Email: ',
                             labelStyle: TextStyle(fontSize: 20.0),
                             border: OutlineInputBorder(),
-                            errorStyle:
-                                TextStyle(color: Colors.redAccent, fontSize: 15),
+                            errorStyle: TextStyle(
+                                color: Colors.redAccent, fontSize: 15),
                           ),
                           controller: emailController,
                           validator: (value) {
@@ -129,6 +128,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: ColorConfig.appbarColor,
+                              ),
                               onPressed: () {
                                 // Validate returns true if the form is valid, otherwise false.
                                 if (_formKey.currentState!.validate()) {
@@ -151,7 +153,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     PageRouteBuilder(
-                                      pageBuilder: (context, a, b) => const Login(),
+                                      pageBuilder: (context, a, b) =>
+                                          const Login(),
                                       transitionDuration:
                                           const Duration(seconds: 0),
                                     ),

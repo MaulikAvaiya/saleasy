@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => isadmin? const HomeScreen():UserHomePage(),
+          builder: (context) => isadmin ? const HomeScreen() : UserHomePage(),
         ),
       );
     } catch (e) {
@@ -110,8 +110,7 @@ class _LoginState extends State<Login> {
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context)
-                          .requestFocus(_passwordFocusNode);
+                      FocusScope.of(context).requestFocus(_passwordFocusNode);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Email: ',
@@ -161,6 +160,9 @@ class _LoginState extends State<Login> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: ColorConfig.appbarColor,
+                        ),
                         onPressed: () {
                           // Validate returns true if the form is valid, otherwise false.
                           if (_formKey.currentState!.validate()) {
