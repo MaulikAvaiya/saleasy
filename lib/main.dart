@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.tealAccent[400],
       ),
-      home: const ProfileScreen(),
+      home: const UserPage(),
       routes: {
         //main route
         ProductScreen.routeName: (context) => const ProductScreen(),

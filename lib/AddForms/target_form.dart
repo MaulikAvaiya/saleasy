@@ -78,7 +78,7 @@ class _AddTargetState extends State<AddTarget> {
     if (selected1 != null && selected1 != selectedDate1) {
       setState(() {
         selectedDate1 = selected1;
-      });
+      },);
     }
   }
 
@@ -109,7 +109,7 @@ class _AddTargetState extends State<AddTarget> {
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
         title: Text(
-          "Add Task",
+          "Add Target",
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
@@ -177,16 +177,17 @@ class _AddTargetState extends State<AddTarget> {
                                   icon: const Icon(
                                       Icons.arrow_drop_down_circle_rounded),
                                   isExpanded: true,
-                                  items: snapshot.data!.docs
-                                      .map((DocumentSnapshot snapshot) {
-                                    return DropdownMenuItem<dynamic>(
-                                      value: snapshot[
-                                          'empname'], //snapshot['id'].toString(),
-                                      child: Text(
-                                        snapshot["empname"],
-                                      ),
-                                    );
-                                  }).toList(),
+                                  items: snapshot.data!.docs.map(
+                                    (DocumentSnapshot snapshot) {
+                                      return DropdownMenuItem<dynamic>(
+                                        value: snapshot[
+                                            'empname'], //snapshot['id'].toString(),
+                                        child: Text(
+                                          snapshot["empname"],
+                                        ),
+                                      );
+                                    },
+                                  ).toList(),
                                 ),
                               ),
                             ),
@@ -209,9 +210,11 @@ class _AddTargetState extends State<AddTarget> {
                                       : const Text('select product name'),
                                   value: _mySelection1,
                                   onChanged: (dynamic newValue) {
-                                    setState(() {
-                                      _mySelection1 = newValue;
-                                    });
+                                    setState(
+                                      () {
+                                        _mySelection1 = newValue;
+                                      },
+                                    );
 
                                     debugPrint(_mySelection1);
                                   },
@@ -233,11 +236,12 @@ class _AddTargetState extends State<AddTarget> {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  border: Border.all(
-                                    color: Colors.grey,
-                                    width: 1,
-                                  )),
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1,
+                                ),
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 15),

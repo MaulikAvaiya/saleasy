@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/deletefunction/companyleaddelete.dart';
 import 'package:saleasy/screens/selflead/self_visited_screen.dart';
-
 import '../../controller/user_controller.dart';
 
 class AddCompanySalesLead extends StatefulWidget {
