@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:saleasy/AddForms/company_lead_forms/add_company_sales_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class CompanyVisitedDetail extends StatefulWidget {
   final String id;
   const CompanyVisitedDetail({Key? key, required this.id}) : super(key: key);
@@ -13,7 +15,8 @@ class CompanyVisitedDetail extends StatefulWidget {
 
 class _CompanyVisitedDetailState extends State<CompanyVisitedDetail> {
   CollectionReference companyvisitedlead =
-      FirebaseFirestore.instance.collection('companyvisitedlead');
+      FirebaseFirestore.instance.collection(user)
+      .doc(userId).collection('companyvisitedlead');
   @override
   Widget build(BuildContext context) {
     return Scaffold(

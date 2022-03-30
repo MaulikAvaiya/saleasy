@@ -27,7 +27,7 @@ class _AddTargetState extends State<AddTarget> {
   final Stream<QuerySnapshot> productStream = FirebaseFirestore.instance
       .collection(user)
       .doc(userId)
-      .collection('products')
+      .collection('product')
       .snapshots();
 
   final Stream<QuerySnapshot> employeeStream = FirebaseFirestore.instance
@@ -191,16 +191,16 @@ class _AddTargetState extends State<AddTarget> {
                                 ),
                               ),
                             ),
-                            Container(
+                             Container(
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
                                   border: Border.all(
-                                    color: Colors.grey,
-                                    width: 1,
-                                  )),
+                                color: Colors.grey,
+                                width: 0.8,
+                              )),
+                              margin:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 15, horizontal: 10),
+                                padding: const EdgeInsets.all(15),
                                 child: DropdownButton<dynamic>(
                                   underline:
                                       Container(color: Colors.transparent),
@@ -221,7 +221,7 @@ class _AddTargetState extends State<AddTarget> {
                                   icon: const Icon(
                                       Icons.arrow_drop_down_circle_rounded),
                                   isExpanded: true,
-                                  items: datasnapshot.data!.docs
+                                  items:datasnapshot.data!.docs
                                       .map((DocumentSnapshot datasnapshot) {
                                     return DropdownMenuItem<dynamic>(
                                       value: datasnapshot[
@@ -234,6 +234,47 @@ class _AddTargetState extends State<AddTarget> {
                                 ),
                               ),
                             ),
+                            // Container(
+                            //   decoration: BoxDecoration(
+                            //       borderRadius: BorderRadius.circular(4),
+                            //       border: Border.all(
+                            //         color: Colors.grey,
+                            //         width: 1,
+                            //       )),
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.symmetric(
+                            //         vertical: 15, horizontal: 10),
+                            //     child: DropdownButton<dynamic>(
+                            //       underline:
+                            //           Container(color: Colors.transparent),
+                            //       isDense: true,
+                            //       hint: _mySelection1 != null
+                            //           ? Text(_mySelection1)
+                            //           : const Text('select product name'),
+                            //       value: _mySelection1,
+                            //       onChanged: (dynamic newValue) {
+                            //         setState(() {
+                            //           _mySelection1 = newValue;
+                            //         });
+
+                            //         debugPrint(_mySelection1);
+                            //       },
+                            //       icon: const Icon(
+                            //           Icons.arrow_drop_down_circle_rounded),
+                            //       isExpanded: true,
+                                  // items: datasnapshot.data!.docs
+                                  //     .map((DocumentSnapshot datasnapshot) {
+                                  //   return DropdownMenuItem<dynamic>(
+                                  //     value: datasnapshot[
+                                  //         'name'], //snapshot['id'].toString(),
+                                  //     child: Text(
+                                  //       datasnapshot["name"],
+                                  //     ),
+                                  //   );
+                                  // }).toList(),
+                            //     ),
+                            //   ),
+                            // ),
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),

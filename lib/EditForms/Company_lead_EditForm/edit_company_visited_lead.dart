@@ -39,7 +39,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
   var _mySelection;
 
   final Stream<QuerySnapshot> productStream =
-      FirebaseFirestore.instance.collection(user).doc(userId).collection('products').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('product').snapshots();
 
   CollectionReference companyvisitedlead =
       FirebaseFirestore.instance.collection(user).doc(userId).collection('companyvisitedlead');

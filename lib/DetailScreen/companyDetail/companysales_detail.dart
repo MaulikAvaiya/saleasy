@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class CompanySalesDetail extends StatefulWidget {
   final String id;
   const CompanySalesDetail({Key? key, required this.id}) : super(key: key);
@@ -12,7 +14,8 @@ class CompanySalesDetail extends StatefulWidget {
 
 class _CompanySalesDetailState extends State<CompanySalesDetail> {
   CollectionReference companysaleslead =
-      FirebaseFirestore.instance.collection('companysaleslead');
+      FirebaseFirestore.instance.collection(user)
+      .doc(userId).collection('companysaleslead');
   @override
   Widget build(BuildContext context) {
     return Scaffold(

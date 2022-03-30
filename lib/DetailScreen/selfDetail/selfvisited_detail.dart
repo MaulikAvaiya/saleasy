@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:saleasy/AddForms/self_lead_forms/add_sales_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class SelfVisitedDetail extends StatefulWidget {
   final String id;
   const SelfVisitedDetail({Key? key, required this.id}) : super(key: key);
@@ -13,7 +15,8 @@ class SelfVisitedDetail extends StatefulWidget {
 
 class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
   CollectionReference selflead =
-      FirebaseFirestore.instance.collection('selfvisitedlead');
+      FirebaseFirestore.instance.collection(user)
+      .doc(userId).collection('selfvisitedlead');
 
   @override
   Widget build(BuildContext context) {

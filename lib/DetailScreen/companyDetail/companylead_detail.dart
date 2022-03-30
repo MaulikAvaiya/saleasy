@@ -7,6 +7,8 @@ import 'package:flutter_sms/flutter_sms.dart';
 import '../../AddForms/company_lead_forms/add_company_task.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../controller/user_controller.dart';
+
 class CompanyLeadDetail extends StatefulWidget {
   final String id;
   const CompanyLeadDetail({Key? key, required this.id}) : super(key: key);
@@ -17,7 +19,8 @@ class CompanyLeadDetail extends StatefulWidget {
 
 class _CompanyLeadDetailState extends State<CompanyLeadDetail> {
   CollectionReference companylead =
-      FirebaseFirestore.instance.collection('companylead');
+      FirebaseFirestore.instance.collection(user)
+      .doc(userId).collection('companylead');
 
   String number = '';
   @override

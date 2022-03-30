@@ -15,10 +15,16 @@ class _TargetListState extends State<TargetList> {
   var datefrom;
   var dateto;
 
-  final Stream<QuerySnapshot> targetStream =
-      FirebaseFirestore.instance.collection(user).doc(userId).collection('target').snapshots();
+  final Stream<QuerySnapshot> targetStream = FirebaseFirestore.instance
+      .collection(user)
+      .doc(userId)
+      .collection('target')
+      .snapshots();
 
-  CollectionReference target = FirebaseFirestore.instance.collection(user).doc(userId).collection('target');
+  CollectionReference target = FirebaseFirestore.instance
+      .collection(user)
+      .doc(userId)
+      .collection('target');
 
   Future<void> deletetarget(id) {
     return target
@@ -104,6 +110,9 @@ class _TargetListState extends State<TargetList> {
                         return TargetDetail(
                           mydatetime: myDateTime,
                           mydatetime1: myDateTime1,
+                          productName: snapshot.data!.docs[index]['product'],
+                          employeeName: snapshot.data!.docs[index]['empname'],
+                          quantity: snapshot.data!.docs[index]['quantity'],
                         );
                       },
                     ),

@@ -83,7 +83,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
  final Stream<QuerySnapshot> productStream = FirebaseFirestore.instance
       .collection(user)
       .doc(userId)
-      .collection('products')
+      .collection('product')
       .snapshots();
   
   CollectionReference selfsaleslead =

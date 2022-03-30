@@ -60,7 +60,7 @@ class _EditProductState extends State<EditProduct> {
           key: _formKey,
           child: FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
-                .collection(user).doc(userId).collection('products')
+                .collection(user).doc(userId).collection('product')
                 .doc(widget.id)
                 .get(),
             builder: (_, snapshot) {

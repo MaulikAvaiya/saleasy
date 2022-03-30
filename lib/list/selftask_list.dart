@@ -102,8 +102,7 @@ class _SelfTaskListState extends State<SelfTaskList> {
                       MaterialPageRoute(
                         builder: (context) {
                           return SelfTaskDetail(
-                            name: snapshot.data!.docs[index]['name'],
-                            tasktype: snapshot.data!.docs[index]['tasktype'],
+                            id: snapshot.data!.docs[index].id,
                           );
                         },
                       ),

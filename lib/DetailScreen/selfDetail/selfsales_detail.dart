@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class SelfSalesDetail extends StatefulWidget {
   final String id;
   const SelfSalesDetail({Key? key, required this.id}) : super(key: key);
@@ -12,7 +14,8 @@ class SelfSalesDetail extends StatefulWidget {
 
 class _SelfSalesDetailState extends State<SelfSalesDetail> {
   CollectionReference selfsaleslead =
-      FirebaseFirestore.instance.collection('selfsaleslead');
+      FirebaseFirestore.instance.collection(user)
+      .doc(userId).collection('selfsaleslead');
 
   @override
   Widget build(BuildContext context) {

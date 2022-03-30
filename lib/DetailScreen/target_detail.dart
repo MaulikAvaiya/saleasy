@@ -1,14 +1,27 @@
+
+
 import 'package:flutter/material.dart';
 import '../constant/color_config.dart';
-
 
 class TargetDetail extends StatelessWidget {
   final DateTime mydatetime;
   final DateTime mydatetime1;
+  final String productName;
+  final String employeeName;
+  final String quantity;
 
-   TargetDetail({ Key? key ,required this.mydatetime, required this.mydatetime1});
+  TargetDetail({
+    Key? key,
+    required this.mydatetime,
+    required this.mydatetime1,
+    required this.employeeName,
+    required this.productName,
+    required this.quantity,
+  });
   @override
   Widget build(BuildContext context) {
+        double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
@@ -22,17 +35,18 @@ class TargetDetail extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
+     
         child: Container(
           color: ColorConfig.primaryColor,
           padding: const EdgeInsets.all(6),
-          height: 700,
-          width: 430,
+        
+          width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: 150,
-                width: 400,
+                height: screenHeight*0.7,
+                width:screenWidth*0.9,
                 child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -43,6 +57,36 @@ class TargetDetail extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                         const Text(
+                          "Product:",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          productName,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: ColorConfig.textColor,
+                          ),
+                        ),
+                         const Text(
+                          "Employee :",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          employeeName,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: ColorConfig.textColor,
+                          ),
+                        ),
                         const Text(
                           "Date From:",
                           style: TextStyle(
@@ -73,6 +117,22 @@ class TargetDetail extends StatelessWidget {
                             color: ColorConfig.textColor,
                           ),
                         ),
+                        
+                         const Text(
+                          "Quantity",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          quantity,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: ColorConfig.textColor,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -85,4 +145,3 @@ class TargetDetail extends StatelessWidget {
     );
   }
 }
-
