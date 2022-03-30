@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../controller/user_controller.dart';
+
 class AddEmployee extends StatefulWidget {
   const AddEmployee({Key? key}) : super(key: key);
   static const routeName = '/add-employee';
@@ -43,7 +45,8 @@ class _AddEmployeeState extends State<AddEmployee> {
   }
 
   CollectionReference employee =
-      FirebaseFirestore.instance.collection('employee');
+  FirebaseFirestore.instance.collection(user).doc(userId).collection('employee');
+      
 
   Future<void> addEmployee() {
     return employee

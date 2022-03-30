@@ -4,6 +4,7 @@ import 'package:saleasy/EditForms/Company_lead_EditForm/edit_company_task.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 import '../DetailScreen/companytask_detail.dart';
+import '../controller/user_controller.dart';
 
 class CompanyTaskList extends StatefulWidget {
   const CompanyTaskList({Key? key}) : super(key: key);
@@ -14,10 +15,10 @@ class CompanyTaskList extends StatefulWidget {
 
 class _CompanyTaskListState extends State<CompanyTaskList> {
   final Stream<QuerySnapshot> companytaskStream =
-      FirebaseFirestore.instance.collection('companytask').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('companytask').snapshots();
 
   CollectionReference companytask =
-      FirebaseFirestore.instance.collection('companytask');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('companytask');
 
   Future<void> deleteCompanyTask(id) {
     return companytask

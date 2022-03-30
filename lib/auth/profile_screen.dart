@@ -8,13 +8,14 @@ class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   static const routeName = '/Profile-screen';
-
+  
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final uid = FirebaseAuth.instance.currentUser!.uid;
+  
   final email = FirebaseAuth.instance.currentUser!.email;
   final creationTime = FirebaseAuth.instance.currentUser!.metadata.creationTime;
 

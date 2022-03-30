@@ -6,6 +6,8 @@ import 'package:saleasy/deletefunction/selfleadelete.dart';
 
 import 'package:saleasy/screens/selflead/selflead_screen.dart';
 
+import '../../controller/user_controller.dart';
+
 class AddVisitedLead extends StatefulWidget {
   final String id;
   final String name;
@@ -71,7 +73,8 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
   
 
   CollectionReference selfvisitedlead =
-      FirebaseFirestore.instance.collection('selfvisitedlead');
+  FirebaseFirestore.instance.collection(user).doc(userId).collection('selfvisitedlead');
+      
 
   Future<void> addselfvisitedlead() {
     return selfvisitedlead
@@ -92,9 +95,8 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
 
 
   final Stream<QuerySnapshot> productStream =
-      FirebaseFirestore.instance.collection('products').snapshots();
-
-
+  FirebaseFirestore.instance.collection(user).doc(userId).collection('products').snapshots();
+    
   void  _selectDate(BuildContext context) async {
     final DateTime? selected =await showDatePicker(
       context: context,

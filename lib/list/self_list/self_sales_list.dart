@@ -4,6 +4,7 @@ import 'package:saleasy/EditForms/Self_lead_EditForm/edit_sales_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 import '../../DetailScreen/selfDetail/selfsales_detail.dart';
+import '../../controller/user_controller.dart';
 
 class SelfSalesList extends StatefulWidget {
   const SelfSalesList({Key? key}) : super(key: key);
@@ -14,10 +15,10 @@ class SelfSalesList extends StatefulWidget {
 
 class _SelfSalesListState extends State<SelfSalesList> {
   final Stream<QuerySnapshot> selfsalesleadStream =
-      FirebaseFirestore.instance.collection('selfsaleslead').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('selfsaleslead').snapshots();
 
   CollectionReference selfsaleslead =
-      FirebaseFirestore.instance.collection('selfsaleslead');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('selfsaleslead');
 
   @override
   Widget build(BuildContext context) {

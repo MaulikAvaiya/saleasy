@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../controller/user_controller.dart';
+
  class Companyleadelete{
 //  final String id;
 //Selfleadelete(this.id);
 Companyleadelete();
 CollectionReference companylead =
-      FirebaseFirestore.instance.collection('companylead');
-
+  FirebaseFirestore.instance.collection(user).doc(userId).collection('companylead');
    Future<void>  deletecompanylead(id) {
     return companylead
         .doc(id)
@@ -22,8 +23,7 @@ CollectionReference companylead =
 class CompanyVisitedLeadDelete{
   CompanyVisitedLeadDelete();
   CollectionReference companyvisitedlead =
-      FirebaseFirestore.instance.collection('companyselfvisitedlead');
-
+  FirebaseFirestore.instance.collection(user).doc(userId).collection('companyselfvisitedlead');
     Future<void>  deletevisitedlead(id) {
     return companyvisitedlead
         .doc(id)

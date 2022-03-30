@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 import '../constant/color_config.dart';
 
 
-class TargetDetail extends StatefulWidget {
-  final String datefrom;
-  final String dateto;
+class TargetDetail extends StatelessWidget {
+  final DateTime mydatetime;
+  final DateTime mydatetime1;
 
-  const TargetDetail({ Key? key ,required this.datefrom, required this.dateto}) : super(key: key);
-  static const routeName='/target_detail';
-  @override
-  _TargetDetailState createState() => _TargetDetailState();
-}
-
-class _TargetDetailState extends State<TargetDetail> {
+   TargetDetail({ Key? key ,required this.mydatetime, required this.mydatetime1});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +51,7 @@ class _TargetDetailState extends State<TargetDetail> {
                           ),
                         ),
                         Text(
-                          widget.datefrom,
+                          "${mydatetime.day}/${mydatetime.month}/${mydatetime.year}",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
@@ -72,7 +66,7 @@ class _TargetDetailState extends State<TargetDetail> {
                           ),
                         ),
                         Text(
-                          widget.dateto,
+                          "${mydatetime1.day}/${mydatetime1.month}/${mydatetime1.year}",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.normal,

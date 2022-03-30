@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class AddSelfLead extends StatefulWidget {
   const AddSelfLead({Key? key}) : super(key: key);
   static const routeName = '/add-self-lead';
@@ -48,12 +50,17 @@ class _AddSelfLeadState extends State<AddSelfLead> {
 
   final _formKey = GlobalKey<FormState>();
 
-  final Stream<QuerySnapshot> employeeStream =
-      FirebaseFirestore.instance.collection('employee').snapshots();
+  final Stream<QuerySnapshot> employeeStream = FirebaseFirestore.instance
+      .collection(user)
+      .doc(userId)
+      .collection('employee')
+      .snapshots();
 
-  CollectionReference selflead =
-      FirebaseFirestore.instance.collection('selflead');
-
+  CollectionReference selflead = FirebaseFirestore.instance
+      .collection(user)
+      .doc(userId)
+      .collection('selflead');
+      
   Future<void> addSelfLead() {
     return selflead
         .add({
@@ -181,7 +188,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                             if (value == null || value.isEmpty) {
                               return 'Please enter contact number ';
                             }
-                            if (value.length != 10){
+                            if (value.length != 10) {
                               return 'Contact number must be 10 digit';
                             }
                             return null;
@@ -239,7 +246,8 @@ class _AddSelfLeadState extends State<AddSelfLead> {
 
                               debugPrint(_mySelection);
                             },
-                            icon: const Icon(Icons.arrow_drop_down_circle_rounded),
+                            icon: const Icon(
+                                Icons.arrow_drop_down_circle_rounded),
                             isExpanded: true,
                             items: snapshot.data!.docs
                                 .map((DocumentSnapshot snapshot) {

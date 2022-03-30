@@ -4,6 +4,8 @@ import 'package:saleasy/constant/color_config.dart';
 import 'package:saleasy/deletefunction/companyleaddelete.dart';
 import 'package:saleasy/screens/selflead/self_visited_screen.dart';
 
+import '../../controller/user_controller.dart';
+
 class AddCompanySalesLead extends StatefulWidget {
   final String id;
   final String name;
@@ -77,7 +79,7 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
    DateTime selectedDate = DateTime.now();
 
   CollectionReference companysaleslead =
-      FirebaseFirestore.instance.collection('companysaleslead');
+  FirebaseFirestore.instance.collection(user).doc(userId).collection('companysaleslead');
 
   Future<void> addcompanysaleslead() {
     return companysaleslead
@@ -110,7 +112,8 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
   }
 
     final Stream<QuerySnapshot> productStream =
-      FirebaseFirestore.instance.collection('products').snapshots();
+       FirebaseFirestore.instance.collection(user).doc(userId).collection('products').snapshots();
+
 
   final _formKey = GlobalKey<FormState>();
 

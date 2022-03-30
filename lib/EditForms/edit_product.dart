@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../controller/user_controller.dart';
+
 class EditProduct extends StatefulWidget {
   static const routeName = '/Edit_product';
   final String id;
@@ -23,7 +25,7 @@ class _EditProductState extends State<EditProduct> {
   }
 
   CollectionReference products =
-      FirebaseFirestore.instance.collection('products');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('products');
 
   Future<void> updateProduct(id, name, rate) {
     return products
@@ -58,7 +60,7 @@ class _EditProductState extends State<EditProduct> {
           key: _formKey,
           child: FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
-                .collection('products')
+                .collection(user).doc(userId).collection('products')
                 .doc(widget.id)
                 .get(),
             builder: (_, snapshot) {

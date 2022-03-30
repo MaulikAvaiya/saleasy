@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class EditCompanyLead extends StatefulWidget {
   final String id;
   const EditCompanyLead({Key? key, required this.id}) : super(key: key);
@@ -28,7 +30,7 @@ class _EditCompanyLeadState extends State<EditCompanyLead> {
   final _formKey = GlobalKey<FormState>();
 
   CollectionReference companylead =
-      FirebaseFirestore.instance.collection('companylead');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('companylead');
 
   Future<void> updateCompanyLead(id, name, address, contact, companyName) {
     return companylead
@@ -65,7 +67,7 @@ class _EditCompanyLeadState extends State<EditCompanyLead> {
           key: _formKey,
           child: FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
-                .collection('companylead')
+                .collection(user).doc(userId).collection('companylead')
                 .doc(widget.id)
                 .get(),
             builder: (_, snapshot) {

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
+import 'package:saleasy/controller/user_controller.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({Key? key}) : super(key: key);
@@ -41,8 +42,10 @@ class _AddProductState extends State<AddProduct> {
   }
 
   //  Adding Student
-  CollectionReference products =
-      FirebaseFirestore.instance.collection('products');
+  CollectionReference products = FirebaseFirestore.instance
+      .collection(user)
+      .doc(userId)
+      .collection('product');
 
   Future<void> addProduct() {
     return products
@@ -84,8 +87,7 @@ class _AddProductState extends State<AddProduct> {
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.done,
                     onFieldSubmitted: (_) {
-                      FocusScope.of(context)
-                          .requestFocus(_rateFocusNode);
+                      FocusScope.of(context).requestFocus(_rateFocusNode);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Product name: ',
@@ -99,7 +101,7 @@ class _AddProductState extends State<AddProduct> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a product name';
                       }
-                     
+
                       return null;
                     },
                   ),
@@ -122,10 +124,10 @@ class _AddProductState extends State<AddProduct> {
                       if (value == null || value.isEmpty) {
                         return 'Please Enter rate';
                       }
-                       if(double.tryParse(value) == null){
+                      if (double.tryParse(value) == null) {
                         return 'Please enter a valid number';
                       }
-                      if(double.parse(value) <= 0){
+                      if (double.parse(value) <= 0) {
                         return 'Please enter a number greater than zero';
                       }
                       return null;
@@ -137,7 +139,8 @@ class _AddProductState extends State<AddProduct> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ElevatedButton(style: ElevatedButton.styleFrom(
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
                           primary: ColorConfig.appbarColor,
                         ),
                         onPressed: () {
@@ -190,5 +193,4 @@ class _AddProductState extends State<AddProduct> {
   }
 }
 
-class Parse {
-}
+class Parse {}

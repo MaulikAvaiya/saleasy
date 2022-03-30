@@ -4,6 +4,7 @@ import 'package:saleasy/EditForms/edit_employee.dart';
 import 'package:saleasy/constant/color_config.dart';
 
 import '../DetailScreen/employee_detail.dart';
+import '../controller/user_controller.dart';
 
 class EmployeeList extends StatefulWidget {
   const EmployeeList({Key? key}) : super(key: key);
@@ -14,10 +15,10 @@ class EmployeeList extends StatefulWidget {
 
 class _EmployeeListState extends State<EmployeeList> {
   final Stream<QuerySnapshot> employeeStream =
-      FirebaseFirestore.instance.collection('employee').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('employee').snapshots();
 
   CollectionReference employee =
-      FirebaseFirestore.instance.collection('employee');
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('employee');
 
   Future<void> deleteEmployee(id) {
     return employee

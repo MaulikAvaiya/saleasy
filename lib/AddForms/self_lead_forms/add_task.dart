@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:saleasy/constant/color_config.dart';
 
+import '../../controller/user_controller.dart';
+
 class AddTask extends StatefulWidget {
   String id;
   String name;
@@ -34,7 +36,8 @@ class _AddTaskState extends State<AddTask> {
   DateTime selectedDate = DateTime.now();
 
   CollectionReference selftask =
-      FirebaseFirestore.instance.collection('selftask');
+   FirebaseFirestore.instance.collection(user).doc(userId).collection('selftask');
+      
 
   Future<void> addselfTask() {
     return selftask
@@ -246,7 +249,7 @@ class _AddTaskState extends State<AddTask> {
                   margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
                     autofocus: false,
-                    keyboardType: TextInputType.datetime,
+                    keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
                       FocusScope.of(context).requestFocus(_typeFocusNode);
@@ -272,7 +275,7 @@ class _AddTaskState extends State<AddTask> {
                   margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
                     autofocus: false,
-                    keyboardType: TextInputType.datetime,
+                    keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.done,
                     decoration: const InputDecoration(
                       labelText: 'Type: ',

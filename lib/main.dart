@@ -11,6 +11,7 @@ import 'package:saleasy/auth/signup.dart';
 import 'package:saleasy/screens/CompanyLead/company_sales_screen.dart';
 import 'package:saleasy/screens/CompanyLead/company_visited_screen.dart';
 import 'package:saleasy/screens/CompanyLead/companylead_screen.dart';
+import 'package:saleasy/screens/home_screen.dart';
 import 'package:saleasy/screens/product_screen.dart';
 import 'package:saleasy/screens/company_lead.dart';
 import 'package:saleasy/screens/company_task_screen.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SalEasy App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.tealAccent[400],
       ),

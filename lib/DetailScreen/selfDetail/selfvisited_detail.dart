@@ -40,6 +40,8 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
               child: CircularProgressIndicator(),
             );
           }
+          Timestamp timestamp = snapshot.data!['datetime'];
+            DateTime myDateTime = timestamp.toDate();
           return SingleChildScrollView(
             child: Container(
               color: ColorConfig.primaryColor,
@@ -157,8 +159,11 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                           
+
                             Text(
-                              snapshot.data!['datetime'].toString(),
+                               
+                              "${myDateTime.day}/${myDateTime.month}/${myDateTime.year}",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
