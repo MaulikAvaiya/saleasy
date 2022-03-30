@@ -7,6 +7,8 @@ import 'package:saleasy/AddForms/self_lead_forms/add_visited_lead.dart';
 import 'package:saleasy/constant/color_config.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../controller/user_controller.dart';
+
 class SelfLeadDetail extends StatefulWidget {
   final String id;
   const SelfLeadDetail({Key? key, required this.id}) : super(key: key);
@@ -17,7 +19,8 @@ class SelfLeadDetail extends StatefulWidget {
 
 class _SelfLeadDetailState extends State<SelfLeadDetail> {
   CollectionReference selflead =
-      FirebaseFirestore.instance.collection('selflead');
+      FirebaseFirestore.instance.collection(user)
+      .doc(userId).collection('selflead');
 
   String number = '';
 

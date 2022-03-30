@@ -48,7 +48,7 @@ class _EditSalesLeadState extends State<EditSalesLead> {
   final _formKey = GlobalKey<FormState>();
 
    final Stream<QuerySnapshot> productStream =
-      FirebaseFirestore.instance.collection(user).doc(userId).collection('products').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('product').snapshots();
 
   CollectionReference selfsaleslead =
       FirebaseFirestore.instance.collection(user).doc(userId).collection('selfsaleslead');

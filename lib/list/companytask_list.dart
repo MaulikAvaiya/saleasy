@@ -102,8 +102,7 @@ class _CompanyTaskListState extends State<CompanyTaskList> {
                     MaterialPageRoute(
                       builder: (context) {
                         return CompanyTaskDetail(
-                          name: snapshot.data!.docs[index]['name'],
-                          tasktype: snapshot.data!.docs[index]['tasktype'],
+                          id: snapshot.data!.docs[index].id,
                         );
                       },
                     ),

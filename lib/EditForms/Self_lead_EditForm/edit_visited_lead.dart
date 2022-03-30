@@ -40,7 +40,7 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
   final _formKey = GlobalKey<FormState>();
 
   final Stream<QuerySnapshot> productStream =
-      FirebaseFirestore.instance.collection(user).doc(userId).collection('products').snapshots();
+      FirebaseFirestore.instance.collection(user).doc(userId).collection('product').snapshots();
 
   CollectionReference selfvisitedlead =
       FirebaseFirestore.instance.collection(user).doc(userId).collection('selfvisitedlead');

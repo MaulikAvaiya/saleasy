@@ -95,7 +95,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
 
 
   final Stream<QuerySnapshot> productStream =
-  FirebaseFirestore.instance.collection(user).doc(userId).collection('products').snapshots();
+  FirebaseFirestore.instance.collection(user).doc(userId).collection('product').snapshots();
     
   void  _selectDate(BuildContext context) async {
     final DateTime? selected =await showDatePicker(
