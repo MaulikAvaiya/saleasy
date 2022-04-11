@@ -304,7 +304,7 @@ return Container(
                   margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
                     autofocus: false,
-                    keyboardType: TextInputType.datetime,
+                    keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
                       FocusScope.of(context).requestFocus(_typeFocusNode);
@@ -330,7 +330,7 @@ return Container(
                   margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
                     autofocus: false,
-                    keyboardType: TextInputType.datetime,
+                    keyboardType: TextInputType.name  ,
                     textInputAction: TextInputAction.done,
                     decoration: const InputDecoration(
                       labelText: 'Type: ',

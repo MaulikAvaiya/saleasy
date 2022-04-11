@@ -21,6 +21,7 @@ class UserPage extends StatelessWidget {
         ),
       ),
       body: Container(
+        color: ColorConfig.primaryColor,
         padding: EdgeInsets.all(10),
         child: Column(
           children: [

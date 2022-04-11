@@ -13,7 +13,7 @@ class SelfVisitedScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
         title: Text(
-          'Visited Lead ',
+          'Visited Lead List',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,

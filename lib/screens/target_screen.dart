@@ -14,7 +14,7 @@ class TargetScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
         title: Text(
-          'Target',
+          'Target List',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,

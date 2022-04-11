@@ -10,6 +10,7 @@ class AddCompanySalesLead extends StatefulWidget {
   final String name;
   final String address;
   final String contact;
+  
   final String companyName;
   //final String product;
 
