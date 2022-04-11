@@ -56,6 +56,22 @@ var _mySelection;
         .then((value) => debugPrint('companytask Added'))
         .catchError((error) => debugPrint('Failed to Add companytask: $error'));
   }
+
+ Future<void> addCompanyTask1() {
+    return companytask
+        .add({
+          'name': widget.name,
+          'address': widget.address,
+          'contact': widget.contact,
+          'companyname': widget.companyName,
+          'task': task,
+          'tasktype': tasktype,
+          'datetime': selectedDate,
+        })
+        .then((value) => debugPrint('companytask Added'))
+        .catchError((error) => debugPrint('Failed to Add companytask: $error'));
+  }
+ 
   void  _selectDate(BuildContext context) async {
     final DateTime? selected =await showDatePicker(
       context: context,
@@ -239,7 +255,7 @@ return Container(
                     focusNode: _companynameFocusNode,
                   ),
                 ),
-                 Container(
+                user!='admin'? SizedBox():Container(
                         decoration: BoxDecoration(
                             border: Border.all(
                           color: Colors.grey,
@@ -360,7 +376,7 @@ return Container(
                             setState(() {
                               task = taskController.text;
                               tasktype = tasktypeController.text;
-                              addCompanyTask();
+                            user!='admin'? addCompanyTask1() :addCompanyTask();
                             });
                           }
                         },

@@ -133,7 +133,7 @@ class _SelfVisitedListState extends State<SelfVisitedList> {
                                 Padding(
                                   padding: EdgeInsets.only(top: screenHeight * 0.012),
                                   child: Text(
-                                    snapshot.data!.docs[index]['product'],
+                                    snapshot.data!.docs[index]['product']??'',
                                     style: TextStyle(fontSize: screenHeight * 0.030),
                                   ),
                                 ),

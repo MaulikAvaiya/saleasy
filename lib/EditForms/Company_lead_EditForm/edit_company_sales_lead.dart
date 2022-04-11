@@ -266,7 +266,34 @@ class _EditCompanySalesLeadState extends State<EditCompanySalesLead> {
                                 focusNode: _companynameFocusNode,
                               ),
                             ),
-                            Container(
+                          user!='admin'? Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: TextFormField(
+                              initialValue: product,
+                              onChanged: (value) => product = value,
+                              autofocus: false,
+                              keyboardType: TextInputType.name,
+                              textInputAction: TextInputAction.next,
+                              onFieldSubmitted: (_) {
+                                FocusScope.of(context)
+                                    .requestFocus(_datetimeFocusNode);
+                              },
+                              decoration: const InputDecoration(
+                                labelText: 'Product: ',
+                                labelStyle: TextStyle(fontSize: 20.0),
+                                border: OutlineInputBorder(),
+                                errorStyle: TextStyle(
+                                    color: Colors.redAccent, fontSize: 15),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your product';
+                                }
+                                return null;
+                              },
+                              focusNode: _productnameFocusNode,
+                            ),
+                          ) :  Container(
                               decoration: BoxDecoration(
                                   border: Border.all(
                                 color: Colors.grey,
@@ -449,7 +476,7 @@ class _EditCompanySalesLeadState extends State<EditCompanySalesLead> {
                                           selfleadAddress,
                                           selfleadContact,
                                           selfleadcompanyName,
-                                          _mySelection,
+                                         user!='admin'? product:_mySelection,
                                           quantity,
                                           rate,
                                           amount,

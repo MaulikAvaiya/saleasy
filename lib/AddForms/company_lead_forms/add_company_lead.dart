@@ -71,6 +71,20 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
         .catchError((error) => debugPrint('Failed to Add companyselflead: $error'));
   }
 
+  
+  Future<void> addCompanyLead1() {
+    return companylead
+        .add({
+          'name': leadName,
+          'address': leadAddress,
+          'contact': leadContact,
+          'companyname': leadCompanyName,
+
+        })
+        .then((value) => debugPrint('companyselflead Added'))
+        .catchError((error) => debugPrint('Failed to Add companyselflead: $error'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -217,7 +231,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                     focusNode: _companynameFocusNode,
                   ),
                 ),
-                Container(
+              user!='admin'? const SizedBox():  Container(
                         decoration: BoxDecoration(
                             border: Border.all(
                           color: Colors.grey,
@@ -273,7 +287,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                               leadCompanyName = leadCompanyNameController.text;
                               leadEmpName = leadEmpNameController.text;
 
-                              addCompanyLead();
+                             user!='admin'?addCompanyLead() :addCompanyLead();
                               Navigator.of(context).pop();
                             });
                           }

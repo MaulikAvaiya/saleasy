@@ -66,6 +66,26 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
           (error) => debugPrint("Failed to update Companytask:$error"),
         );
       }
+
+ Future<void> updateComapnyTask1(id, name, address, contact, companyName,
+       task, tasktype, ) {
+
+    return Companytask.doc(id)
+        .update({
+          'name': name,
+          'address': address,
+          'contact': contact,
+          'companyname': companyName,
+          'task': task,
+          'tasktype': tasktype,
+          'datetime': selectedDate,
+        })
+        .then((value) => debugPrint("Companytask Updated"))
+        .catchError(
+          (error) => debugPrint("Failed to update Companytask:$error"),
+        );
+      }
+
       void  _selectDate(BuildContext context) async {
     final DateTime? selected =await showDatePicker(
       context: context,
@@ -132,7 +152,7 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
                       var selfleadAddress = data['address'];
                       var selfleadContact = data['contact'];
                       var selfleadcompanyName = data['companyname'];
-                      var employee=data['employee'];
+                      var employee=user!='admin'?'':data['employee'];
                       var task = data['task'];
                       var tasktype = data['tasktype'];
                       var datetime = data['datetime'].toString();
@@ -260,7 +280,7 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
                                 focusNode: _companynameFocusNode,
                               ),
                             ),
-                            Container(
+                          user!='admin'?SizedBox() : Container(
                               decoration: BoxDecoration(
                                   border: Border.all(
                                 color: Colors.grey,
@@ -386,7 +406,16 @@ class _EditCompanyTaskState extends State<EditCompanyTask> {
                                     // Validate returns true if the form is valid, otherwise false.
                                     if (_formKey.currentState!.validate()) {
                                       setState(() {
-                                        updateComapnyTask(
+                                   user!='admin'? updateComapnyTask1(
+                                          widget.id,
+                                          selfleadName,
+                                          selfleadAddress,
+                                          selfleadContact,
+                                          selfleadcompanyName,
+                                          task,
+                                          tasktype,
+                                         // datetime,
+                                        ) :   updateComapnyTask(
                                           widget.id,
                                           selfleadName,
                                           selfleadAddress,

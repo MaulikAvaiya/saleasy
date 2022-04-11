@@ -132,7 +132,7 @@ class _SelfSalesDetailState extends State<SelfSalesDetail> {
                               ),
                             ),
                             Text(
-                              snapshot.data!['product'],
+                              snapshot.data!['product']??'',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,

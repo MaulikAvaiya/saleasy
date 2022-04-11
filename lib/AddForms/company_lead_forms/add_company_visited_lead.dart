@@ -71,7 +71,7 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
   DateTime selectedDate = DateTime.now();
 
   CollectionReference companyvisitedlead =
-  FirebaseFirestore.instance.collection(user).doc(userId).collection('companyvisitedlead');
+  FirebaseFirestore.instance.collection('admin').doc(userId).collection('companyvisitedlead');
 
 
 
@@ -83,7 +83,7 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
           'address': widget.address,
           'contact': widget.contact,
           'companyname': widget.companyName,
-          'product': _mySelection,
+          'product': user!='admin'? product:_mySelection,
           'decision': decision,
           'datetime': selectedDate,
         })
@@ -260,7 +260,32 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
                     focusNode: _companynameFocusNode,
                   ),
                 ),
-                Container(
+                user!='admin'?Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          autofocus: false,
+                          textInputAction: TextInputAction.next,
+                          onFieldSubmitted: (_) {
+                            FocusScope.of(context)
+                                .requestFocus(_productnameFocusNode);
+                          },
+                          decoration: const InputDecoration(
+                            labelText: 'Product Name: ',
+                            labelStyle: TextStyle(fontSize: 20.0),
+                            border: OutlineInputBorder(),
+                            errorStyle: TextStyle(
+                                color: Colors.redAccent, fontSize: 15),
+                          ),
+                           controller: productController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter Product name ';
+                            }
+                            return null;
+                          },
+                          focusNode: _productnameFocusNode,
+                        ),
+                      ): Container(
                         decoration: BoxDecoration(
                             border: Border.all(
                           color: Colors.grey,
