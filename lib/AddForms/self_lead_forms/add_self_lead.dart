@@ -51,13 +51,13 @@ class _AddSelfLeadState extends State<AddSelfLead> {
   final _formKey = GlobalKey<FormState>();
 
   final Stream<QuerySnapshot> employeeStream = FirebaseFirestore.instance
-      .collection(user)
+      .collection('admin')
       .doc(userId)
       .collection('employee')
       .snapshots();
 
   CollectionReference selflead = FirebaseFirestore.instance
-      .collection(user)
+      .collection('admin')
       .doc(userId)
       .collection('selflead');
       
@@ -69,6 +69,18 @@ class _AddSelfLeadState extends State<AddSelfLead> {
           'contact': leadContact,
           'companyname': leadCompanyName,
           'employee': _mySelection,
+        })
+        .then((value) => debugPrint('lead Added'))
+        .catchError((error) => debugPrint('Failed to Add lead: $error'));
+  }
+  Future<void> addSelfLead1() {
+    return selflead
+        .add({
+          'name': leadName,
+          'address': leadAddress,
+          'contact': leadContact,
+          'companyname': leadCompanyName,
+        
         })
         .then((value) => debugPrint('lead Added'))
         .catchError((error) => debugPrint('Failed to Add lead: $error'));
@@ -223,7 +235,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                           focusNode: _companynameFocusNode,
                         ),
                       ),
-                      Container(
+                    user!='admin'? SizedBox() :Container(
                         decoration: BoxDecoration(
                             border: Border.all(
                           color: Colors.grey,
@@ -281,7 +293,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                                         leadCompanyNameController.text;
                                     leadEmpName = leadEmpNameController.text;
 
-                                    addSelfLead();
+                                   user!='admin'?addSelfLead1() :addSelfLead();
                                     Navigator.of(context).pop();
                                   });
                                 }

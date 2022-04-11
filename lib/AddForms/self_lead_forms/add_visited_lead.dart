@@ -83,7 +83,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
           'address': widget.address,
           'contact': widget.contact,
           'companyname': widget.companyName,
-          'product': _mySelection,
+          'product':user!='admin'?product:_mySelection,
           'decision': decision,
           'datetime': selectedDate,
         })
@@ -95,7 +95,7 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
 
 
   final Stream<QuerySnapshot> productStream =
-  FirebaseFirestore.instance.collection(user).doc(userId).collection('product').snapshots();
+  FirebaseFirestore.instance.collection('admin').doc(userId). collection('product').snapshots();
     
   void  _selectDate(BuildContext context) async {
     final DateTime? selected =await showDatePicker(
@@ -264,7 +264,32 @@ class _AddVisitedLeadState extends State<AddVisitedLead> {
                           focusNode: _companynameFocusNode,
                         ),
                       ),
-                      Container(
+                     user!='admin'?Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          autofocus: false,
+                          textInputAction: TextInputAction.next,
+                          onFieldSubmitted: (_) {
+                            FocusScope.of(context)
+                                .requestFocus(_productnameFocusNode);
+                          },
+                          decoration: const InputDecoration(
+                            labelText: 'Product Name: ',
+                            labelStyle: TextStyle(fontSize: 20.0),
+                            border: OutlineInputBorder(),
+                            errorStyle: TextStyle(
+                                color: Colors.redAccent, fontSize: 15),
+                          ),
+                           controller: productController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter Product name ';
+                            }
+                            return null;
+                          },
+                          focusNode: _productnameFocusNode,
+                        ),
+                      ): Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(

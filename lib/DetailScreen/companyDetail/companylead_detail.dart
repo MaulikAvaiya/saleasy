@@ -139,7 +139,7 @@ class _CompanyLeadDetailState extends State<CompanyLeadDetail> {
                               ),
                             ),
                             Text(
-                              snapshot.data!['employee'],
+                              snapshot.data!['employee']??'',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
