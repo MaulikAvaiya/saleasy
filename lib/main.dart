@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 import 'package:saleasy/AddForms/add_product.dart';
 import 'package:saleasy/AddForms/company_lead_forms/add_company_lead.dart';
 import 'package:saleasy/AddForms/self_lead_forms/add_self_lead.dart';
@@ -63,34 +63,31 @@ class MyApp extends StatelessWidget {
         AddSelfLead.routeName:(context)=>const AddSelfLead(),
         AddCompanyLead.routeName:(context)=>const AddCompanyLead(),
 
-      
-
-        //EditForm route
-
-        
-
         //self lead route
         SelfLeadScreen.routeName: (context) => const SelfLeadScreen(),
         SelfVisitedScreen.routeName: (context) => const SelfVisitedScreen(),
         SelfSalesScreen.routeName: (context) => const SelfSalesScreen(),
+
         //company lead route
         CompanyLeadScreen.routeName: (context) => const CompanyLeadScreen(),
         CompanyVisitedScreen.routeName: (context) => const CompanyVisitedScreen(),
         CompanySalesScreen.routeName: (context) => const CompanySalesScreen(),
          AddTarget.routeName: (context) =>  const AddTarget(),
         Signup.routeName:(context)=>const Signup(),
+
         //detail route
-       // ProductDetail.routeName: (context) => ProductDetail(name: '',rate: '',),
+        //ProductDetail.routeName: (context) => ProductDetail(name: '',rate: '',),
         //EmloyeeDetail.routeName: (context) => const EmloyeeDetail(),
-      //  SelfLeadDetail.routeName: (context) => SelfLeadDetail(),
-      //  SelfVisitedDetail.routeName: (context) => SelfVisitedDetail(),
+        //SelfLeadDetail.routeName: (context) => SelfLeadDetail(),
+        //SelfVisitedDetail.routeName: (context) => SelfVisitedDetail(),
         //SelfSalesDetail.routeName: (context) => SelfSalesDetail(),
-      //  CompanyLeadDetail.routeName: (context) => CompanyLeadDetail(),
-      //  CompanyVisitedDetail.routeName: (context) => CompanyVisitedDetail(),
-       // CompanySalesDetail.routeName: (context) =>  CompanySalesDetail(),
+        //CompanyLeadDetail.routeName: (context) => CompanyLeadDetail(),
+        //CompanyVisitedDetail.routeName: (context) => CompanyVisitedDetail(),
+        //CompanySalesDetail.routeName: (context) =>  CompanySalesDetail(),
         //SelfTaskDetail.routeName:(context)=>const SelfTaskDetail(),
-       // CompanyTaskDetail.routeName:(context)=>const CompanyTaskDetail(),
+        //CompanyTaskDetail.routeName:(context)=>const CompanyTaskDetail(),
         //TargetDetail.routeName:(context)=>const TargetDetail(),
+        
       },
     );
   }

@@ -88,7 +88,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
   
   CollectionReference selfsaleslead =
   FirebaseFirestore.instance
-      .collection('admin')
+      .collection('user')
       .doc(userId)
       .collection('selfsaleslead');
       

@@ -111,7 +111,7 @@ class _TargetListState extends State<TargetList> {
                           mydatetime: myDateTime,
                           mydatetime1: myDateTime1,
                           productName: snapshot.data!.docs[index]['product'],
-                          employeeName: snapshot.data!.docs[index]['empname'],
+                          employeeName: snapshot.data!.docs[index]['employee'],
                           quantity: snapshot.data!.docs[index]['quantity'],
                         );
                       },

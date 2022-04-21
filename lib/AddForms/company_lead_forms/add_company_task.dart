@@ -117,9 +117,9 @@ var _mySelection;
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
         title: Text(
-          "Add companytask",
+          "Add company task",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 22,
             fontWeight: FontWeight.bold,
             color: ColorConfig.appbartextColor,
           ),

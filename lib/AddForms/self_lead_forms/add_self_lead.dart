@@ -57,7 +57,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
       .snapshots();
 
   CollectionReference selflead = FirebaseFirestore.instance
-      .collection('admin')
+      .collection('user')
       .doc(userId)
       .collection('selflead');
       

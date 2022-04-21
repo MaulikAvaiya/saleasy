@@ -125,7 +125,7 @@ class _AddCompanySalesLeadState extends State<AddCompanySalesLead> {
         title: Text(
           "Add Company SalesLead",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             color: ColorConfig.appbartextColor,
           ),

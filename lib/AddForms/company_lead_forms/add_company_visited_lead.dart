@@ -118,7 +118,7 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
         title: Text(
           "Add company VisitedLead",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             color: ColorConfig.appbartextColor,
           ),

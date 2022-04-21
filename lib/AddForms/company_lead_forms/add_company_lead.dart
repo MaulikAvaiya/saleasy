@@ -78,7 +78,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
           'name': leadName,
           'address': leadAddress,
           'contact': leadContact,
-          'companyname': leadCompanyName,
+          'companyname': leadCompanyName, 
 
         })
         .then((value) => debugPrint('companyselflead Added'))
@@ -93,7 +93,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
         title: Text(
           "Add Company SelfLead ",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 22,
             fontWeight: FontWeight.bold,
             color: ColorConfig.appbartextColor,
           ),
