@@ -15,7 +15,7 @@ class AddTarget extends StatefulWidget {
 }
 
 class _AddTargetState extends State<AddTarget> {
-  var product='';
+  var product = '';
   var quantity = '';
   var _mySelection;
   var _mySelection1;
@@ -46,8 +46,7 @@ class _AddTargetState extends State<AddTarget> {
   Future<void> addtarget1() {
     return target
         .add({
-          
-          'product':product,
+          'product': product,
           'datefrom': selectedDate,
           'dateto': selectedDate1,
           'quantity': quantity,
@@ -55,11 +54,12 @@ class _AddTargetState extends State<AddTarget> {
         .then((value) => debugPrint('target Added'))
         .catchError((error) => debugPrint('Failed to Add target: $error'));
   }
-   Future<void> addtarget() {
+
+  Future<void> addtarget() {
     return target
         .add({
-          'employee':_mySelection,
-          'product':_mySelection1,
+          'employee': _mySelection,
+          'product': _mySelection1,
           'datefrom': selectedDate,
           'dateto': selectedDate1,
           'quantity': quantity,
@@ -90,9 +90,11 @@ class _AddTargetState extends State<AddTarget> {
       lastDate: DateTime(2050),
     );
     if (selected1 != null && selected1 != selectedDate1) {
-      setState(() {
-        selectedDate1 = selected1;
-      },);
+      setState(
+        () {
+          selectedDate1 = selected1;
+        },
+      );
     }
   }
 
@@ -163,116 +165,123 @@ class _AddTargetState extends State<AddTarget> {
                             vertical: 20, horizontal: 30),
                         child: ListView(
                           children: [
-                          user!='admin'? const SizedBox():  Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                color: Colors.grey,
-                                width: 0.8,
-                              )),
-                              margin:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: DropdownButton<dynamic>(
-                                  underline:
-                                      Container(color: Colors.transparent),
-                                  isDense: true,
-                                  hint: _mySelection != null
-                                      ? Text(_mySelection)
-                                      : const Text('select employee name'),
-                                  value: _mySelection,
-                                  onChanged: (dynamic newValue) {
-                                    setState(() {
-                                      _mySelection = newValue;
-                                    });
+                            user != 'admin'
+                                ? const SizedBox()
+                                : Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                      color: Colors.grey,
+                                      width: 0.8,
+                                    )),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 10.0),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15),
+                                      child: DropdownButton<dynamic>(
+                                        underline: Container(
+                                            color: Colors.transparent),
+                                        isDense: true,
+                                        hint: _mySelection != null
+                                            ? Text(_mySelection)
+                                            : const Text(
+                                                'select employee name'),
+                                        value: _mySelection,
+                                        onChanged: (dynamic newValue) {
+                                          setState(() {
+                                            _mySelection = newValue;
+                                          });
 
-                                    debugPrint(_mySelection);
-                                  },
-                                  icon: const Icon(
-                                      Icons.arrow_drop_down_circle_rounded),
-                                  isExpanded: true,
-                                  items: snapshot.data!.docs.map(
-                                    (DocumentSnapshot snapshot) {
-                                      return DropdownMenuItem<dynamic>(
-                                        value: snapshot[
-                                            'empname'], //snapshot['id'].toString(),
-                                        child: Text(
-                                          snapshot["empname"],
-                                        ),
-                                      );
-                                    },
-                                  ).toList(),
-                                ),
-                              ),
-                            ),
-                             user!='admin'?Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: TextFormField(
-                          autofocus: false,
-                          textInputAction: TextInputAction.next,
-                          onFieldSubmitted: (_) {
-                            FocusScope.of(context)
-                                .requestFocus(_productFocusNode);
-                          },
-                          decoration: const InputDecoration(
-                            labelText: 'Product Name: ',
-                            labelStyle: TextStyle(fontSize: 20.0),
-                            border: OutlineInputBorder(),
-                            errorStyle: TextStyle(
-                                color: Colors.redAccent, fontSize: 15),
-                          ),
-                           controller: productController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter Product name ';
-                            }
-                            return null;
-                          },
-                          focusNode: _productFocusNode,
-                        ),
-                      ): Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                color: Colors.grey,
-                                width: 0.8,
-                              )),
-                              margin:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: DropdownButton<dynamic>(
-                                  underline:
-                                      Container(color: Colors.transparent),
-                                  isDense: true,
-                                  hint: _mySelection1 != null
-                                      ? Text(_mySelection1)
-                                      : const Text('select product name'),
-                                  value: _mySelection1,
-                                  onChanged: (dynamic newValue) {
-                                    setState(
-                                      () {
-                                        _mySelection1 = newValue;
-                                      },
-                                    );
-
-                                    debugPrint(_mySelection1);
-                                  },
-                                  icon: const Icon(
-                                      Icons.arrow_drop_down_circle_rounded),
-                                  isExpanded: true,
-                                  items:datasnapshot.data!.docs
-                                      .map((DocumentSnapshot datasnapshot) {
-                                    return DropdownMenuItem<dynamic>(
-                                      value: datasnapshot[
-                                          'name'], //snapshot['id'].toString(),
-                                      child: Text(
-                                        datasnapshot["name"],
+                                          debugPrint(_mySelection);
+                                        },
+                                        icon: const Icon(Icons
+                                            .arrow_drop_down_circle_rounded),
+                                        isExpanded: true,
+                                        items: snapshot.data!.docs.map(
+                                          (DocumentSnapshot snapshot) {
+                                            return DropdownMenuItem<dynamic>(
+                                              value: snapshot[
+                                                  'empname'], //snapshot['id'].toString(),
+                                              child: Text(
+                                                snapshot["empname"],
+                                              ),
+                                            );
+                                          },
+                                        ).toList(),
                                       ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
+                                    ),
+                                  ),
+                            user != 'admin'
+                                ? Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 10.0),
+                                    child: TextFormField(
+                                      autofocus: false,
+                                      textInputAction: TextInputAction.next,
+                                      onFieldSubmitted: (_) {
+                                        FocusScope.of(context)
+                                            .requestFocus(_productFocusNode);
+                                      },
+                                      decoration: const InputDecoration(
+                                        labelText: 'Product Name: ',
+                                        labelStyle: TextStyle(fontSize: 20.0),
+                                        border: OutlineInputBorder(),
+                                        errorStyle: TextStyle(
+                                            color: Colors.redAccent,
+                                            fontSize: 15),
+                                      ),
+                                      controller: productController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter Product name ';
+                                        }
+                                        return null;
+                                      },
+                                      focusNode: _productFocusNode,
+                                    ),
+                                  )
+                                : Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                      color: Colors.grey,
+                                      width: 0.8,
+                                    )),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 10.0),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15),
+                                      child: DropdownButton<dynamic>(
+                                        underline: Container(
+                                            color: Colors.transparent),
+                                        isDense: true,
+                                        hint: _mySelection1 != null
+                                            ? Text(_mySelection1)
+                                            : const Text('select product name'),
+                                        value: _mySelection1,
+                                        onChanged: (dynamic newValue) {
+                                          setState(
+                                            () {
+                                              _mySelection1 = newValue;
+                                            },
+                                          );
+
+                                          debugPrint(_mySelection1);
+                                        },
+                                        icon: const Icon(Icons
+                                            .arrow_drop_down_circle_rounded),
+                                        isExpanded: true,
+                                        items: datasnapshot.data!.docs.map(
+                                            (DocumentSnapshot datasnapshot) {
+                                          return DropdownMenuItem<dynamic>(
+                                            value: datasnapshot[
+                                                'name'], //snapshot['id'].toString(),
+                                            child: Text(
+                                              datasnapshot["name"],
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ),
                             // Container(
                             //   decoration: BoxDecoration(
                             //       borderRadius: BorderRadius.circular(4),
@@ -301,16 +310,16 @@ class _AddTargetState extends State<AddTarget> {
                             //       icon: const Icon(
                             //           Icons.arrow_drop_down_circle_rounded),
                             //       isExpanded: true,
-                                  // items: datasnapshot.data!.docs
-                                  //     .map((DocumentSnapshot datasnapshot) {
-                                  //   return DropdownMenuItem<dynamic>(
-                                  //     value: datasnapshot[
-                                  //         'name'], //snapshot['id'].toString(),
-                                  //     child: Text(
-                                  //       datasnapshot["name"],
-                                  //     ),
-                                  //   );
-                                  // }).toList(),
+                            // items: datasnapshot.data!.docs
+                            //     .map((DocumentSnapshot datasnapshot) {
+                            //   return DropdownMenuItem<dynamic>(
+                            //     value: datasnapshot[
+                            //         'name'], //snapshot['id'].toString(),
+                            //     child: Text(
+                            //       datasnapshot["name"],
+                            //     ),
+                            //   );
+                            // }).toList(),
                             //     ),
                             //   ),
                             // ),
@@ -410,7 +419,7 @@ class _AddTargetState extends State<AddTarget> {
                                       // Validate returns true if the form is valid, otherwise false.
                                       if (_formKey.currentState!.validate()) {
                                         setState(() {
-                                          product=productController.text;
+                                          product = productController.text;
                                           quantity = quantityController.text;
                                           addtarget();
                                         });
@@ -423,20 +432,6 @@ class _AddTargetState extends State<AddTarget> {
                                         fontWeight: FontWeight.bold,
                                         color: ColorConfig.appbartextColor,
                                       ),
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () => {},
-                                    child: Text(
-                                      'Reset',
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: ColorConfig.appbartextColor,
-                                      ),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: ColorConfig.appbarColor,
                                     ),
                                   ),
                                 ],

@@ -47,6 +47,12 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
 
     super.dispose();
   }
+  clearText() {
+    leadNameController.clear();
+    leadAddressController.clear();
+    leadContactController.clear();
+    leadCompanyNameController.clear();
+  }
 
   final _formKey = GlobalKey<FormState>();
 
@@ -302,7 +308,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () => {},
+                        onPressed: () => {clearText()},
                         child: Text(
                           'Reset',
                           style: TextStyle(

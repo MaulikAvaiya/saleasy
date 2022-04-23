@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const UserPage(),
       routes: {
+        
         //main route
         ProductScreen.routeName: (context) => const ProductScreen(),
         EmployeeScreen.routeName: (context) => const EmployeeScreen(),
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
         Signup.routeName:(context)=>const Signup(),
 
         //detail route
+
         //ProductDetail.routeName: (context) => ProductDetail(name: '',rate: '',),
         //EmloyeeDetail.routeName: (context) => const EmloyeeDetail(),
         //SelfLeadDetail.routeName: (context) => SelfLeadDetail(),
