@@ -309,6 +309,7 @@ class _AddTaskState extends State<AddTask> {
                               task = taskController.text;
                               tasktype = tasktypeController.text;
                               addselfTask();
+                              Navigator.pop(context);
                             });
                           }
                         },

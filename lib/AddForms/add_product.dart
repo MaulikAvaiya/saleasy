@@ -43,7 +43,7 @@ class _AddProductState extends State<AddProduct> {
 
   //  Adding Student
   CollectionReference products = FirebaseFirestore.instance
-      .collection(user)
+      .collection('admin')
       .doc(userId)
       .collection('product');
 

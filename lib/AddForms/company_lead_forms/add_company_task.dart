@@ -377,6 +377,7 @@ return Container(
                               task = taskController.text;
                               tasktype = tasktypeController.text;
                             user!='admin'? addCompanyTask1() :addCompanyTask();
+                            Navigator.pop(context);
                             });
                           }
                         },

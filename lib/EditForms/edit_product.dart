@@ -25,7 +25,7 @@ class _EditProductState extends State<EditProduct> {
   }
 
   CollectionReference products =
-      FirebaseFirestore.instance.collection(user).doc(userId).collection('products');
+      FirebaseFirestore.instance.collection('admin').doc(userId).collection('product');
 
   Future<void> updateProduct(id, name, rate) {
     return products
@@ -60,7 +60,7 @@ class _EditProductState extends State<EditProduct> {
           key: _formKey,
           child: FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
-                .collection(user).doc(userId).collection('product')
+                .collection('admin').doc(userId).collection('product')
                 .doc(widget.id)
                 .get(),
             builder: (_, snapshot) {

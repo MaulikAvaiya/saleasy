@@ -53,7 +53,7 @@ class _EditCompanySalesLeadState extends State<EditCompanySalesLead> {
       FirebaseFirestore.instance.collection(user).doc(userId).collection('companysaleslead');
 
   Future<void> updateCompanysalesLead(id, name, address, contact, companyName,
-      product, quantity, rate, amount, datetime) {
+      product, quantity, rate, amount,) {
     return companysaleslead
         .doc(id)
         .update({
@@ -141,7 +141,6 @@ class _EditCompanySalesLeadState extends State<EditCompanySalesLead> {
                       var amount = data['amount'];
                       var rate = data['rate'];
                       var datetime = data['datetime'];
-                      selectedDate=datetime;
 
                       return Padding(
                         padding: const EdgeInsets.symmetric(
@@ -480,7 +479,6 @@ class _EditCompanySalesLeadState extends State<EditCompanySalesLead> {
                                           quantity,
                                           rate,
                                           amount,
-                                          datetime,
                                         );
                                       });
                                       Navigator.of(context).pop();

@@ -94,6 +94,7 @@ class _TargetListState extends State<TargetList> {
                       FlatButton(
                         child: const Text('Yes'),
                         onPressed: () {
+                          deletetarget(snapshot.data!.docs[index].id);
                           Navigator.of(ctx).pop(true);
                         },
                       ),
@@ -111,7 +112,7 @@ class _TargetListState extends State<TargetList> {
                           mydatetime: myDateTime,
                           mydatetime1: myDateTime1,
                           productName: snapshot.data!.docs[index]['product'],
-                          employeeName: snapshot.data!.docs[index]['empname'],
+                         employeeName:user!='admin'?'' :snapshot.data!.docs[index]['employee'],
                           quantity: snapshot.data!.docs[index]['quantity'],
                         );
                       },
@@ -146,7 +147,7 @@ class _TargetListState extends State<TargetList> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                snapshot.data!.docs[index]['product'],
+                                snapshot.data!.docs[index]['product']??'',
                                 style:
                                     TextStyle(fontSize: screenHeight * 0.035),
                               ),

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:saleasy/constant/color_config.dart';
@@ -88,7 +89,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
   
   CollectionReference selfsaleslead =
   FirebaseFirestore.instance
-      .collection('admin')
+      .collection(user)
       .doc(userId)
       .collection('selfsaleslead');
       

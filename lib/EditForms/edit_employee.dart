@@ -25,7 +25,7 @@ class _EditEmployeeState extends State<EditEmployee> {
   }
 
   CollectionReference employee =
-      FirebaseFirestore.instance.collection(user).doc(userId).collection('employee');
+      FirebaseFirestore.instance.collection('admin').doc(userId).collection('employee');
 
   Future<void> updateEmployee(id, name, address, contact, email) {
     return employee
@@ -62,7 +62,7 @@ class _EditEmployeeState extends State<EditEmployee> {
           key: _formKey,
           child: FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
-                .collection(user).doc(userId).collection('employee')
+                .collection('admin').doc(userId).collection('employee')
                 .doc(widget.id)
                 .get(),
             builder: (_, snapshot) {

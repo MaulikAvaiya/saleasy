@@ -103,9 +103,11 @@ class _EmployeeListState extends State<EmployeeList> {
                       .pushReplacement(MaterialPageRoute(builder: (context) {
                     return EmployeeDetail(
                         empname: snapshot.data!.docs[index]['empname'],
-                        address:
-                            snapshot.data!.docs[index]['empaddress'].toString(),
-                        contact: snapshot.data!.docs[index]['empcontact']);
+                        contact: snapshot.data!.docs[index]['empcontact'],
+                        email: snapshot.data!.docs[index]['empemail'],
+                        address: snapshot.data!.docs[index]['empaddress'],
+                        
+                        );
                   }));
                 },
                 child: Card(
@@ -139,15 +141,6 @@ class _EmployeeListState extends State<EmployeeList> {
                                 snapshot.data!.docs[index]['empname'],
                                 style:
                                     TextStyle(fontSize: screenHeight * 0.035),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsets.only(top: screenHeight * 0.012),
-                                child: Text(
-                                  snapshot.data!.docs[index]['empaddress'],
-                                  style:
-                                      TextStyle(fontSize: screenHeight * 0.030),
-                                ),
                               ),
                               Padding(
                                 padding:

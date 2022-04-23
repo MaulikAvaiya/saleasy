@@ -98,6 +98,7 @@ class _SelfTaskListState extends State<SelfTaskList> {
                 key: const ValueKey(null),
                 child: GestureDetector(
                   onTap: () {
+                    
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) {

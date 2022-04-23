@@ -408,7 +408,7 @@ class _AddTargetState extends State<AddTarget> {
                                         setState(() {
                                           product=productController.text;
                                           quantity = quantityController.text;
-                                          addtarget();
+                                        user!='admin'? addtarget1():addtarget();
                                         });
                                       }
                                     },

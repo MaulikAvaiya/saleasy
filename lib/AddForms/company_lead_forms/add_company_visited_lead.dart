@@ -71,7 +71,7 @@ class _AddCompanyVisitedLeadState extends State<AddCompanyVisitedLead> {
   DateTime selectedDate = DateTime.now();
 
   CollectionReference companyvisitedlead =
-  FirebaseFirestore.instance.collection('admin').doc(userId).collection('companyvisitedlead');
+  FirebaseFirestore.instance.collection(user).doc(userId).collection('companyvisitedlead');
 
 
 

@@ -57,7 +57,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
       .snapshots();
 
   CollectionReference selflead = FirebaseFirestore.instance
-      .collection('admin')
+      .collection(user)
       .doc(userId)
       .collection('selflead');
       
@@ -291,7 +291,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                                     leadContact = leadContactController.text;
                                     leadCompanyName =
                                         leadCompanyNameController.text;
-                                    leadEmpName = leadEmpNameController.text;
+                                    
 
                                    user!='admin'?addSelfLead1() :addSelfLead();
                                     Navigator.of(context).pop();

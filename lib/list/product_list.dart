@@ -24,7 +24,7 @@ class _ProductListState extends State<ProductList> {
     return product
         .doc(id)
         .delete()
-        .then((value) => debugPrint('user deleted'))
+        .then((value) => debugPrint('product deleted'))
         .catchError((error) => debugPrint('Fail: $error'));
   }
 

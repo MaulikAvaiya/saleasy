@@ -276,7 +276,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                                 }
                                 return null;
                               },
-                              focusNode: _decisionFocusNode,
+                              focusNode: _productnameFocusNode,
                             ),
                           ) :  Container(
                               decoration: BoxDecoration(

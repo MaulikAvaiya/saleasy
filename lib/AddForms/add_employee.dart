@@ -45,7 +45,7 @@ class _AddEmployeeState extends State<AddEmployee> {
   }
 
   CollectionReference employee =
-  FirebaseFirestore.instance.collection(user).doc(userId).collection('employee');
+  FirebaseFirestore.instance.collection('admin').doc(userId).collection('employee');
       
 
   Future<void> addEmployee() {
@@ -215,6 +215,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                               empEmail = empEmailController.text;
 
                               addEmployee();
+                              Navigator.pop(context);
                             });
                           }
                         },

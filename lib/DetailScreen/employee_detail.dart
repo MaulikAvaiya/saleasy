@@ -5,11 +5,14 @@ class EmployeeDetail extends StatelessWidget {
   final String empname;
   final String address;
   final String contact;
+  final String email;
   const EmployeeDetail(
       {Key? key,
       required this.empname,
       required this.address,
-      required this.contact})
+      required this.contact,
+      required this.email,
+      })
       : super(key: key);
   static const routeName = '/EmployeeDetail';
   @override
@@ -86,6 +89,21 @@ class EmployeeDetail extends StatelessWidget {
                         ),
                         Text(
                           contact,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: ColorConfig.textColor,
+                          ),
+                        ),
+                        const Text(
+                          "email:",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          email,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
