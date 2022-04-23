@@ -21,7 +21,6 @@ class _AddProductState extends State<AddProduct> {
 
   // Create a text controller and use it to retrieve the current value
   final nameController = TextEditingController();
-
   final rateController = TextEditingController();
 
   @override
@@ -161,7 +160,6 @@ class _AddProductState extends State<AddProduct> {
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
-                            //color: ColorConfig.appbartextColor,
                             color: Colors.white,
                           ),
                         ),
@@ -173,7 +171,6 @@ class _AddProductState extends State<AddProduct> {
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
-                            //color: ColorConfig.appbartextColor,
                             color: Colors.white,
                           ),
                         ),

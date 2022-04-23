@@ -153,6 +153,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                                   errorStyle: TextStyle(
                                       color: Colors.redAccent, fontSize: 15),
                                 ),
+                                readOnly: true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter lead name';
@@ -181,6 +182,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                                   errorStyle: TextStyle(
                                       color: Colors.redAccent, fontSize: 15),
                                 ),
+                                readOnly: true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter Address';
@@ -211,6 +213,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                                   errorStyle: TextStyle(
                                       color: Colors.redAccent, fontSize: 15),
                                 ),
+                                readOnly: true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter contact number';
@@ -242,6 +245,7 @@ class _EditCompanyVisitedLeadState extends State<EditCompanyVisitedLead> {
                                   errorStyle: TextStyle(
                                       color: Colors.redAccent, fontSize: 15),
                                 ),
+                                readOnly: true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter company name ';

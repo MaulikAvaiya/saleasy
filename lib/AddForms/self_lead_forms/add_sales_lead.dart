@@ -79,9 +79,9 @@ class _AddSalesLeadState extends State<AddSalesLead> {
     super.dispose();
   }
 
-   DateTime selectedDate = DateTime.now();
+  DateTime selectedDate = DateTime.now();
 
- final Stream<QuerySnapshot> productStream = FirebaseFirestore.instance
+  final Stream<QuerySnapshot> productStream = FirebaseFirestore.instance
       .collection('admin')
       .doc(userId)
       .collection('product')
@@ -92,7 +92,6 @@ class _AddSalesLeadState extends State<AddSalesLead> {
       .collection(user)
       .doc(userId)
       .collection('selfsaleslead');
-      
 
   Future<void> addselfsaleslead() {
     return selfsaleslead
@@ -101,17 +100,19 @@ class _AddSalesLeadState extends State<AddSalesLead> {
           'address': widget.address,
           'contact': widget.contact,
           'companyname': widget.companyName,
-          'product':user!='admin'? product:_mySelection,
+          'product': user != 'admin' ? product : _mySelection,
           'rate': rate,
           'amount': amount,
           'datetime': selectedDate,
           'quantity': quantity,
         })
         .then((value) => debugPrint('selfsaleslead Added'))
-        .catchError((error) => debugPrint('Failed to Add selfsaleslead: $error'));
+        .catchError(
+            (error) => debugPrint('Failed to Add selfsaleslead: $error'));
   }
-  void  _selectDate(BuildContext context) async {
-    final DateTime? selected =await showDatePicker(
+
+  void _selectDate(BuildContext context) async {
+    final DateTime? selected = await showDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2010),
@@ -178,6 +179,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                           errorStyle:
                               TextStyle(color: Colors.redAccent, fontSize: 15),
                         ),
+                        readOnly: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter lead name';
@@ -205,6 +207,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                           errorStyle:
                               TextStyle(color: Colors.redAccent, fontSize: 15),
                         ),
+                        readOnly: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter Address';
@@ -235,13 +238,14 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                           errorStyle:
                               TextStyle(color: Colors.redAccent, fontSize: 15),
                         ),
+                        readOnly: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter contact number ';
                           }
-                          if (value.length != 10){
-                        return 'Contact number must be 10 digit';
-                      } 
+                          if (value.length != 10) {
+                            return 'Contact number must be 10 digit';
+                          }
                           return null;
                         },
                         focusNode: _contactnumberFocusNode,
@@ -265,6 +269,7 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                           errorStyle:
                               TextStyle(color: Colors.redAccent, fontSize: 15),
                         ),
+                        readOnly: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter company name';
@@ -274,69 +279,72 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                         focusNode: _companynameFocusNode,
                       ),
                     ),
-                    user!='admin'?Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: TextFormField(
-                          autofocus: false,
-                          textInputAction: TextInputAction.next,
-                          onFieldSubmitted: (_) {
-                            FocusScope.of(context)
-                                .requestFocus(_productnameFocusNode);
-                          },
-                          decoration: const InputDecoration(
-                            labelText: 'Product Name: ',
-                            labelStyle: TextStyle(fontSize: 20.0),
-                            border: OutlineInputBorder(),
-                            errorStyle: TextStyle(
-                                color: Colors.redAccent, fontSize: 15),
-                          ),
-                           controller: productController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter Product name ';
-                            }
-                            return null;
-                          },
-                          focusNode: _productnameFocusNode,
-                        ),
-                      ): Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                        color: Colors.grey,
-                        width: 0.8,
-                      )),
-                      margin: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: DropdownButton<dynamic>(
-                          underline: Container(color: Colors.transparent),
-                          isDense: true,
-                          hint: _mySelection != null
-                              ? Text(_mySelection)
-                              : const Text('select product name'),
-                          value: _mySelection,
-                          onChanged: (dynamic newValue) {
-                            setState(() {
-                              _mySelection = newValue;
-                            });
-
-                            debugPrint(_mySelection);
-                          },
-                          icon: const Icon(Icons.arrow_drop_down_circle_rounded),
-                          isExpanded: true,
-                          items: snapshot.data!.docs
-                              .map((DocumentSnapshot snapshot) {
-                            return DropdownMenuItem<dynamic>(
-                              value:
-                                  snapshot['name'], //snapshot['id'].toString(),
-                              child: Text(
-                                snapshot['name'],
+                    user != 'admin'
+                        ? Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: TextFormField(
+                              autofocus: false,
+                              textInputAction: TextInputAction.next,
+                              onFieldSubmitted: (_) {
+                                FocusScope.of(context)
+                                    .requestFocus(_productnameFocusNode);
+                              },
+                              decoration: const InputDecoration(
+                                labelText: 'Product Name: ',
+                                labelStyle: TextStyle(fontSize: 20.0),
+                                border: OutlineInputBorder(),
+                                errorStyle: TextStyle(
+                                    color: Colors.redAccent, fontSize: 15),
                               ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
+                              controller: productController,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter Product name ';
+                                }
+                                return null;
+                              },
+                              focusNode: _productnameFocusNode,
+                            ),
+                          )
+                        : Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              color: Colors.grey,
+                              width: 0.8,
+                            )),
+                            margin: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: DropdownButton<dynamic>(
+                                underline: Container(color: Colors.transparent),
+                                isDense: true,
+                                hint: _mySelection != null
+                                    ? Text(_mySelection)
+                                    : const Text('select product name'),
+                                value: _mySelection,
+                                onChanged: (dynamic newValue) {
+                                  setState(() {
+                                    _mySelection = newValue;
+                                  });
+
+                                  debugPrint(_mySelection);
+                                },
+                                icon: const Icon(
+                                    Icons.arrow_drop_down_circle_rounded),
+                                isExpanded: true,
+                                items: snapshot.data!.docs
+                                    .map((DocumentSnapshot snapshot) {
+                                  return DropdownMenuItem<dynamic>(
+                                    value: snapshot[
+                                        'name'], //snapshot['id'].toString(),
+                                    child: Text(
+                                      snapshot['name'],
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
@@ -358,12 +366,12 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                           if (value == null || value.isEmpty) {
                             return 'Please enter quantity';
                           }
-                          if(double.tryParse(value) == null){
-                        return 'Please enter a valid number';
-                      }
-                      if(double.parse(value) <= 0){
-                        return 'Please enter a number greater than zero';
-                      }
+                          if (double.tryParse(value) == null) {
+                            return 'Please enter a valid number';
+                          }
+                          if (double.parse(value) <= 0) {
+                            return 'Please enter a number greater than zero';
+                          }
                           return null;
                         },
                         focusNode: _quantityFocusNode,
@@ -390,12 +398,12 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                           if (value == null || value.isEmpty) {
                             return 'Please Enter rate';
                           }
-                          if(double.tryParse(value) == null){
-                        return 'Please enter a valid number';
-                      }
-                      if(double.parse(value) <= 0){
-                        return 'Please enter a number greater than zero';
-                      }
+                          if (double.tryParse(value) == null) {
+                            return 'Please enter a valid number';
+                          }
+                          if (double.parse(value) <= 0) {
+                            return 'Please enter a number greater than zero';
+                          }
                           return null;
                         },
                         focusNode: _rateFocusNode,
@@ -423,39 +431,42 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                           if (value == null || value.isEmpty) {
                             return 'Please enter amount';
                           }
-                          if(double.tryParse(value) == null){
-                        return 'Please enter a valid number';
-                      }
-                      if(double.parse(value) <= 0){
-                        return 'Please enter a number greater than zero';
-                      }
+                          if (double.tryParse(value) == null) {
+                            return 'Please enter a valid number';
+                          }
+                          if (double.parse(value) <= 0) {
+                            return 'Please enter a number greater than zero';
+                          }
                           return null;
                         },
                         focusNode: _amountFocusNode,
                       ),
                     ),
                     Container(
-                         decoration: BoxDecoration(
-                           borderRadius: BorderRadius.circular(4),
-                            border: Border.all(
-                          color: Colors.grey,
-                          width: 1,
-                        )),
-                        child: Padding(
-                          padding:  const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                          selectedDate!=null?Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}") :
-                            const Text('please select date'),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: 1,
+                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            selectedDate != null
+                                ? Text(
+                                    "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}")
+                                : const Text('please select date'),
                             GestureDetector(
-                                   onTap: (() => setState(() {
-                                        _selectDate(context);
-                                      })),
-                                  child: const Icon(Icons.date_range)),
-                      ],),
-
+                                onTap: (() => setState(() {
+                                      _selectDate(context);
+                                    })),
+                                child: const Icon(Icons.date_range)),
+                          ],
                         ),
+                      ),
                     ),
                     SizedBox(
                       child: Row(
@@ -485,15 +496,6 @@ class _AddSalesLeadState extends State<AddSalesLead> {
                               'Register',
                               style: TextStyle(fontSize: 18.0),
                             ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () => {},
-                            child: const Text(
-                              'Reset',
-                              style: TextStyle(fontSize: 18.0),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                primary: Colors.blueGrey),
                           ),
                         ],
                       ),

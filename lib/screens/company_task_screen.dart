@@ -21,18 +21,6 @@ class CompanyTaskScreen extends StatelessWidget {
         ),
       ),
       body: const CompanyTaskList(),
-      backgroundColor: ColorConfig.primaryColor,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //  Navigator.of(context).pushNamed(AddEmployee.routeName);
-        },
-        backgroundColor: ColorConfig.appbarColor,
-        child: Icon(
-          Icons.add,
-          color: ColorConfig.appbartextColor,
-        ),
-      ),
     );
   }
 }

@@ -60,7 +60,7 @@ class _SelfTaskDetailState extends State<SelfTaskDetail> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: screenHeight*0.7,
+                height: screenHeight*0.9,
                 width:screenWidth*0.9,
                 child: Card(
                   shape: RoundedRectangleBorder(

@@ -36,12 +36,19 @@ class _AddEmployeeState extends State<AddEmployee> {
     _contactnumberFocusNode.dispose();
     _emailFocusNode.dispose();
 
+
     //Controller
     empAddressController.dispose();
     empContactController.dispose();
     empNameController.dispose();
     empEmailController.dispose();
     super.dispose();
+  }
+  clearText() {
+    empNameController.clear();
+    empAddressController.clear();
+    empContactController.clear();
+    empEmailController.clear();
   }
 
   CollectionReference employee =
@@ -229,7 +236,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () => {},
+                        onPressed: () => {clearText()},
                         child: Text(
                           'Reset',
                           style: TextStyle(

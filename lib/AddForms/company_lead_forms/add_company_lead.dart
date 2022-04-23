@@ -47,6 +47,12 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
 
     super.dispose();
   }
+  clearText() {
+    leadNameController.clear();
+    leadAddressController.clear();
+    leadContactController.clear();
+    leadCompanyNameController.clear();
+  }
 
   final _formKey = GlobalKey<FormState>();
 
@@ -78,7 +84,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
           'name': leadName,
           'address': leadAddress,
           'contact': leadContact,
-          'companyname': leadCompanyName,
+          'companyname': leadCompanyName, 
 
         })
         .then((value) => debugPrint('companyselflead Added'))
@@ -93,7 +99,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
         title: Text(
           "Add Company SelfLead ",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 22,
             fontWeight: FontWeight.bold,
             color: ColorConfig.appbartextColor,
           ),
@@ -302,7 +308,7 @@ class _AddCompanyLeadState extends State<AddCompanyLead> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () => {},
+                        onPressed: () => {clearText()},
                         child: Text(
                           'Reset',
                           style: TextStyle(

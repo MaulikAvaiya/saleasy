@@ -47,6 +47,12 @@ class _AddSelfLeadState extends State<AddSelfLead> {
 
     super.dispose();
   }
+  clearText() {
+    leadNameController.clear();
+    leadAddressController.clear();
+    leadContactController.clear();
+    leadCompanyNameController.clear();
+  }
 
   final _formKey = GlobalKey<FormState>();
 
@@ -308,7 +314,7 @@ class _AddSelfLeadState extends State<AddSelfLead> {
                               ),
                             ),
                             ElevatedButton(
-                              onPressed: () => {},
+                              onPressed: () => {clearText()},
                               child: Text(
                                 'Reset',
                                 style: TextStyle(

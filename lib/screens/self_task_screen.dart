@@ -21,18 +21,6 @@ class SelfTaskScreen extends StatelessWidget {
         ),
       ),
       body: const SelfTaskList(),
-      backgroundColor: ColorConfig.primaryColor,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //  Navigator.of(context).pushNamed(AddEmployee.routeName);
-        },
-        backgroundColor: ColorConfig.appbarColor,
-        child: Icon(
-          Icons.add,
-          color: ColorConfig.appbartextColor,
-        ),
-      ),
     );
   }
 }

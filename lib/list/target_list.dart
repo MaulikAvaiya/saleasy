@@ -112,7 +112,9 @@ class _TargetListState extends State<TargetList> {
                           mydatetime: myDateTime,
                           mydatetime1: myDateTime1,
                           productName: snapshot.data!.docs[index]['product'],
-                         employeeName:user!='admin'?'' :snapshot.data!.docs[index]['employee'],
+                          employeeName: user != 'admin'
+                              ? ''
+                              : snapshot.data!.docs[index]['employee'],
                           quantity: snapshot.data!.docs[index]['quantity'],
                         );
                       },
@@ -147,7 +149,7 @@ class _TargetListState extends State<TargetList> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                snapshot.data!.docs[index]['product']??'',
+                                snapshot.data!.docs[index]['product'] ?? '',
                                 style:
                                     TextStyle(fontSize: screenHeight * 0.035),
                               ),
@@ -170,22 +172,6 @@ class _TargetListState extends State<TargetList> {
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                        Card(
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: screenWitdth * 0.008,
-                              vertical: screenHeight * 0.006,
-                            ),
-                            child: Icon(
-                              Icons.edit,
-                              color: ColorConfig.appbarColor,
-                              size: screenHeight * 0.05,
-                            ),
                           ),
                         ),
                       ],

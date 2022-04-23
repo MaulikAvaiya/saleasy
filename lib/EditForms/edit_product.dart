@@ -152,7 +152,7 @@ class _EditProductState extends State<EditProduct> {
                             }
                           },
                           child: Text(
-                            'Update',
+                            'Save',
                             style: TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -160,20 +160,7 @@ class _EditProductState extends State<EditProduct> {
                             ),
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () => {},
-                          child: Text(
-                            'Reset',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                              color: ColorConfig.appbartextColor,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: ColorConfig.appbarColor,
-                          ),
-                        )
+                      
                       ],
                     ),
                   ],

@@ -24,7 +24,7 @@ class _SelfVisitedDetailState extends State<SelfVisitedDetail> {
       appBar: AppBar(
         backgroundColor: ColorConfig.appbarColor,
         title: Text(
-          'Self Vidited Detail',
+          'Self Visited Detail',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,

@@ -60,7 +60,7 @@ class _CompanyLeadDetailState extends State<CompanyLeadDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 550,
+                    height: 600,
                     width: 400,
                     child: Card(
                       shape: RoundedRectangleBorder(
@@ -149,6 +149,8 @@ class _CompanyLeadDetailState extends State<CompanyLeadDetail> {
                             Container(
                                padding: const EdgeInsets.all(25),
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
                                     width: 90,

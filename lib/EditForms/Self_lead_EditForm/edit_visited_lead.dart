@@ -155,6 +155,7 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
                                 errorStyle: TextStyle(
                                     color: Colors.redAccent, fontSize: 15),
                               ),
+                              readOnly: true,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter lead name';
@@ -182,6 +183,7 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
                                 errorStyle: TextStyle(
                                     color: Colors.redAccent, fontSize: 15),
                               ),
+                              readOnly: true,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter Address';
@@ -212,6 +214,7 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
                                 errorStyle: TextStyle(
                                     color: Colors.redAccent, fontSize: 15),
                               ),
+                              readOnly: true,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter contact number';
@@ -242,6 +245,7 @@ class _EditVisitedLeadState extends State<EditVisitedLead> {
                                 errorStyle: TextStyle(
                                     color: Colors.redAccent, fontSize: 15),
                               ),
+                              readOnly: true,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter company name ';
