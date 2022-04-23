@@ -63,17 +63,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Text(
                   'Email: $email',
-                  style: const TextStyle(fontSize: 18.0),
+                  style: const TextStyle(fontSize: 17.0),
                 ),
                 user!.emailVerified
                     ? const Text(
                         'verified',
                         style:
-                            TextStyle(fontSize: 18.0, color: Colors.blueGrey),
+                            TextStyle(fontSize: 12.0, color: Colors.blueGrey),
                       )
                     : TextButton(
                         onPressed: () => {verifyEmail()},
-                        child: const Text('Verify Email'))
+                        child: const Text('Verify Email',style: TextStyle(fontSize: 10),))
               ],
             ),
             Text(
